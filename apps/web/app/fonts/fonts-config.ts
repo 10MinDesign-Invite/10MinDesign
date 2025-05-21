@@ -1,6 +1,4 @@
-// apps/frontend/fonts.ts
-
-import { Amita, Comfortaa, Gotu, Pacifico, Palanquin_Dark, Rozha_One, Sura, Tiro_Devanagari_Hindi, Yatra_One } from 'next/font/google'
+import { Amita, Comfortaa, Gotu, Pacifico, Palanquin_Dark, Sura, Tiro_Devanagari_Hindi, Yatra_One } from 'next/font/google'
 
 
 export const logofont = Pacifico({

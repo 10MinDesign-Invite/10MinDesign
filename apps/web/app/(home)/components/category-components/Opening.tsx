@@ -12,28 +12,9 @@ export function Opening() {
         {
             opening: "Opening1",
             image: "/firstinvitation.png",
-            price: "Free"
-        },
-        {
-            opening: "Opening2",
-            image: "/firstwedding.jpg",
-            price: "50rs"
-        },
-        {
-            opening: "Opening3",
-            image: "/firstinvitation.png",
-            price: "50rs"
-        },
-        {
-            opening: "Opening4",
-            image: "/firstinvitation.png",
-            price: "50rs"
-        },
-        {
-            opening: "Opening5",
-            image: "/firstinvitation.png",
-            price: "50rs"
-        },
+            price: "Free",
+            width:200
+        }
     ];
     return (
         <div className="max-w-[1440px] mx-auto h-dvh dark:text-white mt-[100px] ">
@@ -46,11 +27,11 @@ export function Opening() {
                         return (
                             <div key={cur.opening} className="outline backdrop-blur-xl bg-slate-200 rounded-xl relative mb-4 md:mb-0 overflow-x-hidden">
                                 <p className={`absolute -left-[5px] -top-[3px] ${cur.price == "Free" ? "bg-green-400" : "bg-yellow-400"} rounded-br-xl px-4`}>{cur.price}</p>
-                                <div className=" border-white rounded-t-xl flex justify-center">
+                                <div className=" rounded-t-xl flex justify-center">
                                     <Image
                                         src={cur.image}
                                         // className=" h-[300px]"
-                                        width={200}
+                                        width={cur.width ? cur.width : 200}
                                         height={300}
                                         priority={index === 0}
                                         alt="Picture of the author"
