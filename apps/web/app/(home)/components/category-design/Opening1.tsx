@@ -4,7 +4,7 @@ import NextImage from "next/image";
 import { DesignContainer } from "../category-components/DesignContainer";
 import { DesignWraper } from "../category-components/DesignWraper";
 import { DetailWrapper } from "../category-components/DetailWrapper";
-import { amita, PalanquinDark, sura, yatra_one } from "@/app/fonts/fonts-config";
+import { amita, palanquinDark, sura, yatraOne } from "@/app/fonts/fonts-config";
 import { ChangeEvent, useEffect, useRef, useState } from "react";
 import { Input } from "@/components/ui/input";
 import { GiBowTieRibbon } from "react-icons/gi";
@@ -234,7 +234,7 @@ export function Opening1() {
 
                         <div
                             style={{ fontSize: titleSize ? `${titleSize}%` : undefined }}
-                            className={`${wordsArr.length >= 3 ? 'text-[10vw] xl:text-[80px]' : 'text-[16.5vw] xl:text-[120px]'} md:text-[8.9vw] ${yatra_one.className}  w-[90%] h-full flex justify-center items-center gap-5 text-red-500`}>
+                            className={`${wordsArr.length >= 3 ? 'text-[10vw] xl:text-[80px]' : 'text-[16.5vw] xl:text-[120px]'} md:text-[8.9vw] ${yatraOne.className}  w-[90%] h-full flex justify-center items-center gap-5 text-red-500`}>
                             <span className={`text-red-500 truncate`}>{otherWords.join(" ")}</span>
                             <span className={`text-black`}>{lastWord}</span>
                         </div>
@@ -243,7 +243,7 @@ export function Opening1() {
                     <div className=" absolute top-[48.3%] w-full xl:w-[700px] h-[4.7%] flex justify-center items-center">
                         <div
                             style={{ fontSize: serviceSize ? `${serviceSize}%` : undefined }}
-                            className={`w-[90%]  h-full ${PalanquinDark.className} flex justify-center items-center text-[3.5vw] md:text-[2.4vw] xl:text-[25px]  dark:text-black truncate`}>
+                            className={`w-[90%]  h-full ${palanquinDark.className} flex justify-center items-center text-[3.5vw] md:text-[2.4vw] xl:text-[25px]  dark:text-black truncate`}>
                             {service}
                         </div>
                     </div>
@@ -263,7 +263,7 @@ export function Opening1() {
                     </div>
 
                     <div className=" absolute top-[86.6%] w-full xl:w-[700px] h-[3.4%] flex justify-center items-center">
-                        <div className={` w-[70%] h-full flex justify-center items-center text-[3.3vw] md:text-[2vw] xl:text-[27px] text-red-500 ${yatra_one.className}`}>{invitor}</div>
+                        <div className={` w-[70%] h-full flex justify-center items-center text-[3.3vw] md:text-[2vw] xl:text-[27px] text-red-500 ${yatraOne.className}`}>{invitor}</div>
                     </div>
                     <div className=" absolute top-[91%] w-full xl:w-[700px] h-[3.5%] flex items-center">
                         <div className=" relative pl-1 w-[90%] mx-auto h-full text-red-600 text-[2vw] md:text-[1.2vw] xl:text-[15px] font-semibold flex items-center gap-1  truncate">
