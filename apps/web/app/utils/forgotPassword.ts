@@ -1,4 +1,5 @@
 "use server"
+export const runtime = 'nodejs';
 
 import { prisma } from "@repo/database";
 import bcrypt from "bcryptjs";
