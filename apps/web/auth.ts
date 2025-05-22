@@ -1,3 +1,5 @@
+export const runtime = "nodejs";
+
 import { prisma } from "@repo/database";
 import { loginSchema } from "@repo/zod-input-validation";
 import bcrypt from "bcryptjs";
