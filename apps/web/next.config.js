@@ -1,6 +1,9 @@
 
 /** @type {import('next').NextConfig} */
 const config = {
+  images: {
+    domains: ['lh3.googleusercontent.com'],
+  },
   webpack(config, { isServer }) {
     config.watchOptions = {
       ignored: [
