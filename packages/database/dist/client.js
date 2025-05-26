@@ -5882,7 +5882,7 @@ var require_client = __commonJS({
           "value": "prisma-client-js"
         },
         "output": {
-          "value": "C:\\invite\\packages\\database\\generated\\client",
+          "value": "C:\\10MinDesign\\packages\\database\\generated\\client",
           "fromEnvVar": null
         },
         "config": {
@@ -5896,7 +5896,7 @@ var require_client = __commonJS({
           }
         ],
         "previewFeatures": [],
-        "sourceFilePath": "C:\\invite\\packages\\database\\prisma\\schema.prisma",
+        "sourceFilePath": "C:\\10MinDesign\\packages\\database\\prisma\\schema.prisma",
         "isCustomOutput": true
       },
       "relativeEnvPaths": {
