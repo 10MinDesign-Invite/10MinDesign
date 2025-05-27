@@ -7,4 +7,5 @@ onlyBuiltDependencies:
   - core-js-pure
   - esbuild
   - prisma
+  - sharp
   - unrs-resolver
