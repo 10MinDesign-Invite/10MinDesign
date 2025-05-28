@@ -13,83 +13,85 @@ import { LiaBirthdayCakeSolid } from "react-icons/lia";
 import { FaPeopleRoof } from "react-icons/fa6";
 import { BsFillMoonStarsFill } from "react-icons/bs";
 import { Profile } from "./Profile";
+import { User } from "next-auth";
 
-export function Header({ authData }: any) {
+interface propType {
+    authData: User | undefined;
+    disableAnimation?: string
+}
+
+export function Header({ authData, disableAnimation }: propType) {
 
     const [nav, setNav] = useState<boolean>(false);
     const [curNav, setCurNav] = useState({ explore: false });
     const [theme, setTheme] = useState('light');
 
-
-    useEffect(() => {
-        const stored = localStorage.getItem('theme');
-        if (stored === 'dark') {
-            document.documentElement.classList.add('dark');
-            setTheme('dark');
-        }
-    }, []);
-
     const toggleDarkMode = () => {
-    const isDark = theme === 'dark';
-    const newTheme = isDark ? 'light' : 'dark';
+        const html = document.documentElement;
+        const isDark = html.classList.contains('dark');
+        if (isDark) {
+            html.classList.remove('dark');
+            localStorage.setItem('theme', 'light');
+        } else {
+            html.classList.add('dark');
+            localStorage.setItem('theme', 'dark');
+        }
+    };
 
-    document.documentElement.classList.toggle('dark', !isDark);
-    localStorage.setItem('theme', newTheme);
-    setTheme(newTheme);
-  };
 
     useGSAP(() => {
         let mm = gsap.matchMedia();
-        mm.add("(min-width: 769px)", () => {
-            gsap.set(".logo", {
-                x: 550,
-                y: 350,
-                scale: 9,
-                opacity: 0
-            })
-            gsap.to(".logo", {
-                x: 0,
-                y: 0,
-                scale: 1,
-                opacity: 1,
-                duration: 1
-            })
-            gsap.to("#login-btn", {
-                scale: 1,
-                transformOrigin: "center",
-                duration: 1
-            })
-            gsap.to("#primium-btn", {
-                scale: 1,
-                transformOrigin: "center",
-                duration: 1
+        if (disableAnimation == "") {
+            mm.add("(min-width: 769px)", () => {
+                gsap.set(".logo", {
+                    x: 550,
+                    y: 350,
+                    scale: 9,
+                    opacity: 0
+                })
+                gsap.to(".logo", {
+                    x: 0,
+                    y: 0,
+                    scale: 1,
+                    opacity: 1,
+                    duration: 1
+                })
+                gsap.to("#login-btn", {
+                    scale: 1,
+                    transformOrigin: "center",
+                    duration: 1
+                })
+                gsap.to("#primium-btn", {
+                    scale: 1,
+                    transformOrigin: "center",
+                    duration: 1
+                })
+
+            });
+
+            mm.add("(max-width: 768px)", () => {
+                gsap.set("header", {
+                    opacity: 0,
+                    y: -40
+                })
+                gsap.to("header", {
+                    y: 0,
+                    opacity: 1,
+                    duration: 1
+                })
             })
 
-        });
-
-        mm.add("(max-width: 768px)", () => {
-            gsap.set("header", {
-                opacity: 0,
-                y: -40
-            })
-            gsap.to("header", {
-                y: 0,
-                opacity: 1,
-                duration: 1
-            })
-        })
-
+        }
 
     }, [])
 
-
     return (
-        <header className={`max-w-[1440px] mx-auto flex justify-between borde pr-3 z-50 fixed top-0 left-0 right-0 backdrop-blur-xl lg:rounded-md opacity-0 sm:opacity-100 lg:opacity-100`}>
+        <header className={`max-w-[1440px] mx-auto flex justify-between borde pr-3 z-50 fixed top-0 left-0 right-0 backdrop-blur-xl ${disableAnimation == "" ? "lg:rounded-md opacity-0 sm:opacity-100 lg:opacity-100" : ""}`}>
             <div className="flex p-1 py-4 gap-2 md:gap-[100px] borde">
                 <div id="menuicon" onClick={() => { setNav(!nav) }} className="md:hidden flex justify-center items-center ml-2 md:ml-1 text-lg">
                     <SlMenu />
                 </div>
-                <Link href={"/"} className={`${logofont.className} pl-2 flex justify-center items-center cursor-pointer`}><p className="logo text-2xl lg:text-3xl md:opacity-0 lg:pl-3">Invite</p></Link>
+                <Link href={"/"} className={`${logofont.className} pl-2 flex justify-center items-center cursor-pointer`}><p className={`logo text-2xl lg:text-3xl ${disableAnimation == "" ? "md:opacity-0" : ""} lg:pl-3`}>Invite</p></Link>
                 <nav className="hidden md:flex gap-5 lg:gap-7">
                     <Link href={"/"} className="text-[15px] flex justify-center items-center text-black hover:text-slate-600  dark:text-slate-400 dark:hover:text-white  font-medium cursor-pointer">Home</Link>
                     <div onClick={() => setCurNav(({ explore: curNav.explore ? false : true }))} className="flex items-center gap-2 h-full text-[15px]  text-black hover:text-slate-600 dark:text-slate-400 dark:hover:text-white font-medium cursor-pointer">Explore <p className="text-[10px] flex justify-center items-center"><SlArrowDown /></p></div>
@@ -109,11 +111,11 @@ export function Header({ authData }: any) {
                     {
                         authData != undefined ? <Profile authData={authData} />
                             : <Link href={"/login"}>
-                                <button id="login-btn" className=" w-[60px] md:w-[70px] h-[35px] md:h-[44px] rounded-md font-medium bg-black text-white dark:bg-white dark:text-black transform md:scale-0">Log in</button>
+                                <button id="login-btn" className={` w-[60px] md:w-[70px] h-[35px] md:h-[44px] rounded-md font-medium bg-black text-white dark:bg-white dark:text-black transform ${disableAnimation == "" ? "md:scale-0" : ""}`}>Log in</button>
                             </Link>
                     }
                 </div>
-                <div id="primium-btn" className="flex dark:border-2 dark:border-white justify-center items-center borde px-2 md:px-5 lg:px-7 text-[14px] rounded-md font-light get_primium hover:bg-black hover:text-white hover:dark:bg-white hover:dark:text-black text-black dark:bg-black dark:text-white cursor-pointer transform md:scale-0">
+                <div id="primium-btn" className={`flex dark:border-2 dark:border-white justify-center items-center borde px-2 md:px-5 lg:px-7 text-[14px] rounded-md font-light get_primium hover:bg-black hover:text-white hover:dark:bg-white hover:dark:text-black text-black dark:bg-black dark:text-white cursor-pointer transform ${disableAnimation == "" ? "md:scale-0" : ""}`}>
                     Get Premium
                 </div>
             </div>

@@ -18,6 +18,10 @@ body{
     margin: 0;
     color: black;
 }
+
+.hero-headings{
+  font-weight:1000;
+}
 .get_primium{
   border: 1px solid black;
 }
@@ -37,8 +41,8 @@ body{
   content:"user";
   font-size: 12px;
   position: absolute;
-  top: -4;
   left: 0;
+  top:-0;
   padding-inline: 3px;
   color: rgb(0, 72, 255);
   background-color: rgb(255, 255, 0);
@@ -46,6 +50,16 @@ body{
   font-weight: 700;
   
 } 
+
+#home-images-main-div{
+  background-color: #e9ecef;
+}
+.dark #home-images-main-div{
+  background-color: #212529;
+}
+.home-images-div{
+  background-color: #02c2fd;
+}
 
 @keyframes slideRight {
  0%{

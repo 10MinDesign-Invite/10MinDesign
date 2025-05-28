@@ -8,8 +8,8 @@ import { GiFireSilhouette, GiFireworkRocket } from "react-icons/gi";
 import { IoIosRose } from "react-icons/io";
 import { LiaBirthdayCakeSolid } from "react-icons/lia";
 import { MdOutlineStarRate } from "react-icons/md";
-import { mainheading } from "../../fonts/fonts-config";
 import { useMediaQuery } from "../../Hooks/useMediaQuery";
+import Image from "next/image";
 gsap.registerPlugin(ScrollTrigger)
 
 export function Hero() {
@@ -182,20 +182,20 @@ export function Hero() {
 
     return (
         <main className="p-2">
-            <section className="borde grid grid-cols-1 lg:grid-cols-2">
+            <section className="borde grid grid-cols-1 xl:grid-cols-2">
                 <div className="borde pt-5 lg:pt-[10px] p-1 lg:mt-9">
                     {/* 5 nin design */}
-                    <div id="five-min-design" className="opacity-0 w-[130px] py-[2px] text-black bg-green-300 flex justify-center items-center gap-1 rounded-xl mb-7">
+                    <div style={{ fontFamily: 'MyFont' }} id="five-min-design" className="opacity-0 w-[130px] py-[2px] text-black bg-green-300 flex justify-center items-center gap-1 rounded-xl mb-7">
                         <MdOutlineStarRate className="text-xl" />
                         <p className="text-sm italic">10 Min Design</p>
                     </div>
 
                     {/* heading */}
-                    <div className={`w-full borde mt-2 ${mainheading.className} overflow-hidden`}>
-                        <div className="grid gap-1 pl-1">
-                            <h1 id="heading" className={`opacity-0 text-[42px] md:text-[49px] lmd:text-[53px]`}>We <span id="fontbold" className={`inline-block transition-all duration-300 hover:scale-x-105`}>Help</span> People</h1>
-                            <h2 id="heading" className={`opacity-0 text-[42px] md:text-[49px] lmd:text-[53px] ${mainheading.className}`}>Invite Their</h2>
-                            <h3 id="heading" className={`opacity-0 text-[42px] md:text-[49px] lmd:text-[53px] bg-gradient-to-r from-green-400 to-sky-500 bg-clip-text text-transparent ${mainheading.className}`}><span className={`inline-block transition-all duration-300 hover:scale-x-105 bg-gradient-to-r from-green-400 to-sky-500 bg-clip-text text-transparent`}>Friends</span> And <span className={`inline-block transition-all duration-300 hover:scale-x-105 bg-gradient-to-r from-green-400 to-sky-500 bg-clip-text text-transparent`}>Family</span></h3>
+                    <div className={`w-full borde mt-2 overflow-hidden`}>
+                        <div className="grid gap-1 pl-1 hero-headings">
+                            <h1 id="heading" className={`opacity-0 text-[42px] md:text-[60px] lmd:text-[65px]`}>We <span id="fontbold" className={`inline-block transition-all duration-300 hover:scale-x-105`}>Help</span> People</h1>
+                            <h2 id="heading" className={`opacity-0 text-[42px] md:text-[60px] lmd:text-[65px] `}>Invite Their</h2>
+                            <h3 id="heading" className={`opacity-0 text-[42px] md:text-[60px] lmd:text-[65px] bg-gradient-to-r from-green-400 to-sky-500 bg-clip-text text-transparent`}><span className={`inline-block transition-all duration-300 hover:scale-x-105 bg-gradient-to-r from-green-400 to-sky-500 bg-clip-text text-transparent`}>Friends</span> And <span className={`inline-block transition-all duration-300 hover:scale-x-105 bg-gradient-to-r from-green-400 to-sky-500 bg-clip-text text-transparent`}>Family</span></h3>
                         </div>
                     </div>
 
@@ -221,18 +221,41 @@ export function Hero() {
                 </div>
 
                 {/* card section */}
-                <div className="p-2 borde grid md:grid-cols-2 gap-2 mt-5">
+                <div id="home-images-main-div" className=" w-[400px] md:w-[90%] mx-auto p-2 border grid md:grid-cols-2 gap-2 mt-[100px] xl:mt-4 rounded-3xl overflow-hidden shadow-[0px_0px_0px_1px_rgba(0,0,0,0.06),0px_1px_1px_-0.5px_rgba(0,0,0,0.06),0px_3px_3px_-1.5px_rgba(0,0,0,0.06),_0px_6px_6px_-3px_rgba(0,0,0,0.06),0px_12px_12px_-6px_rgba(0,0,0,0.06),0px_24px_24px_-12px_rgba(0,0,0,0.06)]">
 
-
-                    <div className="borde h-[400px] overflow-scroll p-2 grid gap-5 lg:pt-[50px] scrollbar-hide">
-                        <div className="borde p-2 h-[300px] text-center text-5xl">wedding</div>
-                        <div className="borde p-2 h-[300px] text-center text-5xl">Birthday</div>
+                    <div className="home-images-div borde  h-[450px] overflow-scroll p-2 grid gap-5 md:pt-[25px] lg:pt-[30px] lg:mt-[50px] scrollbar-hide rounded-2xl ">
+                        <Image
+                            className="borde p-2 xl:p-1 w-[80%] h-[450px] md:w-[90%] md:h-[400px] lmd:w-[330px] lmd:h-[440px] xl:w-[95%] xl:h-[392px] mx-auto h-[400px] text-center text-5xl" 
+                            src={"/firstinvitation.webp"}
+                            alt=""
+                            width={250}
+                            height={300}
+                        />
+                        <Image
+                            className="borde p-2 xl:p-1 w-[80%] h-[450px] md:w-[90%] md:h-[400px] lmd:w-[330px] lmd:h-[440px] xl:w-[95%] xl:h-[392px] mx-auto h-[400px] text-center text-5xl" 
+                            src={"/firstinvitation.webp"}
+                            alt=""
+                            width={250}
+                            height={300}
+                        />
 
                     </div>
 
-                    <div className=" h-[400px] overflow-scroll hidden p-2 md:grid gap-5 scrollbar-hide ">
-                        <div className="p-2 h-[300px] text-center text-5xl">wedding</div>
-                        <div className="p-2 h-[300px] text-center text-5xl">Birthday</div>
+                    <div  className="home-images-div h-[450px] overflow-scroll hidden p-2 md:grid gap-5 scrollbar-hide rounded-2xl md:pt-[15px]"> 
+                        <Image
+                            className="borde p-2 xl:p-1 mt-3 w-[90%] mx-auto h-[400px] lmd:w-[320px] lmd:h-[431px] xl:w-[95%] xl:h-[394px] text-center text-5xl" 
+                            src={"/firstwedding.png"}
+                            alt=""
+                            width={250}
+                            height={300}
+                        />
+                        <Image
+                            className="borde p-2 xl:p-1 w-[80%] h-[450px] md:w-[90%] md:h-[400px] lmd:w-[330px] lmd:h-[440px] xl:w-[95%] xl:h-[392px] mx-auto h-[400px] text-center text-5xl" 
+                            src={"/firstinvitation.webp"}
+                            alt=""
+                            width={250}
+                            height={300}
+                        />
 
                     </div>
 

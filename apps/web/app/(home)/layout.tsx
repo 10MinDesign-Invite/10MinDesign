@@ -17,7 +17,7 @@ export default async function RootLayout({
   const authData = await auth();
   return (
       <div className="bg-slate-100 text-black dark:bg-black dark:text-white">
-        <Header authData={authData?.user}/>
+        <Header authData={authData?.user} disableAnimation=""/>
         {children}
       </div>
     
