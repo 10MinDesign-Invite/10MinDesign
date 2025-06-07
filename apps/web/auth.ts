@@ -61,21 +61,10 @@ const config: NextAuthConfig = {
             if(!email) {
               throw new Error("Invalid email");
             }
-            const userAlreadyExist = await prisma.user.findUnique({
-              where:{
-                email:email
-              }
-            });
+            const userAlreadyExist = await axios.post(`${process.env.NEXT_PUBLIC_Backend_URL}/verify/user`,{email})
 
-            if(!userAlreadyExist){
-              await prisma.user.create({
-                data:{
-                  name,
-                  email,
-                  image,
-                  googleId:id?.toString(),
-                }
-              })
+            if(!userAlreadyExist.data){
+              await axios.post(`${process.env.NEXT_PUBLIC_Backend_URL}/add/user`,{email,id,name,image})
             }
 
             return true  //allow google login  
