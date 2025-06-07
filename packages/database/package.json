@@ -1,6 +1,7 @@
 {
   "name": "@repo/database",
   "version": "1.0.0",
+  "main": "dist/client.js",
   "exports": {
     ".": "./dist/client.js"
   },
