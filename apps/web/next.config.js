@@ -40,4 +40,4 @@ const config = {
   },
 };
 
-export default withPrisma(config);
+export default (config);
