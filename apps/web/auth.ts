@@ -30,6 +30,7 @@ const config: NextAuthConfig = {
          }
          
          const user = await axios.post(`${process.env.NEXT_PUBLIC_Backend_URL}/verify/user`,{email})
+
          if (!user) {
           throw new CredentialsSignin("Invalid credentials.",{cause:"invalid credential"})
         }
