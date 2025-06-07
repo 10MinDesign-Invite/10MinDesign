@@ -22,8 +22,8 @@
 
 // next.config.mjs
 
-import { withPrisma } from '@prisma/nextjs-monorepo-workaround-plugin';
-
+import pkg  from '@prisma/nextjs-monorepo-workaround-plugin';
+const { withPrisma } = pkg;
 /** @type {import('next').NextConfig} */
 const config = {
   images: {
