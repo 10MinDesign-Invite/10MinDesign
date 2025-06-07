@@ -1,12 +1,13 @@
 
 import { prisma } from "@repo/database";
 import { loginSchema } from "@repo/zod-input-validation";
-import axios from "axios";
 import bcrypt from "bcryptjs";
 import NextAuth, { AuthError, CredentialsSignin, type NextAuthConfig } from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 import Google from "next-auth/providers/google";
-
+class InvalidLoginError extends CredentialsSignin {
+  code = "Invalid identifier or password"
+}
 const config: NextAuthConfig = {
   providers: [
     Google({
@@ -26,23 +27,26 @@ const config: NextAuthConfig = {
          if(!email || !password) throw new CredentialsSignin("provide both email password",{cause:"both required email and password"})
          const validInput = loginSchema.safeParse({ email, password });
          if (!validInput.success) {
-           throw new CredentialsSignin(validInput.error.errors[0]?.message,{cause:validInput.error.errors[0]?.message + "...."});
+           throw new CredentialsSignin(validInput.error.errors[0]?.message,{cause:validInput.error.errors[0]?.message});
          }
-         
-         const user = await axios.post(`${process.env.NEXT_PUBLIC_Backend_URL}/verify/user`,{email})
-
+         const user = await prisma.user.findUnique({
+           where:{
+             email
+           }
+         });
+ 
          if (!user) {
-          throw new CredentialsSignin("Invalid credentials.",{cause:"invalid credential"})
+          throw new CredentialsSignin("Invalid credentials.",{cause:"invalid username"})
         }
-         const validPassword = await bcrypt.compare(password!,user?.data?.password!)
+         const validPassword = await bcrypt.compare(password!,user?.password!)
           if(!validPassword){
-            throw new CredentialsSignin("Invalid password.",{cause:"invalid credential"})
+            throw new CredentialsSignin("Invalid password.",{cause:"wrong password"})
           }
          
          return {
-           id: user?.data?.id.toString(),
-           name: user?.data?.name,
-           email: user?.data?.email,
+           id: user?.id.toString(),
+           name: user?.name,
+           email: user?.email,
          }
         
       },

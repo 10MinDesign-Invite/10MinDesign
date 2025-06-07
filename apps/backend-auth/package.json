@@ -13,7 +13,6 @@
   "license": "ISC",
   "dependencies": {
     "@repo/database": "workspace:*",
-    "@repo/zod-input-validation":"workspace:*",
     "@repo/eslint-config": "workspace:*",
     "@repo/typescript-config": "workspace:*",
     "@types/express": "^5.0.1",
