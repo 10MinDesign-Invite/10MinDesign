@@ -40,7 +40,6 @@ const express_1 = __importDefault(require("express"));
 const sendotp_1 = require("./routes/sendotp");
 const cors_1 = __importDefault(require("cors"));
 const dotenv = __importStar(require("dotenv"));
-const findUser_1 = require("./routes/findUser");
 dotenv.config();
 const app = (0, express_1.default)();
 app.use(express_1.default.json());
@@ -48,5 +47,4 @@ app.use((0, cors_1.default)({
     origin: `${process.env.FRONTEND_URL}`
 }));
 app.use("/auth", sendotp_1.OTP);
-app.use("/verify", findUser_1.findUser);
-app.listen(8080);
+app.listen(process.env.PORT);

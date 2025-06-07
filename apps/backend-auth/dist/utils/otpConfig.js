@@ -41,7 +41,6 @@ exports.generateOTP = generateOTP;
 const nodemailer_1 = __importDefault(require("nodemailer"));
 const dotenv = __importStar(require("dotenv"));
 dotenv.config();
-console.log(process.env.SMTP_USER);
 exports.transporter = nodemailer_1.default.createTransport({
     service: 'gmail',
     auth: {
