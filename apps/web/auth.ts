@@ -1,6 +1,7 @@
 
 import { prisma } from "@repo/database";
 import { loginSchema } from "@repo/zod-input-validation";
+import axios from "axios";
 import bcrypt from "bcryptjs";
 import NextAuth, { AuthError, CredentialsSignin, type NextAuthConfig } from "next-auth";
 import Credentials from "next-auth/providers/credentials";
@@ -27,26 +28,23 @@ const config: NextAuthConfig = {
          if(!email || !password) throw new CredentialsSignin("provide both email password",{cause:"both required email and password"})
          const validInput = loginSchema.safeParse({ email, password });
          if (!validInput.success) {
-           throw new CredentialsSignin(validInput.error.errors[0]?.message,{cause:validInput.error.errors[0]?.message});
+           throw new CredentialsSignin(validInput.error.errors[0]?.message,{cause:validInput.error.errors[0]?.message+"...."});
          }
-         const user = await prisma.user.findUnique({
-           where:{
-             email
-           }
-         });
- 
+       
+         const user = await axios.post(`${process.env.NEXT_PUBLIC_Backend_URL}/verify/user`,{email})
+         
          if (!user) {
-          throw new CredentialsSignin("Invalid credentials.",{cause:"invalid username"})
+          throw new CredentialsSignin("Invalid credentials.",{cause:"invalid credential"})
         }
-         const validPassword = await bcrypt.compare(password!,user?.password!)
+         const validPassword = await bcrypt.compare(password!,user?.data?.password!)
           if(!validPassword){
-            throw new CredentialsSignin("Invalid password.",{cause:"wrong password"})
+            throw new CredentialsSignin("Invalid password.",{cause:"invalid credential"})
           }
          
          return {
-           id: user?.id.toString(),
-           name: user?.name,
-           email: user?.email,
+           id: user?.data?.id.toString(),
+           name: user?.data?.name,
+           email: user?.data?.email,
          }
         
       },

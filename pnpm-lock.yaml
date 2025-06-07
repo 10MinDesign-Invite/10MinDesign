@@ -36,6 +36,9 @@ importers:
       '@repo/typescript-config':
         specifier: workspace:*
         version: link:../../packages/config-typescript
+      '@repo/zod-input-validation':
+        specifier: workspace:*
+        version: link:../../packages/zod-input-validation
       '@types/express':
         specifier: ^5.0.1
         version: 5.0.2
