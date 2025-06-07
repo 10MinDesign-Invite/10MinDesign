@@ -25,7 +25,7 @@ importers:
         specifier: ^2.5.3
         version: 2.5.3
 
-  apps/backend-otp:
+  apps/backend-auth:
     dependencies:
       '@repo/database':
         specifier: workspace:*
