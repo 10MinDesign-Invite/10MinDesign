@@ -6,7 +6,7 @@ gsap.registerPlugin(useGSAP);
 import Link from "next/link";
 import { logofont } from "../../fonts/fonts-config";
 import { SlArrowDown, SlMenu } from "react-icons/sl";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { IoIosRose } from "react-icons/io";
 import {
   GiFireSilhouette,
@@ -160,7 +160,7 @@ export function Header({ authData, disableAnimation }: propType) {
             <BsFillMoonStarsFill />
           )}
         </div>
-        <div className="">
+        <div className="cursor-pointer">
           {authData != undefined ? (
             <Profile authData={authData} />
           ) : (
