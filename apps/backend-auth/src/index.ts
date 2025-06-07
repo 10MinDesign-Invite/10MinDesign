@@ -14,4 +14,4 @@ app.use(cors({
 app.use("/auth",OTP);
 app.use("/verify",findUser);
 
-app.listen(8080);
+app.listen(process.env.PORT);
