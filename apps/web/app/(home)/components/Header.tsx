@@ -1,25 +1,23 @@
 "use client";
-import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
 gsap.registerPlugin(useGSAP);
 // gsap code importss
+import { User } from "next-auth";
 import Link from "next/link";
-import { logofont } from "../../fonts/fonts-config";
-import { SlArrowDown, SlMenu } from "react-icons/sl";
-import { useEffect, useState } from "react";
-import { IoIosRose } from "react-icons/io";
+import { useState } from "react";
+import { BsFillMoonStarsFill } from "react-icons/bs";
+import { FaPeopleRoof } from "react-icons/fa6";
 import {
   GiFireSilhouette,
   GiFireworkRocket,
   GiStripedSun,
 } from "react-icons/gi";
+import { IoIosRose } from "react-icons/io";
 import { LiaBirthdayCakeSolid } from "react-icons/lia";
-import { FaPeopleRoof } from "react-icons/fa6";
-import { BsFillMoonStarsFill } from "react-icons/bs";
+import { SlArrowDown, SlMenu } from "react-icons/sl";
+import { logofont } from "../../fonts/fonts-config";
 import { Profile } from "./Profile";
-import { User } from "next-auth";
-import axios from "axios";
-import { prisma } from "@repo/database";
 
 interface propType {
   authData: User | undefined;
@@ -45,14 +43,7 @@ export function Header({ authData, disableAnimation }: propType) {
     }
   };
 
-  async function getUser(){
-    const email = "spi@gmail.com"
-    const onlyEmail = "select only email"
-    await axios.post(`${process.env.NEXT_PUBLIC_Backend_URL}/verify/user`,{email,onlyEmail});
-  }
-  useEffect(()=>{
-    getUser();
-  },[])
+ 
 
   useGSAP(() => {
     let mm = gsap.matchMedia();

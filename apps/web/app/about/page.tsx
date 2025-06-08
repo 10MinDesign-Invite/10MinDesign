@@ -1,6 +1,7 @@
 // app/about/page.tsx
 
 import { Metadata } from "next";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "About Us - 10MinDesign",
@@ -56,7 +57,7 @@ export default function AboutPage() {
           Contact us and get your design delivered to your <strong>WhatsApp</strong> or <strong>email</strong>.
         </p>
         <p className="text-lg font-medium mb-2">
-          📩 Email us at:{" "}
+           Email us at:{" "}
           <a
             href="mailto:10MinDesign.invite@gmail.com"
             className="underline hover:text-yellow-200 transition"
@@ -65,19 +66,19 @@ export default function AboutPage() {
           </a>
         </p>
         <p className="text-sm italic opacity-90">
-          🎉 With your permission, we may even showcase your custom invite on our website!
+           With your permission, we may even showcase your custom invite on our website!
         </p>
       </div>
 
       {/* CTA */}
       <div className="text-center mt-10">
         <p className="text-xl font-medium mb-4">Start designing your next invite today!</p>
-        <a
-          href="/"
+        <Link
+          href="/explore"
           className="bg-violet-600 hover:bg-violet-700 dark:bg-violet-500 dark:hover:bg-violet-600 text-white px-8 py-3 rounded-full text-lg shadow-md transition-all"
         >
           Create Your Invite
-        </a>
+        </Link>
       </div>
     </section>
   );
