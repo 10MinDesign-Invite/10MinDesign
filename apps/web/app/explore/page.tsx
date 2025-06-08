@@ -15,7 +15,7 @@ export default async function ExplorePage() {
     const authData = await auth()
   return (
     <>
-    <Header authData={authData?.user} disableAnimation="disable"/>
+    <Header disableAnimation="disable"/>
 
       <div className="min-h-screen py-24 px-6">
         <div className="max-w-7xl mx-auto text-center">

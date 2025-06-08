@@ -18,7 +18,7 @@ const [currentDesign,setCurrentDesign] = useState({wedding:"",image:""})
         }
     ];
     return (
-        <div className="max-w-[1440px] mx-auto border h-dvh dark:text-white mt-[100px]">
+        <div className="max-w-[1440px] mx-auto h-dvh dark:text-white mt-[100px]">
             <CategoryLayout category="Wedding" />
             <div className="pb-9 mt-[30px]  grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 px-5 sm:gap-6 md:gap-7 lg:gap-10">
                             {

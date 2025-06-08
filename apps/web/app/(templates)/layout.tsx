@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import "@repo/ui/styles.css";
-import "../../app/globals.css"
-import { auth } from "@/auth";
+import "../../app/globals.css";
 import { Header } from "../(home)/components/Header";
+import { SessionProvider } from "next-auth/react";
 
 export const metadata: Metadata = {
   title: "invite",
@@ -14,12 +14,10 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const authData = await auth();
   return (
-      <div className="bg-slate-100 text-black dark:bg-black dark:text-white">
-        <Header authData={authData?.user} disableAnimation="disable"/>
-        {children}
-      </div>
-    
+    <div className="bg-slate-100 text-black dark:bg-black dark:text-white">
+      <Header disableAnimation="disable" />
+      {children}
+    </div>
   );
 }

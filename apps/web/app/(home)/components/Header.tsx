@@ -3,7 +3,6 @@ import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 gsap.registerPlugin(useGSAP);
 // gsap code importss
-import { User } from "next-auth";
 import Link from "next/link";
 import { useState } from "react";
 import { BsFillMoonStarsFill } from "react-icons/bs";
@@ -18,13 +17,15 @@ import { LiaBirthdayCakeSolid } from "react-icons/lia";
 import { SlArrowDown, SlMenu } from "react-icons/sl";
 import { logofont } from "../../fonts/fonts-config";
 import { Profile } from "./Profile";
+import { useSession } from "next-auth/react";
 
 interface propType {
-  authData: User | undefined;
   disableAnimation?: string;
 }
 
-export function Header({ authData, disableAnimation }: propType) {
+export function Header({ disableAnimation }: propType) {
+  const { data } = useSession();
+  const authData = data?.user;
   const [nav, setNav] = useState<boolean>(false);
   const [curNav, setCurNav] = useState({ explore: false });
   const [theme, setTheme] = useState("light");
@@ -42,8 +43,6 @@ export function Header({ authData, disableAnimation }: propType) {
       setTheme("dark");
     }
   };
-
- 
 
   useGSAP(() => {
     let mm = gsap.matchMedia();
