@@ -7,6 +7,7 @@ export const verifyUser = Router();
 
 verifyUser.post("/user",async (req:Request,res:Response)=>{
     const email = req.body.email;
+    const onlyEmail = req.body.onlyEmail
     const parseData = verifyuser.safeParse({email});
     if(!parseData.success){
         res.send("email format not correct");
@@ -21,5 +22,9 @@ verifyUser.post("/user",async (req:Request,res:Response)=>{
         res.status(404).send("user not found");
         return
     }
-    res.status(200).send(user)
+    if(onlyEmail == "select only email"){
+        res.status(200).send(user.email)
+    }else{
+        res.status(200).send(user);
+    }
 })

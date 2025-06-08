@@ -16,9 +16,9 @@ export function Hero() {
 
     const category = [
         { text: "Birthday", icon: < LiaBirthdayCakeSolid />, color: "text-amber-900 dark:text-pink-300" },
-        { text: "wedding", icon: <IoIosRose />, color: "text-red-500" },
-        { text: "opening", icon: <FaPeopleRoof />, color: "text-blue-400" },
-        { text: "festivals", icon: <GiFireworkRocket />, color: "text-green-600 dark:text-green-300" },
+        { text: "Wedding", icon: <IoIosRose />, color: "text-red-500" },
+        { text: "Opening", icon: <FaPeopleRoof />, color: "text-blue-400" },
+        { text: "Festivals", icon: <GiFireworkRocket />, color: "text-green-600 dark:text-green-300" },
         { text: "Rip", icon: <GiFireSilhouette />, color: "text-orange-400" }
     ]
 

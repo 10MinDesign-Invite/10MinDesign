@@ -51,4 +51,4 @@ app.use((0, cors_1.default)({
 app.use("/auth", sendotp_1.OTP);
 app.use("/verify", findUser_1.verifyUser);
 app.use("/add", addUser_1.addUser);
-app.listen(process.env.PORT);
+app.listen(process.env.PORT || 8080);

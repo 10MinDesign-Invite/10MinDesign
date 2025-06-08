@@ -14,4 +14,4 @@ app.use("/auth",OTP);
 app.use("/verify",verifyUser);
 app.use("/add",addUser);
 
-app.listen(process.env.PORT);
+app.listen(process.env.PORT || 8080);

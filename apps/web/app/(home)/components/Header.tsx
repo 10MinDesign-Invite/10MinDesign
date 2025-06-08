@@ -6,7 +6,7 @@ gsap.registerPlugin(useGSAP);
 import Link from "next/link";
 import { logofont } from "../../fonts/fonts-config";
 import { SlArrowDown, SlMenu } from "react-icons/sl";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { IoIosRose } from "react-icons/io";
 import {
   GiFireSilhouette,
@@ -18,6 +18,8 @@ import { FaPeopleRoof } from "react-icons/fa6";
 import { BsFillMoonStarsFill } from "react-icons/bs";
 import { Profile } from "./Profile";
 import { User } from "next-auth";
+import axios from "axios";
+import { prisma } from "@repo/database";
 
 interface propType {
   authData: User | undefined;
@@ -42,6 +44,15 @@ export function Header({ authData, disableAnimation }: propType) {
       setTheme("dark");
     }
   };
+
+  async function getUser(){
+    const email = "spi@gmail.com"
+    const onlyEmail = "select only email"
+    await axios.post(`${process.env.NEXT_PUBLIC_Backend_URL}/verify/user`,{email,onlyEmail});
+  }
+  useEffect(()=>{
+    getUser();
+  },[])
 
   useGSAP(() => {
     let mm = gsap.matchMedia();

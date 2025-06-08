@@ -16,6 +16,7 @@ const express_1 = require("express");
 exports.verifyUser = (0, express_1.Router)();
 exports.verifyUser.post("/user", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const email = req.body.email;
+    const onlyEmail = req.body.onlyEmail;
     const parseData = zod_input_validation_1.verifyuser.safeParse({ email });
     if (!parseData.success) {
         res.send("email format not correct");
@@ -30,5 +31,10 @@ exports.verifyUser.post("/user", (req, res) => __awaiter(void 0, void 0, void 0,
         res.status(404).send("user not found");
         return;
     }
-    res.status(200).send(user);
+    if (onlyEmail == "select only email") {
+        res.status(200).send(user.email);
+    }
+    else {
+        res.status(200).send(user);
+    }
 }));
