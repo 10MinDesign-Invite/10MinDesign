@@ -1,5 +1,5 @@
 import { handleDownload } from "@/app/(templates)/utils/handelDwonload";
-import { inknut_antiqua, laila, palanquinDark } from "@/app/fonts/fonts-config";
+import { inknut_antiqua, laila } from "@/app/fonts/fonts-config";
 import { Image } from "@imagekit/next";
 import { useEffect, useRef, useState } from "react";
 import { DesignContainer } from "../../category-components/DesignContainer";
@@ -29,13 +29,13 @@ export function Wedding1() {
 
     return (
         <DesignWraper customeStyles="flex flex-col lg:flex-row items-center lg:items-start text-black">
-            <DetailWrapper customeStyles="relative w-full md:w-[70%] border border-black dark:text-white mb-[25px] lg:mb-0 dark:shadow-[inset_0px_0px_14px_0px_#e53e3e] shadow-[0px_7px_13px_0px_#63b3ed]">
-                <div className="w-full border border-red-600 flex justify-end">
+            <DetailWrapper customeStyles="relative w-full md:w-[70%] dark:text-white mb-[25px] lg:mb-0 dark:shadow-[inset_0px_0px_14px_0px_#e53e3e] shadow-[0px_7px_13px_0px_#63b3ed]">
+                <div className="w-full flex justify-end">
                     <button className="bg-green-400 px-2 rounded-lg" onClick={() => handleDownload(containerRef)}> dwonload</button>
                 </div>
 
-                <div className="border border-black flex">
-                    <div className="border border-black w-[80%] flex flex-col gap-1">
+                <div className="flex">
+                    <div className=" w-[80%] flex flex-col gap-1">
                         <div className="flex justify-between">
                             <label htmlFor="lastname" className="w-[20%]">name1 :</label>
                             <input type="text" value={name1} onChange={(e) => setName1(e.target.value)} className="w-[75%] rounded-md pl-1 md:p-1 dark:text-black" placeholder="सैनी" />
@@ -45,12 +45,12 @@ export function Wedding1() {
                             <input type="text" value={name2} onChange={(e) => setName2(e.target.value)} className="w-[75%] rounded-md pl-1 md:p-1 dark:text-black" placeholder="शेट्टी" />
                         </div>
                     </div>
-                    <div className="border border-black w-[20%] flex justify-center items-center">
+                    <div className=" w-[20%] flex justify-center items-center">
                         <button onClick={() => setWhichSize("name1 And name2")} className="bg-slate-300 px-2 rounded-lg dark:text-black">Edit Size</button>
                     </div>
                 </div>
-                <div className="border border-black flex">
-                    <div className="border border-black w-[80%] flex flex-col gap-1">
+                <div className="flex">
+                    <div className="w-[80%] flex flex-col gap-1">
                         <div className="flex justify-between">
                             <label htmlFor="lastname" className="w-[20%]">name1 :</label>
                             <input type="text" value={firstName1} onChange={(e) => setFirstName1(e.target.value)} className="w-[75%] rounded-md md:p-1 dark:text-black" placeholder="राजीव" />
@@ -66,12 +66,12 @@ export function Wedding1() {
                             />
                         </div>
                     </div>
-                    <div className="border border-black w-[20%] flex justify-center items-center">
+                    <div className="w-[20%] flex justify-center items-center">
                         <button onClick={() => setWhichSize("firstName1 And Info")} className="bg-slate-300 px-2 rounded-lg dark:text-black">Edit Size</button>
                     </div>
                 </div>
-                <div className="border border-black flex">
-                    <div className="border border-black w-[80%] flex flex-col gap-1">
+                <div className="flex">
+                    <div className="w-[80%] flex flex-col gap-1">
                         <div className="flex justify-between">
                             <label htmlFor="lastname" className="w-[20%]">name2 :</label>
                             <input type="text" value={firstName2} onChange={(e) => setFirstName2(e.target.value)} className="w-[75%] rounded-md md:p-1 dark:text-black" placeholder="संजना" />
@@ -87,7 +87,7 @@ export function Wedding1() {
                             />
                         </div>
                     </div>
-                    <div className="border border-black w-[20%] flex justify-center items-center">
+                    <div className="w-[20%] flex justify-center items-center">
                         <button onClick={() => setWhichSize("firstName2 And Info")} className="bg-slate-300 px-2 rounded-lg dark:text-black">Edit Size</button>
                     </div>
                 </div>
@@ -95,8 +95,8 @@ export function Wedding1() {
                     <label htmlFor="" className="w-[20%]">Date1 :</label>
                     <input type="text" value={date1} onChange={(e) => setDate1(e.target.value)} className="w-[75%] md:p-1 rounded-md dark:text-black" placeholder="बुधवार दि. १२/०९/२०२५ रोजी सायं ०५:३० वा" />
                 </div>
-                <div className="border border-black flex">
-                    <div className="border border-black w-[80%] flex flex-col gap-1">
+                <div className="flex">
+                    <div className="w-[80%] flex flex-col gap-1">
                         <div className="flex justify-between">
                             <label htmlFor="lastname" className="w-[20%]">Date2 :</label>
                             <textarea
@@ -109,12 +109,12 @@ export function Wedding1() {
                             />
                         </div>
                     </div>
-                    <div className="border border-black w-[20%] flex justify-center items-center">
+                    <div className="w-[20%] flex justify-center items-center">
                         <button onClick={() => setWhichSize("Date2")} className="bg-slate-300 px-2 rounded-lg dark:text-black">Edit Size</button>
                     </div>
                 </div>
-                <div className="border border-black flex">
-                    <div className="border border-black w-[80%] flex flex-col gap-1">
+                <div className="flex">
+                    <div className="w-[80%] flex flex-col gap-1">
                         <div className="flex justify-between">
                             <label htmlFor="lastname" className="w-[20%]">location :</label>
                             <input type="text" value={location} onChange={(e) => setLocation(e.target.value)} className="w-[75%] rounded-md md:p-1 dark:text-black" placeholder="मंगल कार्यालय" />
@@ -130,12 +130,12 @@ export function Wedding1() {
                             />
                         </div>
                     </div>
-                    <div className="border border-black w-[20%] flex justify-center items-center">
+                    <div className="w-[20%] flex justify-center items-center">
                         <button onClick={() => setWhichSize("location And Info")} className="bg-slate-300 px-2 rounded-lg dark:text-black">Edit Size</button>
                     </div>
                 </div>
-                <div className="border border-black flex">
-                    <div className="border border-black w-[80%] flex flex-col gap-1">
+                <div className="flex">
+                    <div className="w-[80%] flex flex-col gap-1">
                         <div className="flex justify-between">
                             <label htmlFor="lastname" className="w-[20%]">relats :</label>
                             <textarea
@@ -147,18 +147,18 @@ export function Wedding1() {
                             />
                         </div>
                     </div>
-                    <div className="border border-black w-[20%] flex justify-center items-center">
+                    <div className="w-[20%] flex justify-center items-center">
                         <button onClick={() => setWhichSize("relats")} className="bg-slate-300 px-2 rounded-lg dark:text-black">Edit Size</button>
                     </div>
                 </div>
-                <div className="border border-black flex">
-                    <div className="border border-black w-[80%] flex flex-col gap-1">
+                <div className="flex">
+                    <div className="w-[80%] flex flex-col gap-1">
                         <div className="flex justify-between">
                             <label htmlFor="lastname" className="w-[20%] dark:text-black">Invite :</label>
                             <input type="text" value={invite} onChange={(e) => setInvite(e.target.value)} className="w-[75%] rounded-md md:p-1 dark:text-black" placeholder="समस्त xyz परिवार व abc" />
                         </div>
                     </div>
-                    <div className="border border-black w-[20%] flex justify-center items-center">
+                    <div className="w-[20%] flex justify-center items-center">
                         <button onClick={() => setWhichSize("invite")} className="bg-slate-300 px-2 rounded-lg dark:text-black">Edit Size</button>
                     </div>
                 </div>
@@ -289,11 +289,11 @@ export function Wedding1() {
                 </div>
             </DetailWrapper>
 
-            <DesignContainer customeStyles="w-[80%] border">
+            <DesignContainer customeStyles="w-[80%]">
 
-                <div ref={containerRef} className="border border-white relative w-full h-full md:h-[auto] mx-auto flex justify-center items-center">
+                <div ref={containerRef} className="relative w-full h-full md:h-[auto] mx-auto flex justify-center items-center">
                     {/* top most section */}
-                    <div className="absolute border border-black top-[0%] left-[0%] w-[8%] h-[8.5%] skew-[40]">
+                    <div className="absolute top-[0%] left-[0%] w-[8%] h-[8.5%] skew-[40]">
                         <Image
                             src="/first_wedding_bells.png"
                             width={800}
@@ -301,7 +301,7 @@ export function Wedding1() {
                             alt={"main image"}
                         />
                     </div>
-                    <div className="absolute border border-black top-[0%] right-[0%] w-[8%] h-[8.5%] rotate-[360deg] bg-white">
+                    <div className="absolute top-[0%] right-[0%] w-[8%] h-[8.5%] rotate-[360deg]">
                         <Image
                             className="scale-x-[-1]"
                             src="/first_wedding_bells.png"
@@ -317,7 +317,7 @@ export function Wedding1() {
                         height={500}
                         alt={"main image"}
                     />
-                    <div className="absolute top-[0.5%] right-[11%] w-[9.5%] border border-black">
+                    <div className="absolute top-[0.5%] right-[11%] w-[9.5%]">
                         <Image
                             style={{ width: "100%", height: "100%" }}
                             src="/swastik_red.png"
@@ -326,7 +326,7 @@ export function Wedding1() {
                             alt={"main image"}
                         />
                     </div>
-                    <div className="absolute border border-black top-[3%] left-[28.4%] lg:left-[30%] w-[12.9%] h-[8.9%] lg:w-[10.2%] lg:h-[7.2%] overflow-hidden">
+                    <div className="absolute top-[3%] left-[28.4%] lg:left-[30%] w-[13.5%] h-[8.9%] lg:w-[10.9%] lg:h-[7.2%] overflow-hidden">
                         <Image
                             src="/first_wedding_ganpati.png"
                             style={{ width: "100%", height: "100%" }}
@@ -338,21 +338,21 @@ export function Wedding1() {
                     </div>
                     {/* images end */}
                     {/* ---------------------------------------------------------------------- */}
-                    <p className={`absolute border border-black top-[0%] left-[20%] w-[30%] h-[2.5%] text-[1.8vw] lg:text-[0.9vw] ${laila.className} font-[700] text-red-700`}>
+                    <p className={`absolute top-[0%] left-[20%] w-[30%] h-[2.5%] text-[1.9vw] lg:text-[1vw] ${laila.className} font-[700] text-red-700`}>
                         || {"श्री गणेशाय नम:"} ||
                     </p>
 
-                    <div style={{fontSize:`${sizes.name1 == 1 ? undefined : `${sizes.name1}px`}`}} className={`border border-black absolute top-[3%] left-[45.5%] w-[29.5%] h-[4.5%] flex justify-center items-center text-[3vw] lg:text-[2vw] ${inknut_antiqua.className} font-[900] bg-gradient-to-b from-red-400 to-red-800 bg-clip-text text-transparent`}>
+                    <div style={{fontSize:`${sizes.name1 == 1 ? undefined : `${sizes.name1}px`}`}} className={`absolute top-[3%] left-[45.5%] w-[29.5%] h-[4.5%] flex justify-center items-center text-[3vw] lg:text-[2vw] ${inknut_antiqua.className} font-[900] bg-gradient-to-b from-red-400 to-red-800 bg-clip-text text-transparent`}>
                         {name1}
                     </div>
-                    <div style={{fontSize:`${sizes.name2 == 1 ? undefined : `${sizes.name2}px`}`}} className={`border border-black absolute top-[8%] left-[50.5%] w-[29.5%] h-[4.5%] flex justify-center items-center text-[3vw] lg:text-[2vw] ${inknut_antiqua.className} font-[900] bg-gradient-to-b from-red-400 to-red-800 bg-clip-text text-transparent`}>
+                    <div style={{fontSize:`${sizes.name2 == 1 ? undefined : `${sizes.name2}px`}`}} className={`absolute top-[8%] left-[50.5%] w-[29.5%] h-[4.5%] flex justify-center items-center text-[3vw] lg:text-[2vw] ${inknut_antiqua.className} font-[900] bg-gradient-to-b from-red-400 to-red-800 bg-clip-text text-transparent`}>
                         {name2}
                     </div>
 
                     {/* ================================================================================= */}
                     {/* second section */}
                     {/* images  start*/}
-                    <div className="absolute border border-black top-[13.8%] left-[0%] w-[17%]">
+                    <div className="absolute top-[13.8%] left-[0%] w-[17%]">
                         <Image
                             src="/first_wedding_nimantran.png"
                             style={{ width: "100%", height: "100%" }}
@@ -363,25 +363,25 @@ export function Wedding1() {
                         />
                     </div>
                     {/* images end ===================================================================== */}
-                    <p className="absolute text-[2vw] lg:text-[1vw] top-[10%] left-[17%] border font-bold text-red-700">चि.</p>
-                    <div style={{fontSize:`${sizes.firstName1 == 1 ? undefined : `${sizes.firstName1}px`}`}} className={`absolute border border-black top-[12.5%] left-[20.5%] w-[34.9%] h-[7.3%] font-extrabold text-[6vw] lg:text-[3.5vw] flex justify-center items-center text-red-700 ${palanquinDark.className}`}>
+                    <p className="absolute text-[2vw] lg:text-[1vw] top-[10%] left-[17%] font-bold text-red-700">चि.</p>
+                    <div style={{fontSize:`${sizes.firstName1 == 1 ? undefined : `${sizes.firstName1}px`}`}} className={`absolute top-[12.5%] left-[20.5%] w-[34.9%] h-[7.3%] font-extrabold text-[6vw] lg:text-[3.5vw] flex justify-center items-center text-red-700 ${laila.className}`}>
                         {firstName1}
                     </div>
-                    <p className="absolute text-[2vw] lg:text-[1vw] top-[19.4%] left-[17%] border font-bold text-red-700">चि.सौ.कां.</p>
-                    <div style={{fontSize:`${sizes.firstName2 == 1 ? undefined : `${sizes.firstName2}px`}`}} className={`absolute border border-black top-[22.3%] left-[20.5%] w-[34.9%] h-[7.3%] font-bold text-[7vw] lg:text-[3.5vw] flex justify-center items-center text-red-700 ${palanquinDark.className}`}>
+                    <p className="absolute text-[2vw] lg:text-[1vw] top-[19.4%] left-[17%] font-bold text-red-700">चि.सौ.कां.</p>
+                    <div style={{fontSize:`${sizes.firstName2 == 1 ? undefined : `${sizes.firstName2}px`}`}} className={`absolute top-[22.3%] left-[20.5%] w-[34.9%] h-[7.3%] font-bold text-[7vw] lg:text-[3.5vw] flex justify-center items-center text-red-700 ${laila.className}`}>
                         {firstName2}
                     </div>
 
-                    <p style={{fontSize:`${sizes.firstNameInfo1 == 1 ? undefined : `${sizes.firstNameInfo1}px`}`}} className="flex items-center leading-[2vw] lg:leading-[1vw] whitespace-pre-wrap break-words absolute border border-black top-[12.5%] left-[60.1%] w-[40%] h-[7.3%] font-bold text-left text-[1.7vw] lg:text-[0.8vw] overflow-x-hidden text-red-800">
+                    <p style={{fontSize:`${sizes.firstNameInfo1 == 1 ? undefined : `${sizes.firstNameInfo1}px`}`,lineHeight:"120%"}} className="flex items-center leading-[2vw] lg:leading-[1vw] whitespace-pre-wrap break-words absolute scrollbar-hide top-[12.5%] left-[60.1%] w-[40%] h-[7.3%] font-bold text-left text-[1.7vw] lg:text-[0.8vw] overflow-x-hidden text-red-800">
                         {firstNameInfo1}
                     </p>
 
-                    <p style={{fontSize:`${sizes.firstNameInfo2 == 1 ? undefined : `${sizes.firstNameInfo2}px`}`}} className="flex items-center whitespace-pre-wrap leading-[2vw] lg:leading-[1vw] break-words absolute border border-black top-[22.3%] left-[60.1%] w-[40%] h-[7.3%] font-bold text-[1.6vw] lg:text-[0.8vw] text-left overflow-x-hidden text-red-800">
+                    <p style={{fontSize:`${sizes.firstNameInfo2 == 1 ? undefined : `${sizes.firstNameInfo2}px`}`,lineHeight:"120%"}} className="flex items-center whitespace-pre-wrap leading-[2vw] lg:leading-[1vw] break-words absolute scrollbar-hide top-[22.3%] left-[60.1%] w-[40%] h-[7.3%] font-bold text-[1.6vw] lg:text-[0.8vw] text-left overflow-x-hidden text-red-800">
                         {firstNameInfo2}
                     </p>
                     {/* third section */}
                     {/* images start */}
-                    <div className="absolute border border-black w-[66.4%] h-[19%] top-[30%] left-[10.9%]">
+                    <div className="absolute w-[66.4%] h-[19%] top-[30%] left-[10.9%]">
                         <Image
                             src="/first_wedding_shubh_vivaha.png"
                             style={{ width: "100%", height: "100%" }}
@@ -390,14 +390,14 @@ export function Wedding1() {
                             height={100}
                             priority={true}
                         />
-                        <div className={`absolute border border-white bottom-[14%] right-[5.7%] w-[68%] h-[15.5%] text-white font-bold text-[1.5vw] lg:text-[0.7vw] bg-blac ${laila.className} flex justify-center items-center overflow-hidden`}>
+                        <div className={`absolute bottom-[14%] right-[5.7%] w-[68%] h-[15.5%] text-white font-bold text-[1.5vw] lg:text-[0.7vw] bg-blac ${laila.className} flex justify-center items-center overflow-hidden`}>
                             {date1}
                         </div>
-                        <div className={`absolute border border-black bottom-[0%] right-[9%] w-[65%] h-[14%] text-[1.5vw] lg:text-[0.7vw] font-bold text-white bg-blac ${laila.className} flex justify-center items-center overflow-hidden`}>
+                        <div className={`absolute bottom-[0%] right-[9%] w-[65%] h-[14%] text-[1.5vw] lg:text-[0.7vw] font-bold text-white bg-blac ${laila.className} flex justify-center items-center overflow-hidden`}>
                             या शुभ मुहूर्तावर करण्याचे योजिले आहे.
                         </div>
                     </div>
-                    <div className="border border-black absolute top-[35%] right-[4%] w-[18%] h-[10%]">
+                    <div className="absolute top-[35%] right-[4%] w-[18%] h-[10%]">
                         <Image
                             src="/first_wedding_dhol.png"
                             style={{ width: "100%", height: "100%", position: "relative" }}
@@ -409,10 +409,10 @@ export function Wedding1() {
                     </div>
 
                     {/* third section */}
-                    <div className="border border-black absolute top-[51%] left-[2%] w-[48.5%] h-[11%]">
+                    <div className="absolute top-[51%] left-[2%] w-[48.5%] h-[11%]">
                         <div className="w-full h-full relative">
                             <div className="w-[85%] h-[27%] mx-auto flex justify-between gap-1">
-                                <div className="h-full w-[10%] scale-x-[-1] mix-blend-multipl">
+                                <div className="h-full w-[10%] scale-x-[-1] mix-blend-multiply">
                                     <Image
                                         src="/first_wedding_bars.png"
                                         style={{ width: "100%", height: "100%" }}
@@ -422,14 +422,14 @@ export function Wedding1() {
                                         priority={true}
                                     />
                                 </div>
-                                <div className={`w-[80%] rounded-[35%] bg-orange-700 text-white flex justify-center items-center text-[1.2vw] lg:text-[0.7vw]`}>
+                                <div className={`w-[80%] rounded-[35%] bg-orange-700 text-yellow-200 flex justify-center items-center text-[1.4vw] lg:text-[0.9vw]`}>
                                     {/* <p className="font-medium text-black">❀</p> */}
                                     <div className={`font-semibold flex justify-center items-center`}>
                                         {"साखरपुडा आणि हळदी समारंभ"}
                                     </div>
                                     {/* <p className="font-medium text-black">❀</p> */}
                                 </div>
-                                <div className="h-full w-[10%] mix-blend-multipl">
+                                <div className="h-full w-[10%] mix-blend-multiply">
                                     <Image
                                         src="/first_wedding_bars.png"
                                         style={{ width: "100%", height: "100%", position: "relative" }}
@@ -441,8 +441,8 @@ export function Wedding1() {
                                 </div>
                             </div>
 
-                            <div className="borde border-green-400 h-[75%] rounded-tl-lg p-[0.2vw] bg-orange-600 rounded-br-lg overflow-hidden">
-                                <div style={{fontSize:`${sizes.Date2 == 1 ? undefined : `${sizes.Date2}px`}`}} className={`font-semibold leading-[2.1vw] lg:leading-[1.1vw] border border-green-400 h-full w-full rounded-tl-lg bg-red-800 rounded-br-lg text-white text-[1.6vw] lg:text-[0.9vw] flex justify-center items-center whitespace-pre-wrap break-words`}>
+                            <div className=" h-[75%] rounded-tl-lg p-[0.2vw] bg-orange-600 rounded-br-lg overflow-hidden">
+                                <div style={{fontSize:`${sizes.Date2 == 1 ? undefined : `${sizes.Date2}px`}`}} className={`font-semibold leading-[2.1vw] lg:leading-[1.1vw] h-full w-full rounded-tl-lg bg-red-800 rounded-br-lg text-white text-[1.6vw] lg:text-[0.9vw] flex justify-center items-center whitespace-pre-wrap break-words`}>
                                     {date2}
                                 </div>
                             </div>
@@ -450,9 +450,9 @@ export function Wedding1() {
                     </div>
                     {/* =============================================================================================== */}
                     {/* fourth section */}
-                    <div className="absolute border border-black top-[63%] left-[2%] w-[48.5%]">
+                    <div className="absolute top-[63%] left-[2%] w-[48.5%]">
                         <div className="w-full flex justify-center items-center gap-1">
-                            <div className="w-[5%] scale-x-[-1]">
+                            <div className="w-[5%] scale-x-[-1] mix-blend-multiply">
                                 <Image
                                     src="/first_wedding_bars.png"
                                     style={{ width: "100%", height: "100%", position: "relative" }}
@@ -462,10 +462,10 @@ export function Wedding1() {
                                     priority={true}
                                 />
                             </div>
-                            <div className="w-[33%] border text-[2.1vw] lg:text-[1vw] p-[1px] text-white bg-gradient-to-b from-purple-400 to-red-800 rounded-[45%] flex font-bold justify-center items-center">
+                            <div className="w-[33%] text-[2.1vw] lg:text-[1vw] p-[1px] text-white bg-gradient-to-b from-purple-400 to-red-800 rounded-[45%] flex font-bold justify-center items-center">
                                 विवाहस्थळ
                             </div>
-                            <div className="w-[5%]">
+                            <div className="w-[5%] mix-blend-multiply">
                                 <Image
                                     src="/first_wedding_bars.png"
                                     style={{ width: "100%", height: "100%", position: "relative" }}
@@ -479,7 +479,7 @@ export function Wedding1() {
                     </div>
                     {/* ===================================================================================== */}
                     {/* fift section */}
-                    <div className="absolute border w-[48.5%] top-[66.8%] left-[2%] ">
+                    <div className="absolute w-[48.5%] top-[66.8%] left-[2%] ">
                         <div className="w-full relative flex justify-center items-center gap-[2px]">
                             <div className="w-[6.4%] scale-x-[-1]">
                                 <Image
@@ -491,10 +491,10 @@ export function Wedding1() {
                                     priority={true}
                                 />
                             </div>
-                            <div style={{fontSize:`${sizes.location == 1 ? undefined : `${sizes.location}px`}`}} className={`w-[80%] xl:w-[300px] border text-[2.5vw] lg:text-[1.4vw] xl:text-[20px] font-extrabold text-red-800 bg-white ${laila.className}`}>
+                            <div style={{fontSize:`${sizes.location == 1 ? undefined : `${sizes.location}px`}`}} className={`w-[80%] xl:w-[300px] text-[2.5vw] lg:text-[1.4vw] xl:text-[20px] font-extrabold text-red-800 ${laila.className}`}>
                                 {location}
                             </div>
-                            <div className="w-[6.4%]">
+                            <div className="w-[6.4%] mix-blend-multiply">
                                 <Image
                                     src="/first_wedding_bars.png"
                                     style={{ width: "100%", height: "100%", position: "relative" }}
@@ -506,22 +506,22 @@ export function Wedding1() {
                             </div>
                         </div>
                     </div>
-                    <div style={{fontSize:`${sizes.Info == 1 ? undefined : `${sizes.Info}px`}`}} className="absolute border top-[71.4%] left-[2%] w-[48.5%] h-[5.5%] flex justify-center items-center text-[1.2vw] lg:text-[0.6vw] font-bold">
+                    <div style={{fontSize:`${sizes.Info == 1 ? undefined : `${sizes.Info}px`}`, overflow:"hidden"}} className="absolute top-[71.4%] left-[2%] w-[48.5%] h-[5.5%] flex justify-center items-center text-[1.2vw] lg:text-[0.6vw] font-bold">
                         {locationAdd}
                     </div>
                     {/* ================================================================================== */}
                     {/* sixth section */}
-                    <div className="absolute border top-[77.3%] left-[2%] w-[48.5%] h-[4%]">
-                        <div className="w-[33%] mx-auto border text-[2.1vw] lg:text-[1vw] p-[1px] text-white bg-gradient-to-b from-purple-400 to-red-800 rounded-[45%] flex font-bold justify-center items-center">
+                    <div className="absolute top-[77.3%] left-[2%] w-[48.5%] h-[4%]">
+                        <div className="w-[33%] mx-auto text-[2.1vw] lg:text-[1vw] p-[1px] text-white bg-gradient-to-b from-purple-400 to-red-800 rounded-[45%] flex font-bold justify-center items-center">
                             आपले नम्र
                         </div>
                     </div>
-                    <div style={{fontSize:`${sizes.relats == 1 ? undefined : `${sizes.relats}px`}`}} className="leading-[2vw] lg:leading-[1vw] whitespace-pre-wrap break-words absolute border border-black top-[81.5%] left-[2%] w-[48.5%] h-[12%] font-bold flex justify-center items-center text-[1.6vw] lg:text-[0.8vw] overflow-hidden text-red-800">
+                    <div style={{fontSize:`${sizes.relats == 1 ? undefined : `${sizes.relats}px`}`,lineHeight: "120%"}} className="leading-[2vw] lg:leading-[1vw] whitespace-pre-wrap break-words absolute top-[81.5%] left-[2%] w-[48.5%] h-[12%] font-bold flex justify-center items-center text-[1.6vw] lg:text-[0.8vw] overflow-hidden text-red-800">
                         {relats}
                     </div>
                     {/* ===================================================================================== */}
                     {/* sixth section */}
-                    <div className="absolute border bg-amber-100 border-black bottom-0 left-0 h-[6%] w-full flex items-center">
+                    <div className="absolute bg-amber-100 bottom-0 left-0 h-[6%] w-full flex items-center">
                         <div className="w-[10%] h-full">
                             <Image
                                 src="/first_wedding_elephant.png"
@@ -532,10 +532,10 @@ export function Wedding1() {
                                 priority={true}
                             />
                         </div>
-                        <div className="border w-[12%] h-[50%]  rounded-[50%] flex justify-center items-center text-[1.5vw] lg:text-[0.9vw] font-bold bg-gradient-to-t from-purple-500 to-red-600 text-white">
+                        <div className=" w-[12%] h-[50%]  rounded-[50%] flex justify-center items-center text-[1.5vw] lg:text-[0.9vw] font-bold bg-gradient-to-t from-purple-500 to-red-600 text-white">
                             निमंत्रक
                         </div>
-                        <div style={{fontSize:`${sizes.invite == 1 ? undefined : `${sizes.invite}px`}`}} className="w-[78%] border h-full text-slate-700 font-bold text-[3.5vw] lg:text-[2vw] flex justify-center items-center">
+                        <div style={{fontSize:`${sizes.invite == 1 ? undefined : `${sizes.invite}px`}`}} className="w-[78%] h-full text-slate-700 font-bold text-[3.5vw] lg:text-[2vw] flex justify-center items-center">
                             {invite}
                         </div>
                         <div className="w-[10%] h-full scale-x-[-1]">
@@ -550,19 +550,25 @@ export function Wedding1() {
                         </div>
                     </div>
                     {/* last sec image */}
-                    <div className="absolute top-[51%] left-[51.5%] w-[46.8%] h-[42%] outline overflow-hidden">
-                        <div className="relative w-full h-full outline">
-                            <div className="w-full h-[30%] outlin">
+                    <div className="absolute top-[51%] left-[51.5%] w-[46.8%] h-[42%] overflow-hidden">
+                        <div className="relative w-full h-full">
+                            <div className="w-[85%] rotate-90 mx-auto">
                                 <Image
-                                className="outlin object-cover w-full h-full"
-                                    src="/redScroll.png"
+                                    className="object-cover w-full h-full"
+                                    src="/redScrollBar.png"
                                     width={500}
                                     height={200}
                                     alt="red scroll"
                                 />
                             </div>
-                            <div className="absolute outline w-full h-full top-0">
-                                hii
+                            <div className="absolute w-full h-full top-0">
+                                <Image
+                                    className="outlin object-cover w-full h-full"
+                                    src="gibliphoto.png"
+                                    width={500}
+                                    height={200}
+                                    alt="red scroll"
+                                />
                             </div>
                         </div>
                     </div>

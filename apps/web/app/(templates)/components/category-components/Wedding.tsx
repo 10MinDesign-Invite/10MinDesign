@@ -12,7 +12,7 @@ const [currentDesign,setCurrentDesign] = useState({wedding:"",image:""})
     const images = [
         {
             wedding: "Wedding1",
-            image: "/firstwedding.jpg",
+            image: "/firstweddingv2.png",
             price: "Free",
             width:210
         }
@@ -50,7 +50,7 @@ const [currentDesign,setCurrentDesign] = useState({wedding:"",image:""})
                                                     </div>
                                                     <div onClick={()=>setCurrentDesign({wedding:cur.wedding,image:cur.image})} className="flex items-center justify-center w-[100px] bg-white rounded-xl text-black gap-1 cursor-pointer">
                                                         <IoMdEye className="text-2xl text-sky-500" />
-                                                        <p className="">{"100"}</p>
+                                                        <p className="">{"view"}</p>
                                                     </div>
                                                 </div>
                                                 

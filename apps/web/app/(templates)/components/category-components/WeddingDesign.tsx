@@ -15,7 +15,7 @@ export function WeddingDesign({ setCurrentDesign, currentDesign }: propType) {
                     <Image
                         src={`${currentDesign.image}`}
                         width={500}
-                        height={1}
+                        height={500}
                         alt="Design preview"
                         loading="lazy"
                         // className=" md:h-[700px]"

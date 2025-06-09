@@ -312,7 +312,7 @@ export function Hero() {
         {/* card section */}
         <div
           id="home-images-main-div"
-          className=" w-[400px] md:w-[90%] mx-auto p-2 xl:opacity-0 border grid md:grid-cols-2 lg:mt-[122px] gap-2 mt-[100px] xl:mt-4 rounded-3xl overflow-hidden shadow-[0px_0px_0px_1px_rgba(0,0,0,0.06),0px_1px_1px_-0.5px_rgba(0,0,0,0.06),0px_3px_3px_-1.5px_rgba(0,0,0,0.06),_0px_6px_6px_-3px_rgba(0,0,0,0.06),0px_12px_12px_-6px_rgba(0,0,0,0.06),0px_24px_24px_-12px_rgba(0,0,0,0.06)]"
+          className=" w-[400px] md:w-[90%] mx-auto p-2 xl:opacity-0 grid md:grid-cols-2 lg:mt-[122px] gap-2 mt-[100px] xl:mt-4 rounded-3xl overflow-hidden shadow-[0px_0px_0px_1px_rgba(0,0,0,0.06),0px_1px_1px_-0.5px_rgba(0,0,0,0.06),0px_3px_3px_-1.5px_rgba(0,0,0,0.06),_0px_6px_6px_-3px_rgba(0,0,0,0.06),0px_12px_12px_-6px_rgba(0,0,0,0.06),0px_24px_24px_-12px_rgba(0,0,0,0.06)]"
         >
           <div
             id="card-one"
@@ -327,7 +327,7 @@ export function Hero() {
             />
             <Image
               className="borde p-2 xl:p-1 w-[80%] h-[450px] md:w-[90%] md:h-[400px] lmd:w-[330px] lmd:h-[440px] xl:w-[95%] xl:h-[392px] mx-auto text-center text-5xl"
-              src={"/firstinvitation.webp"}
+              src={"/firstwedding.webp"}
               alt=""
               width={250}
               height={300}
@@ -340,7 +340,7 @@ export function Hero() {
           >
             <Image
               className="borde p-2 xl:p-1 mt-3 w-[90%] mx-auto h-[400px] lmd:w-[320px] lmd:h-[431px] xl:w-[95%] xl:h-[394px] text-center text-5xl"
-              src={"/firstwedding.png"}
+              src={"/firstwedding.webp"}
               alt=""
               width={250}
               height={300}
