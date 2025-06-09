@@ -73,6 +73,7 @@ export default function Page() {
                 </CardHeader>
                 <CardContent>
                     <form className="flex flex-col gap-4" action={async(formData:FormData) =>{
+                      
                         const email = formData.get("email") as string;
                         const password = formData.get("password") as string;
                         const confirmPassword = formData.get("ConfirmPassword") as string;
@@ -87,23 +88,27 @@ export default function Page() {
                             }
                             const verifyOTPLoading = toast.loading("Processing......")
                              try {
-                                const verifyRes = await axios.post(`${process.env.NEXT_PUBLIC_Backend_URL}/auth/verify-otp`, { email, otp });
-                                if (!verifyRes.data.success) {
+                               
+                                if(validInput.data?.password! == validInput.data?.confirmPassword!){
+                                   const verifyRes = await axios.post(`${process.env.NEXT_PUBLIC_Backend_URL}/auth/verify-otp`, { email, otp });
+                                if (verifyRes.status != 200) {
                                   toast.dismiss(verifyOTPLoading)  
                                   toast.error("OTP verification failed");
                                   return;
-                                }
-                                
-                                toast.success("OTP verified");
-                                const resetRes = await forgotPassword(validInput.data?.email!, validInput.data?.password!, validInput.data?.confirmPassword!);
-                                
-                                if (resetRes?.success) {
+                                }else{
+                                   toast.success("OTP verified");
+                                   const resetRes = await forgotPassword(validInput.data?.email!, validInput.data?.password!, validInput.data?.confirmPassword!);
+                                   if (resetRes?.success) {
                                   toast.dismiss(verifyOTPLoading)  
                                   toast.success("Password reset successful");
                                   router.push("/login");
                                 } else {
                                   toast.dismiss(verifyOTPLoading)  
                                   toast.error(resetRes?.message);
+                                }
+                                }
+                                }else{
+                                  toast.warning("check password and confirm password")
                                 }
                             
                               } catch (error:any) {

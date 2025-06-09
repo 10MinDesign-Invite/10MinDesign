@@ -1,23 +1,17 @@
 "use server"
 
-import { prisma } from "@repo/database";
-import bcrypt from "bcryptjs";
+import axios from "axios";
 
-export async function forgotPassword(email:string,password:string,ConfirmPassword:string){
-    const hashPassword = await bcrypt.hash(ConfirmPassword,10);
+export async function forgotPassword(email:string,password:string,confirmPassword:string){
     try {
-        const result = await prisma.user.update({
-            where:{
-                email
-            },
-            data:{
-                password:hashPassword
-            }
+        const result = await axios.put(`${process.env.NEXT_PUBLIC_Backend_URL}/forgot/password`,{
+                email,
+                confirmPassword
         })
-        if(result){
+        if(result.status == 200){
             return {
                 success:true,
-                message:"password reset"
+                message:"forgot password success"
             }
         }
         

@@ -42,6 +42,7 @@ const cors_1 = __importDefault(require("cors"));
 const dotenv = __importStar(require("dotenv"));
 const findUser_1 = require("./routes/findUser");
 const addUser_1 = require("./routes/addUser");
+const forgotPassword_1 = require("./routes/forgotPassword");
 dotenv.config();
 const app = (0, express_1.default)();
 app.use(express_1.default.json());
@@ -51,4 +52,5 @@ app.use((0, cors_1.default)({
 app.use("/auth", sendotp_1.OTP);
 app.use("/verify", findUser_1.verifyUser);
 app.use("/add", addUser_1.addUser);
+app.use("/forgot", forgotPassword_1.forgotPassword);
 app.listen(process.env.PORT || 8080);

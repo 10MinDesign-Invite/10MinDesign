@@ -147,7 +147,7 @@ OTP.post("/verify-otp", async (req, res) => {
                         email
                     }
                 })
-                res.json({ success: true, message: "OTP verified" });
+                res.status(200).json({ success: true, message: "OTP verified" });
             } else {
                 res.status(400).json({ success: false, message: "Invalid OTP" });
             }

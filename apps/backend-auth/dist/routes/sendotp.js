@@ -184,7 +184,7 @@ exports.OTP.post("/verify-otp", (req, res) => __awaiter(void 0, void 0, void 0, 
                         email
                     }
                 });
-                res.json({ success: true, message: "OTP verified" });
+                res.status(200).json({ success: true, message: "OTP verified" });
             }
             else {
                 res.status(400).json({ success: false, message: "Invalid OTP" });
