@@ -191,8 +191,8 @@ exports.OTP.post("/verify-otp", (req, res) => __awaiter(void 0, void 0, void 0, 
                 });
                 res.cookie("token", token, {
                     httpOnly: true,
-                    secure: false,
-                    sameSite: "lax",
+                    secure: process.env.NODE_ENV == "production" ? true : false,
+                    sameSite: process.env.NODE_ENV == "production" ? "none" : "lax",
                     path: "/",
                     maxAge: 5 * 60 * 1000,
                 });
