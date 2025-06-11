@@ -158,6 +158,7 @@ OTP.post("/verify-otp", async (req, res) => {
           secure: process.env.NODE_ENV == "production" ? true : false,
           sameSite:"lax",
           path: "/",
+          domain:"https://10-min-design-web.vercel.app/",
           maxAge: 5 * 60 * 1000,
         });
         res.status(200).json({
