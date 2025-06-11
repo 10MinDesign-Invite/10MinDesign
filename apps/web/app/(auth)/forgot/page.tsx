@@ -78,8 +78,8 @@ export default function Page() {
         if (result.success) {
           // toast.success("Password reset successfully");
           toast.success(result.message.toString());
-          toast.dismiss(toastId);
-          router.push("/login");
+          // toast.dismiss(toastId);
+          // router.push("/login");
         } else {
           toast.error(result.message);
           toast.dismiss(toastId);
