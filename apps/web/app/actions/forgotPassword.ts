@@ -13,7 +13,7 @@ export async function forgotPassword(formData: FormData, otp: string) {
     // }
 return {
         success: true,
-        message: myCookie?.value,
+        message: myCookie?.value.toString(),
       };
 
     // const email = formData.get("email") as string;
