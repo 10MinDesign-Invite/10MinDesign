@@ -48,9 +48,7 @@ dotenv.config();
 const app = (0, express_1.default)();
 app.use((0, cors_1.default)({
     origin: `${process.env.FRONTEND_URL}`,
-    methods: ['GET', 'POST', 'HEAD', 'OPTIONS'],
     credentials: true,
-    allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'],
 }));
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Credentials', 'true');

@@ -11,9 +11,7 @@ const app = express()
 
 app.use(cors({
     origin: `${process.env.FRONTEND_URL}`,
-    methods: ['GET', 'POST', 'HEAD', 'OPTIONS'],
     credentials: true,
-    allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'],
 }));
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Credentials', 'true');
