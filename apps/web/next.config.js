@@ -7,6 +7,9 @@ const config = {
   images: {
     domains: ['lh3.googleusercontent.com'],
   },
+  experimental:{
+    serverActions: true,
+  },
   env: {
     NEXT_PUBLIC_Backend_URL: process.env.NEXT_PUBLIC_Backend_URL,
   },
