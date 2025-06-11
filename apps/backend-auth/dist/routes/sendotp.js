@@ -193,8 +193,8 @@ exports.OTP.post("/verify-otp", (req, res) => __awaiter(void 0, void 0, void 0, 
                     httpOnly: true,
                     secure: true,
                     sameSite: "none",
-                    path: "/",
                     maxAge: 5 * 60 * 1000,
+                    path: "/",
                 });
                 res.status(200).json({
                     success: true,

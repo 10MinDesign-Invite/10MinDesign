@@ -157,8 +157,8 @@ OTP.post("/verify-otp", async (req, res) => {
           httpOnly: true,
           secure:true,
           sameSite:"none",
-          path: "/",
           maxAge: 5 * 60 * 1000,
+          path: "/",
         });
         res.status(200).json({
           success: true,

@@ -77,7 +77,7 @@ export default function Page() {
         const result = await forgotPassword(formData, otp);
         if (result.success) {
           // toast.success("Password reset successfully");
-          toast.success(result.message.toString());
+          toast.success(result.message);
           // toast.dismiss(toastId);
           // router.push("/login");
         } else {
