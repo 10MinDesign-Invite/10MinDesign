@@ -155,8 +155,9 @@ OTP.post("/verify-otp", async (req, res) => {
       
         res.cookie("token", token, {
           httpOnly: true,
-          secure: process.env.NODE_ENV == "production" ? true : false,
-          sameSite:"none",
+          // secure: process.env.NODE_ENV == "production" ? true : false,
+          secure:true,
+          sameSite:"lax",
           path: "/",
           maxAge: 5 * 60 * 1000,
         });
