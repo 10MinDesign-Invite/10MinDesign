@@ -156,9 +156,8 @@ OTP.post("/verify-otp", async (req, res) => {
         res.cookie("token", token, {
           httpOnly: true,
           secure: process.env.NODE_ENV == "production" ? true : false,
-          sameSite:"lax",
+          sameSite:"none",
           path: "/",
-          domain:"https://10-min-design-web.vercel.app",
           maxAge: 5 * 60 * 1000,
         });
         res.status(200).json({
