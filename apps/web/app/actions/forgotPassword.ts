@@ -7,7 +7,7 @@ export async function forgotPassword(formData: FormData, otp: string) {
     const myCookie = (await cookieStore).get("token");
     if (!myCookie?.value) {
       return {
-        success: false,
+        success: true,
         message: myCookie?.value.toString(),
       };
     }
