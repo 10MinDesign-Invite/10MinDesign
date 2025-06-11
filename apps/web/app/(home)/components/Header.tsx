@@ -3,6 +3,7 @@ import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 gsap.registerPlugin(useGSAP);
 // gsap code importss
+import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { useState } from "react";
 import { BsFillMoonStarsFill } from "react-icons/bs";
@@ -17,15 +18,14 @@ import { LiaBirthdayCakeSolid } from "react-icons/lia";
 import { SlArrowDown, SlMenu } from "react-icons/sl";
 import { logofont } from "../../fonts/fonts-config";
 import { Profile } from "./Profile";
-import { useSession } from "next-auth/react";
 
 interface propType {
   disableAnimation?: string;
 }
 
 export function Header({ disableAnimation }: propType) {
-  const { data } = useSession();
-  const authData = data?.user;
+  const { data:authData,status } = useSession();
+ 
   const [nav, setNav] = useState<boolean>(false);
   const [curNav, setCurNav] = useState({ explore: false });
   const [theme, setTheme] = useState("light");
@@ -162,18 +162,19 @@ export function Header({ disableAnimation }: propType) {
           )}
         </div>
         <div className="cursor-pointer">
-          {authData != undefined ? (
-            <Profile authData={authData} />
-          ) : (
-            <Link href={"/login"}>
+          {
+            authData?.user ? (<Profile authData = {authData?.user}/>):
+            ( <Link href={"/login"}>
               <button
                 id="login-btn"
-                className={` w-[60px] md:w-[70px] h-[35px] md:h-[44px] rounded-md font-medium bg-black text-white dark:bg-white dark:text-black transform ${disableAnimation == "" ? "md:scale-0" : ""}`}
+                className={`w-[60px] md:w-[70px] h-[35px] md:h-[44px] rounded-md font-medium bg-black text-white dark:bg-white dark:text-black transform ${
+                  disableAnimation == "" ? "md:scale-0" : ""
+                }`}
               >
                 Log in
               </button>
-            </Link>
-          )}
+            </Link>)
+          }
         </div>
         <div
           id="primium-btn"
@@ -318,3 +319,13 @@ export function Header({ disableAnimation }: propType) {
     </header>
   );
 }
+{/* <Link href={"/login"}>
+              <button
+                id="login-btn"
+                className={`w-[60px] md:w-[70px] h-[35px] md:h-[44px] rounded-md font-medium bg-black text-white dark:bg-white dark:text-black transform ${
+                  disableAnimation == "" ? "md:scale-0" : ""
+                }`}
+              >
+                Log in
+              </button>
+            </Link> */}

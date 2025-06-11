@@ -60,15 +60,17 @@ exports.OTP.post("/send-otp", (req, res) => __awaiter(void 0, void 0, void 0, fu
     }
     const generatedOtp = (0, otpConfig_1.generateOTP)();
     try {
-        const otp = jsonwebtoken_1.default.sign({ otp: generatedOtp }, process.env.jwt_OTP_SECRET, { expiresIn: "1h" });
+        const otp = jsonwebtoken_1.default.sign({ otp: generatedOtp }, process.env.jwt_OTP_SECRET, {
+            expiresIn: "1h",
+        });
         const userExist = yield database_1.prisma.user.findUnique({
             where: {
-                email
+                email,
             },
             select: {
                 email: true,
-                googleId: true
-            }
+                googleId: true,
+            },
         });
         if (userExist && userExist.googleId == null) {
             const emailSendData = yield otpConfig_1.transporter.sendMail({
@@ -132,12 +134,12 @@ exports.OTP.post("/send-otp", (req, res) => __awaiter(void 0, void 0, void 0, fu
                 yield database_1.prisma.otpStore.upsert({
                     where: { email: email },
                     update: {
-                        otp
+                        otp,
                     },
                     create: {
                         email: email,
-                        otp
-                    }
+                        otp,
+                    },
                 });
                 res.json({ success: true, message: "OTP sent to email" });
             }
@@ -161,18 +163,18 @@ exports.OTP.post("/verify-otp", (req, res) => __awaiter(void 0, void 0, void 0, 
         // access otp and verify is correct
         const userExist = yield database_1.prisma.user.findUnique({
             where: {
-                email
+                email,
             },
             select: {
                 email: true,
-                googleId: true
-            }
+                googleId: true,
+            },
         });
         if (userExist) {
             const dbOTP = yield database_1.prisma.otpStore.findFirst({
                 where: {
-                    email
-                }
+                    email,
+                },
             });
             if (dbOTP) {
                 validOTP = jsonwebtoken_1.default.verify(dbOTP.otp, process.env.jwt_OTP_SECRET);
@@ -181,10 +183,23 @@ exports.OTP.post("/verify-otp", (req, res) => __awaiter(void 0, void 0, void 0, 
                 // delete the otp after successfull verification
                 yield database_1.prisma.otpStore.delete({
                     where: {
-                        email
-                    }
+                        email,
+                    },
                 });
-                res.status(200).json({ success: true, message: "OTP verified" });
+                const token = jsonwebtoken_1.default.sign({ token: email }, process.env.jwt_OTP_SECRET, {
+                    expiresIn: "5m",
+                });
+                res.cookie("token", token, {
+                    httpOnly: true,
+                    secure: false,
+                    sameSite: "lax",
+                    path: "/",
+                    maxAge: 5 * 60 * 1000,
+                });
+                res.status(200).json({
+                    success: true,
+                    message: "OTP verified successfully",
+                });
             }
             else {
                 res.status(400).json({ success: false, message: "Invalid OTP" });

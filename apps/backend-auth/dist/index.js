@@ -43,12 +43,21 @@ const dotenv = __importStar(require("dotenv"));
 const findUser_1 = require("./routes/findUser");
 const addUser_1 = require("./routes/addUser");
 const forgotPassword_1 = require("./routes/forgotPassword");
+const cookie_parser_1 = __importDefault(require("cookie-parser"));
 dotenv.config();
 const app = (0, express_1.default)();
-app.use(express_1.default.json());
 app.use((0, cors_1.default)({
-    origin: `${process.env.FRONTEND_URL}`
+    origin: 'http://localhost:3000',
+    methods: ['GET', 'POST', 'HEAD', 'OPTIONS'],
+    credentials: true,
+    allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'],
 }));
+app.use((req, res, next) => {
+    res.setHeader('Access-Control-Allow-Credentials', 'true');
+    next();
+});
+app.use(express_1.default.json());
+app.use((0, cookie_parser_1.default)());
 app.use("/auth", sendotp_1.OTP);
 app.use("/verify", findUser_1.verifyUser);
 app.use("/add", addUser_1.addUser);

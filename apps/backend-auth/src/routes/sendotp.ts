@@ -1,37 +1,38 @@
 import Router from "express";
 import { generateOTP, transporter } from "../utils/otpConfig";
-import { prisma } from "@repo/database"
+import { prisma } from "@repo/database";
 import jwt, { JwtPayload } from "jsonwebtoken";
-import * as dotenv from 'dotenv';
+import * as dotenv from "dotenv";
 dotenv.config();
 
 export const OTP = Router();
 
 OTP.post("/send-otp", async (req, res) => {
-    const { email } = req.body;
-    if (!email) {
-        res.status(400).json({ success: false, message: "Email is required" });
-    }
-    const generatedOtp = generateOTP();
-    try {
-        const otp = jwt.sign({ otp: generatedOtp }, process.env.jwt_OTP_SECRET!, { expiresIn: "1h" });
-        const userExist = await prisma.user.findUnique({
-            where: {
-                email
-            },
-            select:
-            {
-                email: true,
-                googleId: true
-            }
-        })
+  const { email } = req.body;
+  if (!email) {
+    res.status(400).json({ success: false, message: "Email is required" });
+  }
+  const generatedOtp = generateOTP();
+  try {
+    const otp = jwt.sign({ otp: generatedOtp }, process.env.jwt_OTP_SECRET!, {
+      expiresIn: "1h",
+    });
+    const userExist = await prisma.user.findUnique({
+      where: {
+        email,
+      },
+      select: {
+        email: true,
+        googleId: true,
+      },
+    });
 
-        if (userExist && userExist.googleId == null) {
-            const emailSendData = await transporter.sendMail({
-                from: process.env.SMTP_USER,
-                to: email,
-                subject: "Your OTP Code for Password Reset", 
-                text: `Hi,
+    if (userExist && userExist.googleId == null) {
+      const emailSendData = await transporter.sendMail({
+        from: process.env.SMTP_USER,
+        to: email,
+        subject: "Your OTP Code for Password Reset",
+        text: `Hi,
 
                 You requested to reset your password. Please use the OTP below:
 
@@ -42,7 +43,7 @@ OTP.post("/send-otp", async (req, res) => {
                 — 10MinDesign
                 `,
 
-                html: `<!DOCTYPE html>
+        html: `<!DOCTYPE html>
                         <html>
                         <head>
                         <meta charset="UTF-8" />
@@ -84,77 +85,92 @@ OTP.post("/send-otp", async (req, res) => {
                                 </table>
                                 </body>
                                 </html>`,
+      });
 
-            });
+      if (emailSendData.accepted.length !== 0) {
+        await prisma.otpStore.upsert({
+          where: { email: email },
+          update: {
+            otp,
+          },
+          create: {
+            email: email,
+            otp,
+          },
+        });
 
-
-            if (emailSendData.accepted.length !== 0) {
-                await prisma.otpStore.upsert({
-                    where: { email: email },
-                    update: {
-                        otp
-                    },
-                    create: {
-                        email: email,
-                        otp
-                    }
-                });
-
-                res.json({ success: true, message: "OTP sent to email" });
-            }
-        } else {
-            res.status(404).json({ message: "user not exist or invalid email" });
-        }
-    } catch (err) {
-        console.error(err);
-        res.status(500).json({ success: false, message: "Failed to send email" });
+        res.json({ success: true, message: "OTP sent to email" });
+      }
+    } else {
+      res.status(404).json({ message: "user not exist or invalid email" });
     }
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ success: false, message: "Failed to send email" });
+  }
 });
 
 OTP.post("/verify-otp", async (req, res) => {
-    const { email, otp } = req.body;
-    try {
-        let validOTP = null;
-        if (!email || !otp) {
-            res.json({ error: "provide email and otp" })
-        }
-        // access otp and verify is correct
-        const userExist = await prisma.user.findUnique({
-            where: {
-                email
-            },
-            select:
-            {
-                email: true,
-                googleId: true
-            }
-        })
-        if (userExist) {
-            const dbOTP = await prisma.otpStore.findFirst({
-                where: {
-                    email
-                }
-            })
-
-            if (dbOTP) {
-                validOTP = jwt.verify(dbOTP.otp, process.env.jwt_OTP_SECRET!) as JwtPayload
-            }
-
-            if (validOTP?.otp.toString() == otp) {
-                // delete the otp after successfull verification
-                await prisma.otpStore.delete({
-                    where: {
-                        email
-                    }
-                })
-                res.status(200).json({ success: true, message: "OTP verified" });
-            } else {
-                res.status(400).json({ success: false, message: "Invalid OTP" });
-            }
-        } else {
-            res.status(404).json({ success: false, message: "user not found" });
-        }
-    } catch (error) {
-        console.log(error);
+  const { email, otp } = req.body;
+  try {
+    let validOTP = null;
+    if (!email || !otp) {
+      res.json({ error: "provide email and otp" });
     }
+    // access otp and verify is correct
+    const userExist = await prisma.user.findUnique({
+      where: {
+        email,
+      },
+      select: {
+        email: true,
+        googleId: true,
+      },
+    });
+    if (userExist) {
+      const dbOTP = await prisma.otpStore.findFirst({
+        where: {
+          email,
+        },
+      });
+
+      if (dbOTP) {
+        validOTP = jwt.verify(
+          dbOTP.otp,
+          process.env.jwt_OTP_SECRET!
+        ) as JwtPayload;
+      }
+
+      if (validOTP?.otp.toString() == otp) {
+        // delete the otp after successfull verification
+        await prisma.otpStore.delete({
+          where: {
+            email,
+          },
+        });
+
+        const token = jwt.sign({ token: email }, process.env.jwt_OTP_SECRET!, {
+          expiresIn: "5m",
+        });
+      
+        res.cookie("token", token, {
+          httpOnly: true,
+          secure: false,
+          sameSite: "lax",
+          path: "/",
+          maxAge: 5 * 60 * 1000,
+        });
+        res.status(200).json({
+          success: true,
+          message: "OTP verified successfully",
+        });
+      } else {
+        res.status(400).json({ success: false, message: "Invalid OTP" });
+      }
+    } else {
+      res.status(404).json({ success: false, message: "user not found" });
+    }
+  } catch (error) {
+    console.log(error);
+  }
 });

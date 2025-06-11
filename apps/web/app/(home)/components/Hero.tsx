@@ -35,13 +35,23 @@ export function Hero() {
   async function getUser() {
     const email = "spi@gmail.com";
     const onlyEmail = "select only email";
-    await axios.post(`${process.env.NEXT_PUBLIC_Backend_URL}/verify/user`, {
+    const res = await axios.post(`${process.env.NEXT_PUBLIC_Backend_URL}/verify/user`, {
       email,
       onlyEmail,
     });
+    if (res.data.success) {
+      return res.data.user;
+    } else {
+      return("Failed to fetch user");
+    }
   }
   useEffect(() => {
-    getUser();
+    try {
+      const result = getUser();
+      console.log(result);
+    } catch (error) {
+      console.log(error);
+    }
   }, []);
   const items = isDesktop
     ? [...category, ...category, ...category, ...category]

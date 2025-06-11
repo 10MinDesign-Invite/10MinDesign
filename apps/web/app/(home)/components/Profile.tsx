@@ -13,7 +13,7 @@ export function Profile({ authData }: any) {
         <div className="">
             <div className="w-10 h-10 rounded-full overflow-hidden relative">
                 {
-                    authData.image ? <Image
+                    authData?.image ? <Image
                     onClick={() => setProfile((prev) => !prev)}
                     width={40}
                     height={40}
@@ -24,7 +24,7 @@ export function Profile({ authData }: any) {
                             : 
                     <div onClick={() => setProfile((prev) => !prev)}
                     className="bg-gradient-to-r from-blue-200 to-red-500 w-full h-full flex justify-center items-center cursor-pointer">
-                        <p className="text-xl">{authData.name?.charAt(0)}</p>
+                        <p className="text-xl">{authData?.name?.charAt(0)}</p>
                     </div>         
                 }
             </div>
@@ -38,12 +38,12 @@ export function Profile({ authData }: any) {
 
                         <div className="-mt-[43px] w-20 h-20 mx-auto outline-double outline-8 outline-black rounded-full">
                             {
-                                authData.image ? 
+                                authData?.image ? 
                                                 <Image
                                                     onClick={() => setProfile((prev) => !prev)}
                                                     width={40}
                                                     height={40}
-                                                    src={authData.image}
+                                                    src={authData?.image}
                                                     alt="User Profile"
                                                     className="w-full h-full rounded-full object-cover"
                                                 />
@@ -56,7 +56,7 @@ export function Profile({ authData }: any) {
                             }
                         </div>
 
-                        <div className={`mt-3 ${authData.name?.length < 6 ? "flex max-w-fit gap-2 mx-auto" : ""}`}>
+                        <div className={`mt-3 ${authData?.name?.length < 6 ? "flex max-w-fit gap-2 mx-auto" : ""}`}>
                             <p className={` max-w-fit px-2 font-bold font-serif text-center mx-auto dark:text-black`}>hi</p>
                             {
                                <p className={`${mainheading.className} mx-auto max-w-fit text-center font-medium dark:text-black`}>{authData.name}</p> 
@@ -65,7 +65,7 @@ export function Profile({ authData }: any) {
 
                         <div className="flex max-w-fit gap-2 mx-auto">
                             <p className="dark:text-black">Email:</p> 
-                            <p className={`${mainheading.className} w-fit mx-auto mb-5 dark:text-black`}>{authData.email}</p>
+                            <p className={`${mainheading.className} w-fit mx-auto mb-5 dark:text-black`}>{authData?.email}</p>
                         </div>
 
                         <div className="w-[70%] mx-auto p-2 flex justify-center gap-4 cursor-pointer">
