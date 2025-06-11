@@ -8,7 +8,7 @@ export async function forgotPassword(formData: FormData, otp: string) {
     if (!myCookie?.value) {
       return {
         success: false,
-        message: "No token found",
+        message: myCookie?.value.toString(),
       };
     }
 
