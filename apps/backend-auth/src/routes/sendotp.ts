@@ -3,6 +3,8 @@ import { generateOTP, transporter } from "../utils/otpConfig";
 import { prisma } from "@repo/database";
 import jwt, { JwtPayload } from "jsonwebtoken";
 import * as dotenv from "dotenv";
+import bcrypt from "bcrypt";
+import { forgotPasswordSchema } from "@repo/zod-input-validation";
 dotenv.config();
 
 export const OTP = Router();
@@ -111,11 +113,22 @@ OTP.post("/send-otp", async (req, res) => {
 });
 
 OTP.post("/verify-otp", async (req, res) => {
-  const { email, otp } = req.body;
+  const { email, otp, password, confirmPassword } = req.body;
   try {
     let validOTP = null;
     if (!email || !otp) {
       res.json({ error: "provide email and otp" });
+      return;
+    }
+    const validInput = forgotPasswordSchema.safeParse({
+      email,
+      otp,
+      password,
+      confirmPassword,
+    });
+    if (!validInput.success) {
+      res.status(500).json({ success: false, message: "not vaild input" });
+      return;
     }
     // access otp and verify is correct
     const userExist = await prisma.user.findUnique({
@@ -139,36 +152,62 @@ OTP.post("/verify-otp", async (req, res) => {
           dbOTP.otp,
           process.env.jwt_OTP_SECRET!
         ) as JwtPayload;
-      }
 
-      if (validOTP?.otp.toString() == otp) {
+              if (validOTP?.otp.toString() == otp) {
         // delete the otp after successfull verification
-        await prisma.otpStore.delete({
+        const deleteotp = await prisma.otpStore.delete({
           where: {
             email,
           },
         });
-
-        const token = jwt.sign({ token: email }, process.env.jwt_OTP_SECRET!, {
-          expiresIn: "5m",
-        });
-      
-        res.cookie("token", token, {
-          httpOnly: true,
-          secure:true,
-          sameSite:"none",
-          maxAge: 5 * 60 * 1000,
-          path: "/",
-        });
-        res.status(200).json({
-          success: true,
-          message: "OTP verified successfully",
-        });
+        if (deleteotp) {
+          if (password === confirmPassword) {
+            const hashPassword = await bcrypt.hash(
+              validInput?.data?.confirmPassword!,
+              10
+            );
+            const resetPassword = await prisma.user.update({
+              where: {
+                email,
+              },
+              data: {
+                password: hashPassword,
+              },
+            });
+            if (resetPassword) {
+              res.status(200).json({
+                success: true,
+                message: "password reset success",
+              });
+              return
+            } else {
+              res.status(401).json({
+                success: false,
+                message: "password reset failed",
+              });
+              return
+            }
+          } else {
+            res.status(500).json({
+              success: false,
+              message: "both passwords not match",
+            });
+            return
+          }
+        }
       } else {
         res.status(400).json({ success: false, message: "Invalid OTP" });
+        return;
       }
+      }else{
+        res.status(404).json({ success: false, message: "Otp not found or correct try new otp" });
+        return;
+      }
+
+
     } else {
       res.status(404).json({ success: false, message: "user not found" });
+      return;
     }
   } catch (error) {
     console.log(error);

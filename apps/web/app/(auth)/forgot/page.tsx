@@ -1,9 +1,7 @@
 "use client";
-import { forgotPassword } from "@/app/actions/forgotPassword";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import jwt from "jsonwebtoken";
 import {
   InputOTP,
   InputOTPGroup,
@@ -68,23 +66,24 @@ export default function Page() {
   }
   const handleSubmit = async (formData: FormData) => {
     const toastId = toast.loading("wait verifiying you");
+    const password = formData.get("password");
+    const confirmPassword = formData.get("confirmPassword");
   try {
-    const res = await axios.post<{status:number,token:string,success:boolean,message:string}>(`${process.env.NEXT_PUBLIC_Backend_URL}/auth/verify-otp`,{email,otp},{withCredentials:true})
+    const res = await axios.post<{status:number,token:string,success:boolean,message:string}>(`${process.env.NEXT_PUBLIC_Backend_URL}/auth/verify-otp`,{email,otp,password,confirmPassword})
       if (res.status !== 200) {
         toast.error(res.data.message);
         toast.dismiss(toastId);
         return;
       } else {
-        const token = jwt.sign({email}, process.env.jwt_OTP_SECRET as string, {expiresIn: "5m"})
-        const result = await forgotPassword(formData, token);
-        if (result.success) {
-          toast.success("Password reset successfully");
+        if (res.status === 200) {
+          toast.success(res.data.message);
           toast.dismiss(toastId);
-          router.push("/login");
+          router.push("/login")
         } else {
-          toast.error(result.message);
+          toast.error(res.data.message);
           toast.dismiss(toastId);
         }
+        
       }
   } catch (error) {
     console.log(error)
@@ -117,7 +116,7 @@ export default function Page() {
             <Input
               disabled={otpSended ? false : true}
               placeholder="Confirm Password"
-              name="ConfirmPassword"
+              name="confirmPassword"
               type="password"
               required
             />

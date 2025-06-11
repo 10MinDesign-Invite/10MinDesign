@@ -51,6 +51,8 @@ const otpConfig_1 = require("../utils/otpConfig");
 const database_1 = require("@repo/database");
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const dotenv = __importStar(require("dotenv"));
+const bcrypt_1 = __importDefault(require("bcrypt"));
+const zod_input_validation_1 = require("@repo/zod-input-validation");
 dotenv.config();
 exports.OTP = (0, express_1.default)();
 exports.OTP.post("/send-otp", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
@@ -154,11 +156,23 @@ exports.OTP.post("/send-otp", (req, res) => __awaiter(void 0, void 0, void 0, fu
     }
 }));
 exports.OTP.post("/verify-otp", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { email, otp } = req.body;
+    var _a;
+    const { email, otp, password, confirmPassword } = req.body;
     try {
         let validOTP = null;
         if (!email || !otp) {
             res.json({ error: "provide email and otp" });
+            return;
+        }
+        const validInput = zod_input_validation_1.forgotPasswordSchema.safeParse({
+            email,
+            otp,
+            password,
+            confirmPassword,
+        });
+        if (!validInput.success) {
+            res.status(500).json({ success: false, message: "not vaild input" });
+            return;
         }
         // access otp and verify is correct
         const userExist = yield database_1.prisma.user.findUnique({
@@ -178,35 +192,61 @@ exports.OTP.post("/verify-otp", (req, res) => __awaiter(void 0, void 0, void 0, 
             });
             if (dbOTP) {
                 validOTP = jsonwebtoken_1.default.verify(dbOTP.otp, process.env.jwt_OTP_SECRET);
-            }
-            if ((validOTP === null || validOTP === void 0 ? void 0 : validOTP.otp.toString()) == otp) {
-                // delete the otp after successfull verification
-                yield database_1.prisma.otpStore.delete({
-                    where: {
-                        email,
-                    },
-                });
-                const token = jsonwebtoken_1.default.sign({ token: email }, process.env.jwt_OTP_SECRET, {
-                    expiresIn: "5m",
-                });
-                res.cookie("token", token, {
-                    httpOnly: true,
-                    secure: true,
-                    sameSite: "none",
-                    maxAge: 5 * 60 * 1000,
-                    path: "/",
-                });
-                res.status(200).json({
-                    success: true,
-                    message: "OTP verified successfully",
-                });
+                if ((validOTP === null || validOTP === void 0 ? void 0 : validOTP.otp.toString()) == otp) {
+                    // delete the otp after successfull verification
+                    const deleteotp = yield database_1.prisma.otpStore.delete({
+                        where: {
+                            email,
+                        },
+                    });
+                    if (deleteotp) {
+                        if (password === confirmPassword) {
+                            const hashPassword = yield bcrypt_1.default.hash((_a = validInput === null || validInput === void 0 ? void 0 : validInput.data) === null || _a === void 0 ? void 0 : _a.confirmPassword, 10);
+                            const resetPassword = yield database_1.prisma.user.update({
+                                where: {
+                                    email,
+                                },
+                                data: {
+                                    password: hashPassword,
+                                },
+                            });
+                            if (resetPassword) {
+                                res.status(200).json({
+                                    success: true,
+                                    message: "password reset success",
+                                });
+                                return;
+                            }
+                            else {
+                                res.status(401).json({
+                                    success: false,
+                                    message: "password reset failed",
+                                });
+                                return;
+                            }
+                        }
+                        else {
+                            res.status(500).json({
+                                success: false,
+                                message: "both passwords not match",
+                            });
+                            return;
+                        }
+                    }
+                }
+                else {
+                    res.status(400).json({ success: false, message: "Invalid OTP" });
+                    return;
+                }
             }
             else {
-                res.status(400).json({ success: false, message: "Invalid OTP" });
+                res.status(404).json({ success: false, message: "Otp not found or correct try new otp" });
+                return;
             }
         }
         else {
             res.status(404).json({ success: false, message: "user not found" });
+            return;
         }
     }
     catch (error) {

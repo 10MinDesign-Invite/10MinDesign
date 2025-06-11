@@ -15,8 +15,6 @@ export const loginHandler=async(email: string, password: string)=>{
     if(result) return result
    } catch (error) {
     const err = error as CredentialsSignin;
-    // return err.cause?.toString() || err.toString();
-        // return JSON.stringify(err.cause)
         if(JSON.stringify(err.cause) == undefined){
             return 
         }else if(JSON.stringify(err?.cause).includes("....")){

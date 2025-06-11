@@ -16,5 +16,6 @@ export const loginSchema = z.object({
 export const forgotPasswordSchema = z.object({
     email:z.string().email({message:"not valid email format"}),
     password:z.string().min(6,{message:"min 6 char is nedded in password"}),
-    confirmPassword:z.string().min(6,{message:"min 6 char is nedded in password"})
+    confirmPassword:z.string().min(6,{message:"min 6 char is nedded in password"}),
+    otp:z.string().min(6,{message:"wrong otp format"})
 })
