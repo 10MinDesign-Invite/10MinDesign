@@ -7,9 +7,6 @@ const config = {
   images: {
     domains: ['lh3.googleusercontent.com'],
   },
-  env: {
-    NEXT_PUBLIC_Backend_URL: process.env.NEXT_PUBLIC_Backend_URL,
-  },
   webpack(config, { isServer }) {
     config.watchOptions = {
       ignored: [
