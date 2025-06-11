@@ -20,7 +20,7 @@ export async function forgotPassword(formData: FormData, otp: string) {
         email,
         password,
         confirmPassword,
-        token: myCookie?.value,
+        token: myCookie?.value.toString(),
       }),
     });
 
