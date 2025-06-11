@@ -8,30 +8,30 @@ export const forgotPassword = Router();
 forgotPassword.put("/password",verifyOtpToken, async (req: Request, res: Response) => {
   try {
     const { email, password,confirmPassword } = req.body;
-    // const validInput = forgotPasswordSchema.safeParse({email, password, confirmPassword});
-    // if (!validInput.success) {
-    //   res.status(400).send(validInput.error.errors[0].message);
-    //   return;
-    // }
-    // const hashPassword = await bcrypt.hash(confirmPassword, 10);
-    // if (!email || !password || !confirmPassword) {
-    //    res.status(400).send("All fields are required.");
-    //    return
-    // }
-    // if (password !== confirmPassword) {
-    //    res.status(400).send("Passwords not match.");
-    //    return
-    // }
-    // if(!hashPassword){
-    //   console.log("failed to hash password");
-    //   return;
-    // }
+    const validInput = forgotPasswordSchema.safeParse({email, password, confirmPassword});
+    if (!validInput.success) {
+      res.status(400).send(validInput.error.errors[0].message);
+      return;
+    }
+    const hashPassword = await bcrypt.hash(confirmPassword, 10);
+    if (!email || !password || !confirmPassword) {
+       res.status(400).send("All fields are required.");
+       return
+    }
+    if (password !== confirmPassword) {
+       res.status(400).send("Passwords not match.");
+       return
+    }
+    if(!hashPassword){
+      console.log("failed to hash password");
+      return;
+    }
       const result = await prisma.user.update({
         where: {
           email:email
         },
         data: {
-          password
+          password:hashPassword
         },
       });
       if (result) {

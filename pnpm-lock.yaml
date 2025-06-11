@@ -112,6 +112,9 @@ importers:
       '@repo/zod-input-validation':
         specifier: workspace:*
         version: link:../../packages/zod-input-validation
+      '@types/jsonwebtoken':
+        specifier: ^9.0.9
+        version: 9.0.9
       axios:
         specifier: ^1.9.0
         version: 1.9.0

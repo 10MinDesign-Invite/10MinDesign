@@ -3,7 +3,7 @@ import { forgotPassword } from "@/app/actions/forgotPassword";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-// import jwt from "jsonwebtoken";
+import jwt from "jsonwebtoken";
 import {
   InputOTP,
   InputOTPGroup,
@@ -75,8 +75,8 @@ export default function Page() {
         toast.dismiss(toastId);
         return;
       } else {
-        // const token = jwt.sign({email}, process.env.NEXT_PUBLIC_JWT_SECRET as string, {expiresIn: "5m"})
-        const result = await forgotPassword(formData, otp);
+        const token = jwt.sign({email}, process.env.jwt_OTP_SECRET as string, {expiresIn: "5m"})
+        const result = await forgotPassword(formData, token);
         if (result.success) {
           toast.success("Password reset successfully");
           toast.dismiss(toastId);

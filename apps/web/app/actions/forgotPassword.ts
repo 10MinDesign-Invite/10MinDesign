@@ -2,11 +2,8 @@
 
 import { cookies } from "next/headers";
 
-export async function forgotPassword(formData: FormData, otp: string) {
+export async function forgotPassword(formData: FormData, token: string) {
   try {
-    const cookieStore = cookies();
-    const myCookie = (await cookieStore).get("token");
-
     const email = formData.get("email") as string;
     const password = formData.get("password") as string;
     const confirmPassword = formData.get("ConfirmPassword") as string;
@@ -20,7 +17,7 @@ export async function forgotPassword(formData: FormData, otp: string) {
         email,
         password,
         confirmPassword,
-        token: myCookie?.value.toString(),
+        token
       }),
     });
 
