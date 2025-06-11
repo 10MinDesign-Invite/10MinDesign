@@ -15,7 +15,7 @@ export async function forgotPassword(formData: FormData, otp: string) {
     const email = formData.get("email") as string;
     const password = formData.get("password") as string;
     const confirmPassword = formData.get("ConfirmPassword") as string;
-    const response = await fetch(`${process.env.NEXT_PUBLIC_Backend_URL}/forgot/password`, {
+    const response = await fetch(`https://10-min-design-web.vercel.app/forgot/password`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
