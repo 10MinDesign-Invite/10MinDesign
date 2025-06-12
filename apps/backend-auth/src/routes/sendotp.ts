@@ -1,7 +1,6 @@
 import Router from "express";
 import { generateOTP, transporter } from "../utils/otpConfig";
 import { prisma } from "@repo/database";
-import jwt, { JwtPayload } from "jsonwebtoken";
 import * as dotenv from "dotenv";
 import bcrypt from "bcrypt";
 import { forgotPasswordSchema } from "@repo/zod-input-validation";
@@ -13,12 +12,11 @@ OTP.post("/send-otp", async (req, res) => {
   const { email } = req.body;
   if (!email) {
     res.status(400).json({ success: false, message: "Email is required" });
+    return;
   }
   const generatedOtp = generateOTP();
   try {
-    const otp = jwt.sign({ otp: generatedOtp }, process.env.jwt_OTP_SECRET!, {
-      expiresIn: "1h",
-    });
+    const hashedOtp = await bcrypt.hash(generatedOtp, 10);
     const userExist = await prisma.user.findUnique({
       where: {
         email,
@@ -91,20 +89,26 @@ OTP.post("/send-otp", async (req, res) => {
 
       if (emailSendData.accepted.length !== 0) {
         await prisma.otpStore.upsert({
-          where: { email: email },
+          where: { email },
           update: {
-            otp,
+            otp: hashedOtp,
+            createdAt: new Date(),
+            expiresAt: new Date(Date.now() + 5 * 60 * 1000),
           },
           create: {
-            email: email,
-            otp,
+            email,
+            otp: hashedOtp,
+            createdAt: new Date(),
+            expiresAt: new Date(Date.now() + 5 * 60 * 1000),
           },
         });
 
         res.json({ success: true, message: "OTP sent to email" });
+        return;
       }
     } else {
       res.status(404).json({ message: "user not exist or invalid email" });
+      return;
     }
   } catch (err) {
     console.error(err);
@@ -115,7 +119,6 @@ OTP.post("/send-otp", async (req, res) => {
 OTP.post("/verify-otp", async (req, res) => {
   const { email, otp, password, confirmPassword } = req.body;
   try {
-    let validOTP = null;
     if (!email || !otp) {
       res.json({ error: "provide email and otp" });
       return;
@@ -146,65 +149,67 @@ OTP.post("/verify-otp", async (req, res) => {
           email,
         },
       });
-
+      const now = new Date();
+      const expireAt = new Date(dbOTP?.expiresAt!);
+      if (expireAt < now) {
+        res.status(400).json({ success: false, message: "OTP expired" });
+        return;
+      }
       if (dbOTP) {
-        validOTP = jwt.verify(
-          dbOTP.otp,
-          process.env.jwt_OTP_SECRET!
-        ) as JwtPayload;
-
-              if (validOTP?.otp.toString() == otp) {
-        // delete the otp after successfull verification
-        const deleteotp = await prisma.otpStore.delete({
-          where: {
-            email,
-          },
-        });
-        if (deleteotp) {
-          if (password === confirmPassword) {
-            const hashPassword = await bcrypt.hash(
-              validInput?.data?.confirmPassword!,
-              10
-            );
-            const resetPassword = await prisma.user.update({
-              where: {
-                email,
-              },
-              data: {
-                password: hashPassword,
-              },
-            });
-            if (resetPassword) {
-              res.status(200).json({
-                success: true,
-                message: "password reset success",
+        const parseOTP = await bcrypt.compare(otp,dbOTP.otp);
+        if (parseOTP) {
+          // delete the otp after successfull verification
+          const deleteotp = await prisma.otpStore.delete({
+            where: {
+              email,
+            },
+          });
+          if (deleteotp) {
+            if (password === confirmPassword) {
+              const hashPassword = await bcrypt.hash(
+                validInput?.data?.confirmPassword!,
+                10
+              );
+              const resetPassword = await prisma.user.update({
+                where: {
+                  email,
+                },
+                data: {
+                  password: hashPassword,
+                },
               });
-              return
+              if (resetPassword) {
+                res.status(200).json({
+                  success: true,
+                  message: "password reset success",
+                });
+                return;
+              } else {
+                res.status(401).json({
+                  success: false,
+                  message: "password reset failed",
+                });
+                return;
+              }
             } else {
-              res.status(401).json({
+              res.status(500).json({
                 success: false,
-                message: "password reset failed",
+                message: "both passwords not match",
               });
-              return
+              return;
             }
-          } else {
-            res.status(500).json({
-              success: false,
-              message: "both passwords not match",
-            });
-            return
           }
+        } else {
+          res.status(400).json({ success: false, message: "Invalid OTP" });
+          return;
         }
       } else {
-        res.status(400).json({ success: false, message: "Invalid OTP" });
+        res.status(404).json({
+          success: false,
+          message: "Otp not found or correct try new otp",
+        });
         return;
       }
-      }else{
-        res.status(404).json({ success: false, message: "Otp not found or correct try new otp" });
-        return;
-      }
-
-
     } else {
       res.status(404).json({ success: false, message: "user not found" });
       return;

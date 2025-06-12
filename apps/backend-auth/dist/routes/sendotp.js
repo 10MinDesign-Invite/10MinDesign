@@ -49,7 +49,6 @@ exports.OTP = void 0;
 const express_1 = __importDefault(require("express"));
 const otpConfig_1 = require("../utils/otpConfig");
 const database_1 = require("@repo/database");
-const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const dotenv = __importStar(require("dotenv"));
 const bcrypt_1 = __importDefault(require("bcrypt"));
 const zod_input_validation_1 = require("@repo/zod-input-validation");
@@ -59,12 +58,11 @@ exports.OTP.post("/send-otp", (req, res) => __awaiter(void 0, void 0, void 0, fu
     const { email } = req.body;
     if (!email) {
         res.status(400).json({ success: false, message: "Email is required" });
+        return;
     }
     const generatedOtp = (0, otpConfig_1.generateOTP)();
     try {
-        const otp = jsonwebtoken_1.default.sign({ otp: generatedOtp }, process.env.jwt_OTP_SECRET, {
-            expiresIn: "1h",
-        });
+        const hashedOtp = yield bcrypt_1.default.hash(generatedOtp, 10);
         const userExist = yield database_1.prisma.user.findUnique({
             where: {
                 email,
@@ -134,20 +132,26 @@ exports.OTP.post("/send-otp", (req, res) => __awaiter(void 0, void 0, void 0, fu
             });
             if (emailSendData.accepted.length !== 0) {
                 yield database_1.prisma.otpStore.upsert({
-                    where: { email: email },
+                    where: { email },
                     update: {
-                        otp,
+                        otp: hashedOtp,
+                        createdAt: new Date(),
+                        expiresAt: new Date(Date.now() + 5 * 60 * 1000),
                     },
                     create: {
-                        email: email,
-                        otp,
+                        email,
+                        otp: hashedOtp,
+                        createdAt: new Date(),
+                        expiresAt: new Date(Date.now() + 5 * 60 * 1000),
                     },
                 });
                 res.json({ success: true, message: "OTP sent to email" });
+                return;
             }
         }
         else {
             res.status(404).json({ message: "user not exist or invalid email" });
+            return;
         }
     }
     catch (err) {
@@ -159,7 +163,6 @@ exports.OTP.post("/verify-otp", (req, res) => __awaiter(void 0, void 0, void 0, 
     var _a;
     const { email, otp, password, confirmPassword } = req.body;
     try {
-        let validOTP = null;
         if (!email || !otp) {
             res.json({ error: "provide email and otp" });
             return;
@@ -190,9 +193,15 @@ exports.OTP.post("/verify-otp", (req, res) => __awaiter(void 0, void 0, void 0, 
                     email,
                 },
             });
+            const now = new Date();
+            const expireAt = new Date(dbOTP === null || dbOTP === void 0 ? void 0 : dbOTP.expiresAt);
+            if (expireAt < now) {
+                res.status(400).json({ success: false, message: "OTP expired" });
+                return;
+            }
             if (dbOTP) {
-                validOTP = jsonwebtoken_1.default.verify(dbOTP.otp, process.env.jwt_OTP_SECRET);
-                if ((validOTP === null || validOTP === void 0 ? void 0 : validOTP.otp.toString()) == otp) {
+                const parseOTP = yield bcrypt_1.default.compare(otp, dbOTP.otp);
+                if (parseOTP) {
                     // delete the otp after successfull verification
                     const deleteotp = yield database_1.prisma.otpStore.delete({
                         where: {
@@ -240,7 +249,10 @@ exports.OTP.post("/verify-otp", (req, res) => __awaiter(void 0, void 0, void 0, 
                 }
             }
             else {
-                res.status(404).json({ success: false, message: "Otp not found or correct try new otp" });
+                res.status(404).json({
+                    success: false,
+                    message: "Otp not found or correct try new otp",
+                });
                 return;
             }
         }
