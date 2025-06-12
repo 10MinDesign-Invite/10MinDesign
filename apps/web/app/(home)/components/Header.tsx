@@ -18,13 +18,15 @@ import { LiaBirthdayCakeSolid } from "react-icons/lia";
 import { SlArrowDown, SlMenu } from "react-icons/sl";
 import { logofont } from "../../fonts/fonts-config";
 import { Profile } from "./Profile";
+import { Session, User } from "next-auth";
 
 interface propType {
   disableAnimation?: string;
+  authData?: Session | null
 }
 
-export function Header({ disableAnimation }: propType) {
-  const { data:authData,status } = useSession();
+export function Header({authData, disableAnimation }: propType) {
+  // const { data:authData,status } = useSession();
  
   const [nav, setNav] = useState<boolean>(false);
   const [curNav, setCurNav] = useState({ explore: false });

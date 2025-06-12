@@ -80,8 +80,8 @@ export default function Page() {
           toast.dismiss(toastId);
           router.push("/login")
         } else {
-          toast.error(res.data.message);
           toast.dismiss(toastId);
+          toast.error(res.data.message);
         }
         
       }

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import "@repo/ui/styles.css";
 import "../../app/globals.css"
-import { Header } from "./components/Header";
+// import { Header } from "./components/Header";
 
 export const metadata: Metadata = {
   title: "invite",
@@ -15,7 +15,7 @@ export default async function RootLayout({
 }>) {
   return (
       <div className="bg-slate-100 text-black dark:bg-black dark:text-white">
-        <Header disableAnimation=""/>
+        {/* <Header disableAnimation=""/> */}
         {children}
       </div>
     
