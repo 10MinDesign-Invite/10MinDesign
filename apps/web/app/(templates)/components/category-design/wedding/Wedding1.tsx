@@ -338,14 +338,14 @@ export function Wedding1() {
                     </div>
                     {/* images end */}
                     {/* ---------------------------------------------------------------------- */}
-                    <p className={`absolute top-[0%] left-[20%] w-[30%] h-[2.5%] text-[1.9vw] lg:text-[1vw] ${laila.className} font-[700] text-red-700`}>
+                    <p className={`absolute top-[0%] left-[20%] w-[30%] h-[2.5%] text-[1.9vw] lg:text-[1vw] xl:text-[14px] ${laila.className} font-[700] text-red-700`}>
                         || {"श्री गणेशाय नम:"} ||
                     </p>
 
-                    <div style={{fontSize:`${sizes.name1 == 1 ? undefined : `${sizes.name1}px`}`}} className={`absolute top-[3%] left-[45.5%] w-[29.5%] h-[4.5%] flex justify-center items-center text-[3vw] lg:text-[2vw] ${inknut_antiqua.className} font-[900] bg-gradient-to-b from-red-400 to-red-800 bg-clip-text text-transparent`}>
+                    <div style={{fontSize:`${sizes.name1 == 1 ? undefined : `${sizes.name1}px`}`}} className={`absolute top-[3%] left-[45.5%] w-[29.5%] h-[4.5%] flex justify-center items-center text-[3vw] lg:text-[2vw] xl:text-[23px] ${inknut_antiqua.className} font-[900] bg-gradient-to-b from-red-400 to-red-800 bg-clip-text text-transparent`}>
                         {name1}
                     </div>
-                    <div style={{fontSize:`${sizes.name2 == 1 ? undefined : `${sizes.name2}px`}`}} className={`absolute top-[8%] left-[50.5%] w-[29.5%] h-[4.5%] flex justify-center items-center text-[3vw] lg:text-[2vw] ${inknut_antiqua.className} font-[900] bg-gradient-to-b from-red-400 to-red-800 bg-clip-text text-transparent`}>
+                    <div style={{fontSize:`${sizes.name2 == 1 ? undefined : `${sizes.name2}px`}`}} className={`absolute top-[8%] left-[50.5%] w-[29.5%] h-[4.5%] flex justify-center items-center text-[3vw] lg:text-[2vw] xl:text-[23px] ${inknut_antiqua.className} font-[900] bg-gradient-to-b from-red-400 to-red-800 bg-clip-text text-transparent`}>
                         {name2}
                     </div>
 
@@ -363,20 +363,20 @@ export function Wedding1() {
                         />
                     </div>
                     {/* images end ===================================================================== */}
-                    <p className="absolute text-[2vw] lg:text-[1vw] top-[10%] left-[17%] font-bold text-red-700">चि.</p>
-                    <div style={{fontSize:`${sizes.firstName1 == 1 ? undefined : `${sizes.firstName1}px`}`}} className={`absolute top-[12.5%] left-[20.5%] w-[34.9%] h-[7.3%] font-extrabold text-[6vw] lg:text-[3.5vw] flex justify-center items-center text-red-700 ${laila.className}`}>
+                    <p className="absolute text-[2vw] lg:text-[1vw] xl:text-[12.5px] top-[10%] left-[17%] font-bold text-red-700">चि.</p>
+                    <div style={{fontSize:`${sizes.firstName1 == 1 ? undefined : `${sizes.firstName1}px`}`}} className={`absolute top-[12.5%] left-[20.5%] w-[34.9%] h-[7.3%] font-extrabold text-[9vw] lg:text-[7vw] xl:text-[100px] flex justify-center items-center text-red-700 ${laila.className}`}>
                         {firstName1}
                     </div>
-                    <p className="absolute text-[2vw] lg:text-[1vw] top-[19.4%] left-[17%] font-bold text-red-700">चि.सौ.कां.</p>
-                    <div style={{fontSize:`${sizes.firstName2 == 1 ? undefined : `${sizes.firstName2}px`}`}} className={`absolute top-[22.3%] left-[20.5%] w-[34.9%] h-[7.3%] font-bold text-[7vw] lg:text-[3.5vw] flex justify-center items-center text-red-700 ${laila.className}`}>
+                    <p className="absolute text-[2vw] lg:text-[1vw] xl:text-[12.5px] top-[19.4%] left-[17%] font-bold text-red-700">चि.सौ.कां.</p>
+                    <div style={{fontSize:`${sizes.firstName2 == 1 ? undefined : `${sizes.firstName2}px`}`}} className={`absolute top-[22.3%] left-[20.5%] w-[34.9%] h-[7.3%] font-bold text-[9vw] lg:text-[7vw] xl:text-[100px] flex justify-center items-center text-red-700 ${laila.className}`}>
                         {firstName2}
                     </div>
 
-                    <p style={{fontSize:`${sizes.firstNameInfo1 == 1 ? undefined : `${sizes.firstNameInfo1}px`}`,lineHeight:"120%"}} className="flex items-center leading-[2vw] lg:leading-[1vw] whitespace-pre-wrap break-words absolute scrollbar-hide top-[12.5%] left-[60.1%] w-[40%] h-[7.3%] font-bold text-left text-[1.7vw] lg:text-[0.8vw] overflow-x-hidden text-red-800">
+                    <p style={{fontSize:`${sizes.firstNameInfo1 == 1 ? undefined : `${sizes.firstNameInfo1}px`}`,lineHeight:"120%"}} className="flex items-center leading-[2vw] lg:leading-[1vw] whitespace-pre-wrap break-words absolute scrollbar-hide top-[12.5%] left-[60.1%] w-[40%] h-[7.3%] font-bold text-left text-[1.7vw] lg:text-[0.8vw] xl:text-[11.5px] overflow-x-hidden text-red-800">
                         {firstNameInfo1}
                     </p>
 
-                    <p style={{fontSize:`${sizes.firstNameInfo2 == 1 ? undefined : `${sizes.firstNameInfo2}px`}`,lineHeight:"120%"}} className="flex items-center whitespace-pre-wrap leading-[2vw] lg:leading-[1vw] break-words absolute scrollbar-hide top-[22.3%] left-[60.1%] w-[40%] h-[7.3%] font-bold text-[1.6vw] lg:text-[0.8vw] text-left overflow-x-hidden text-red-800">
+                    <p style={{fontSize:`${sizes.firstNameInfo2 == 1 ? undefined : `${sizes.firstNameInfo2}px`}`,lineHeight:"120%"}} className="flex items-center whitespace-pre-wrap leading-[2vw] lg:leading-[1vw] break-words absolute scrollbar-hide top-[22.3%] left-[60.1%] w-[40%] h-[7.3%] font-bold text-[1.6vw] lg:text-[0.8vw] xl:text-[11.5px] text-left overflow-x-hidden text-red-800">
                         {firstNameInfo2}
                     </p>
                     {/* third section */}
@@ -390,10 +390,10 @@ export function Wedding1() {
                             height={100}
                             priority={true}
                         />
-                        <div className={`absolute bottom-[14%] right-[5.7%] w-[68%] h-[15.5%] text-white font-bold text-[1.5vw] lg:text-[0.7vw] bg-blac ${laila.className} flex justify-center items-center overflow-hidden`}>
+                        <div className={`absolute bottom-[14%] right-[5.7%] w-[68%] h-[15.5%] text-white font-bold text-[1.5vw] lg:text-[0.7vw] xl:text-[9px] bg-blac ${laila.className} flex justify-center items-center overflow-hidden`}>
                             {date1}
                         </div>
-                        <div className={`absolute bottom-[0%] right-[9%] w-[65%] h-[14%] text-[1.5vw] lg:text-[0.7vw] font-bold text-white bg-blac ${laila.className} flex justify-center items-center overflow-hidden`}>
+                        <div className={`absolute bottom-[0%] right-[9%] w-[65%] h-[14%] text-[1.5vw] lg:text-[0.7vw] xl:text-[9px] font-bold text-white bg-blac ${laila.className} flex justify-center items-center overflow-hidden`}>
                             या शुभ मुहूर्तावर करण्याचे योजिले आहे.
                         </div>
                     </div>
@@ -422,7 +422,7 @@ export function Wedding1() {
                                         priority={true}
                                     />
                                 </div>
-                                <div className={`w-[80%] rounded-[35%] bg-orange-700 text-yellow-200 flex justify-center items-center text-[1.4vw] lg:text-[0.9vw]`}>
+                                <div className={`w-[80%] rounded-[35%] bg-orange-700 text-yellow-200 flex justify-center items-center text-[1.4vw] lg:text-[0.9vw] xl:text-[12px]`}>
                                     {/* <p className="font-medium text-black">❀</p> */}
                                     <div className={`font-semibold flex justify-center items-center`}>
                                         {"साखरपुडा आणि हळदी समारंभ"}
@@ -442,7 +442,7 @@ export function Wedding1() {
                             </div>
 
                             <div className=" h-[75%] rounded-tl-lg p-[0.2vw] bg-orange-600 rounded-br-lg overflow-hidden">
-                                <div style={{fontSize:`${sizes.Date2 == 1 ? undefined : `${sizes.Date2}px`}`}} className={`font-semibold leading-[2.1vw] lg:leading-[1.1vw] h-full w-full rounded-tl-lg bg-red-800 rounded-br-lg text-white text-[1.6vw] lg:text-[0.9vw] flex justify-center items-center whitespace-pre-wrap break-words`}>
+                                <div style={{fontSize:`${sizes.Date2 == 1 ? undefined : `${sizes.Date2}px`}`}} className={`font-semibold leading-[2.1vw] lg:leading-[1.1vw] h-full w-full rounded-tl-lg bg-red-800 rounded-br-lg text-white text-[1.6vw] lg:text-[0.9vw] xl:text-[12px] flex justify-center items-center whitespace-pre-wrap break-words`}>
                                     {date2}
                                 </div>
                             </div>
@@ -462,7 +462,7 @@ export function Wedding1() {
                                     priority={true}
                                 />
                             </div>
-                            <div className="w-[33%] text-[2.1vw] lg:text-[1vw] p-[1px] text-white bg-gradient-to-b from-purple-400 to-red-800 rounded-[45%] flex font-bold justify-center items-center">
+                            <div className="w-[33%] text-[2.1vw] lg:text-[1vw] xl:text-[12px] p-[1px] text-white bg-gradient-to-b from-purple-400 to-red-800 rounded-[45%] flex font-bold justify-center items-center">
                                 विवाहस्थळ
                             </div>
                             <div className="w-[5%] mix-blend-multiply">
@@ -506,17 +506,17 @@ export function Wedding1() {
                             </div>
                         </div>
                     </div>
-                    <div style={{fontSize:`${sizes.Info == 1 ? undefined : `${sizes.Info}px`}`, overflow:"hidden"}} className="absolute top-[71.4%] left-[2%] w-[48.5%] h-[5.5%] flex justify-center items-center text-[1.2vw] lg:text-[0.6vw] font-bold">
+                    <div style={{fontSize:`${sizes.Info == 1 ? undefined : `${sizes.Info}px`}`, overflow:"hidden"}} className="absolute top-[71.4%] left-[2%] w-[48.5%] h-[5.5%] flex justify-center items-center text-[1.2vw] lg:text-[0.6vw] xl:text-[11.5px] font-bold">
                         {locationAdd}
                     </div>
                     {/* ================================================================================== */}
                     {/* sixth section */}
                     <div className="absolute top-[77.3%] left-[2%] w-[48.5%] h-[4%]">
-                        <div className="w-[33%] mx-auto text-[2.1vw] lg:text-[1vw] p-[1px] text-white bg-gradient-to-b from-purple-400 to-red-800 rounded-[45%] flex font-bold justify-center items-center">
+                        <div className="w-[33%] mx-auto text-[2.1vw] lg:text-[1vw] xl:text-[12.5px] p-[1px] text-white bg-gradient-to-b from-purple-400 to-red-800 rounded-[45%] flex font-bold justify-center items-center">
                             आपले नम्र
                         </div>
                     </div>
-                    <div style={{fontSize:`${sizes.relats == 1 ? undefined : `${sizes.relats}px`}`,lineHeight: "120%"}} className="leading-[2vw] lg:leading-[1vw] whitespace-pre-wrap break-words absolute top-[81.5%] left-[2%] w-[48.5%] h-[12%] font-bold flex justify-center items-center text-[1.6vw] lg:text-[0.8vw] overflow-hidden text-red-800">
+                    <div style={{fontSize:`${sizes.relats == 1 ? undefined : `${sizes.relats}px`}`,lineHeight: "120%"}} className="leading-[2vw] lg:leading-[1vw] xl:text-[11.5px] whitespace-pre-wrap break-words absolute top-[81.5%] left-[2%] w-[48.5%] h-[12%] font-bold flex justify-center items-center text-[1.6vw] lg:text-[0.8vw] overflow-hidden text-red-800">
                         {relats}
                     </div>
                     {/* ===================================================================================== */}
@@ -532,10 +532,10 @@ export function Wedding1() {
                                 priority={true}
                             />
                         </div>
-                        <div className=" w-[12%] h-[50%]  rounded-[50%] flex justify-center items-center text-[1.5vw] lg:text-[0.9vw] font-bold bg-gradient-to-t from-purple-500 to-red-600 text-white">
+                        <div className=" w-[12%] h-[50%]  rounded-[50%] flex justify-center items-center text-[1.5vw] lg:text-[0.9vw] xl:text-[12px] font-bold bg-gradient-to-t from-purple-500 to-red-600 text-white">
                             निमंत्रक
                         </div>
-                        <div style={{fontSize:`${sizes.invite == 1 ? undefined : `${sizes.invite}px`}`}} className="w-[78%] h-full text-slate-700 font-bold text-[3.5vw] lg:text-[2vw] flex justify-center items-center">
+                        <div style={{fontSize:`${sizes.invite == 1 ? undefined : `${sizes.invite}px`}`}} className="w-[78%] h-full text-slate-700 font-bold text-[3.5vw] lg:text-[2vw] xl:text-[23px] flex justify-center items-center">
                             {invite}
                         </div>
                         <div className="w-[10%] h-full scale-x-[-1]">
