@@ -41,10 +41,8 @@ export default function RootLayout({
       <body className="bg-slate-100 text-black dark:bg-black dark:text-white">
       
         <ImageKitProvider urlEndpoint={process.env.imagekit_URL}>
-      <SessionProvider>
         {children}
         <ToastContainer />
-      </SessionProvider>
       </ImageKitProvider>
       
       </body>

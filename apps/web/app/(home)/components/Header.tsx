@@ -24,7 +24,7 @@ interface propType {
 }
 
 export function Header({ disableAnimation }: propType) {
-  const { data:authData,status } = useSession();
+  const { data:authData,status} = useSession();
  
   const [nav, setNav] = useState<boolean>(false);
   const [curNav, setCurNav] = useState({ explore: false });
@@ -159,7 +159,7 @@ export function Header({ disableAnimation }: propType) {
         </div>
         <div className="cursor-pointer">
           {
-            authData?.user != null ? (<Profile authData = {authData?.user}/>):
+            authData?.user != null && authData.user != undefined ? (<Profile authData = {authData?.user}/>):
             ( <Link href={"/login"}>
               <button
                 className={`w-[60px] md:w-[70px] h-[35px] md:h-[44px] rounded-md font-medium bg-black text-white dark:bg-white dark:text-black transform ${
