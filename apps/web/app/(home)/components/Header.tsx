@@ -18,15 +18,13 @@ import { LiaBirthdayCakeSolid } from "react-icons/lia";
 import { SlArrowDown, SlMenu } from "react-icons/sl";
 import { logofont } from "../../fonts/fonts-config";
 import { Profile } from "./Profile";
-import { Session, User } from "next-auth";
 
 interface propType {
   disableAnimation?: string;
-  authData?: Session | null
 }
 
-export function Header({authData, disableAnimation }: propType) {
-  // const { data:authData,status } = useSession();
+export function Header({ disableAnimation }: propType) {
+  const { data:authData,status } = useSession();
  
   const [nav, setNav] = useState<boolean>(false);
   const [curNav, setCurNav] = useState({ explore: false });
@@ -63,11 +61,7 @@ export function Header({authData, disableAnimation }: propType) {
           opacity: 1,
           duration: 1,
         });
-        gsap.to("#login-btn", {
-          scale: 1,
-          transformOrigin: "center",
-          duration: 1,
-        });
+        
         gsap.to("#primium-btn", {
           scale: 1,
           transformOrigin: "center",
@@ -87,11 +81,11 @@ export function Header({authData, disableAnimation }: propType) {
         });
       });
     }
-  }, []);
+  },[]);
 
   return (
     <header
-      className={`max-w-[1440px] mx-auto flex justify-between borde pr-3 z-50 fixed top-0 left-0 right-0 backdrop-blur-xl ${disableAnimation == "" ? "lg:rounded-md opacity-0 sm:opacity-100 lg:opacity-100" : ""}`}
+      className={`max-w-[1440px] mx-auto flex justify-between pr-3 z-50 fixed top-0 left-0 right-0 backdrop-blur-xl ${disableAnimation == "" ? "lg:rounded-md opacity-0 sm:opacity-100 lg:opacity-100" : ""}`}
     >
       <div className="flex p-1 py-4 gap-2 md:gap-[100px] borde">
         <div
@@ -165,17 +159,16 @@ export function Header({authData, disableAnimation }: propType) {
         </div>
         <div className="cursor-pointer">
           {
-            authData?.user ? (<Profile authData = {authData?.user}/>):
+            authData?.user != null ? (<Profile authData = {authData?.user}/>):
             ( <Link href={"/login"}>
               <button
-                id="login-btn"
                 className={`w-[60px] md:w-[70px] h-[35px] md:h-[44px] rounded-md font-medium bg-black text-white dark:bg-white dark:text-black transform ${
-                  disableAnimation == "" ? "md:scale-0" : ""
+                  disableAnimation == "" ? "" : ""
                 }`}
               >
                 Log in
               </button>
-            </Link>)
+            </Link>) 
           }
         </div>
         <div

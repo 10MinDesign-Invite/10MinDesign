@@ -1,7 +1,5 @@
 
 import Link from "next/link";
-import { Header } from "../(home)/components/Header";
-import { auth } from "@/auth";
 
 const categories = [
   { name: "Wedding", slug: `category/wedding`, bg: "from-pink-500 to-pink-400" },
@@ -12,11 +10,8 @@ const categories = [
 ];
 
 export default async function ExplorePage() {
-    const authData = await auth()
   return (
     <>
-    <Header disableAnimation="disable"/>
-
       <div className="min-h-screen py-24 px-6">
         <div className="max-w-7xl mx-auto text-center">
           <h2 className="text-5xl font-extrabold dark:text-gray-400 text-gray-500 tracking-tight mb-12">

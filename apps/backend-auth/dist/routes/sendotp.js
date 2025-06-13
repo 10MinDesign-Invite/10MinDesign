@@ -83,7 +83,7 @@ exports.OTP.post("/send-otp", (req, res) => __awaiter(void 0, void 0, void 0, fu
 
                 OTP: ${generatedOtp}
 
-                This OTP is valid for 1 hour. If you did not request a password reset, you can ignore this email.
+                This OTP is valid for 5 min. If you did not request a password reset, you can ignore this email.
 
                 — 10MinDesign
                 `,
