@@ -34,7 +34,7 @@ export function Wedding1() {
                     <button className="bg-green-400 px-2 rounded-lg" onClick={() => handleDownload(containerRef)}> dwonload</button>
                 </div>
 
-                <div className="flex">
+                <div className="flex mb-1">
                     <div className=" w-[80%] flex flex-col gap-1">
                         <div className="flex justify-between">
                             <label htmlFor="lastname" className="w-[20%]">name1 :</label>
@@ -49,7 +49,7 @@ export function Wedding1() {
                         <button onClick={() => setWhichSize("name1 And name2")} className="bg-slate-300 px-2 rounded-lg dark:text-black">Edit Size</button>
                     </div>
                 </div>
-                <div className="flex">
+                <div className="flex mb-1">
                     <div className="w-[80%] flex flex-col gap-1">
                         <div className="flex justify-between">
                             <label htmlFor="lastname" className="w-[20%]">name1 :</label>
@@ -70,7 +70,7 @@ export function Wedding1() {
                         <button onClick={() => setWhichSize("firstName1 And Info")} className="bg-slate-300 px-2 rounded-lg dark:text-black">Edit Size</button>
                     </div>
                 </div>
-                <div className="flex">
+                <div className="flex mb-1">
                     <div className="w-[80%] flex flex-col gap-1">
                         <div className="flex justify-between">
                             <label htmlFor="lastname" className="w-[20%]">name2 :</label>
@@ -91,11 +91,11 @@ export function Wedding1() {
                         <button onClick={() => setWhichSize("firstName2 And Info")} className="bg-slate-300 px-2 rounded-lg dark:text-black">Edit Size</button>
                     </div>
                 </div>
-                <div className="w-[80%] flex justify-between">
+                <div className="w-[80%] flex justify-between mb-1">
                     <label htmlFor="" className="w-[20%]">Date1 :</label>
                     <input type="text" value={date1} onChange={(e) => setDate1(e.target.value)} className="w-[75%] md:p-1 rounded-md dark:text-black" placeholder="बुधवार दि. १२/०९/२०२५ रोजी सायं ०५:३० वा" />
                 </div>
-                <div className="flex">
+                <div className="flex mb-1">
                     <div className="w-[80%] flex flex-col gap-1">
                         <div className="flex justify-between">
                             <label htmlFor="lastname" className="w-[20%]">Date2 :</label>
@@ -113,7 +113,7 @@ export function Wedding1() {
                         <button onClick={() => setWhichSize("Date2")} className="bg-slate-300 px-2 rounded-lg dark:text-black">Edit Size</button>
                     </div>
                 </div>
-                <div className="flex">
+                <div className="flex mb-1">
                     <div className="w-[80%] flex flex-col gap-1">
                         <div className="flex justify-between">
                             <label htmlFor="lastname" className="w-[20%]">location :</label>
@@ -134,7 +134,7 @@ export function Wedding1() {
                         <button onClick={() => setWhichSize("location And Info")} className="bg-slate-300 px-2 rounded-lg dark:text-black">Edit Size</button>
                     </div>
                 </div>
-                <div className="flex">
+                <div className="flex mb-1">
                     <div className="w-[80%] flex flex-col gap-1">
                         <div className="flex justify-between">
                             <label htmlFor="lastname" className="w-[20%]">relats :</label>
@@ -163,7 +163,7 @@ export function Wedding1() {
                     </div>
                 </div>
                 {/* sizes */}
-                <div className={` outline absolute top-[7%] left-[3%] w-[75%] ${whichSize == "" ? "hidden" : "block"}`}>
+                <div className={` outline sticky start-10 mx-auto  lg:absolute lg:-ml-5 top-[7%] left-[3%] w-[75%] ${whichSize == "" ? "hidden" : "block"}`}>
                     {
                         whichSize == "name1 And name2" &&(
                             <div className="w-full bg-white">
