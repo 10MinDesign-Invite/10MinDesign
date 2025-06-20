@@ -9,7 +9,7 @@ export function Features() {
                     10 Min Design
                 </div>
 
-                <div className="w-[400px] lg:w-[600px] mx-auto mt-7 text text-5xl lg:text-6xl text-center font-extrabold  flex justify-center items-center">
+                <div className="w-[50%] sm:w-[400px] lg:w-[600px] mx-auto mt-7 text-4xl sm:text-5xl lg:text-6xl text-center font-extrabold  flex justify-center items-center">
                     Made Easy Save Time
                 </div>
                 <div className=" mt-7 w-[350px] lg:w-[400px] mx-auto">
