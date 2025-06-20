@@ -17,6 +17,6 @@ app.use(cookieParser());
 app.use("/auth",OTP);
 app.use("/verify",verify_Add_User);
 app.use("/add",addUser);
-app.use("/api", healthRoute);
+app.use("/health", healthRoute);
 
 app.listen(process.env.PORT || 8080);
