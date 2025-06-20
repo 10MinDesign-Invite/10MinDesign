@@ -4,7 +4,7 @@ import { prisma } from "@repo/database"; // adjust this import
 
 export const healthRoute = Router();
 
-healthRoute.get("/health", async (req, res) => {
+healthRoute.get("/check", async (req, res) => {
   try {
     const result = await prisma.user.findFirst({ select: { id: true } });
     if(result){

@@ -14,7 +14,7 @@ exports.healthRoute = void 0;
 const express_1 = require("express");
 const database_1 = require("@repo/database"); // adjust this import
 exports.healthRoute = (0, express_1.Router)();
-exports.healthRoute.get("/health", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.healthRoute.get("/check", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const result = yield database_1.prisma.user.findFirst({ select: { id: true } });
         if (result) {
