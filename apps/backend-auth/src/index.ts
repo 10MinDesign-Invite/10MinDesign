@@ -5,6 +5,7 @@ import * as dotenv from 'dotenv';
 import { verify_Add_User } from "./routes/verify-Add-User";
 import { addUser } from "./routes/addUser";
 import cookieParser from "cookie-parser"
+import { healthRoute } from "./routes/health";
 dotenv.config();
 const app = express()
 
@@ -16,5 +17,6 @@ app.use(cookieParser());
 app.use("/auth",OTP);
 app.use("/verify",verify_Add_User);
 app.use("/add",addUser);
+app.use("/api", healthRoute);
 
 app.listen(process.env.PORT || 8080);
