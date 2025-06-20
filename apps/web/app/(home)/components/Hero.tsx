@@ -224,7 +224,7 @@ export function Hero() {
 
   return (
     <main className="p-2">
-      <section className="borde grid grid-cols-1 lg:mt-4 xl:grid-cols-2">
+      <section className=" borde grid grid-cols-1 lg:mt-4 xl:grid-cols-2">
         <div className="borde pt-5 lg:pt-[10px] p-1 lg:mt-9">
           {/* 5 nin design */}
           <div
@@ -304,21 +304,21 @@ export function Hero() {
         {/* card section */}
         <div
           id="home-images-main-div"
-          className=" w-[400px] md:w-[90%] mx-auto p-2 xl:opacity-0 grid md:grid-cols-2 lg:mt-[122px] gap-2 mt-[100px] xl:mt-4 rounded-3xl overflow-hidden shadow-[0px_0px_0px_1px_rgba(0,0,0,0.06),0px_1px_1px_-0.5px_rgba(0,0,0,0.06),0px_3px_3px_-1.5px_rgba(0,0,0,0.06),_0px_6px_6px_-3px_rgba(0,0,0,0.06),0px_12px_12px_-6px_rgba(0,0,0,0.06),0px_24px_24px_-12px_rgba(0,0,0,0.06)]"
+          className="w-[98%] sm:w-[400px] md:w-[90%] mx-auto p-2 xl:opacity-0 grid md:grid-cols-2 lg:mt-[122px] gap-2 mt-[100px] xl:mt-4 rounded-3xl overflow-hidden shadow-[0px_0px_0px_1px_rgba(0,0,0,0.06),0px_1px_1px_-0.5px_rgba(0,0,0,0.06),0px_3px_3px_-1.5px_rgba(0,0,0,0.06),_0px_6px_6px_-3px_rgba(0,0,0,0.06),0px_12px_12px_-6px_rgba(0,0,0,0.06),0px_24px_24px_-12px_rgba(0,0,0,0.06)]"
         >
           <div
             id="card-one"
             className="home-images-div borde opacity-0 lg:opacity-100 xl:opacity-0 h-[450px] overflow-scroll p-2 grid gap-5 md:pt-[25px] lg:pt-[30px] lg:mt-[50px] scrollbar-hide rounded-2xl "
           >
             <Image
-              className="borde p-2 xl:p-1 w-[80%] h-[450px] md:w-[90%] md:h-[400px] lmd:w-[330px] lmd:h-[440px] xl:w-[95%] xl:h-[392px] mx-auto text-center text-5xl"
+              className="borde p-2 xl:p-1 w-[330px] sm:w-[80%] h-[450px] md:w-[90%] md:h-[400px] lmd:w-[330px] lmd:h-[440px] xl:w-[95%] xl:h-[392px] mx-auto text-center text-5xl"
               src={"/firstinvitation.webp"}
               alt="invitation card image"
               width={250}
               height={300}
             />
             <Image
-              className="borde p-2 xl:p-1 w-[80%] h-[450px] md:w-[90%] md:h-[400px] lmd:w-[330px] lmd:h-[440px] xl:w-[95%] xl:h-[392px] mx-auto text-center text-5xl"
+              className="borde p-2 xl:p-1 w-[330px] sm:w-[80%] h-[450px] md:w-[90%] md:h-[400px] lmd:w-[330px] lmd:h-[440px] xl:w-[95%] xl:h-[392px] mx-auto text-center text-5xl"
               src={"/firstwedding.webp"}
               alt="wedding card image"
               width={250}
@@ -338,7 +338,7 @@ export function Hero() {
               height={300}
             />
             <Image
-              className="borde p-2 xl:p-1 w-[80%] h-[450px] md:w-[90%] md:h-[400px] lmd:w-[330px] lmd:h-[440px] xl:w-[95%] xl:h-[392px] mx-auto h-[400px text-center text-5xl"
+              className="borde p-2 xl:p-1 w-[80%] h-[450px] md:w-[90%] md:h-[400px] lmd:w-[330px] lmd:h-[440px] xl:w-[95%] xl:h-[392px] mx-auto text-center text-5xl"
               src={"/firstinvitation.webp"}
               alt="invitation card image"
               width={250}
