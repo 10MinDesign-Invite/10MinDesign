@@ -1,0 +1,1 @@
+{"root":["./src/index.ts","./src/routes/sendotp.ts","./src/utils/otpconfig.ts"],"version":"5.8.3"}
