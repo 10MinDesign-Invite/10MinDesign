@@ -10,7 +10,8 @@
         "imagekit_URL",
         "AUTH_GOOGLE_ID",
         "AUTH_GOOGLE_SECRET",
-        "DATABASE_URL"
+        "DATABASE_URL",
+        "NEXTAUTH_URL"
       ]
     },
     "db:migrate:dev": {
