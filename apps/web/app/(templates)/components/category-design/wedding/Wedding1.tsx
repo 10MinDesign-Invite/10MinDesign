@@ -53,26 +53,26 @@ export function Wedding1() {
                 <div className="flex mb-1">
                     <div className=" w-[80%] flex flex-col gap-1">
                         <div className="flex justify-between">
-                            <label htmlFor="lastname" className="w-[20%]">name1 :</label>
+                            <label htmlFor="lastname" className="w-[20%] text-sm md:text-[16px] ">name1 :</label>
                             <input type="text" value={name1} onChange={(e) => setName1(e.target.value)} className="w-[75%] rounded-md pl-1 md:p-1 dark:text-black" placeholder="सैनी" />
                         </div>
                         <div className="flex justify-between">
-                            <label htmlFor="lastname" className="w-[20%]">name2 :</label>
+                            <label htmlFor="lastname" className="w-[20%] text-sm md:text-[16px] ">name2 :</label>
                             <input type="text" value={name2} onChange={(e) => setName2(e.target.value)} className="w-[75%] rounded-md pl-1 md:p-1 dark:text-black" placeholder="शेट्टी" />
                         </div>
                     </div>
-                    <div className=" w-[20%] flex justify-center items-center">
-                        <button onClick={() => setWhichSize("name1 And name2")} className="bg-slate-300 px-2 rounded-lg dark:text-black">Edit Size</button>
+                    <div className=" w-[20%] text-sm md:text-[16px] flex justify-center items-center">
+                        <button onClick={() => setWhichSize("name1 And name2")} className="bg-slate-300 px-2 py-2 rounded-lg dark:text-black">Edit Size</button>
                     </div>
                 </div>
                 <div className="flex mb-1">
                     <div className="w-[80%] flex flex-col gap-1">
                         <div className="flex justify-between">
-                            <label htmlFor="lastname" className="w-[20%]">name1 :</label>
+                            <label htmlFor="lastname" className="w-[20%] text-sm md:text-[16px]">name1 :</label>
                             <input type="text" value={firstName1} onChange={(e) => setFirstName1(e.target.value)} className="w-[75%] rounded-md md:p-1 dark:text-black" placeholder="राजीव" />
                         </div>
                         <div className="flex justify-between">
-                            <label htmlFor="lastname" className="w-[20%]">Info :</label>
+                            <label htmlFor="lastname" className="w-[20%] text-sm md:text-[16px]">Info :</label>
                             <textarea
                                 value={firstNameInfo1}
                                 onChange={(e) => setFirstNameInfo1(e.target.value)}
@@ -82,18 +82,18 @@ export function Wedding1() {
                             />
                         </div>
                     </div>
-                    <div className="w-[20%] flex justify-center items-center">
-                        <button onClick={() => setWhichSize("firstName1 And Info")} className="bg-slate-300 px-2 rounded-lg dark:text-black">Edit Size</button>
+                    <div className="w-[20%] text-sm md:text-[16px] flex justify-center items-center">
+                        <button onClick={() => setWhichSize("firstName1 And Info")} className="bg-slate-300 px-2 py-2 rounded-lg dark:text-black">Edit Size</button>
                     </div>
                 </div>
                 <div className="flex mb-1">
                     <div className="w-[80%] flex flex-col gap-1">
                         <div className="flex justify-between">
-                            <label htmlFor="lastname" className="w-[20%]">name2 :</label>
+                            <label htmlFor="lastname" className="w-[20%] text-sm md:text-[16px]">name2 :</label>
                             <input type="text" value={firstName2} onChange={(e) => setFirstName2(e.target.value)} className="w-[75%] rounded-md md:p-1 dark:text-black" placeholder="संजना" />
                         </div>
                         <div className="flex justify-between">
-                            <label htmlFor="lastname" className="w-[20%]">Info :</label>
+                            <label htmlFor="lastname" className="w-[20%] text-sm md:text-[16px]">Info :</label>
                             <textarea
                                 value={firstNameInfo2}
                                 onChange={(e) => setFirstNameInfo2(e.target.value)}
@@ -103,18 +103,18 @@ export function Wedding1() {
                             />
                         </div>
                     </div>
-                    <div className="w-[20%] flex justify-center items-center">
-                        <button onClick={() => setWhichSize("firstName2 And Info")} className="bg-slate-300 px-2 rounded-lg dark:text-black">Edit Size</button>
+                    <div className="w-[20%] text-sm md:text-[16px] flex justify-center items-center">
+                        <button onClick={() => setWhichSize("firstName2 And Info")} className="bg-slate-300 px-2 py-2 rounded-lg dark:text-black">Edit Size</button>
                     </div>
                 </div>
                 <div className="w-[80%] flex justify-between mb-1">
-                    <label htmlFor="" className="w-[20%]">Date1 :</label>
+                    <label htmlFor="" className="w-[20%] text-sm md:text-[16px]">Date1 :</label>
                     <input type="text" value={date1} onChange={(e) => setDate1(e.target.value)} className="w-[75%] md:p-1 rounded-md dark:text-black" placeholder="बुधवार दि. १२/०९/२०२५ रोजी सायं ०५:३० वा" />
                 </div>
                 <div className="flex mb-1">
                     <div className="w-[80%] flex flex-col gap-1">
                         <div className="flex justify-between">
-                            <label htmlFor="lastname" className="w-[20%]">Date2 :</label>
+                            <label htmlFor="lastname" className="w-[20%] text-sm md:text-[16px]">Date2 :</label>
                             <textarea
                                 value={date2}
                                 onChange={(e) => setDate2(e.target.value)}
@@ -125,18 +125,18 @@ export function Wedding1() {
                             />
                         </div>
                     </div>
-                    <div className="w-[20%] flex justify-center items-center">
-                        <button onClick={() => setWhichSize("Date2")} className="bg-slate-300 px-2 rounded-lg dark:text-black">Edit Size</button>
+                    <div className="w-[20%] text-sm md:text-[16px] flex justify-center items-center">
+                        <button onClick={() => setWhichSize("Date2")} className="bg-slate-300 px-2 py-2 rounded-lg dark:text-black">Edit Size</button>
                     </div>
                 </div>
                 <div className="flex mb-1">
                     <div className="w-[80%] flex flex-col gap-1">
                         <div className="flex justify-between">
-                            <label htmlFor="lastname" className="w-[20%]">location :</label>
+                            <label htmlFor="lastname" className="w-[20%] text-sm md:text-[16px]">location:</label>
                             <input type="text" value={location} onChange={(e) => setLocation(e.target.value)} className="w-[75%] rounded-md md:p-1 dark:text-black" placeholder="मंगल कार्यालय" />
                         </div>
                         <div className="flex justify-between">
-                            <label htmlFor="lastname" className="w-[20%]">Info :</label>
+                            <label htmlFor="lastname" className="w-[20%] text-sm md:text-[16px]">Info :</label>
                             <textarea
                                 value={locationAdd}
                                 onChange={(e) => setLocationAdd(e.target.value)}
@@ -146,14 +146,14 @@ export function Wedding1() {
                             />
                         </div>
                     </div>
-                    <div className="w-[20%] flex justify-center items-center">
-                        <button onClick={() => setWhichSize("location And Info")} className="bg-slate-300 px-2 rounded-lg dark:text-black">Edit Size</button>
+                    <div className="w-[20%] text-sm md:text-[16px] flex justify-center items-center">
+                        <button onClick={() => setWhichSize("location And Info")} className="bg-slate-300 px-2 py-2 rounded-lg dark:text-black">Edit Size</button>
                     </div>
                 </div>
                 <div className="flex mb-1">
                     <div className="w-[80%] flex flex-col gap-1">
                         <div className="flex justify-between">
-                            <label htmlFor="lastname" className="w-[20%]">relats :</label>
+                            <label htmlFor="lastname" className="w-[20%] text-sm md:text-[16px]">relats :</label>
                             <textarea
                                 value={relats}
                                 onChange={(e) => setRelates(e.target.value)}
@@ -163,23 +163,23 @@ export function Wedding1() {
                             />
                         </div>
                     </div>
-                    <div className="w-[20%] flex justify-center items-center">
-                        <button onClick={() => setWhichSize("relats")} className="bg-slate-300 px-2 rounded-lg dark:text-black">Edit Size</button>
+                    <div className="w-[20%] text-sm md:text-[16px] flex justify-center items-center">
+                        <button onClick={() => setWhichSize("relats")} className="bg-slate-300 px-2 py-2 rounded-lg dark:text-black">Edit Size</button>
                     </div>
                 </div>
                 <div className="flex">
                     <div className="w-[80%] flex flex-col gap-1">
                         <div className="flex justify-between">
-                            <label htmlFor="lastname" className="w-[20%] dark:text-black">Invite :</label>
+                            <label htmlFor="lastname" className="w-[20%] text-sm md:text-[16px]">Invite :</label>
                             <input type="text" value={invite} onChange={(e) => setInvite(e.target.value)} className="w-[75%] rounded-md md:p-1 dark:text-black" placeholder="समस्त xyz परिवार व abc" />
                         </div>
                     </div>
-                    <div className="w-[20%] flex justify-center items-center">
-                        <button onClick={() => setWhichSize("invite")} className="bg-slate-300 px-2 rounded-lg dark:text-black">Edit Size</button>
+                    <div className="w-[20%] text-sm md:text-[16px] flex justify-center items-center">
+                        <button onClick={() => setWhichSize("invite")} className="bg-slate-300 px-2 py-2 rounded-lg dark:text-black">Edit Size</button>
                     </div>
                 </div>
                 {/* sizes */}
-                <div className={` outline sticky start-10 mx-auto  lg:absolute lg:-ml-5 top-[7%] left-[3%] w-[75%] ${whichSize == "" ? "hidden" : "block"}`}>
+                <div className={` outline sticky start-10 mx-auto  lg:absolute lg:-ml-5 top-[7%] left-[3%] w-[78%] sm:w-[75%] ${whichSize == "" ? "hidden" : "block"}`}>
                     {
                         whichSize == "name1 And name2" &&(
                             <div className="w-full bg-white">
@@ -188,12 +188,12 @@ export function Wedding1() {
                                 </div>
                                 <div className="outline p-2 flex flex-col gap-1 dark:text-black">
                                     <div className="flex flex-row gap-2 justify-center">
-                                        <label htmlFor="name1" className="">name1 :</label>
-                                        <input id="name1" value={sizes.name1} onChange={(e)=>setSizes((prev)=>({...prev,name1:Number(e.target.value)}))} type="number" min={1} className="bg-slate-200 rounded-md" />
+                                        <label htmlFor="name1" className="flex justify-center items-center">name1 :</label>
+                                        <input id="name1" value={sizes.name1} onChange={(e)=>setSizes((prev)=>({...prev,name1:Number(e.target.value)}))} type="number" min={1} className="bg-slate-200 rounded-md py-1" />
                                     </div>
                                     <div className="flex flex-row gap-2 justify-center">
-                                        <label htmlFor="name1" className="">name2 :</label>
-                                        <input id="name1" value={sizes.name2} onChange={(e)=>setSizes((prev)=>({...prev,name2:Number(e.target.value)}))} type="number" min={1} className="bg-slate-200 rounded-md" />
+                                        <label htmlFor="name1" className="flex justify-center items-center">name2 :</label>
+                                        <input id="name1" value={sizes.name2} onChange={(e)=>setSizes((prev)=>({...prev,name2:Number(e.target.value)}))} type="number" min={1} className="bg-slate-200 rounded-md py-1" />
                                     </div>
                                 </div>
                             </div>
@@ -207,12 +207,12 @@ export function Wedding1() {
                                 </div>
                                 <div className="outline p-2 flex flex-col gap-1 dark:text-black">
                                     <div className="flex flex-row gap-2 justify-center">
-                                        <label htmlFor="name1" className="w-[20%] ">name1 :</label>
-                                        <input id="name1" value={sizes.firstName1} onChange={(e)=>setSizes((prev)=>({...prev,firstName1:Number(e.target.value)}))} type="number" min={1} className="bg-slate-200 rounded-md" />
+                                        <label htmlFor="name1" className="w-[22%] flex justify-center items-center">name1 :</label>
+                                        <input id="name1" value={sizes.firstName1} onChange={(e)=>setSizes((prev)=>({...prev,firstName1:Number(e.target.value)}))} type="number" min={1} className="bg-slate-200 rounded-md py-1" />
                                     </div>
                                     <div className="flex flex-row gap-2 justify-center">
-                                        <label htmlFor="name1" className="w-[20%] ">Info1 :</label>
-                                        <input id="name1" value={sizes.firstNameInfo1} onChange={(e)=>setSizes((prev)=>({...prev,firstNameInfo1:Number(e.target.value)}))} type="number" min={1} className="bg-slate-200 rounded-md" />
+                                        <label htmlFor="name1" className="w-[22%] flex justify-center items-center">Info1 :</label>
+                                        <input id="name1" value={sizes.firstNameInfo1} onChange={(e)=>setSizes((prev)=>({...prev,firstNameInfo1:Number(e.target.value)}))} type="number" min={1} className="bg-slate-200 rounded-md py-1" />
                                     </div>
                                 </div>
                             </div>
@@ -226,12 +226,12 @@ export function Wedding1() {
                                 </div>
                                 <div className="outline p-2 flex flex-col gap-1 dark:text-black">
                                     <div className="flex flex-row gap-2 justify-center">
-                                        <label htmlFor="name1" className="w-[20%] ">name2 :</label>
-                                        <input id="name1" value={sizes.firstName2} onChange={(e)=>setSizes((prev)=>({...prev,firstName2:Number(e.target.value)}))} type="number" min={1} className="bg-slate-200 rounded-md" />
+                                        <label htmlFor="name1" className="w-[22%] flex justify-center items-center">name2 :</label>
+                                        <input id="name1" value={sizes.firstName2} onChange={(e)=>setSizes((prev)=>({...prev,firstName2:Number(e.target.value)}))} type="number" min={1} className="bg-slate-200 rounded-md py-1" />
                                     </div>
                                     <div className="flex flex-row gap-2 justify-center">
-                                        <label htmlFor="name1" className="w-[20%] ">Info2 :</label>
-                                        <input id="name1" value={sizes.firstNameInfo2} onChange={(e)=>setSizes((prev)=>({...prev,firstNameInfo2:Number(e.target.value)}))} type="number" min={1} className="bg-slate-200 rounded-md" />
+                                        <label htmlFor="name1" className="w-[22%] flex justify-center items-center">Info2 :</label>
+                                        <input id="name1" value={sizes.firstNameInfo2} onChange={(e)=>setSizes((prev)=>({...prev,firstNameInfo2:Number(e.target.value)}))} type="number" min={1} className="bg-slate-200 rounded-md py-1" />
                                     </div>
                                 </div>
                             </div>
@@ -245,8 +245,8 @@ export function Wedding1() {
                                 </div>
                                 <div className="outline p-2 flex flex-col gap-1 dark:text-black">
                                     <div className="flex flex-row gap-2 justify-center">
-                                        <label htmlFor="name1" className="w-[20%] ">Date2 :</label>
-                                        <input id="name1" value={sizes.Date2} onChange={(e)=>setSizes((prev)=>({...prev,Date2:Number(e.target.value)}))} type="number" min={1} className="bg-slate-200 rounded-md" />
+                                        <label htmlFor="name1" className="w-[22%] flex justify-center items-center">Date2 :</label>
+                                        <input id="name1" value={sizes.Date2} onChange={(e)=>setSizes((prev)=>({...prev,Date2:Number(e.target.value)}))} type="number" min={1} className="bg-slate-200 rounded-md py-1" />
                                     </div>
                                 </div>
                             </div>
@@ -260,12 +260,12 @@ export function Wedding1() {
                                 </div>
                                 <div className="outline p-2 flex flex-col gap-1 dark:text-black">
                                     <div className="flex flex-row gap-2 justify-center">
-                                        <label htmlFor="name1" className="w-[20%] ">location :</label>
-                                        <input id="name1" value={sizes.location} onChange={(e)=>setSizes((prev)=>({...prev,location:Number(e.target.value)}))} type="number" min={1} className="bg-slate-200 rounded-md" />
+                                        <label htmlFor="name1" className="w-[22%] flex justify-center items-center">location:</label>
+                                        <input id="name1" value={sizes.location} onChange={(e)=>setSizes((prev)=>({...prev,location:Number(e.target.value)}))} type="number" min={1} className="bg-slate-200 rounded-md py-1" />
                                     </div>
                                     <div className="flex flex-row gap-2 justify-center">
-                                        <label htmlFor="name1" className="w-[20%] ">Info2 :</label>
-                                        <input id="name1" value={sizes.Info} onChange={(e)=>setSizes((prev)=>({...prev,Info:Number(e.target.value)}))} type="number" min={1} className="bg-slate-200 rounded-md" />
+                                        <label htmlFor="name1" className="w-[22%] flex justify-center items-center">Info2 :</label>
+                                        <input id="name1" value={sizes.Info} onChange={(e)=>setSizes((prev)=>({...prev,Info:Number(e.target.value)}))} type="number" min={1} className="bg-slate-200 rounded-md py-1" />
                                     </div>
                                 </div>
                             </div>
@@ -279,8 +279,8 @@ export function Wedding1() {
                                 </div>
                                 <div className="outline p-2 flex flex-col gap-1 dark:text-black">
                                     <div className="flex flex-row gap-2 justify-center">
-                                        <label htmlFor="name1" className="w-[20%] ">relats :</label>
-                                        <input id="name1" value={sizes.relats} onChange={(e)=>setSizes((prev)=>({...prev,relats:Number(e.target.value)}))} type="number" min={1} className="bg-slate-200 rounded-md" />
+                                        <label htmlFor="name1" className="w-[22%] flex justify-center items-center">relats :</label>
+                                        <input id="name1" value={sizes.relats} onChange={(e)=>setSizes((prev)=>({...prev,relats:Number(e.target.value)}))} type="number" min={1} className="bg-slate-200 rounded-md py-1" />
                                     </div>
                                 </div>
                             </div>
@@ -294,8 +294,8 @@ export function Wedding1() {
                                 </div>
                                 <div className="outline p-2 flex flex-col gap-1 dark:text-black">
                                     <div className="flex flex-row gap-2 justify-center">
-                                        <label htmlFor="name1" className="w-[20%] ">invite :</label>
-                                        <input id="name1" value={sizes.invite} onChange={(e)=>setSizes((prev)=>({...prev,invite:Number(e.target.value)}))} type="number" min={1} className="bg-slate-200 rounded-md" />
+                                        <label htmlFor="name1" className="w-[22%] flex justify-center items-center">invite :</label>
+                                        <input id="name1" value={sizes.invite} onChange={(e)=>setSizes((prev)=>({...prev,invite:Number(e.target.value)}))} type="number" min={1} className="bg-slate-200 rounded-md py-1" />
                                     </div>
                                 </div>
                             </div>
