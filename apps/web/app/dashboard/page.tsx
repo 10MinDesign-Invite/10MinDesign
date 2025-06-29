@@ -153,7 +153,7 @@ export default async function Dashboard() {
               <p className="text-[12px]">since 2025</p>
             </div>
             <div className="">
-              <div className={`text-md text-yellow-300`}>Neutral</div>
+              <div className={`text-md text-black`}>Neutral</div>
               <div className="">
                 <p className="">00</p>
                 <div className=""></div>
@@ -167,7 +167,7 @@ export default async function Dashboard() {
       <div className=" mt-2 p-1">
         <div className="mx-auto flex justify-center items-center md:items-start flex-col md:flex-row gap-4">
 
-          <div className="flex flex-col md:w-[50%] gap-2 p-3 dark:shadow-[0px_0px_5px_0px_#cbd5e0] shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)] rounded-xl">
+          <div className="flex flex-col md:max-w-[50%] gap-2 p-3 dark:shadow-[0px_0px_5px_0px_#cbd5e0] shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)] rounded-xl">
             <p className="text-3xl font-bold">Visual Preview</p>
             <div className="text-sm">
               See all the details in{" "}
@@ -201,7 +201,7 @@ export default async function Dashboard() {
             </div>
           </div>
 
-          <div className="md:w-[50%]">
+          <div className="md:max-w-[50%] lg:">
             <DoughnutChart />
           </div>
         </div>
