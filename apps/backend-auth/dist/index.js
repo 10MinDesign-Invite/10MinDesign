@@ -44,13 +44,18 @@ const addUser_1 = require("./routes/addUser");
 const health_1 = require("./routes/health");
 const sendotp_1 = require("./routes/sendotp");
 const verify_Add_User_1 = require("./routes/verify-Add-User");
+const getAdmin_1 = require("./routes/getAdmin");
 dotenv.config();
 const app = (0, express_1.default)();
-app.use((0, cors_1.default)({ origin: [process.env.FRONTEND_URL, process.env.CORN_JOB] }));
+app.use((0, cors_1.default)({
+    origin: [process.env.FRONTEND_URL, process.env.CORN_JOB],
+    credentials: true
+}));
 app.use(express_1.default.json());
 app.use((0, cookie_parser_1.default)());
 app.use("/auth", sendotp_1.OTP);
 app.use("/verify", verify_Add_User_1.verify_Add_User);
 app.use("/add", addUser_1.addUser);
 app.use("/health", health_1.healthRoute);
+app.use("/get", getAdmin_1.getAdmin);
 app.listen(process.env.PORT || 8080);
