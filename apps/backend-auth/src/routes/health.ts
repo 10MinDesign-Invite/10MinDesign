@@ -1,6 +1,6 @@
-// routes/health.ts
+
 import { Router } from "express";
-import { prisma } from "@repo/database"; // adjust this import
+import { prisma } from "@repo/database"; 
 
 export const healthRoute = Router();
 

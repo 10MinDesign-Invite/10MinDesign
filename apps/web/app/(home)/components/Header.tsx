@@ -26,7 +26,6 @@ interface propType {
 
 export function Header({ disableAnimation }: propType) {
   const { data: authData } = useSession();
-
   const [nav, setNav] = useState<boolean>(false);
   const [curNav, setCurNav] = useState({ explore: false });
   const [theme, setTheme] = useState("light");

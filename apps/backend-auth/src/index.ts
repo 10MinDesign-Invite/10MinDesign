@@ -1,11 +1,11 @@
-import express from "express"
-import { OTP } from "./routes/sendotp"
-import cors from "cors"
+import cookieParser from "cookie-parser";
+import cors from "cors";
 import * as dotenv from 'dotenv';
-import { verify_Add_User } from "./routes/verify-Add-User";
+import express from "express";
 import { addUser } from "./routes/addUser";
-import cookieParser from "cookie-parser"
 import { healthRoute } from "./routes/health";
+import { OTP } from "./routes/sendotp";
+import { verify_Add_User } from "./routes/verify-Add-User";
 dotenv.config();
 const app = express()
 

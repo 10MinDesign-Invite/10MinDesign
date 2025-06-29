@@ -9,22 +9,21 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.healthRoute = void 0;
-const express_1 = require("express");
+exports.getUsers = void 0;
 const database_1 = require("@repo/database");
-exports.healthRoute = (0, express_1.Router)();
-exports.healthRoute.get("/check", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+const express_1 = require("express");
+exports.getUsers = (0, express_1.Router)();
+exports.getUsers.get("/totalusers", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const result = yield database_1.prisma.user.findFirst({ select: { id: true } });
-        if (result) {
-            res.status(200).json({ status: "DB awake " });
-        }
-        else {
-            res.status(404).json({ status: "DB sleep " });
-        }
+        database_1.prisma.user.findMany({
+            select: {
+                email: true,
+                googleId: true
+            }
+        });
+        res.send("hiii get user");
     }
     catch (err) {
-        console.error(err);
-        res.status(500).json({ status: "DB error" });
+        console.log(err);
     }
 }));
