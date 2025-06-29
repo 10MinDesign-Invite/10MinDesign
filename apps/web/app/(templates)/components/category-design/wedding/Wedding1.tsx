@@ -179,7 +179,7 @@ export function Wedding1() {
                     </div>
                 </div>
                 {/* sizes */}
-                <div className={` outline sticky start-10 mx-auto  lg:absolute lg:-ml-5 top-[7%] left-[3%] w-[78%] sm:w-[75%] ${whichSize == "" ? "hidden" : "block"}`}>
+                <div className={`mt-4 outline sticky start-10 mx-auto  lg:absolute lg:-ml-5 top-[7%] left-[3%] w-[100%] sm:w-[75%] ${whichSize == "" ? "hidden" : "block"}`}>
                     {
                         whichSize == "name1 And name2" &&(
                             <div className="w-full bg-white">
