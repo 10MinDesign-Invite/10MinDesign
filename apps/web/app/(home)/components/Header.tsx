@@ -43,7 +43,7 @@ export function Header({ disableAnimation }: propType) {
       setTheme("dark");
     }
   };
-
+  
   useGSAP(() => {
     let mm = gsap.matchMedia();
     if (disableAnimation == "") {
@@ -94,6 +94,7 @@ export function Header({ disableAnimation }: propType) {
     }
     getUser();
   }, []);
+
   return (
     <header
       className={`max-w-[1440px] mx-auto flex justify-between pr-3 z-50 fixed top-0 left-0 right-0 backdrop-blur-xl ${disableAnimation == "" ? "lg:rounded-md opacity-0 sm:opacity-100 lg:opacity-100" : ""}`}
