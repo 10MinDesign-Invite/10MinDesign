@@ -17,7 +17,7 @@ export default async function DashboardLayout({
 }>) {
   return (
     
-      <ThemeProvider attribute={"class"} defaultTheme="system" enableSystem disableTransitionOnChange>
+    <ThemeProvider attribute={"class"} defaultTheme="system" enableSystem disableTransitionOnChange>
         <main className="flex gap-3 h-screen dark:bg-black mx-auto w-full max-w-screen-2xl p-1 bg-slate-100 overflow-hidden">
           <Sidebar />
           <div className=" p-1 w-full bg-white dark:bg-black dark:base-shadow-pure-white shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)]">
@@ -28,6 +28,7 @@ export default async function DashboardLayout({
           </div>
         </main>
       </ThemeProvider>
+
     
   );
 }

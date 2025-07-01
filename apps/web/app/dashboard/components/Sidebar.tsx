@@ -49,9 +49,9 @@ export const Sidebar = () => {
                   </li>
                   <li>
                     <Link
-                      href="/settings"
+                      href="/dashboard/settings"
                       className={`flex items-center hover:bg-slate-200 dark:hover:text-black px-2 py-1 rounded-lg gap-2 ${
-                        pathName === "/settings" ? "bg-slate-100" : ""
+                        pathName === "/dashboard/settings" ? "bg-slate-200 dark:text-black" : ""
                       }`}
                     >
                       <SlSettings />
