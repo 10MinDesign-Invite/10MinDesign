@@ -5,7 +5,7 @@ export async function AuthMiddleware(req: Request, res: Response, next:NextFunct
   try {
     const token = await getToken({
       req: {
-        headers: req.headers as Record<string, string> || req.cookies['__Secure-authjs.session-token'],
+        headers: req.cookies['__Secure-authjs.session-token'],
       },
       secret: process.env.AUTH_SECRET!,
     });
