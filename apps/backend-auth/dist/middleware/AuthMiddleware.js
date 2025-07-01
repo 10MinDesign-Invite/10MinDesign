@@ -16,11 +16,12 @@ function AuthMiddleware(req, res, next) {
         try {
             const token = yield (0, jwt_1.getToken)({
                 req: {
-                    headers: req.headers,
+                    headers: req.headers || req.cookies['__Secure-authjs.session-token'],
                 },
                 secret: process.env.AUTH_SECRET,
             });
-            if (!(token === null || token === void 0 ? void 0 : token.email)) {
+            console.log(token, "from base");
+            if (!(token === null || token === void 0 ? void 0 : token.email) || token) {
                 res.send("unauthorized user");
                 return;
             }
