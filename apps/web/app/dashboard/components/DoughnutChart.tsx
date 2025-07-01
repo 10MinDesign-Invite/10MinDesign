@@ -10,12 +10,23 @@ import {
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
-const data = {
+
+
+ 
+
+interface chartProps{
+  totalUsers:number;
+  total_Google_Users:number;
+  total_Gmail_Users:number;
+}
+
+export default function DoughnutChart({totalUsers,total_Google_Users,total_Gmail_Users}:chartProps) {
+  const data = {
   labels: ['Total', 'google', 'Gmail'],
   datasets: [
     {
       label: 'total',
-      data: [2000, 1800, 200],
+      data: [totalUsers, total_Google_Users, total_Gmail_Users],
       backgroundColor: [ '#60a5fa', '#facc15', '#f87171'],
       borderColor: [ '#3b82f6', '#eab308', '#ef4444'],
       borderWidth: 1,
@@ -34,12 +45,6 @@ const options = {
       },
     },
   }  
-
- 
-
-
-
-export default function DoughnutChart() {
   return (
     // <div className="w-full max-w-md mx-auto p-4 bg-white rounded-xl shadow dark:bg-gray-800">
       <Doughnut data={data} options={options} />

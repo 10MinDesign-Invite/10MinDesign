@@ -7,7 +7,6 @@ export const getUsers = Router();
 getUsers.post("/users",AuthMiddleware,async(req:Request,res:Response)=>{
     try {
         const {data} = req.body.data;
-        console.log(data,"/////////////////////////////////////////////////////////////////")
         if(data === "GET_ALL_USERS"){
             const Users = await prisma.user.findMany({select:{email:true,name:true,id:true,image:true,googleId:true}});
            if(Users.length > 0 && Users){

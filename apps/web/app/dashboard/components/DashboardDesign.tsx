@@ -15,30 +15,39 @@ import { getUsersData } from "../Quries/getUsersData";
 import { useEffect, useState } from "react";
 
 export const DashboardDesign = ({ authData }: { authData: string }) => {
-  const [totalUsers,setTotalUsers] = useState<[]>([]);  
-  let googleUsers = 20010;
-  let gmailUsers = 200;
+  const [totalUsers,setTotalUsers] = useState<number>(0);  
+  const [total_Google_Users,setTotal_Google_Users] = useState(0);
+  const [total_Gmail_Users,setTotal_Gmail_Users] = useState(0); 
+  const google_Increase = ((total_Google_Users - total_Gmail_Users) / total_Gmail_Users) * 100;
+  const google_Percent = google_Increase.toFixed(2);  
+  const gmail_Increase = ((total_Gmail_Users - total_Google_Users) / total_Google_Users) * 100;
+  const gmail_Percent = gmail_Increase.toFixed(2);  
 
   const Gmail_Google_Users = useMutation({
     mutationKey: ["GET_TOTAL_GOOGLE_AND_GMAIL_USERS"],
     mutationFn: (data: string) => getUsersData(data),
     onSuccess(data) {
-        // console.log(data,"cccc")
+        const google_users=data.filter((item:{googleId:string})=>{
+            return item.googleId != null;
+        });
+        const gmail_users=data.filter((item:{googleId:string})=>{
+            return item.googleId == null;
+        });
+        setTotal_Google_Users(google_users.length)
+        setTotal_Gmail_Users(gmail_users.length)
     },
   });
   const Total_Users = useMutation({
     mutationKey: ["GET_TOTAL_USERS"],
     mutationFn: (data: string) => getUsersData(data),
     onSuccess(data) {
-        console.log(data)
+        setTotalUsers(data.length);
     },
   });
 
   useEffect(()=>{
     Total_Users.mutate("GET_TOTAL_USERS")
-    Gmail_Google_Users.mutate("GET_ALL_USERS");
-    console.log(totalUsers);
-    
+    Gmail_Google_Users.mutate("GET_TOTAL_GOOGLE_AND_GMAIL_USERS");    
   },[])
 
   return (
@@ -51,6 +60,7 @@ export const DashboardDesign = ({ authData }: { authData: string }) => {
       <hr className="shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)]" />
 
       <div className="relative w-full mt-3 overflow-x-hidden p-2 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+
         <div className="rounded-xl px-5 py-5 base-shadow dark:shadow-[0px_0px_5px_0px_#cbd5e0]">
           <div className="w-full flex justify-between">
             <div className=" flex justify-center items-center gap-2">
@@ -66,7 +76,7 @@ export const DashboardDesign = ({ authData }: { authData: string }) => {
           <div className="mt-3 py-2 w-full flex justify-between items-center">
             <div className="">
               <p className="text-3xl font-bold">
-                <CountUpCustome value={2000} duration={3} />
+                <CountUpCustome value={totalUsers} duration={3} />
               </p>
               <p className="text-[12px]">since 2025</p>
             </div>
@@ -93,22 +103,22 @@ export const DashboardDesign = ({ authData }: { authData: string }) => {
           <div className="mt-3 w-full flex justify-between items-center">
             <div className="">
               <p className="text-3xl font-bold">
-                <CountUpCustome value={1800} duration={3} />
+                <CountUpCustome value={total_Google_Users} duration={3} />
               </p>
               <p className="text-[12px]">since 2025</p>
             </div>
             <div className="">
               <div
-                className={`text-5xl ${googleUsers > gmailUsers ? "text-green-400" : "text-red-400"}`}
+                className={`text-5xl ${total_Google_Users > total_Gmail_Users ? "text-green-400" : "text-red-400"}`}
               >
-                {googleUsers > gmailUsers ? (
+                {total_Google_Users > total_Gmail_Users ? (
                   <HiOutlineArrowTrendingUp />
                 ) : (
                   <HiOutlineArrowTrendingDown />
                 )}
               </div>
               <div className="">
-                <p className="">percent</p>
+                <p className={`${google_Percent.includes("-") ? "text-red-500" : "text-green-500"}`}>{ total_Google_Users == 0 ? "loading" : google_Percent+"%" }</p>
                 <div className=""></div>
               </div>
             </div>
@@ -131,22 +141,22 @@ export const DashboardDesign = ({ authData }: { authData: string }) => {
           <div className="mt-3 w-full flex justify-between items-center">
             <div className="">
               <p className="text-3xl font-bold">
-                <CountUpCustome value={200} duration={3} />
+                <CountUpCustome value={total_Gmail_Users} duration={3} />
               </p>
               <p className="text-[12px]">since 2025</p>
             </div>
             <div className="">
               <div
-                className={`text-5xl ${googleUsers < gmailUsers ? "text-green-400" : "text-red-400"}`}
+                className={`text-5xl ${total_Google_Users < total_Gmail_Users ? "text-green-400" : "text-red-400"}`}
               >
-                {googleUsers < gmailUsers ? (
+                {total_Google_Users < total_Gmail_Users ? (
                   <HiOutlineArrowTrendingUp />
                 ) : (
                   <HiOutlineArrowTrendingDown />
                 )}
               </div>
               <div className="">
-                <p className="">percent</p>
+                <p className={`${gmail_Percent.includes("-") ? "text-red-500" : "text-green-500"}`}>{ total_Gmail_Users == 0 ? "loading" : gmail_Percent+"%" }</p>
                 <div className=""></div>
               </div>
             </div>
@@ -176,7 +186,7 @@ export const DashboardDesign = ({ authData }: { authData: string }) => {
               <p className="text-[12px]">since 2025</p>
             </div>
             <div className="">
-              <div className={`text-md text-black`}>Neutral</div>
+              <div className={`text-md text-black dark:text-white`}>Neutral</div>
               <div className="">
                 <p className="">00</p>
                 <div className=""></div>
@@ -221,7 +231,7 @@ export const DashboardDesign = ({ authData }: { authData: string }) => {
           </div>
 
           <div className="md:max-w-[50%] lg:">
-            <DoughnutChart />
+            <DoughnutChart totalUsers={totalUsers} total_Google_Users={total_Google_Users} total_Gmail_Users={total_Gmail_Users}/>
           </div>
         </div>
       </div>

@@ -17,7 +17,6 @@ exports.getUsers = (0, express_1.Router)();
 exports.getUsers.post("/users", AuthMiddleware_1.AuthMiddleware, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { data } = req.body.data;
-        console.log(data, "/////////////////////////////////////////////////////////////////");
         if (data === "GET_ALL_USERS") {
             const Users = yield database_1.prisma.user.findMany({ select: { email: true, name: true, id: true, image: true, googleId: true } });
             if (Users.length > 0 && Users) {
