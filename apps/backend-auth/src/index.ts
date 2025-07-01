@@ -6,6 +6,7 @@ import { addUser } from "./routes/addUser";
 import { healthRoute } from "./routes/health";
 import { OTP } from "./routes/sendotp";
 import { verify_Add_User } from "./routes/verify-Add-User";
+import { getUsers } from "./routes/getUsers";
 dotenv.config();
 const app = express()
 
@@ -23,6 +24,7 @@ app.use("/auth",OTP);
 app.use("/verify",verify_Add_User);
 app.use("/add",addUser);
 app.use("/health", healthRoute);
+app.use("/get", getUsers);
 
 
 app.listen(process.env.PORT || 8080);
