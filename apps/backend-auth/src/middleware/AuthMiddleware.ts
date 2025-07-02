@@ -1,18 +1,16 @@
-import { getToken } from "@auth/core/jwt";
+import { decode} from "@auth/core/jwt";
 import { NextFunction, Request, Response } from "express";
 
 export async function AuthMiddleware(req: Request, res: Response, next:NextFunction) {
   try {
-    const token = await getToken({
-      req: {
-        headers: req.cookies['__Secure-authjs.session-token'],
-      },
-      secret: process.env.AUTH_SECRET!,
+    const token = req.headers.authorization?.split(" ")[1];
+    
+    const decoded = await decode({
+      token:token,
+      salt: `${process.env.NODE_ENV === "development" ? process.env.DEV_SALT : process.env.PROD_SALT}`,
+      secret: process.env.AUTH_SECRET!
     });
-    
-    
-    console.log(token,"from base")
-    if(!token?.email || token){
+    if(!token){
         res.send("unauthorized user")   
         return
     }

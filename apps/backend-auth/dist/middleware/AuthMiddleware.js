@@ -13,15 +13,15 @@ exports.AuthMiddleware = AuthMiddleware;
 const jwt_1 = require("@auth/core/jwt");
 function AuthMiddleware(req, res, next) {
     return __awaiter(this, void 0, void 0, function* () {
+        var _a;
         try {
-            const token = yield (0, jwt_1.getToken)({
-                req: {
-                    headers: req.headers || req.cookies['__Secure-authjs.session-token'],
-                },
-                secret: process.env.AUTH_SECRET,
+            const token = (_a = req.headers.authorization) === null || _a === void 0 ? void 0 : _a.split(" ")[1];
+            const decoded = yield (0, jwt_1.decode)({
+                token: token,
+                salt: `${process.env.NODE_ENV === "development" ? process.env.DEV_SALT : process.env.PROD_SALT}`,
+                secret: process.env.AUTH_SECRET
             });
-            console.log(token, "from base");
-            if (!(token === null || token === void 0 ? void 0 : token.email) || token) {
+            if (!token) {
                 res.send("unauthorized user");
                 return;
             }

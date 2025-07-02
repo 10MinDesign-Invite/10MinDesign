@@ -18,6 +18,7 @@ const config: NextAuthConfig = {
         email: {},
         password: {},
       },
+      
       authorize: async (credentials) => {
 
          const email = credentials.email as string | undefined

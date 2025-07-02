@@ -4,10 +4,9 @@ import { prisma } from "@repo/database";
 
 export const getUsers = Router();
 
-getUsers.post("/users",AuthMiddleware,async(req:Request,res:Response)=>{
+getUsers.get("/all_users_data",AuthMiddleware,async(req:Request,res:Response)=>{
     try {
-        const {data} = req.body.data;
-        if(data === "GET_ALL_USERS"){
+        
             const Users = await prisma.user.findMany({select:{email:true,name:true,id:true,image:true,googleId:true}});
            if(Users.length > 0 && Users){
                 res.status(200).send(Users);
@@ -16,8 +15,15 @@ getUsers.post("/users",AuthMiddleware,async(req:Request,res:Response)=>{
                 res.status(404).json({success:false,message:"no data"});
                 return
            }
-        }
-        else if(data === "GET_TOTAL_USERS"){
+        
+        
+    } catch (error) {
+        console.log(error)
+    }
+})
+getUsers.get("/total_users_count",AuthMiddleware,async(req:Request,res:Response)=>{
+    try {
+        
             const UsersIds = await prisma.user.findMany({select:{id:true}});
             if(UsersIds.length > 0 && UsersIds){
                 res.status(200).send(UsersIds);
@@ -26,7 +32,15 @@ getUsers.post("/users",AuthMiddleware,async(req:Request,res:Response)=>{
                 res.status(404).json({success:false,message:"no data"});
                 return 
             }
-        }else if(data === "GET_TOTAL_GOOGLE_AND_GMAIL_USERS"){
+        
+        
+    } catch (error) {
+        console.log(error)
+    }
+})
+getUsers.get("/total_auth_users_count",AuthMiddleware,async(req:Request,res:Response)=>{
+    try {
+        
             const GoogleIds = await prisma.user.findMany({select:{googleId:true}});
             if(GoogleIds.length > 0 && GoogleIds){
                 res.status(200).send(GoogleIds);
@@ -35,7 +49,6 @@ getUsers.post("/users",AuthMiddleware,async(req:Request,res:Response)=>{
                 res.status(404).json({success:false,message:"no data"});
                 return
             }
-        }
         
     } catch (error) {
         console.log(error)

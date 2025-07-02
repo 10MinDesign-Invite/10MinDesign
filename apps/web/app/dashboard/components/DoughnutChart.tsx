@@ -15,18 +15,18 @@ ChartJS.register(ArcElement, Tooltip, Legend);
  
 
 interface chartProps{
-  totalUsers:number;
+  totalUsersData:number;
   total_Google_Users:number;
   total_Gmail_Users:number;
 }
 
-export default function DoughnutChart({totalUsers,total_Google_Users,total_Gmail_Users}:chartProps) {
+export default function DoughnutChart({totalUsersData,total_Google_Users,total_Gmail_Users}:chartProps) {
   const data = {
   labels: ['Total', 'google', 'Gmail'],
   datasets: [
     {
       label: 'total',
-      data: [totalUsers, total_Google_Users, total_Gmail_Users],
+      data: [totalUsersData, total_Google_Users, total_Gmail_Users],
       backgroundColor: [ '#60a5fa', '#facc15', '#f87171'],
       borderColor: [ '#3b82f6', '#eab308', '#ef4444'],
       borderWidth: 1,
