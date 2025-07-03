@@ -9,16 +9,14 @@ import { verify_Add_User } from "./routes/verify-Add-User";
 import { getUsers } from "./routes/getUsers";
 dotenv.config();
 const app = express()
-
+app.use(express.json());
+app.use(cookieParser());
 app.use(cors(
     {
         origin:[process.env.FRONTEND_URL!,process.env.CORN_JOB!],
         credentials:true
     }
 ));
-
-app.use(express.json());
-app.use(cookieParser());
 
 app.use("/auth",OTP);
 app.use("/verify",verify_Add_User);

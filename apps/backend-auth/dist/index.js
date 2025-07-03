@@ -47,12 +47,12 @@ const verify_Add_User_1 = require("./routes/verify-Add-User");
 const getUsers_1 = require("./routes/getUsers");
 dotenv.config();
 const app = (0, express_1.default)();
+app.use(express_1.default.json());
+app.use((0, cookie_parser_1.default)());
 app.use((0, cors_1.default)({
     origin: [process.env.FRONTEND_URL, process.env.CORN_JOB],
     credentials: true
 }));
-app.use(express_1.default.json());
-app.use((0, cookie_parser_1.default)());
 app.use("/auth", sendotp_1.OTP);
 app.use("/verify", verify_Add_User_1.verify_Add_User);
 app.use("/add", addUser_1.addUser);
