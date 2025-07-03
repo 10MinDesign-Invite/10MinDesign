@@ -4,7 +4,8 @@ import { NextFunction, Request, Response } from "express";
 export async function AuthMiddleware(req: Request, res: Response, next:NextFunction) {
   try {
     // const token = req.headers.authorization?.split(" ")[1];
-        const token = req.cookies[`${process.env.NODE_ENV == 'development' ? 'authjs.session-token':'__Secure-authjs.session-token'}`];
+        // const token = req.cookies[`${process.env.NODE_ENV == 'development' ? 'authjs.session-token':'__Secure-authjs.session-token'}`];
+        const token = req.cookies['__Secure-authjs.session-token'];
 
     const decoded = await decode({
       token:token,
