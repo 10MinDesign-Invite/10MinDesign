@@ -26,7 +26,8 @@ function AuthMiddleware(req, res, next) {
                 return;
             }
             console.log(token, "000000000000000000000000000000000000000000");
-            next();
+            res.send([token]);
+            // next();
         }
         catch (error) {
             console.log(error);

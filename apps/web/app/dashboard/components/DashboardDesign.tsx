@@ -40,7 +40,7 @@ export const DashboardDesign = ({ authData }: { authData: string }) => {
       const gmailUsers = authTotal?.filter(
         (user: { googleId: number }) => user.googleId === null
       );
-
+      console.log()
       setTotal_Google_Users(googleUsers.length);
       setTotal_Gmail_Users(gmailUsers.length);
     }
