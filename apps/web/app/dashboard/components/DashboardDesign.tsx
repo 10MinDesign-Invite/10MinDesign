@@ -32,19 +32,19 @@ export const DashboardDesign = ({ authData }: { authData: string }) => {
   const [total_Google_Users, setTotal_Google_Users] = useState(0);
   const [total_Gmail_Users, setTotal_Gmail_Users] = useState(0);
 
-  // useEffect(() => {
-  //   if (authTotal) {
-  //     const googleUsers = authTotal?.filter(
-  //       (user: { googleId: number }) => user.googleId != null
-  //     );
-  //     const gmailUsers = authTotal?.filter(
-  //       (user: { googleId: number }) => user.googleId === null
-  //     );
+  useEffect(() => {
+    if (authTotal) {
+      const googleUsers = authTotal?.filter(
+        (user: { googleId: number }) => user.googleId != null
+      );
+      const gmailUsers = authTotal?.filter(
+        (user: { googleId: number }) => user.googleId === null
+      );
 
-  //     setTotal_Google_Users(googleUsers.length);
-  //     setTotal_Gmail_Users(gmailUsers.length);
-  //   }
-  // }, [authTotal]);
+      setTotal_Google_Users(googleUsers.length);
+      setTotal_Gmail_Users(gmailUsers.length);
+    }
+  }, [authTotal]);
 
   const google_Increase = total_Gmail_Users > 0 ? ((total_Google_Users - total_Gmail_Users) / total_Gmail_Users) * 100 : 0;
   const google_Percent = google_Increase.toFixed(2);
