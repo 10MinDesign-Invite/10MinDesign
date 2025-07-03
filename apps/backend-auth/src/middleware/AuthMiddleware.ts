@@ -6,7 +6,7 @@ export async function AuthMiddleware(req: Request, res: Response, next:NextFunct
     // const token = req.headers.authorization?.split(" ")[1];
         // const token = req.cookies[`${process.env.NODE_ENV == 'development' ? 'authjs.session-token':'__Secure-authjs.session-token'}`];
         console.log("Cookie header:", req.headers.cookie);
-        const token = req.cookies['__Secure-authjs.session-token'];
+        const token = await req.cookies['__Secure-authjs.session-token'];
 
     const decoded = await decode({
       token:token,
@@ -19,7 +19,7 @@ export async function AuthMiddleware(req: Request, res: Response, next:NextFunct
     // }
      
     console.log(token,"000000000000000000000000000000000000000000");
-    res.send(req.headers.cookie)
+    res.send(token)
     // next();
     
   } catch (error) {
