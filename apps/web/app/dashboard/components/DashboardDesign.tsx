@@ -34,10 +34,10 @@ export const DashboardDesign = ({ authData }: { authData: string }) => {
 
   useEffect(() => {
     if (authTotal) {
-      const googleUsers = authTotal.filter(
+      const googleUsers = authTotal?.filter(
         (user: { googleId: number }) => user.googleId != null
       );
-      const gmailUsers = authTotal.filter(
+      const gmailUsers = authTotal?.filter(
         (user: { googleId: number }) => user.googleId === null
       );
 
