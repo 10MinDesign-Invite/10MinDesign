@@ -15,7 +15,8 @@ function AuthMiddleware(req, res, next) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             // const token = req.headers.authorization?.split(" ")[1];
-            const token = req.cookies[`${process.env.NODE_ENV == 'development' ? 'authjs.session-token' : '__Secure-authjs.session-token'}`];
+            // const token = req.cookies[`${process.env.NODE_ENV == 'development' ? 'authjs.session-token':'__Secure-authjs.session-token'}`];
+            const token = req.cookies['__Secure-authjs.session-token'];
             const decoded = yield (0, jwt_1.decode)({
                 token: token,
                 salt: `${process.env.NODE_ENV === "development" ? process.env.DEV_SALT : process.env.PROD_SALT}`,
