@@ -50,9 +50,6 @@ const config: NextAuthConfig = {
   pages: {
     signIn: "/login"
   },
-  session:{
-    strategy:'jwt'
-  },
   callbacks:{
     signIn:async ({user,account,email,profile})=>{
         if(account?.provider === "google"){
