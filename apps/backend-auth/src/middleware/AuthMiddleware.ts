@@ -12,7 +12,6 @@ export async function AuthMiddleware(req: Request, res: Response, next:NextFunct
       salt: `${process.env.NODE_ENV === "development" ? process.env.DEV_SALT : process.env.PROD_SALT}`,
       secret: process.env.AUTH_SECRET!
     });
-    
     if(!token){
         res.send("unauthorized user")   
         return
