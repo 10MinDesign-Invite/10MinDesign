@@ -10,23 +10,25 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AuthMiddleware = AuthMiddleware;
+const jwt_1 = require("@auth/core/jwt");
 function AuthMiddleware(req, res, next) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             // const token = req.headers.authorization?.split(" ")[1];
             // const token = req.cookies[`${process.env.NODE_ENV == 'development' ? 'authjs.session-token':'__Secure-authjs.session-token'}`];
-            const token = req.cookies;
-            // const decoded = await decode({
-            //   token:token,
-            //   salt: `${process.env.NODE_ENV === "development" ? process.env.DEV_SALT : process.env.PROD_SALT}`,
-            //   secret: process.env.AUTH_SECRET!
-            // });
+            console.log("Cookie header:", req.headers.cookie);
+            const token = req.cookies['__Secure-authjs.session-token'];
+            const decoded = yield (0, jwt_1.decode)({
+                token: token,
+                salt: `${process.env.NODE_ENV === "development" ? process.env.DEV_SALT : process.env.PROD_SALT}`,
+                secret: process.env.AUTH_SECRET
+            });
             // if(!token){
             //     res.send("unauthorized user")   
             //     return
             // }
             console.log(token, "000000000000000000000000000000000000000000");
-            res.send(token);
+            res.send(req.headers.cookie);
             // next();
         }
         catch (error) {
