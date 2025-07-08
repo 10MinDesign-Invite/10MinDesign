@@ -3,7 +3,6 @@ import "@repo/ui/styles.css";
 import type { Metadata } from "next";
 import { ToastContainer } from 'react-toastify';
 import "./globals.css";
-import { SessionProvider } from 'next-auth/react';
 
 export const metadata: Metadata = {
   title: "10MinDesign",
@@ -43,7 +42,7 @@ export default function RootLayout({
         <ImageKitProvider urlEndpoint={process.env.imagekit_URL}>
         {children}
         <ToastContainer />
-      </ImageKitProvider>
+        </ImageKitProvider>
       
       </body>
     </html>
