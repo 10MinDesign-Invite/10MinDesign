@@ -41,10 +41,10 @@ const cors_1 = __importDefault(require("cors"));
 const dotenv = __importStar(require("dotenv"));
 const express_1 = __importDefault(require("express"));
 const addUser_1 = require("./routes/addUser");
-const health_1 = require("./routes/health");
 const sendotp_1 = require("./routes/sendotp");
 const verify_Add_User_1 = require("./routes/verify-Add-User");
 const getUsers_1 = require("./routes/getUsers");
+const cron_1 = __importDefault(require("./config/cron"));
 dotenv.config();
 const app = (0, express_1.default)();
 app.use(express_1.default.json());
@@ -53,9 +53,13 @@ app.use((0, cors_1.default)({
     origin: [process.env.FRONTEND_URL, process.env.CORN_JOB],
     credentials: true
 }));
+if (process.env.NODE_ENV == "production")
+    cron_1.default.start();
+app.get("/api/health", (req, res) => {
+    res.status(200).json({ status: "ok" });
+});
 app.use("/auth", sendotp_1.OTP);
 app.use("/verify", verify_Add_User_1.verify_Add_User);
 app.use("/add", addUser_1.addUser);
-app.use("/health", health_1.healthRoute);
 app.use("/get", getUsers_1.getUsers);
 app.listen(process.env.PORT || 8080);
