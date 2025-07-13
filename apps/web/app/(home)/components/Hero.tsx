@@ -10,8 +10,7 @@ import { LiaBirthdayCakeSolid } from "react-icons/lia";
 import { MdOutlineStarRate } from "react-icons/md";
 import { useMediaQuery } from "../../Hooks/useMediaQuery";
 import Image from "next/image";
-import axios from "axios";
-import { useEffect } from "react";
+
 gsap.registerPlugin(ScrollTrigger);
 
 
