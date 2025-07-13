@@ -82,18 +82,7 @@ export function Header({ disableAnimation }: propType) {
       });
     }
   }, []);
-  useEffect(() => {
-    async function getUser() {
-      const res = await axios.post(
-        `${process.env.NEXT_PUBLIC_Backend_URL}/verify/user`,
-        {
-          email: "spi@gmail.com",
-          customeData: "select only email",
-        }
-      );
-    }
-    getUser();
-  }, []);
+
 
   return (
     <header
