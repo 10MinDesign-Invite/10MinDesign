@@ -12,8 +12,8 @@ export function Features() {
                 <div className="w-[50%] sm:w-[400px] lg:w-[600px] mx-auto mt-7 text-4xl sm:text-5xl lg:text-6xl text-center font-extrabold  flex justify-center items-center">
                     Made Easy Save Time
                 </div>
-                <div className=" mt-7 w-[350px] lg:w-[400px] mx-auto">
-                    <p className=" mx-auto text-center text-[19px] lg:text-[20px] lg:w-[90%]">
+                <div className=" mt-7 max-w-[330px] lg:w-[400px] mx-auto outline">
+                    <p className="text-center text-[16px] lg:text-[20px] lg:w-[90%]">
                          Easily design, select a brand logo,
                           fill in the details, download your design, and share it
                            with friends and family.
