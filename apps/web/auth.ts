@@ -89,9 +89,10 @@
 import { loginSchema } from "@repo/zod-input-validation";
 import axios from "axios";
 import bcrypt from "bcryptjs";
-import NextAuth, { AuthError, CredentialsSignin, type NextAuthConfig } from "next-auth";
+import NextAuth, {  CredentialsSignin, type NextAuthConfig } from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 import Google from "next-auth/providers/google";
+
 
 const config: NextAuthConfig = {
   providers: [
@@ -163,7 +164,7 @@ const config: NextAuthConfig = {
       },
       async session({token,session}){
         if(token.role && session.user){
-          session.user.role = token.role
+          session.user.role = token.role as string
         }
         if(token.id && session.user){
           session.user.id = token.id.toString()
