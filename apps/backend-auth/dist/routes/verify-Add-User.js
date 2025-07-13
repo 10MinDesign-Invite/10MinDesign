@@ -15,26 +15,34 @@ const zod_input_validation_1 = require("@repo/zod-input-validation");
 const express_1 = require("express");
 exports.verify_Add_User = (0, express_1.Router)();
 exports.verify_Add_User.post("/user", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const email = req.body.email;
-    const onlyEmail = req.body.onlyEmail;
-    const parseData = zod_input_validation_1.verifyuser.safeParse({ email });
-    if (!parseData.success) {
-        res.send("email format not correct");
-        return;
-    }
-    const user = yield database_1.prisma.user.findUnique({
-        where: {
-            email
+    try {
+        const email = req.body.email;
+        const Data = req.body.customeData;
+        const parseData = zod_input_validation_1.verifyuser.safeParse({ email });
+        if (!parseData.success) {
+            res.send("email format not correct");
+            return;
         }
-    });
-    if (!user) {
-        res.status(404).send("user not found");
-        return;
+        const user = yield database_1.prisma.user.findUnique({
+            where: {
+                email
+            }
+        });
+        if (!user) {
+            res.status(404).send("user not found");
+            return;
+        }
+        if (Data == "select only email") {
+            res.status(200).send(user.email);
+        }
+        else if (Data == "select only id and role") {
+            res.status(200).json({ email: user === null || user === void 0 ? void 0 : user.email, id: user === null || user === void 0 ? void 0 : user.id, role: user === null || user === void 0 ? void 0 : user.role });
+        }
+        else {
+            res.status(200).send(user);
+        }
     }
-    if (onlyEmail == "select only email") {
-        res.status(200).send(user.email);
-    }
-    else {
-        res.status(200).send(user);
+    catch (error) {
+        console.log(error);
     }
 }));

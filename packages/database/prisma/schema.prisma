@@ -19,6 +19,8 @@ model User {
   password  String?
   image     String?
   googleId  String?
+  role      String  @default("user")
+  @@index([email, googleId])
 }
 model OtpStore{
     id        Int      @id @default(autoincrement())

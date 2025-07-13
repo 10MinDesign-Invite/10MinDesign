@@ -1,13 +1,19 @@
+"use client";
+import gsap from "gsap";
+import { ScrollSmoother, ScrollTrigger } from "gsap/all";
 import { Features } from "./Features";
-import { Hero } from "./Hero";
 import { Header } from "./Header";
+import { Hero } from "./Hero";
 
-export async function Structure(){
-    return(
-        <>  <Header disableAnimation=""/>
-            <Hero/>
-            <Features/>
-        </>
-    )
+gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
 
+export function Structure() {
+
+  return (
+    <>
+      <Header disableAnimation="" />
+      <Hero />
+      <Features />
+    </>
+  );
 }

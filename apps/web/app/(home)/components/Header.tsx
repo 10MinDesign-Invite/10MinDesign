@@ -26,6 +26,7 @@ interface propType {
 
 export function Header({ disableAnimation }: propType) {
   const { data: authData } = useSession();
+  console.log("authdata",authData);
   const [nav, setNav] = useState<boolean>(false);
   const [curNav, setCurNav] = useState({ explore: false });
   const [theme, setTheme] = useState("light");
@@ -88,7 +89,7 @@ export function Header({ disableAnimation }: propType) {
         `${process.env.NEXT_PUBLIC_Backend_URL}/verify/user`,
         {
           email: "spi@gmail.com",
-          onlyEmail: "select only email",
+          customeData: "select only email",
         }
       );
     }

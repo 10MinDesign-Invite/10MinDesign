@@ -25,7 +25,7 @@ addUser.post("/user", async (req: Request, res: Response) => {
         },
       });
       if (result) {
-        res.status(200).send("done from backend res.....SSSSSSS");
+        res.status(200).json({id:result.id});
       } else {
         res.status(500).send("error from backend res..... EEEEEE");
       }

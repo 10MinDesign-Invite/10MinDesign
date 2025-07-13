@@ -38,7 +38,7 @@ exports.addUser.post("/user", (req, res) => __awaiter(void 0, void 0, void 0, fu
                 },
             });
             if (result) {
-                res.status(200).send("done from backend res.....SSSSSSS");
+                res.status(200).json({ id: result.id });
             }
             else {
                 res.status(500).send("error from backend res..... EEEEEE");
