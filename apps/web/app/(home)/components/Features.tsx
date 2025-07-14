@@ -13,7 +13,7 @@ export function Features() {
                     Made Easy Save Time
                 </div>
                 <div className=" mt-7 max-w-[330px] lg:w-[400px] mx-auto">
-                    <p className="text-center text-[16px] lg:text-[20px] lg:w-[90%]">
+                    <p className=" text-center text-[16px] lg:text-[20px] lg:w-[90%] mx-auto">
                          Easily design, select a brand logo,
                           fill in the details, download your design, and share it
                            with friends and family.
