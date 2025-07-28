@@ -1,6 +1,6 @@
 import "@repo/ui/styles.css";
 import type { Metadata } from "next";
-import "../../app/globals.css";
+// import "../../app/globals.css";
 import { MobileNav } from "./components/MobileNav";
 import { Sidebar } from "./components/Sidebar";
 import { ThemeProvider } from "./components/ThemeProvider";
