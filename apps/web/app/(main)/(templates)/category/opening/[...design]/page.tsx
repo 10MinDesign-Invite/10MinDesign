@@ -1,7 +1,7 @@
 "use client"
 
-import { Opening1 } from "@/app/(templates)/components/category-design/opening/Opening1";
-import { Opening2 } from "@/app/(templates)/components/category-design/opening/Opening2";
+import { Opening1 } from "@/app/(main)/(templates)/components/category-design/opening/Opening1";
+import { Opening2 } from "@/app/(main)/(templates)/components/category-design/opening/Opening2";
 import { notFound, useParams } from "next/navigation";
 
 

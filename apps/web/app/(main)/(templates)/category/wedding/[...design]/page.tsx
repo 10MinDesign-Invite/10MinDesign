@@ -1,5 +1,5 @@
 "use client"
-import { Wedding1 } from "@/app/(templates)/components/category-design/wedding/Wedding1";
+import { Wedding1 } from "@/app/(main)/(templates)/components/category-design/wedding/Wedding1";
 import { notFound, useParams } from "next/navigation";
 
 

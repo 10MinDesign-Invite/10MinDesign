@@ -1,4 +1,4 @@
-import { handleDownload } from "@/app/(templates)/utils/handelDwonload";
+import { handleDownload } from "@/app/(main)/(templates)/utils/handelDwonload";
 import { inknut_antiqua, laila } from "@/app/fonts/fonts-config";
 import { Image } from "@imagekit/next";
 import  NextImage  from "next/image";

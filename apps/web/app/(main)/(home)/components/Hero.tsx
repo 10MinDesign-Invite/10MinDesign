@@ -8,7 +8,7 @@ import { GiFireSilhouette, GiFireworkRocket } from "react-icons/gi";
 import { IoIosRose } from "react-icons/io";
 import { LiaBirthdayCakeSolid } from "react-icons/lia";
 import { MdOutlineStarRate } from "react-icons/md";
-import { useMediaQuery } from "../../Hooks/useMediaQuery";
+import { useMediaQuery } from "../../../Hooks/useMediaQuery";
 import Image from "next/image";
 
 gsap.registerPlugin(ScrollTrigger);

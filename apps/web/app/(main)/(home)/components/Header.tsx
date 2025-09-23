@@ -16,7 +16,7 @@ import {
 import { IoIosRose } from "react-icons/io";
 import { LiaBirthdayCakeSolid } from "react-icons/lia";
 import { SlArrowDown, SlMenu } from "react-icons/sl";
-import { logofont } from "../../fonts/fonts-config";
+import { logofont } from "../../../fonts/fonts-config";
 import { Profile } from "./Profile";
 import axios from "axios";
 
