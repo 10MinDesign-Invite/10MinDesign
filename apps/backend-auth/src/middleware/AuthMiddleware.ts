@@ -15,6 +15,7 @@ export async function AuthMiddleware(req: Request, res: Response, next:NextFunct
         return
     }
     console.log(token);
+    
     next();
     
   } catch (error) {
