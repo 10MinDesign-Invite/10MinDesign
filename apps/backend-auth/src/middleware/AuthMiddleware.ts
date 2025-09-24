@@ -14,8 +14,7 @@ export async function AuthMiddleware(req: Request, res: Response, next:NextFunct
         res.send("unauthorized user")   
         return
     }
-    console.log(token);
-    
+     
     next();
     
   } catch (error) {
