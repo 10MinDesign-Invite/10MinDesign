@@ -1,10 +1,10 @@
 "use client"
 
-import { loginHandler } from "@/app/actions/login"
+import { useRouter } from "next/navigation"
 import { toast } from "react-toastify"
 import { Button } from "./ui/button"
 import { Input } from "./ui/input"
-import { useRouter} from "next/navigation"
+import { authClient } from "@repo/better-auth/authClient"
 
 
 export function LoginForm() {
@@ -19,16 +19,11 @@ export function LoginForm() {
                 const password = formData.get("password") as string;
                 if (!email) toast.error("provide email")
                 if (!password) toast.error("provide password")
-                const result = await loginHandler(email, password);
-                if (result === undefined) {
-                    toast.dismiss(toastId);
-                    toast.success("login successfull")
-                    router.refresh();
-                }
-                else {
-                    toast.dismiss(toastId)
-                    toast.error(result?.toString())
-                }
+               const { error } = await authClient.signIn.email({
+                         email,
+                         password,
+                         callbackURL: "/",
+                     });
             } catch (error) {
                 toast.dismiss(toastId)
                 console.log(error)

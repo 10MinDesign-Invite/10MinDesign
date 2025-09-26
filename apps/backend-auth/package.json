@@ -13,6 +13,7 @@
   "license": "ISC",
   "dependencies": {
     "@auth/core": "^0.40.0",
+    "@repo/better-auth": "workspace:*",
     "@repo/database": "workspace:*",
     "@repo/eslint-config": "workspace:*",
     "@repo/typescript-config": "workspace:*",
@@ -20,7 +21,7 @@
     "@types/bcrypt": "^5.0.2",
     "@types/express": "^5.0.1",
     "@types/jsonwebtoken": "^9.0.9",
-    "@types/node": "^22.14.0",
+    "@types/node": "^22.15.21",
     "bcrypt": "^6.0.0",
     "cookie-parser": "^1.4.7",
     "cors": "^2.8.5",

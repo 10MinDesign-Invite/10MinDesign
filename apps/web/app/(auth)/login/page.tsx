@@ -1,23 +1,18 @@
 
-import { Button } from "@/components/ui/button"
+import { LoginForm } from "@/components/LoginForm";
+import { Button } from "@/components/ui/button";
 import {
     Card,
     CardContent,
     CardFooter,
     CardHeader,
     CardTitle,
-} from "@/components/ui/card"
-import Link from "next/link"
-import { FcGoogle } from "react-icons/fc";
-import { auth, signIn } from "@/auth"
-import { LoginForm } from "@/components/LoginForm"
-import { redirect } from "next/navigation"
+} from "@/components/ui/card";
+import Link from "next/link";
 import { CiLock } from "react-icons/ci";
+import { FcGoogle } from "react-icons/fc";
 
 export default async function Page() {
-        
-        let session = await auth();
-        if(session?.user) return redirect("/");
         
     return (
         <div className="flex justify-center items-center w-full h-dvh">
@@ -31,7 +26,7 @@ export default async function Page() {
                 <CardFooter className="flex flex-col">
                     <form className="flex flex-col gap-4" action={async()=>{
                         "use server"
-                        await signIn("google");
+                        // await signIn("google");
                     }} >
                         <Link href={"/forgot"} className="flex justify-center items-center gap-2">Forgot Password<p><CiLock className="text-red-500 text-2xl hover:text-green-400" /></p></Link>
                         <p className="text-center">OR</p>

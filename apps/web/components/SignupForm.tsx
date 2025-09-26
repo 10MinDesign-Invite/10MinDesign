@@ -16,11 +16,11 @@ import { FormEvent } from "react";
 import { FcGoogle } from "react-icons/fc";
 import { toast } from "react-toastify";
 
-export default function Page() {
-const router=useRouter()
 
-  async function signup(e: FormEvent<HTMLFormElement>) {
+export const SignupForm = () => {
+    async function signup(e: FormEvent<HTMLFormElement>) {
     const toastId = toast.loading("Signing up...");
+    const router= useRouter()
     try {
       e.preventDefault();
       const formData = new FormData(e.currentTarget);
@@ -39,28 +39,30 @@ const router=useRouter()
         return;
       }
 
-      await authClient.signUp.email({
-              email, 
-              password, 
-              name, 
-          }, {
-              onSuccess: (ctx) => {
-                router.push("/")
-              },
-              onError: (ctx) => {
-                  toast.dismiss(toastId);
-                  toast.error(ctx.error.message);
-              },
-      });
+   const { data, error } = await authClient.signUp.email({
+        email, 
+        password, 
+        name, 
+    }, {
+        onRequest: (ctx) => {
+         
+        },
+        onSuccess: (ctx) => {
+            toast.dismiss(toastId);
+            router.push("/")
+        },
+        onError: (ctx) => {
+            toast.dismiss(toastId);
+            toast.error(ctx.error.message);
+        },
+});
   
+    
     } catch (error: any) {
       console.error(error);
       toast.dismiss(toastId);
-    }finally{
-       toast.dismiss(toastId);
     }
   }
-
   return (
     <div className="flex justify-center items-center w-full h-dvh">
       <Card className="w-[90%] md:w-[50%] lg:w-[28%]">
@@ -106,5 +108,5 @@ const router=useRouter()
         </CardFooter>
       </Card>
     </div>
-  );
+  )
 }

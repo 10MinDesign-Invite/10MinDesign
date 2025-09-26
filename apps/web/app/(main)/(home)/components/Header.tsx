@@ -3,7 +3,6 @@ import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 gsap.registerPlugin(useGSAP);
 // gsap code importss
-import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { BsFillMoonStarsFill } from "react-icons/bs";
@@ -18,14 +17,17 @@ import { LiaBirthdayCakeSolid } from "react-icons/lia";
 import { SlArrowDown, SlMenu } from "react-icons/sl";
 import { logofont } from "../../../fonts/fonts-config";
 import { Profile } from "./Profile";
-import axios from "axios";
+import { authClient } from "@repo/better-auth/authClient";
 
 interface propType {
   disableAnimation?: string;
 }
 
 export function Header({ disableAnimation }: propType) {
-  const { data: authData } = useSession();
+  const {
+    data: session,
+    isPending,
+  } = authClient.useSession();
   const [nav, setNav] = useState<boolean>(false);
   const [curNav, setCurNav] = useState({ explore: false });
   const [theme, setTheme] = useState("light");
@@ -43,7 +45,7 @@ export function Header({ disableAnimation }: propType) {
       setTheme("dark");
     }
   };
-  
+
   useGSAP(() => {
     let mm = gsap.matchMedia();
     if (disableAnimation == "") {
@@ -82,7 +84,6 @@ export function Header({ disableAnimation }: propType) {
       });
     }
   }, []);
-
 
   return (
     <header
@@ -159,19 +160,19 @@ export function Header({ disableAnimation }: propType) {
           )}
         </div>
         <div className="cursor-pointer">
-          {authData?.user != null && authData.user != undefined ? (
-            <Profile authData={authData?.user} />
+          {session?.user != null && session.user != undefined ? (
+            <Profile authData={session?.user} />
           ) : (
-            <Link href={"/login"}>
-              <button
-                className={`w-[60px] md:w-[70px] h-[35px] md:h-[44px] rounded-md font-medium bg-black text-white dark:bg-white dark:text-black transform ${
-                  disableAnimation == "" ? "" : ""
-                }`}
-              >
-                Log in
-              </button>
-            </Link>
-          )}
+          <Link href={"/login"}>
+            <button
+              className={`w-[60px] md:w-[70px] h-[35px] md:h-[44px] rounded-md font-medium bg-black text-white dark:bg-white dark:text-black transform ${
+                disableAnimation == "" ? "" : ""
+              }`}
+            >
+              Log in
+            </button>
+          </Link>
+           )} 
         </div>
         <div
           id="primium-btn"
