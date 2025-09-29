@@ -7,6 +7,7 @@ import {
   InputOTPGroup,
   InputOTPSlot,
 } from "@/components/ui/input-otp";
+import { authClient } from "@repo/auth/authClient";
 import axios from "axios";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -34,62 +35,60 @@ export default function Page() {
   }, [otpSended]);
 
   async function sendOTP() {
-    if (!email) {
-      toast.warn("Please enter your email first");
-      return;
-    }
-
     const otpSendLoading = toast.loading("Sending OTP to your email...");
-
     try {
-      const res = await axios.post<sendOtpType>(
-        `${process.env.NEXT_PUBLIC_Backend_URL}/auth/send-otp`,
-        { email }
-      );
+      if (!email) {
+        toast.warn("Please enter your email first");
+        return;
+      }
 
-      toast.dismiss(otpSendLoading);
-
-      if (res.data.success) {
+      const { data, error } = await authClient.forgetPassword.emailOtp({
+        email,
+      });
+      if (data?.success) {
+        toast.success("succc.....");
         setOtpSended(true);
         setHide(true);
-        toast.success(res.data.message);
       } else {
-        toast.warning(res.data.message);
+        toast.error(error?.message);
       }
-    } catch (error: any) {
+    } finally {
       toast.dismiss(otpSendLoading);
-      toast.error(
-        error?.response?.data?.message ||
-          "Something went wrong while sending OTP"
-      );
     }
   }
+
   const handleSubmit = async (formData: FormData) => {
-    const toastId = toast.loading("wait verifiying you");
+    const toastId = toast.loading("wait....");
     const password = formData.get("password");
     const confirmPassword = formData.get("confirmPassword");
-  try {
-    const res = await axios.post<{status:number,token:string,success:boolean,message:string}>(`${process.env.NEXT_PUBLIC_Backend_URL}/auth/verify-otp`,{email,otp,password,confirmPassword})
-      if (res.status !== 200) {
-        toast.error(res.data.message);
-        toast.dismiss(toastId);
-        return;
-      } else {
-        if (res.status === 200) {
-          toast.success(res.data.message);
-          toast.dismiss(toastId);
-          router.push("/login")
-        } else {
-          toast.dismiss(toastId);
-          toast.error(res.data.message);
-        }
-        
+    try {
+      if(!password || !confirmPassword){
+          toast.error("provide both passwords...")
+          return;
       }
-  } catch (error) {
-    console.log(error)
-    toast.dismiss(toastId);
-  }
-};
+      if(password !== confirmPassword) {
+        toast.error("password and confirmPassword not match...")
+        return;
+      }
+      const { data, error } = await authClient.emailOtp.resetPassword({
+        email,
+        otp,
+        password:confirmPassword as string
+      });
+      if(data?.success){
+        toast.success("done...")
+        router.push("/signin")
+      }
+      if(error){
+        toast.error(error.message);
+      }
+    } catch (error) {
+      console.log(error);
+    }finally{
+      toast.dismiss(toastId);
+    }
+  };
+
   return (
     <div className="flex justify-center items-center w-full h-dvh">
       <Card className="w-[90%] md:w-[50%] lg:w-[28%]">
@@ -139,10 +138,10 @@ export default function Page() {
 
             <Button
               disabled={hide ? true : false}
-              onClick={sendOTP}
+              onClick={() => sendOTP()}
               type="button"
             >
-              Send OTP
+              {"Send OTP"}
             </Button>
             <Button type="submit">Reset Password</Button>
             <Link href={"/"} className="text-sm underline w-full text-center">
@@ -154,4 +153,3 @@ export default function Page() {
     </div>
   );
 }
-
