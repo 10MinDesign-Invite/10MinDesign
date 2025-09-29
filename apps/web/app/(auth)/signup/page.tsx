@@ -1,109 +1,174 @@
-"use client"
-import { Button } from "@/components/ui/button";
+"use client";
+
+import React from "react";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
+import { User, Mail, Lock } from "lucide-react";
+
+// shadcn/ui components (assumes shadcn structure with components in /components/ui)
 import {
   Card,
-  CardContent,
-  CardFooter,
   CardHeader,
   CardTitle,
+  CardContent,
+  CardFooter,
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { authClient } from "@repo/better-auth/authClient";
-import { registerSchema } from "@repo/zod-input-validation";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { FormEvent } from "react";
+import { Label } from "@/components/ui/label";
+import { Button } from "@/components/ui/button";
+import { authClient } from "@repo/auth/authClient";
 import { FcGoogle } from "react-icons/fc";
+import Link from "next/link";
 import { toast } from "react-toastify";
+import { signupSchema } from "@repo/zod-input-validation";
+import { useRouter } from "next/navigation";
 
-export default function Page() {
-const router=useRouter()
+type SignupValues = z.infer<typeof signupSchema>;
 
-  async function signup(e: FormEvent<HTMLFormElement>) {
-    const toastId = toast.loading("Signing up...");
+export default function SignupForm() {
+  const router = useRouter();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+    reset,
+  } = useForm<SignupValues>({
+    resolver: zodResolver(signupSchema),
+    defaultValues: {
+      username: "",
+      email: "",
+      password: "",
+    },
+  });
+
+  async function onSubmit(values: SignupValues) {
     try {
-      e.preventDefault();
-      const formData = new FormData(e.currentTarget);
-      const name = formData.get("name") as string | undefined;
-      const email = formData.get("email") as string | undefined;
-      const password = formData.get("password") as string | undefined;
-      if (!name || !email || !password) {
-        toast.dismiss(toastId);
-        toast.error("please provide all values");
-        return;
-      }
-      const validInput = registerSchema.safeParse({ email, name, password });
-      if (!validInput.success) {
-        toast.dismiss(toastId);
-        toast.error(validInput.error.errors[0].message);
-        return;
-      }
-
-      await authClient.signUp.email({
-              email, 
-              password, 
-              name, 
-          }, {
-              onSuccess: (ctx) => {
-                router.push("/")
-              },
-              onError: (ctx) => {
-                  toast.dismiss(toastId);
-                  toast.error(ctx.error.message);
-              },
+      const { data, error } = await authClient.signUp.email({
+        name: values.username,
+        email: values.email,
+        password: values.password,
       });
-  
-    } catch (error: any) {
-      console.error(error);
-      toast.dismiss(toastId);
-    }finally{
-       toast.dismiss(toastId);
+      if(error) return toast.error(error.message)
+      toast.success("SignUp success.....")  
+      router.push("/");
+    } catch (err) {
+      console.error(err);
     }
   }
 
-  return (
-    <div className="flex justify-center items-center w-full h-dvh">
-      <Card className="w-[90%] md:w-[50%] lg:w-[28%]">
-        <CardHeader>
-          <CardTitle className="text-2xl text-center">SignUp</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <form className="flex flex-col gap-4" onSubmit={signup}>
-            <Input placeholder="Name" name="name" />
-            <Input placeholder="Email" name="email" />
-            <Input placeholder="password" name="password" type="password" />
-            <Button type="submit">SignUp</Button>
-          </form>
-        </CardContent>
-        <CardFooter className="flex flex-col">
-          <form
-            className="flex flex-col gap-4"
-            action={async () => {
-            //  google login
-            
-    //            await authClient.signIn.social({
-    //   provider: "google",
-    //   callbackURL: "http://localhost:3000/",
-    // });
+  async function handelGoogle() {
+    const data = await authClient.signIn.social({
+      provider: "google",
+      callbackURL: `${process.env.NEXT_PUBLIC_FRONTEND_URL}/`,
+    });
+  }
 
-            }}
-          >
-            <p className="text-center">OR</p>
-            <Button type="submit" variant={"outline"}>
-              <FcGoogle />
-              Login With Google
-            </Button>
+  return (
+    <div className="min-h-[100vh] flex items-center justify-center p-4">
+      <Card className="w-full max-w-xl">
+        <CardHeader>
+          <CardTitle className="text-2xl">Create an account</CardTitle>
+        </CardHeader>
+
+        <CardContent>
+          <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+              <div className="col-span-1">
+                <Label htmlFor="username" className="mb-2">
+                  Username
+                </Label>
+                <div className="relative">
+                  <span className="absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none">
+                    <User className="w-4 h-4 opacity-60" />
+                  </span>
+                  <Input
+                    id="username"
+                    {...register("username")}
+                    placeholder="your-username"
+                    className="pl-10"
+                  />
+                </div>
+                {errors.username && (
+                  <p className="text-sm text-red-600 mt-1">
+                    {errors.username.message}
+                  </p>
+                )}
+              </div>
+
+              <div className="col-span-1">
+                <Label htmlFor="email" className="mb-2">
+                  Email
+                </Label>
+                <div className="relative">
+                  <span className="absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none">
+                    <Mail className="w-4 h-4 opacity-60" />
+                  </span>
+                  <Input
+                    id="email"
+                    {...register("email")}
+                    placeholder="you@example.com"
+                    className="pl-10"
+                  />
+                </div>
+                {errors.email && (
+                  <p className="text-sm text-red-600 mt-1">
+                    {errors.email.message}
+                  </p>
+                )}
+              </div>
+            </div>
+
+            <div>
+              <Label htmlFor="password" className="mb-2">
+                Password
+              </Label>
+              <div className="relative">
+                <span className="absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none">
+                  <Lock className="w-4 h-4 opacity-60" />
+                </span>
+                <Input
+                  id="password"
+                  type="password"
+                  {...register("password")}
+                  placeholder="Choose a secure password"
+                  className="pl-10"
+                />
+              </div>
+              {errors.password && (
+                <p className="text-sm text-red-600 mt-1">
+                  {errors.password.message}
+                </p>
+              )}
+            </div>
+
+            <CardFooter className="flex flex-col items-center gap-3 p-0 pt-2">
+              <Button type="submit" className="w-[70%]" disabled={isSubmitting}>
+                {isSubmitting ? "Creating account..." : "Sign up"}
+              </Button>
+            </CardFooter>
           </form>
-          <Link
-            className="text-sm flex gap-2 mt-2 hover:text-green-600"
-            href={"/login"}
-          >
-            <p className="text-black dark:text-white">
-              Already have an account?
-            </p>
-            Signin
-          </Link>
-        </CardFooter>
+          <div className="flex justify-center items-center w-full flex-col mt-4 gap-4">
+            <Button onClick={handelGoogle} className="w-[70%]">
+              <FcGoogle />
+              Continue With Google
+            </Button>
+            <div className="w-full text-center text-sm text-muted-foreground">
+              <p>
+                By continuing you agree to our{" "}
+                <span className="underline">Terms</span> and{" "}
+                <span className="underline">Privacy Policy</span>.
+              </p>
+            </div>
+            <div className="w-full text-center text-sm text-muted-foreground">
+              <Link href={"/signin"}>
+                Already Have an Account{" "}
+                <span className="underline">signin</span>
+              </Link>
+            </div>
+            
+          </div>
+        </CardContent>
       </Card>
     </div>
   );
