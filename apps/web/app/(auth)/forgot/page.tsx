@@ -46,7 +46,7 @@ export default function Page() {
         email,
       });
       if (data?.success) {
-        toast.success("succc.....");
+        toast.success("check your inbox.....");
         setOtpSended(true);
         setHide(true);
       } else {

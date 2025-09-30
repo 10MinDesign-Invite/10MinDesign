@@ -21,6 +21,7 @@ import { FcGoogle } from "react-icons/fc";
 import { signinSchema } from "@repo/zod-input-validation";
 import Link from "next/link";
 import { IoLockClosed } from "react-icons/io5";
+import { toast } from "react-toastify";
 
 type SignupValues = z.infer<typeof signinSchema>;
 
@@ -38,16 +39,21 @@ export default function SignupForm() {
   });
 
   async function onSubmit(values: SignupValues) {
+    const id = toast.loading("wait...");
     try {
-      await authClient.signIn.email({
+      const {error} = await authClient.signIn.email({
         email: values.email,
         password: values.password,
         callbackURL: "/",
       },{
-
+        onSuccess(){
+          toast.success("success...")
+        }
       });
     } catch (err) {
       console.error(err);
+    }finally{
+      toast.dismiss(id);
     }
   }
 

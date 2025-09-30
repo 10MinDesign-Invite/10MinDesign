@@ -43,6 +43,7 @@ export default function SignupForm() {
   });
 
   async function onSubmit(values: SignupValues) {
+    const id = toast.loading("wait....")
     try {
       const { data, error } = await authClient.signUp.email({
         name: values.username,
@@ -54,6 +55,8 @@ export default function SignupForm() {
       router.push("/");
     } catch (err) {
       console.error(err);
+    }finally{
+      toast.dismiss(id);
     }
   }
 
