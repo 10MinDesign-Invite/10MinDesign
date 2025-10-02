@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation"
 import { toast } from "react-toastify"
 import { Button } from "./ui/button"
 import { Input } from "./ui/input"
-import { authClient } from "@repo/better-auth/authClient"
+import { authClient } from "@repo/auth/authClient"
 
 
 export function LoginForm() {
@@ -19,7 +19,7 @@ export function LoginForm() {
                 const password = formData.get("password") as string;
                 if (!email) toast.error("provide email")
                 if (!password) toast.error("provide password")
-               const { error } = await authClient.signIn.email({
+                await authClient.signIn.email({
                          email,
                          password,
                          callbackURL: "/",
