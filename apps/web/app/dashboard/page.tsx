@@ -9,7 +9,7 @@ export default async function Dashboard() {
       headers: await headers()
     }
 })
-if(session.data?.user.role === "user"){
+if(session.data?.user.role !== "admin"){
   redirect("/signin")
 }
 
