@@ -1,14 +1,21 @@
-// import { auth } from "@/auth";
-import { redirect } from "next/navigation";
+import { headers } from "next/headers";
 import { DashboardDesign } from "./components/DashboardDesign";
+import { authClient } from "@repo/auth/authClient";
+import { redirect } from "next/navigation";
 
 export default async function Dashboard() {
-  // const authData = await auth();
-  // if (authData?.user?.email == null) return redirect("/login");
+  const session = await authClient.getSession({
+    fetchOptions:{
+      headers: await headers()
+    }
+})
+if(session.data?.user.role === "user"){
+  redirect("/signin")
+}
 
   return (
     <>
-        {/* <DashboardDesign authData={authData?.user?.name!} /> */}
+        <DashboardDesign authData={session.data?.user.name ?? "Admin"} />
     </>
   );
 }
