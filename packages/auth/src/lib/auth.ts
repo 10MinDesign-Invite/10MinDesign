@@ -26,28 +26,25 @@ export const auth = betterAuth({
   database: prismaAdapter(prisma, {
     provider: "postgresql",
   }),
-  // plugins: [
-  //       customSession(async ({ user, session }) => {
-  //         const dbUser = await prisma.user.findUnique({
-  //       where: { id: user.id },
-  //       select: {       
-  //         role: true 
-  //       },
-  //     });
-  //           return {
-  //               user: {
-  //                   ...user,
-  //                   role: dbUser.,
-  //               },
-  //               session
-  //           };
-  //       }),
-  //   ],
-
-
-
-
+  
     plugins: [
+        customSession(async ({ user, session }) => {
+          const dbUser = await prisma.user.findUnique({
+          where: { id: user.id },
+          select: {       
+            role: true 
+          },
+        });
+            return {
+                user: {
+                    ...user,
+                    role:dbUser?.role
+                },
+                session
+            };
+        }),
+
+        // this is for email 
         emailOTP({ 
             async sendVerificationOTP({ email, otp, type }) { 
                 if (type === "sign-in") { 
@@ -72,4 +69,4 @@ export const auth = betterAuth({
 
 });
 
-export {toNodeHandler} from "better-auth/node"
+export {toNodeHandler,fromNodeHeaders} from "better-auth/node"
