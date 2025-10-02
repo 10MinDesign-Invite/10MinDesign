@@ -8,6 +8,7 @@
     ".": "./dist/index.js"
   },
   "scripts": {
+    "build": "tsc",
     "db:migrate:deploy": "prisma migrate deploy",
     "db:migrate:dev": "prisma migrate dev",
     "db:push": "prisma db push",
@@ -17,8 +18,7 @@
     "lint": "eslint . --max-warnings 0",
     "prebuild": "pnpm run generate",
     "predev": "npm run generate",
-    "studio": "prisma studio",
-    "build": "pnpm tsc"
+    "studio": "prisma studio"
   },
   "keywords": [],
   "author": "",
