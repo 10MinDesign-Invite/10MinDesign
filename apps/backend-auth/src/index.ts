@@ -30,4 +30,4 @@ app.get("/api/health", (req,res)=>{
 app.use("/auth",OTP);
 app.use("/get", getUsers);
 
-app.listen(process.env.PORT || 8080);
+app.listen(process.env.PORT ?? 8080);
