@@ -6,11 +6,11 @@
   "exports": {
     "./auth": {
       "types": "./dist/lib/auth.d.ts",
-      "default": "./dist/lib/auth.ts"
+      "default": "./src/lib/auth.ts"
     },
     "./authClient": {
       "types": "./dist/lib/authClient.d.ts",
-      "default": "./dist/lib/authClient.ts"
+      "default": "./src/lib/authClient.ts"
     }
   },
   "scripts": {
