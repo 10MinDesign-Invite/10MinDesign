@@ -1,31 +1,28 @@
-import Router from "express";
-import { generateOTP, transporter } from "../utils/otpConfig";
 import { prisma } from "@repo/database";
 import * as dotenv from "dotenv";
-import bcrypt from "bcrypt";
-import { forgotPasswordSchema } from "@repo/zod-input-validation";
+import Router from "express";
+import { transporter } from "../utils/otpConfig";
 dotenv.config();
 
 export const OTP = Router();
 
 OTP.post("/send-otp", async (req, res) => {
-  const { email,otp,type } = req.body;
-
-  if (!email || !otp) {
-    res.status(400).json({ success: false, message: "Email is required" });
-    return;
-  }
-
   try {
+    const { email, otp, type } = req.body;
+
+    if (!email || !otp) {
+      res.status(400).json({ success: false, message: "Email is required" });
+      return;
+    }
     const userExist = await prisma.user.findUnique({
       where: {
         email,
       },
       select: {
         email: true,
-        accounts:{
-            select:{providerId:true}
-        }
+        accounts: {
+          select: { providerId: true },
+        },
       },
     });
     if (userExist && userExist?.accounts[0].providerId == "credential") {
