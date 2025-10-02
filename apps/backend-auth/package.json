@@ -5,7 +5,7 @@
   "main": "",
   "scripts": {
     "build": "tsc",
-    "start": "pnpm run build && node dist/index.js",
+    "start": "node dist/index.js",
     "dev": "pnpm run build && node  dist/index.js"
   },
   "keywords": [],
