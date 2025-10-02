@@ -17,22 +17,41 @@ import { LiaBirthdayCakeSolid } from "react-icons/lia";
 import { SlArrowDown, SlMenu } from "react-icons/sl";
 import { logofont } from "../../../fonts/fonts-config";
 import { Profile } from "./Profile";
-import { authClient } from "@repo/better-auth/authClient";
 
 interface propType {
   disableAnimation?: string;
+  session?: {
+    user: {
+        id: string;
+        createdAt: Date;
+        updatedAt: Date;
+        email: string;
+        emailVerified: boolean;
+        name: string;
+        image?: string | null | undefined;
+    };
+    session: {
+        id: string;
+        createdAt: Date;
+        updatedAt: Date;
+        userId: string;
+        expiresAt: Date;
+        token: string;
+        ipAddress?: string | null | undefined;
+        userAgent?: string | null | undefined;
+    };
+           } | null
+
 }
 
-export function Header({ disableAnimation }: propType) {
-  const {
-    data: session,
-    isPending,
-  } = authClient.useSession();
+export function Header({ disableAnimation,session }: propType) {
+  
   const [nav, setNav] = useState<boolean>(false);
   const [curNav, setCurNav] = useState({ explore: false });
   const [theme, setTheme] = useState("light");
 
-  const toggleDarkMode = () => {
+  const toggleDarkMode = async() => {
+
     const html = document.documentElement;
     const isDark = html.classList.contains("dark");
     if (isDark) {
@@ -151,7 +170,7 @@ export function Header({ disableAnimation }: propType) {
       <div className="flex p-1 py-4 gap-[10px] borde">
         <div
           onClick={toggleDarkMode}
-          className="flex justify-center items-center w-[30px] text-xl rounded-full"
+          className="flex justify-center items-center w-[30px] text-xl rounded-full cursor-pointer"
         >
           {theme == "dark" ? (
             <GiStripedSun className="text-[rgb(247,164,70)]" />
@@ -163,7 +182,7 @@ export function Header({ disableAnimation }: propType) {
           {session?.user != null && session.user != undefined ? (
             <Profile authData={session?.user} />
           ) : (
-          <Link href={"/login"}>
+          <Link href={"/signin"}>
             <button
               className={`w-[60px] md:w-[70px] h-[35px] md:h-[44px] rounded-md font-medium bg-black text-white dark:bg-white dark:text-black transform ${
                 disableAnimation == "" ? "" : ""

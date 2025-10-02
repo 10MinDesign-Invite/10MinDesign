@@ -1,6 +1,7 @@
 import { Header } from "../components/Header";
 
-export default function SocialPage() {
+export default async function SocialPage() {
+
   return (
     <div className="flex flex-col items-center justify-center h-screen bg-gray-200 dark:bg-black">
       <Header disableAnimation="disable" />

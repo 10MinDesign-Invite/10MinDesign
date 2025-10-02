@@ -1,8 +1,8 @@
 // app/about/page.tsx
-
 import { Metadata } from "next";
 import Link from "next/link";
 import { Header } from "../components/Header";
+import { headers } from "next/headers";
 
 export const metadata: Metadata = {
   title: "About Us - 10MinDesign",
@@ -11,6 +11,8 @@ export const metadata: Metadata = {
 };
 
 export default function AboutPage() {
+  
+    
   return (
     <>
       <Header disableAnimation="disable" />

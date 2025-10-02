@@ -7,12 +7,33 @@ import { Hero } from "./Hero";
 import { Footer } from "./Footer";
 
 gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
-
-export function Structure() {
-
+interface propType{
+  session?: {
+    user: {
+        id: string;
+        createdAt: Date;
+        updatedAt: Date;
+        email: string;
+        emailVerified: boolean;
+        name: string;
+        image?: string | null | undefined;
+    };
+    session: {
+        id: string;
+        createdAt: Date;
+        updatedAt: Date;
+        userId: string;
+        expiresAt: Date;
+        token: string;
+        ipAddress?: string | null | undefined;
+        userAgent?: string | null | undefined;
+    };
+           } | null
+}
+export function Structure({session}:propType) {
   return (
     <>
-      <Header disableAnimation="" />
+      <Header disableAnimation="" session={session} />
       <Hero />
       <Features />
       <Footer/>

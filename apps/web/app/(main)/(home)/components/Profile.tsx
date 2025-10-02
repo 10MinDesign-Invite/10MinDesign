@@ -1,6 +1,6 @@
 "use client";
 import { mainheading } from "@/app/fonts/fonts-config";
-import { authClient } from "@repo/better-auth/authClient";
+import { authClient } from "@repo/auth/authClient";
 // import { signOut } from "next-auth/react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -10,6 +10,8 @@ import { RiLogoutCircleLine } from "react-icons/ri";
 export function Profile({ authData }: any) {
   const router = useRouter();
   const [profile, setProfile] = useState(false);
+
+
   async function handelLogOut() {
     await authClient.signOut({
       fetchOptions: {
@@ -19,6 +21,8 @@ export function Profile({ authData }: any) {
       },
     });
   }
+
+
   return (
     <div className="">
       <div className="w-10 h-10 rounded-full overflow-hidden relative">
