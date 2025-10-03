@@ -8,7 +8,7 @@ import axios from 'axios';
 export const auth = betterAuth({
   secret: `${process.env.BETTER_AUTH_SECRET}`,
   trustedOrigins: [`${process.env.FRONTEND_URL}`,`${process.env.BACKEND_URL}`],
-  baseURL: `${process.env.BACKEND_URL}`,
+  baseURL: `${process.env.FRONTEND_URL}`,
   emailAndPassword: {
     enabled: true,
     autoSignIn: true
