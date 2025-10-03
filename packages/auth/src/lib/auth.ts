@@ -5,7 +5,7 @@ import { prismaAdapter } from "better-auth/adapters/prisma";
 import {prisma} from "@repo/database"
 import { customSession, emailOTP } from 'better-auth/plugins';
 import axios from 'axios';
-
+console.log(process.env.BACKEND_URL,process.env.FRONTEND_URL,"auth=======")
 export const auth = betterAuth({
   secret: `${process.env.BETTER_AUTH_SECRET}`,
   trustedOrigins: [`${process.env.FRONTEND_URL}`],
