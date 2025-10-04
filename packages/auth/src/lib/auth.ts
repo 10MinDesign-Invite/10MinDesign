@@ -2,6 +2,7 @@ import { prisma } from "@repo/database";
 import axios from 'axios';
 import { betterAuth } from "better-auth";
 import { prismaAdapter } from "better-auth/adapters/prisma";
+import { nextCookies } from "better-auth/next-js";
 import { customSession, emailOTP } from 'better-auth/plugins';
 import * as dotenv from 'dotenv';
 dotenv.config();
@@ -61,7 +62,7 @@ export const auth = betterAuth({
                 } 
             }, 
         }),
-        
+        nextCookies(),
     ]
 
 });
