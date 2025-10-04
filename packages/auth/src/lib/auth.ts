@@ -3,7 +3,7 @@ import axios from 'axios';
 import { betterAuth } from "better-auth";
 import { prismaAdapter } from "better-auth/adapters/prisma";
 import { nextCookies } from "better-auth/next-js";
-import { customSession, emailOTP } from 'better-auth/plugins';
+import { customSession, emailOTP, oAuthProxy } from 'better-auth/plugins';
 import * as dotenv from 'dotenv';
 dotenv.config();
 
@@ -11,7 +11,7 @@ export const auth = betterAuth({
   secret: `${process.env.BETTER_AUTH_SECRET}`,
   trustedOrigins: [`https://www.10mindesigns.shop`],
   // baseURL: `https://www.10mindesigns.shop`,
-  baseURL: `https://one0mindesignbackend-auth.onrender.com`,
+  // baseURL: `https://one0mindesignbackend-auth.onrender.com`,
   emailAndPassword: {
     enabled: true,
     autoSignIn: true
@@ -62,6 +62,7 @@ export const auth = betterAuth({
                 } 
             }, 
         }),
+       
         nextCookies(),
     ]
 
