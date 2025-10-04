@@ -10,7 +10,7 @@ export const auth = betterAuth({
   secret: `${process.env.BETTER_AUTH_SECRET}`,
   trustedOrigins: [`https://www.10mindesigns.shop`],
   // baseURL: `https://www.10mindesigns.shop`,
-  baseURL: `https://www.10mindesigns.shop`,
+  baseURL: `https://one0mindesignbackend-auth.onrender.com`,
   emailAndPassword: {
     enabled: true,
     autoSignIn: true
