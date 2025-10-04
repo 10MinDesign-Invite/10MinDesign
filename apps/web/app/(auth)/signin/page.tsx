@@ -59,9 +59,11 @@ export default function SignupForm() {
 
   async function handelGoogle() {
     const data = await authClient.signIn.social({
-    provider: "google",
-    callbackURL: "/"
-  });
+      provider: "google",
+    });
+    if(data.data){
+      console.log("//////////")
+    }
   }
 
   return (
