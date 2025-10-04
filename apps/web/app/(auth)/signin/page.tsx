@@ -60,10 +60,9 @@ export default function SignupForm() {
   async function handelGoogle() {
     const data = await authClient.signIn.social({
       provider: "google",
+      callbackURL: "https://one0mindesignbackend-auth.onrender.com/dashboard"
     });
-    if(data.data){
-      console.log("//////////")
-    }
+    
   }
 
   return (
