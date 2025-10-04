@@ -1,16 +1,16 @@
-import * as dotenv from 'dotenv';
-dotenv.config();
+import { prisma } from "@repo/database";
+import axios from 'axios';
 import { betterAuth } from "better-auth";
 import { prismaAdapter } from "better-auth/adapters/prisma";
-import {prisma} from "@repo/database"
 import { customSession, emailOTP } from 'better-auth/plugins';
-import axios from 'axios';
-import { nextCookies } from 'better-auth/next-js';
+import * as dotenv from 'dotenv';
+dotenv.config();
 
 export const auth = betterAuth({
   secret: `${process.env.BETTER_AUTH_SECRET}`,
-  trustedOrigins: [`https://www.10mindesigns.shop`],
-  baseURL: `https://www.10mindesigns.shop`,
+  trustedOrigins: [`http://localhost:3000`],
+  // baseURL: `https://www.10mindesigns.shop`,
+  baseURL: `https://one0mindesignbackend-auth.onrender.com`,
   emailAndPassword: {
     enabled: true,
     autoSignIn: true
@@ -55,15 +55,15 @@ export const auth = betterAuth({
                     // Send the OTP for email verification
                 } else { 
                   
-                    await axios.post(`https://one0mindesignbackend-auth.onrender.com/auth/send-otp`,{email,otp,type})
+                    // await axios.post(`https://one0mindesignbackend-auth.onrender.com/auth/send-otp`,{email,otp,type})
+                    await axios.post(`http://localhost:8080/auth/send-otp`,{email,otp,type})
 
                 } 
             }, 
         }),
         
-        nextCookies()
     ]
 
 });
 
-export {toNodeHandler,fromNodeHeaders} from "better-auth/node"
+export { fromNodeHeaders, toNodeHandler } from "better-auth/node";
