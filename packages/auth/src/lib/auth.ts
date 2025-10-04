@@ -9,7 +9,7 @@ import axios from 'axios';
 export const auth = betterAuth({
   secret: `${process.env.BETTER_AUTH_SECRET}`,
   trustedOrigins: [`https://www.10mindesigns.shop`],
-  baseURL: `https://one0mindesignbackend-auth.onrender.com`,
+  baseURL: `https://www.10mindesigns.shop`,
   emailAndPassword: {
     enabled: true,
     autoSignIn: true
@@ -54,7 +54,7 @@ export const auth = betterAuth({
                     // Send the OTP for email verification
                 } else { 
                   
-                    await axios.post(`${process.env.BACKEND_URL}/auth/send-otp`,{email,otp,type})
+                    await axios.post(`https://one0mindesignbackend-auth.onrender.com/auth/send-otp`,{email,otp,type})
 
                 } 
             }, 
