@@ -18,7 +18,7 @@ app.use(cors({
     credentials: true,
 }));
 
-app.all('/api/auth/*spalt', toNodeHandler(auth));
+// app.all('/api/auth/*spalt', toNodeHandler(auth));
 
 app.use(express.json());
 if(process.env.NODE_ENV == "production") job.start();

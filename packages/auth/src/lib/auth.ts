@@ -10,7 +10,7 @@ export const auth = betterAuth({
   secret: `${process.env.BETTER_AUTH_SECRET}`,
   trustedOrigins: [`https://www.10mindesigns.shop`],
   // baseURL: `https://www.10mindesigns.shop`,
-  baseURL: `https://one0mindesignbackend-auth.onrender.com`,
+  baseURL: `https://www.10mindesigns.shop`,
   emailAndPassword: {
     enabled: true,
     autoSignIn: true
@@ -67,3 +67,4 @@ export const auth = betterAuth({
 });
 
 export { fromNodeHeaders, toNodeHandler } from "better-auth/node";
+export {toNextJsHandler} from "better-auth/next-js"

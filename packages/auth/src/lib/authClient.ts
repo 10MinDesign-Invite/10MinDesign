@@ -3,7 +3,7 @@ import { createAuthClient } from "better-auth/react"
 import type {auth} from "./auth.js"
 export const authClient = createAuthClient({
     // baseURL: `https://www.10mindesigns.shop`, 
-    baseURL: `https://one0mindesignbackend-auth.onrender.com`, 
+    baseURL: `https://www.10mindesigns.shop`, 
     // email otp
     plugins: [
         emailOTPClient(),
@@ -11,4 +11,3 @@ export const authClient = createAuthClient({
     ]
 });
 
-export {toNextJsHandler} from "better-auth/next-js"
