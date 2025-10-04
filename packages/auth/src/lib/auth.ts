@@ -5,12 +5,11 @@ import { prismaAdapter } from "better-auth/adapters/prisma";
 import {prisma} from "@repo/database"
 import { customSession, emailOTP } from 'better-auth/plugins';
 import axios from 'axios';
-import { nextCookies } from 'better-auth/next-js';
 
 export const auth = betterAuth({
   secret: `${process.env.BETTER_AUTH_SECRET}`,
-  trustedOrigins: [`${process.env.FRONTEND_URL}`],
-  baseURL: `${process.env.BACKEND_URL}`,
+  trustedOrigins: [`https://www.10mindesigns.shop`],
+  baseURL: `https://one0mindesignbackend-auth.onrender.com`,
   emailAndPassword: {
     enabled: true,
     autoSignIn: true
@@ -61,7 +60,7 @@ export const auth = betterAuth({
             }, 
         }),
         
-        nextCookies()
+        // nextCookies()
     ]
 
 });
