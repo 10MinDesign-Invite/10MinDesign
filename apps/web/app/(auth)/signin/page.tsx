@@ -60,7 +60,7 @@ export default function SignupForm() {
   async function handelGoogle() {
     await authClient.signIn.social({
       provider: "google",
-      callbackURL: `https://www.10mindesigns.shop/`,
+      callbackURL: `https://www.10mindesigns.shop/api/auth/callback/google`,
     });
   }
 
