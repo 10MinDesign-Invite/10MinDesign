@@ -8,7 +8,7 @@ dotenv.config();
 
 export const auth = betterAuth({
   secret: `${process.env.BETTER_AUTH_SECRET}`,
-  trustedOrigins: [`http://localhost:3000`],
+  trustedOrigins: [`https://www.10mindesigns.shop`],
   // baseURL: `https://www.10mindesigns.shop`,
   baseURL: `https://one0mindesignbackend-auth.onrender.com`,
   emailAndPassword: {
