@@ -5,6 +5,7 @@ import { prismaAdapter } from "better-auth/adapters/prisma";
 import {prisma} from "@repo/database"
 import { customSession, emailOTP } from 'better-auth/plugins';
 import axios from 'axios';
+import { nextCookies } from 'better-auth/next-js';
 
 export const auth = betterAuth({
   secret: `${process.env.BETTER_AUTH_SECRET}`,
@@ -60,7 +61,7 @@ export const auth = betterAuth({
             }, 
         }),
         
-        // nextCookies()
+        nextCookies()
     ]
 
 });
