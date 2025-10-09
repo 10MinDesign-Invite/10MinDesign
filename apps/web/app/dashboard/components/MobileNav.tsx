@@ -54,8 +54,8 @@ export const MobileNav = () => {
                 <li>
                   <Link
                     href="/dashboard"
-                    className={`flex items-center hover:bg-slate-50 dark:text-black px-2 py-1 rounded-lg gap-2 ${
-                      pathName === "/dashboard" ? "bg-slate-100" : ""
+                    className={`flex items-center dark:hover:bg-slate-300 dark:hover:text-black px-2 hover:bg-slate-50 py-1 rounded-lg gap-2 ${
+                      pathName === "/dashboard" ? "dark:bg-slate-100 dark:text-black bg-slate-100" : ""
                     }`}
                   >
                     <LuLayoutDashboard />
@@ -77,7 +77,7 @@ export const MobileNav = () => {
                   <Link
                     href="/dashboard/settings"
                     className={`flex items-center hover:bg-slate-50 dark:hover:bg-slate-300 dark:hover:text-black px-2 py-1 rounded-lg gap-2 ${
-                      pathName === "/dashboard/settings" ? "bg-slate-100" : ""
+                      pathName === "/dashboard/settings" ? "bg-slate-100 text-black" : ""
                     }`}
                   >
                     <SlSettings />
