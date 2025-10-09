@@ -1,77 +1,34 @@
-// import { Request, Response, Router } from "express";
-// import { AuthMiddleware } from "../middleware/AuthMiddleware";
-// import { prisma } from "@repo/database";
-
-// export const getUsers = Router();
-
-// getUsers.get("/all_users_data",AuthMiddleware,async(req:Request,res:Response)=>{
-//     try {
-        
-//             const Users = await prisma.user.findMany({select:{email:true,name:true,id:true,image:true,googleId:true}});
-//            if(Users.length > 0 && Users){
-//                 res.status(200).send(Users);
-//                 return
-//            }else{
-//                 res.status(404).json({success:false,message:"no data"});
-//                 return
-//            }
-        
-        
-//     } catch (error) {
-//         console.log(error)
-//     }
-// })
-// getUsers.get("/total_users_count",AuthMiddleware,async(req:Request,res:Response)=>{
-//     try {
-        
-//             const UsersIds = await prisma.user.findMany({select:{id:true}});
-//             if(UsersIds.length > 0 && UsersIds){
-//                 res.status(200).send(UsersIds);
-//                 return 
-//             }else{
-//                 res.status(404).json({success:false,message:"no data"});
-//                 return 
-//             }
-        
-        
-//     } catch (error) {
-//         console.log(error)
-//     }
-// })
-// getUsers.get("/total_auth_users_count",AuthMiddleware,async(req:Request,res:Response)=>{
-//     try {
-        
-//             const GoogleIds = await prisma.user.findMany({select:{googleId:true}});
-//             if(GoogleIds.length > 0 && GoogleIds){
-//                 res.status(200).send(GoogleIds);
-//                 return
-//             }else{
-//                 res.status(404).json({success:false,message:"no data"});
-//                 return
-//             }
-        
-//     } catch (error) {
-//         console.log(error)
-//     }
-// })
-
 
 import { Request, Response, Router } from "express";
-import { AuthMiddleware } from "../middleware/AuthMiddleware";
 import { prisma } from "@repo/database";
-import { decode } from "@auth/core/jwt";
+import { adminMiddleware } from "../middleware/adminMiddleware";
 
 export const getUsers = Router();
 
-getUsers.get("/dashboard_data", async (req: Request, res: Response) => {
-    console.log("under route................................");
-    console.log(req.cookies)
-        const sessionToken = req.cookies['authjs.session-token'] || req.cookies['__Secure-next-auth.session-token'];
-    const decoded = await decode({
-      token: sessionToken,
-      secret: process.env.AUTH_SECRET!,
-      salt: '__Secure-authjs.session-token'
+getUsers.get("/dashboard_data",adminMiddleware, async (req: Request, res: Response) => {
+  try {
+    const allUsers = await prisma.user.findMany({
+      select: { googleId: true, email: true, role: true },
     });
-    console.log(decoded,"data===========");
-    res.send(decoded)
+
+    if (!allUsers || allUsers.length === 0) {
+       res.status(404).json({ success: false, message: "No data found" });
+       return
+    }
+
+    const totalUsers = allUsers.length;
+    const totalGoogleUsers = allUsers.filter((u) => u.googleId !== null).length;
+    const totalGmailUsers = allUsers.filter((u) => u.googleId === null).length;
+    const totalAdmins = allUsers.filter((u) => u.role === "admin").length;
+
+    res.status(200).json({
+      totalUsers,
+      totalGoogleUsers,
+      totalGmailUsers,
+      totalAdmins,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ success: false, message: "Server error" });
+  }
 });
