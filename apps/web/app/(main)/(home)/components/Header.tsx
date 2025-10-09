@@ -18,14 +18,16 @@ import { LiaBirthdayCakeSolid } from "react-icons/lia";
 import { SlArrowDown, SlMenu } from "react-icons/sl";
 import { logofont } from "../../../fonts/fonts-config";
 import { Profile } from "./Profile";
-import axios from "axios";
+import { Session, User } from "next-auth";
+
 
 interface propType {
   disableAnimation?: string;
+  authData?: User | null;
 }
 
-export function Header({ disableAnimation }: propType) {
-  const { data: authData } = useSession();
+export function Header({ disableAnimation,authData }: propType) {
+  // const { data: authData } = useSession();
   const [nav, setNav] = useState<boolean>(false);
   const [curNav, setCurNav] = useState({ explore: false });
   const [theme, setTheme] = useState("light");
@@ -159,8 +161,8 @@ export function Header({ disableAnimation }: propType) {
           )}
         </div>
         <div className="cursor-pointer">
-          {authData?.user != null && authData.user != undefined ? (
-            <Profile authData={authData?.user} />
+          {authData != null && authData != undefined ? (
+            <Profile authData={authData} />
           ) : (
             <Link href={"/login"}>
               <button

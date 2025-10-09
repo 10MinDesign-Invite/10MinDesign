@@ -5,14 +5,18 @@ import { Features } from "./Features";
 import { Header } from "./Header";
 import { Hero } from "./Hero";
 import { Footer } from "./Footer";
+import { User } from "next-auth";
+
+interface StructureProps {
+  authData?: User | null;
+}
 
 gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
 
-export function Structure() {
-
+export function Structure({ authData }: StructureProps) {
   return (
     <>
-      <Header disableAnimation="" />
+      <Header disableAnimation="" authData={authData} />
       <Hero />
       <Features />
       <Footer/>
