@@ -3,7 +3,7 @@ import { prismaAdapter } from "better-auth/adapters/prisma";
 import { prisma } from "@repo/database";
 
 export const auth = betterAuth({
-  secret:process.env.BETTER_AUTH_SECRET?.toString(),
+  secret:process.env.AUTH_SECRET?.toString(),
   trustedOrigins:[`${process.env.FRONTEND_URL!}`],
   baseURL: `${process.env.BACKEND_URL}`,  
 
