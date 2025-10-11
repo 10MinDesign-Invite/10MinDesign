@@ -111,7 +111,8 @@ export default function Signup() {
               <span className="text-sm text-neutral-400">or continue with</span>
               <Separator className="flex-1 bg-neutral-700" />
             </div>
-
+            <Link href={`${process.env.NEXT_PUBLIC_Backend_URL}/google`}>
+           
             <Button
               variant="outline"
               className="w-full flex items-center justify-center gap-3 bg-neutral-900 hover:bg-neutral-800 text-white font-medium rounded-lg py-2 transition"
@@ -141,7 +142,7 @@ export default function Signup() {
               </svg>
               Continue with Google
             </Button>
-
+             </Link>
             <p className="text-sm text-center text-neutral-400 mt-4">
               Already have an account?{" "}
               <Link href="/signin" className="underline text-white">
