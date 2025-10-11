@@ -72,7 +72,7 @@ export default function Signup() {
   async function googleLogin(){
      await authClient.signIn.social({
       provider: "google",
-      callbackURL: `${process.env.NEXT_PUBLIC_FRONTEND_URL}/`
+      callbackURL: `https://www.10mindesigns.shop/`
   });
   }
 
