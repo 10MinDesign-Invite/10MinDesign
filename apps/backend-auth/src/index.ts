@@ -6,7 +6,6 @@ import job from "./config/cron";
 import { getUsers } from "./routes/getUsers";
 import { handelUser } from "./routes/handelUser";
 import { OTP } from "./routes/sendotp";
-import { verify_Add_User } from "./routes/verify-Add-User";
 
 import * as arctic from "arctic";
 import { handelGoogleLogin } from "./routes/handelGoogleLogin";
@@ -28,7 +27,6 @@ app.get("/api/health", (req, res) => {
   res.status(200).json({ status: "ok" });
 });
 app.use("/otp", OTP);
-app.use("/verify", verify_Add_User);
 app.use("/auth", handelUser);
 app.use("/get", getUsers);
 app.use(handelGoogleLogin);
