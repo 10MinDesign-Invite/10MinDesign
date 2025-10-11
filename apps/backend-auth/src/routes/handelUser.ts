@@ -58,6 +58,7 @@ handelUser.post("/signinuser", async (req: Request, res: Response) => {
             secure: process.env.NODE_ENV == "production" ? true : false,
             sameSite: process.env.NODE_ENV == "production" ? "none" : "lax",
             maxAge: 7 * 24 * 60 * 60 * 1000,
+            path:"/"
           })
           .json({ success: true, message: "signin successfull..." });
       }
@@ -126,6 +127,7 @@ handelUser.post("/signupuser", async (req: Request, res: Response) => {
             secure: process.env.NODE_ENV == "production" ? true : false,
             sameSite: process.env.NODE_ENV == "production" ? "none" : "lax",
             maxAge: 7 * 24 * 60 * 60 * 1000,
+            path:"/"
           })
           .json({ success: true, message: "signup successfull..." });
       } else {
