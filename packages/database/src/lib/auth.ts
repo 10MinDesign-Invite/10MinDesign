@@ -21,6 +21,11 @@ export const auth = betterAuth({
       clientSecret: `${process.env.AUTH_GOOGLE_SECRET}`,
     },
   },
+
+  crossSubDomainCookies: {
+    enabled: true,
+    domain: "www.10mindesigns.shop",
+  },
 });
 
 export { toNodeHandler } from "better-auth/node";
