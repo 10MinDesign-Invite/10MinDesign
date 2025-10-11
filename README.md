@@ -8,7 +8,6 @@ This turborepo includes the following packages/apps:
 
 ### Apps and packages
 
-
 - `web`: a [Next.js](https://nextjs.org/) app
 - `@repo/eslint-config`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
 - `@repo/database`: [Prisma ORM](https://prisma.io/) to manage & access your database

@@ -1,5 +1,5 @@
 import Router from "express";
-import { generateOTP, transporter } from "../utils/otpConfig";
+import { generateOTP, transporter } from "../config/otpConfig";
 import { prisma } from "@repo/database";
 import * as dotenv from "dotenv";
 import bcrypt from "bcrypt";
@@ -107,7 +107,9 @@ OTP.post("/send-otp", async (req, res) => {
         return;
       }
     } else {
-      res.status(404).json({ message: "user not exist or invalid email" });
+      res
+        .status(404)
+        .json({ message: "user not exist or invalid email or Login Method " });
       return;
     }
   } catch (err) {
@@ -156,7 +158,7 @@ OTP.post("/verify-otp", async (req, res) => {
         return;
       }
       if (dbOTP) {
-        const parseOTP = await bcrypt.compare(otp,dbOTP.otp);
+        const parseOTP = await bcrypt.compare(otp, dbOTP.otp);
         if (parseOTP) {
           // delete the otp after successfull verification
           const deleteotp = await prisma.otpStore.delete({
@@ -168,7 +170,7 @@ OTP.post("/verify-otp", async (req, res) => {
             if (password === confirmPassword) {
               const hashPassword = await bcrypt.hash(
                 validInput?.data?.confirmPassword!,
-                10
+                10,
               );
               const resetPassword = await prisma.user.update({
                 where: {

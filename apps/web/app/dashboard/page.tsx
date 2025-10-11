@@ -1,14 +1,12 @@
-import { auth } from "@/auth";
-import { redirect } from "next/navigation";
+import { AuthData } from "@repo/zod-input-validation";
 import { DashboardDesign } from "./components/DashboardDesign";
+import { getSession } from "../action/getSession";
 
 export default async function Dashboard() {
-  const authData = await auth();
-  if (authData?.user?.email == null) return redirect("/login");
-
+  const authData: AuthData | null = await getSession();
   return (
     <>
-        <DashboardDesign authData={authData?.user?.name!} />
+      <DashboardDesign authData={authData?.name} />
     </>
   );
 }

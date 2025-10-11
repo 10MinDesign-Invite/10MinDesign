@@ -3,9 +3,8 @@ import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 gsap.registerPlugin(useGSAP);
 // gsap code importss
-import { useSession } from "next-auth/react";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { BsFillMoonStarsFill } from "react-icons/bs";
 import { FaPeopleRoof } from "react-icons/fa6";
 import {
@@ -18,16 +17,14 @@ import { LiaBirthdayCakeSolid } from "react-icons/lia";
 import { SlArrowDown, SlMenu } from "react-icons/sl";
 import { logofont } from "../../../fonts/fonts-config";
 import { Profile } from "./Profile";
-import { Session, User } from "next-auth";
-
+import { AuthData } from "@repo/zod-input-validation";
 
 interface propType {
   disableAnimation?: string;
-  authData?: User | null;
+  authData?: AuthData | null;
 }
 
-export function Header({ disableAnimation,authData }: propType) {
-  // const { data: authData } = useSession();
+export function Header({ disableAnimation, authData }: propType) {
   const [nav, setNav] = useState<boolean>(false);
   const [curNav, setCurNav] = useState({ explore: false });
   const [theme, setTheme] = useState("light");
@@ -45,7 +42,7 @@ export function Header({ disableAnimation,authData }: propType) {
       setTheme("dark");
     }
   };
-  
+
   useGSAP(() => {
     let mm = gsap.matchMedia();
     if (disableAnimation == "") {
@@ -84,7 +81,6 @@ export function Header({ disableAnimation,authData }: propType) {
       });
     }
   }, []);
-
 
   return (
     <header
@@ -164,7 +160,7 @@ export function Header({ disableAnimation,authData }: propType) {
           {authData != null && authData != undefined ? (
             <Profile authData={authData} />
           ) : (
-            <Link href={"/login"}>
+            <Link href={"/signin"}>
               <button
                 className={`w-[60px] md:w-[70px] h-[35px] md:h-[44px] rounded-md font-medium bg-black text-white dark:bg-white dark:text-black transform ${
                   disableAnimation == "" ? "" : ""
@@ -317,16 +313,4 @@ export function Header({ disableAnimation,authData }: propType) {
       </div>
     </header>
   );
-}
-{
-  /* <Link href={"/login"}>
-              <button
-                id="login-btn"
-                className={`w-[60px] md:w-[70px] h-[35px] md:h-[44px] rounded-md font-medium bg-black text-white dark:bg-white dark:text-black transform ${
-                  disableAnimation == "" ? "md:scale-0" : ""
-                }`}
-              >
-                Log in
-              </button>
-            </Link> */
 }

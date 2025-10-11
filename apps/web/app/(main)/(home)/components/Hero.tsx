@@ -13,8 +13,6 @@ import Image from "next/image";
 
 gsap.registerPlugin(ScrollTrigger);
 
-
-
 export function Hero() {
   const category = [
     {
@@ -64,7 +62,7 @@ export function Hero() {
       gsap.fromTo(
         "#explore-btn",
         { x: -30, delay: 5, opacity: 0, duration: 1 },
-        { x: 0, delay: 5, opacity: 1, duration: 1 }
+        { x: 0, delay: 5, opacity: 1, duration: 1 },
       );
       gsap.to("#box", {
         delay: 2,
@@ -118,7 +116,7 @@ export function Hero() {
       gsap.fromTo(
         "#explore-btn",
         { x: -30, delay: 5, opacity: 0, duration: 1 },
-        { x: 0, delay: 5, opacity: 1, duration: 1 }
+        { x: 0, delay: 5, opacity: 1, duration: 1 },
       );
       gsap.to("#box", {
         delay: 2,
@@ -154,36 +152,36 @@ export function Hero() {
       gsap.fromTo(
         "#card-one",
         { y: 200, opacity: 0 },
-        { y: 0, opacity: 1, duration: 2 }
+        { y: 0, opacity: 1, duration: 2 },
       );
     });
     mm.add("(min-width: 768px) and (max-width: 1023px)", () => {
       gsap.fromTo(
         "#card-one",
         { y: 200, opacity: 0 },
-        { y: 0, opacity: 1, duration: 2 }
+        { y: 0, opacity: 1, duration: 2 },
       );
       gsap.fromTo(
         "#card-two",
         { y: 200, opacity: 0 },
-        { y: 0, opacity: 1, duration: 2 }
+        { y: 0, opacity: 1, duration: 2 },
       );
     });
     mm.add("(min-width: 1280px)", () => {
       gsap.fromTo(
         "#card-one",
         { y: 600, opacity: 0, delay: 1.8 },
-        { y: 0, opacity: 1, duration: 2, delay: 1.8 }
+        { y: 0, opacity: 1, duration: 2, delay: 1.8 },
       );
       gsap.fromTo(
         "#card-two",
         { y: -600, opacity: 0, delay: 1.8 },
-        { y: 0, opacity: 1, duration: 2, delay: 1.8 }
+        { y: 0, opacity: 1, duration: 2, delay: 1.8 },
       );
       gsap.fromTo(
         "#home-images-main-div",
         { x: -40, opacity: 0, delay: 1 },
-        { x: 0, opacity: 1, duration: 2, delay: 1 }
+        { x: 0, opacity: 1, duration: 2, delay: 1 },
       );
     });
 

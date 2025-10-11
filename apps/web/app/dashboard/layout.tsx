@@ -17,8 +17,12 @@ export default async function DashboardLayout({
   children: React.ReactNode;
 }>) {
   return (
-    
-    <ThemeProvider attribute={"class"} defaultTheme="system" enableSystem disableTransitionOnChange>
+    <ThemeProvider
+      attribute={"class"}
+      defaultTheme="system"
+      enableSystem
+      disableTransitionOnChange
+    >
       <QueryProvider>
         <main className="flex gap-3 h-screen dark:bg-black mx-auto w-full max-w-screen-2xl p-1 bg-slate-100 overflow-hidden">
           <Sidebar />
@@ -30,8 +34,6 @@ export default async function DashboardLayout({
           </div>
         </main>
       </QueryProvider>
-      </ThemeProvider>
-
-    
+    </ThemeProvider>
   );
 }
