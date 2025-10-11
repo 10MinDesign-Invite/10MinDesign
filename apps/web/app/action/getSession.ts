@@ -1,6 +1,6 @@
 import { redis } from "@repo/redis";
 import { cookies } from "next/headers";
-import { AuthData } from "@repo/zod-input-validation";
+import { AuthData } from "../types/custome-types";
 
 export async function getSession(): Promise<AuthData | null> {
   const cookieStore = await cookies();

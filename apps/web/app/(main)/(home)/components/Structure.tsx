@@ -5,7 +5,7 @@ import { Features } from "./Features";
 import { Header } from "./Header";
 import { Hero } from "./Hero";
 import { Footer } from "./Footer";
-import { AuthData } from "@repo/zod-input-validation";
+import { AuthData } from "@/app/types/custome-types";
 
 interface StructureProps {
   authData?: AuthData | null;

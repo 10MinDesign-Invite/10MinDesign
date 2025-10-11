@@ -22,20 +22,4 @@ export const forgotPasswordSchema = z.object({
   otp: z.string().min(6, { message: "wrong otp format" }),
 });
 
-export type AuthData = {
-  id?: number;
-  email: string;
-  name: string;
-  role: string;
-};
 
-export type GoogleDataType = {
-  email: string;
-  name: string;
-  picture: string;
-  sub: string;
-};
-
-export type adminMiddlewareType = {
-  role: string;
-};

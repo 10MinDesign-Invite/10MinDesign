@@ -2,9 +2,9 @@ import { Request, Response, Router } from "express";
 import arctic from "arctic";
 import { google } from "../config/googleConfig";
 import { prisma } from "@repo/database";
-import { GoogleDataType } from "@repo/zod-input-validation";
 import { generateSessionId } from "../utils/generateSessionId";
 import { redis } from "@repo/redis";
+import { GoogleDataType } from "../types/custome-types";
 
 export const handelGoogleLogin = Router();
 

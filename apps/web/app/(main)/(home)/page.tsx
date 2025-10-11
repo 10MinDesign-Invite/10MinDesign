@@ -1,6 +1,6 @@
 import { Structure } from "./components/Structure";
 import { getSession } from "../../action/getSession";
-import { AuthData } from "@repo/zod-input-validation";
+import { AuthData } from "@/app/types/custome-types";
 export default async function Home() {
   const authData: AuthData | null = await getSession();
 

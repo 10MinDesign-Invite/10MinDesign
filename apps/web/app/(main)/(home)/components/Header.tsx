@@ -17,7 +17,7 @@ import { LiaBirthdayCakeSolid } from "react-icons/lia";
 import { SlArrowDown, SlMenu } from "react-icons/sl";
 import { logofont } from "../../../fonts/fonts-config";
 import { Profile } from "./Profile";
-import { AuthData } from "@repo/zod-input-validation";
+import { AuthData } from "@/app/types/custome-types";
 
 interface propType {
   disableAnimation?: string;

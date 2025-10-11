@@ -1,6 +1,6 @@
 import { redis } from "@repo/redis";
-import { adminMiddlewareType } from "@repo/zod-input-validation";
 import { NextFunction, Request, Response } from "express";
+import { adminMiddlewareType } from "../types/custome-types";
 
 export async function adminMiddleware(
   req: Request,

@@ -13,7 +13,6 @@ import { CountUpCustome } from "../components/CountUpCustome";
 import DoughnutChart from "../components/DoughnutChart";
 import { ToolTipDisplyInfo } from "../components/ToolTipDisplyInfo";
 import { getDashboardUsersData } from "../Quries/getUsersData";
-import { AuthData } from "@repo/zod-input-validation";
 
 export const DashboardDesign = ({ authData }: { authData?: string }) => {
   const { data, isLoading, isError } = useQuery({
