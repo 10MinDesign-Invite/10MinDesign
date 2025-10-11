@@ -6,9 +6,10 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { Label, Separator } from "@radix-ui/react-dropdown-menu";
-import axios from "axios";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
+import {authClient} from "@repo/database/authClient"
+
 
 export default function Signup() {
   const [loading, setLoading] = useState(false);
@@ -26,15 +27,40 @@ export default function Signup() {
     };
 
     try {
-      const response = await axios.post(
-        `${process.env.NEXT_PUBLIC_Backend_URL}/auth/signupuser`,
-        data,
-        { withCredentials: true }
-      );
-      if (response.data.success) {
-        toast.success("Account created successfully!");
-        router.push("/");
-      }
+      // const response = await axios.post(
+      //   `${process.env.NEXT_PUBLIC_Backend_URL}/auth/signupuser`,
+      //   data,
+      //   { withCredentials: true }
+      // );
+      // if (response.data.success) {
+      //   toast.success("Account created successfully!");
+      //   router.push("/");
+      // }
+
+
+
+    const { error } = await authClient.signUp.email({
+          email:data.email, 
+          password:data.password, 
+          name:data.name, 
+          callbackURL: "/" 
+    }, {
+        onSuccess: (ctx) => {
+            console.log("success.........");
+        },
+        onError: (ctx) => {
+            alert(ctx.error.message);
+        },
+});
+
+
+
+
+
+
+
+
+
     } catch (error: any) {
       console.error(error);
       toast.error(error?.response?.data?.message || "Something went wrong");
@@ -42,6 +68,13 @@ export default function Signup() {
       setLoading(false);
     }
   };
+
+  async function googleLogin(){
+     await authClient.signIn.social({
+      provider: "google",
+      callbackURL: `${process.env.NEXT_PUBLIC_FRONTEND_URL}/`
+  });
+  }
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-black text-white px-4 py-10">
@@ -112,8 +145,9 @@ export default function Signup() {
               <Separator className="flex-1 bg-neutral-700" />
             </div>
 
-            <Link href={`${process.env.NEXT_PUBLIC_Backend_URL}/google`}>
+            {/* <Link href={`${process.env.NEXT_PUBLIC_Backend_URL}/google`}> */}
               <Button
+                onClick={googleLogin}
                 variant="outline"
                 className="w-full flex items-center justify-center gap-3 bg-neutral-900 hover:bg-neutral-800 text-white font-medium rounded-lg py-2 transition"
               >
@@ -142,7 +176,8 @@ export default function Signup() {
                 </svg>
                 Continue with Google
               </Button>
-            </Link>
+            {/* </Link> */}
+
             <p className="text-sm text-center text-neutral-400 mt-4">
               Already have an account?{" "}
               <Link href="/signin" className="underline text-white">

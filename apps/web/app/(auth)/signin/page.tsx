@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label, Separator } from "@radix-ui/react-dropdown-menu";
+import { authClient } from "@repo/database/authClient";
 import axios from "axios";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -25,15 +26,35 @@ export default function Signin() {
     };
 
     try {
-      const response = await axios.post(
-        `${process.env.NEXT_PUBLIC_Backend_URL}/auth/signinuser`,
-        data,
-        { withCredentials: true },
-      );
-      if (response.data.success) {
-        toast.success("signin successfully!");
-        router.push("/");
-      }
+      // const response = await axios.post(
+      //   `${process.env.NEXT_PUBLIC_Backend_URL}/auth/signinuser`,
+      //   data,
+      //   { withCredentials: true },
+      // );
+      // if (response.data.success) {
+      //   toast.success("signin successfully!");
+      //   router.push("/");
+      // }
+
+
+
+      const {data:result , error } = await authClient.signIn.email({
+        email:data.email,
+        password:data.password,
+        callbackURL: "/",
+      }, {
+          onSuccess:()=>{
+            console.log("done...........")
+          }
+      })
+
+
+
+
+
+
+
+
     } catch (error: any) {
       console.error(error);
       toast.error(error?.response?.data?.message || "Something went wrong");

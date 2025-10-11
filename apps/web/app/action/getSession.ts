@@ -1,6 +1,7 @@
 import { redis } from "@repo/redis";
-import { cookies } from "next/headers";
+import { cookies, headers } from "next/headers";
 import { AuthData } from "../types/custome-types";
+import { auth } from "@repo/database/auth";
 
 export async function getSession(): Promise<AuthData | null> {
   const cookieStore = await cookies();
@@ -11,3 +12,4 @@ export async function getSession(): Promise<AuthData | null> {
   )) as AuthData | null;
   return authData;
 }
+
