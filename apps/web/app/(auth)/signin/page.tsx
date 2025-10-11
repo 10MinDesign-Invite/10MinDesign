@@ -63,6 +63,15 @@ export default function Signin() {
     }
   };
 
+
+   async function googleLogin(){
+       await authClient.signIn.social({
+        provider: "google",
+        callbackURL: `https://www.10mindesigns.shop/`
+    });
+    }
+
+
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-black text-white px-4 py-10">
       <Card className="w-full max-w-md bg-gradient-to-br from-gray-900 to-black border border-neutral-700 shadow-xl rounded-2xl">
@@ -122,8 +131,9 @@ export default function Signin() {
               <Separator className="flex-1 bg-neutral-700" />
             </div>
 
-            <Link href={`${process.env.NEXT_PUBLIC_Backend_URL}/google`}>
+            {/* <Link href={`${process.env.NEXT_PUBLIC_Backend_URL}/google`}> */}
               <Button
+                onClick={googleLogin}
                 variant="outline"
                 className="w-full flex items-center justify-center gap-3 bg-neutral-900 hover:bg-neutral-800 text-white font-medium rounded-lg py-2 transition"
               >
@@ -152,7 +162,7 @@ export default function Signin() {
                 </svg>
                 Continue with Google
               </Button>
-            </Link>
+            {/* </Link> */}
 
             <p className="text-sm text-center text-neutral-400 mt-4">
               Already have an account?{" "}
