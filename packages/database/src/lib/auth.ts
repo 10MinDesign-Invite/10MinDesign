@@ -22,10 +22,19 @@ export const auth = betterAuth({
     },
   },
 
-  crossSubDomainCookies: {
-    enabled: true,
-    domain: "www.10mindesigns.shop",
-  },
+  advanced: {
+        cookies: {
+            session_token: {
+                name: "custom_session_token",
+                attributes: {
+                  sameSite:"lax",
+                  httpOnly:true,
+                  secure:true,
+                  domain:"www.10mindesigns.shop"
+                }
+            },
+        }
+    }
 });
 
 export { toNodeHandler } from "better-auth/node";
