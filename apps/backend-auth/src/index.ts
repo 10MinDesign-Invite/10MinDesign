@@ -29,6 +29,6 @@ app.get("/api/health", (req, res) => {
 app.use("/otp", OTP);
 app.use("/auth", handelUser);
 app.use("/get", getUsers);
-app.use(handelGoogleLogin);
+// app.use(handelGoogleLogin);
 
 app.listen(process.env.PORT || 8080);
