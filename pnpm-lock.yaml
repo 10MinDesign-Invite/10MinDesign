@@ -91,9 +91,6 @@ importers:
       '@types/cors':
         specifier: ^2.8.17
         version: 2.8.18
-      '@types/nodemailer':
-        specifier: ^6.4.17
-        version: 6.4.17
 
   apps/web:
     dependencies:
@@ -1719,9 +1716,6 @@ packages:
 
   '@types/node@24.0.13':
     resolution: {integrity: sha512-Qm9OYVOFHFYg3wJoTSrz80hoec5Lia/dPp84do3X7dZvLikQvM1YpmvTBEdIr/e+U8HTkFjLHLnl78K/qjf+jQ==}
-
-  '@types/nodemailer@6.4.17':
-    resolution: {integrity: sha512-I9CCaIp6DTldEg7vyUTZi8+9Vo0hi1/T8gv3C89yk1rSAAzoKQ8H8ki/jBYJSFoH/BisgLP8tkZMlQ91CIquww==}
 
   '@types/normalize-package-data@2.4.4':
     resolution: {integrity: sha512-37i+OaWTh9qeK4LSHPsyRC7NahnGotNuZvjLSgcPzblpHB3rrCJxAOgI5gCdKm7coonsaX1Of0ILiTcnZjbfxA==}
@@ -6218,10 +6212,6 @@ snapshots:
     dependencies:
       undici-types: 7.8.0
     optional: true
-
-  '@types/nodemailer@6.4.17':
-    dependencies:
-      '@types/node': 20.17.50
 
   '@types/normalize-package-data@2.4.4': {}
 
