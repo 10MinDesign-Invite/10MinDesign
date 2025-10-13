@@ -66,105 +66,105 @@ OTP.post("/send-otp", async (req, res) => {
   }
 });
 
-// OTP.post("/verify-otp", async (req, res) => {
-//   const { email, otp, password, confirmPassword } = req.body;
-//   try {
-//     if (!email || !otp) {
-//       res.json({ error: "provide email and otp" });
-//       return;
-//     }
-//     const validInput = forgotPasswordSchema.safeParse({
-//       email,
-//       otp,
-//       password,
-//       confirmPassword,
-//     });
-//     if (!validInput.success) {
-//       res.status(500).json({ success: false, message: "not vaild input" });
-//       return;
-//     }
-//     // access otp and verify is correct
-//     const userExist = await prisma.user.findUnique({
-//       where: {
-//         email,
-//       },
-//       select: {
-//         email: true,
-//         googleId: true,
-//       },
-//     });
-//     if (userExist) {
-//       const dbOTP = await prisma.otpStore.findFirst({
-//         where: {
-//           email,
-//         },
-//       });
-//       const now = new Date();
-//       const expireAt = new Date(dbOTP?.expiresAt!);
-//       if (expireAt < now) {
-//         res.status(400).json({ success: false, message: "OTP expired" });
-//         return;
-//       }
-//       if (dbOTP) {
-//         const parseOTP = await bcrypt.compare(otp,dbOTP.otp);
-//         if (parseOTP) {
-//           // delete the otp after successfull verification
-//           const deleteotp = await prisma.otpStore.delete({
-//             where: {
-//               email,
-//             },
-//           });
-//           if (deleteotp) {
-//             if (password === confirmPassword) {
-//               const hashPassword = await bcrypt.hash(
-//                 validInput?.data?.confirmPassword!,
-//                 10
-//               );
-//               const resetPassword = await prisma.user.update({
-//                 where: {
-//                   email,
-//                 },
-//                 data: {
-//                   password: hashPassword,
-//                 },
-//               });
-//               if (resetPassword) {
-//                 res.status(200).json({
-//                   success: true,
-//                   message: "password reset success",
-//                 });
-//                 return;
-//               } else {
-//                 res.status(401).json({
-//                   success: false,
-//                   message: "password reset failed",
-//                 });
-//                 return;
-//               }
-//             } else {
-//               res.status(500).json({
-//                 success: false,
-//                 message: "both passwords not match",
-//               });
-//               return;
-//             }
-//           }
-//         } else {
-//           res.status(400).json({ success: false, message: "Invalid OTP" });
-//           return;
-//         }
-//       } else {
-//         res.status(404).json({
-//           success: false,
-//           message: "Otp not found or correct try new otp",
-//         });
-//         return;
-//       }
-//     } else {
-//       res.status(404).json({ success: false, message: "user not found" });
-//       return;
-//     }
-//   } catch (error) {
-//     console.log(error);
-//   }
-// });
+OTP.post("/verify-otp", async (req, res) => {
+  const { email, otp, password, confirmPassword } = req.body;
+  try {
+    if (!email || !otp) {
+      res.json({ error: "provide email and otp" });
+      return;
+    }
+    const validInput = forgotPasswordSchema.safeParse({
+      email,
+      otp,
+      password,
+      confirmPassword,
+    });
+    if (!validInput.success) {
+      res.status(500).json({ success: false, message: "not vaild input" });
+      return;
+    }
+    // access otp and verify is correct
+    const userExist = await prisma.user.findUnique({
+      where: {
+        email,
+      },
+      select: {
+        email: true,
+        googleId: true,
+      },
+    });
+    if (userExist) {
+      const dbOTP = await prisma.otpStore.findFirst({
+        where: {
+          email,
+        },
+      });
+      const now = new Date();
+      const expireAt = new Date(dbOTP?.expiresAt!);
+      if (expireAt < now) {
+        res.status(400).json({ success: false, message: "OTP expired" });
+        return;
+      }
+      if (dbOTP) {
+        const parseOTP = await bcrypt.compare(otp,dbOTP.otp);
+        if (parseOTP) {
+          // delete the otp after successfull verification
+          const deleteotp = await prisma.otpStore.delete({
+            where: {
+              email,
+            },
+          });
+          if (deleteotp) {
+            if (password === confirmPassword) {
+              const hashPassword = await bcrypt.hash(
+                validInput?.data?.confirmPassword!,
+                10
+              );
+              const resetPassword = await prisma.user.update({
+                where: {
+                  email,
+                },
+                data: {
+                  password: hashPassword,
+                },
+              });
+              if (resetPassword) {
+                res.status(200).json({
+                  success: true,
+                  message: "password reset success",
+                });
+                return;
+              } else {
+                res.status(401).json({
+                  success: false,
+                  message: "password reset failed",
+                });
+                return;
+              }
+            } else {
+              res.status(500).json({
+                success: false,
+                message: "both passwords not match",
+              });
+              return;
+            }
+          }
+        } else {
+          res.status(400).json({ success: false, message: "Invalid OTP" });
+          return;
+        }
+      } else {
+        res.status(404).json({
+          success: false,
+          message: "Otp not found or correct try new otp",
+        });
+        return;
+      }
+    } else {
+      res.status(404).json({ success: false, message: "user not found" });
+      return;
+    }
+  } catch (error) {
+    console.log(error);
+  }
+});
