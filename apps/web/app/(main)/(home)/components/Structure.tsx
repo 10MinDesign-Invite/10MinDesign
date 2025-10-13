@@ -19,7 +19,7 @@ export function Structure({ authData }: StructureProps) {
       <Header disableAnimation="" authData={authData} />
       <Hero />
       <Features />
-      <Footer/>
+      <Footer />
     </>
   );
 }

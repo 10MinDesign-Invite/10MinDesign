@@ -1,7 +1,7 @@
-import { ImageKitProvider } from '@imagekit/next';
+import { ImageKitProvider } from "@imagekit/next";
 import "@repo/ui/styles.css";
 import type { Metadata } from "next";
-import { ToastContainer } from 'react-toastify';
+import { ToastContainer } from "react-toastify";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -38,12 +38,10 @@ export default function RootLayout({
         />
       </head>
       <body className="bg-slate-100 text-black dark:bg-black dark:text-white">
-      
         <ImageKitProvider urlEndpoint={process.env.imagekit_URL}>
-        {children}
-        <ToastContainer />
+          {children}
+          <ToastContainer />
         </ImageKitProvider>
-      
       </body>
     </html>
   );

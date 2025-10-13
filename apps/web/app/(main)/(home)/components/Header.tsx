@@ -20,13 +20,12 @@ import { logofont } from "../../../fonts/fonts-config";
 import { Profile } from "./Profile";
 import { Session, User } from "next-auth";
 
-
 interface propType {
   disableAnimation?: string;
   authData?: User | null;
 }
 
-export function Header({ disableAnimation,authData }: propType) {
+export function Header({ disableAnimation, authData }: propType) {
   // const { data: authData } = useSession();
   const [nav, setNav] = useState<boolean>(false);
   const [curNav, setCurNav] = useState({ explore: false });
@@ -45,7 +44,7 @@ export function Header({ disableAnimation,authData }: propType) {
       setTheme("dark");
     }
   };
-  
+
   useGSAP(() => {
     let mm = gsap.matchMedia();
     if (disableAnimation == "") {
@@ -84,7 +83,6 @@ export function Header({ disableAnimation,authData }: propType) {
       });
     }
   }, []);
-
 
   return (
     <header

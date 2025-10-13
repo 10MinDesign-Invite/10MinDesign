@@ -44,7 +44,7 @@ export default function Page() {
     try {
       const res = await axios.post<sendOtpType>(
         `${process.env.NEXT_PUBLIC_Backend_URL}/auth/send-otp`,
-        { email }
+        { email },
       );
 
       toast.dismiss(otpSendLoading);
@@ -60,7 +60,7 @@ export default function Page() {
       toast.dismiss(otpSendLoading);
       toast.error(
         error?.response?.data?.message ||
-          "Something went wrong while sending OTP"
+          "Something went wrong while sending OTP",
       );
     }
   }
@@ -68,8 +68,18 @@ export default function Page() {
     const toastId = toast.loading("wait verifiying you");
     const password = formData.get("password");
     const confirmPassword = formData.get("confirmPassword");
-  try {
-    const res = await axios.post<{status:number,token:string,success:boolean,message:string}>(`${process.env.NEXT_PUBLIC_Backend_URL}/auth/verify-otp`,{email,otp,password,confirmPassword})
+    try {
+      const res = await axios.post<{
+        status: number;
+        token: string;
+        success: boolean;
+        message: string;
+      }>(`${process.env.NEXT_PUBLIC_Backend_URL}/auth/verify-otp`, {
+        email,
+        otp,
+        password,
+        confirmPassword,
+      });
       if (res.status !== 200) {
         toast.error(res.data.message);
         toast.dismiss(toastId);
@@ -78,18 +88,17 @@ export default function Page() {
         if (res.status === 200) {
           toast.success(res.data.message);
           toast.dismiss(toastId);
-          router.push("/login")
+          router.push("/login");
         } else {
           toast.dismiss(toastId);
           toast.error(res.data.message);
         }
-        
       }
-  } catch (error) {
-    console.log(error)
-    toast.dismiss(toastId);
-  }
-};
+    } catch (error) {
+      console.log(error);
+      toast.dismiss(toastId);
+    }
+  };
   return (
     <div className="flex justify-center items-center w-full h-dvh">
       <Card className="w-[90%] md:w-[50%] lg:w-[28%]">
@@ -154,4 +163,3 @@ export default function Page() {
     </div>
   );
 }
-

@@ -18,51 +18,50 @@ import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
 
 export default function Page() {
- const router = useRouter();
+  const router = useRouter();
 
   async function signup(e: FormEvent<HTMLFormElement>) {
     const toastId = toast.loading("Signing up...");
 
     try {
-        e.preventDefault();
-        const formData = new FormData(e.currentTarget);
-        const name = formData.get("name") as string | undefined;
-        const email = formData.get("email") as string | undefined;
-        const password = formData.get("password") as string | undefined;
-        if (!name || !email || !password) {
-          toast.dismiss(toastId);
-          toast.error("please provide all values");
-          return;
-        }
-        const validInput = registerSchema.safeParse({ email, name, password });
-        if (!validInput.success) {
-          toast.dismiss(toastId);
-          toast.error(validInput.error.errors[0].message);
-          return;
-        }
-        const result = await axios.post(
-          `${process.env.NEXT_PUBLIC_Backend_URL}/add/signupuser`,
-          {
-            name: validInput.data.name,
-            email: validInput.data.email,
-            password: validInput.data.password,
-          }
-        );
-        if (!result.data.success) {
-          toast.dismiss(toastId);
-          toast.error(result.data.message+"!resssss");
-          return;
-        } else {
+      e.preventDefault();
+      const formData = new FormData(e.currentTarget);
+      const name = formData.get("name") as string | undefined;
+      const email = formData.get("email") as string | undefined;
+      const password = formData.get("password") as string | undefined;
+      if (!name || !email || !password) {
         toast.dismiss(toastId);
-          toast.success(result.data.message);
-          router.push("/login");
-        }
-    } catch (error:any) {
-        console.error(error);
-        toast.error(error.response.data.message)
-        toast.dismiss(toastId)
+        toast.error("please provide all values");
+        return;
+      }
+      const validInput = registerSchema.safeParse({ email, name, password });
+      if (!validInput.success) {
+        toast.dismiss(toastId);
+        toast.error(validInput.error.errors[0].message);
+        return;
+      }
+      const result = await axios.post(
+        `${process.env.NEXT_PUBLIC_Backend_URL}/add/signupuser`,
+        {
+          name: validInput.data.name,
+          email: validInput.data.email,
+          password: validInput.data.password,
+        },
+      );
+      if (!result.data.success) {
+        toast.dismiss(toastId);
+        toast.error(result.data.message + "!resssss");
+        return;
+      } else {
+        toast.dismiss(toastId);
+        toast.success(result.data.message);
+        router.push("/login");
+      }
+    } catch (error: any) {
+      console.error(error);
+      toast.error(error.response.data.message);
+      toast.dismiss(toastId);
     }
-
   }
 
   return (
@@ -83,7 +82,7 @@ export default function Page() {
           <form
             className="flex flex-col gap-4"
             action={async () => {
-              await signIn("google",{redirectTo:"/"});
+              await signIn("google", { redirectTo: "/" });
             }}
           >
             <p className="text-center">OR</p>

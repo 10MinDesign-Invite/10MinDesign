@@ -8,7 +8,7 @@ export default async function Dashboard() {
 
   return (
     <>
-        <DashboardDesign authData={authData?.user?.name!} />
+      <DashboardDesign authData={authData?.user?.name!} />
     </>
   );
 }

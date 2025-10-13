@@ -14,11 +14,8 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-      <div className="bg-slate-100 text-black dark:bg-black dark:text-white">
-        <SessionProvider>
-        {children}
-        </SessionProvider>
-      </div>
-    
+    <div className="bg-slate-100 text-black dark:bg-black dark:text-white">
+      <SessionProvider>{children}</SessionProvider>
+    </div>
   );
 }

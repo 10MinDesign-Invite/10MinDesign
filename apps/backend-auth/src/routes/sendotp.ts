@@ -34,9 +34,9 @@ OTP.post("/send-otp", async (req, res) => {
         from: "10MinDesign <noreply@api.10mindesigns.shop>",
         to: [`${email}`],
         subject: "sending or testing the email",
-        html: `${emailHtml(email,generatedOtp)}`,
+        html: `${emailHtml(email, generatedOtp)}`,
       });
-      
+
       if (!error) {
         await prisma.otpStore.upsert({
           where: { email },
@@ -106,7 +106,7 @@ OTP.post("/verify-otp", async (req, res) => {
         return;
       }
       if (dbOTP) {
-        const parseOTP = await bcrypt.compare(otp,dbOTP.otp);
+        const parseOTP = await bcrypt.compare(otp, dbOTP.otp);
         if (parseOTP) {
           // delete the otp after successfull verification
           const deleteotp = await prisma.otpStore.delete({
@@ -118,7 +118,7 @@ OTP.post("/verify-otp", async (req, res) => {
             if (password === confirmPassword) {
               const hashPassword = await bcrypt.hash(
                 validInput?.data?.confirmPassword!,
-                10
+                10,
               );
               const resetPassword = await prisma.user.update({
                 where: {

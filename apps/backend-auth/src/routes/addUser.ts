@@ -25,11 +25,11 @@ addUser.post("/user", async (req: Request, res: Response) => {
         },
       });
       if (result) {
-        res.status(200).json({id:result.id});
+        res.status(200).json({ id: result.id });
       } else {
         res.status(500).send("error from backend res..... EEEEEE");
       }
-    }else{
+    } else {
       res.status(500).send("worng user from backend res..... EEEEEE");
     }
   } catch (error) {
