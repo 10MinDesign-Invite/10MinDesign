@@ -111,6 +111,28 @@ const config: NextAuthConfig = {
       return token;
     },
   },
+
+  // custome cookie for my error in be req.cookie is null cheking this work orr noy 
+
+  useSecureCookies: process.env.NODE_ENV === "development" ? false : true,
+  cookies: {
+    sessionToken: {
+      name:
+        process.env.NODE_ENV === "development"
+          ? "next-auth.session-token"
+          : "__Secure-next-auth.session-token",
+      options: {
+        httpOnly: true,
+        sameSite: process.env.NODE_ENV === "development" ? "lax" : "none",
+        path: "/",
+        secure: process.env.NODE_ENV === "development" ? false : true,
+        domain:
+          process.env.NODE_ENV === "development"
+            ? undefined
+            : ".10mindesigns.shop",
+      },
+    },
+  },
 };
 
 const nextAuth = NextAuth(config);
