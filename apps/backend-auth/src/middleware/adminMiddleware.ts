@@ -7,6 +7,8 @@ export async function adminMiddleware(
   next: NextFunction,
 ) {
   try {
+    const coo = req.cookies;
+    console.log(coo,"coooo=============")
     const token = req.headers.authorization?.split(" ")[1];
 
     const decoded = await decode({
