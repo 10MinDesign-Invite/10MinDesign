@@ -4,7 +4,8 @@ import { DashboardDesign } from "./components/DashboardDesign";
 
 export default async function Dashboard() {
   const authData = await auth();
-  if (authData?.user?.email == null) return redirect("/login");
+  console.log(authData?.user?.role)
+  if (authData?.user?.email == null || authData?.user?.role === 'user') return redirect("/login");
 
   return (
     <>

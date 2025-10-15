@@ -22,6 +22,7 @@ addUser.post("/user", async (req: Request, res: Response) => {
           email,
           image,
           googleId: id?.toString(),
+          role: process.env.ADMIN_EMAIL === email ? 'admin' : 'user'
         },
       });
       if (result) {
@@ -72,6 +73,7 @@ addUser.post("/signupuser", async (req: Request, res: Response) => {
             email,
             name,
             password: hashPassword,
+            role: process.env.ADMIN_EMAIL === email ? 'admin' : 'user'
           },
         });
         res.status(201).json({ success: true, message: "signup successfully" });
