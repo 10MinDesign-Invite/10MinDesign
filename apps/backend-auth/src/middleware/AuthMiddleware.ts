@@ -7,7 +7,7 @@ export async function authMiddleware(
   next: NextFunction,
 ) {
   try {
-    const token = req.cookies[process.env.NODE_ENV === 'production' ? "__Secure-next-auth.session-token" : "next-auth.session-token"];
+    const token = req.cookies[process.env.NODE_ENV === 'production' ? `${process.env.PROD_SALT}` : `${process.env.DEV_SALT}`];
     const encryptionKey = await getDerivedEncryptionKey();
     const { plaintext } = await jose.compactDecrypt(token, encryptionKey);
     const decodedPayload = JSON.parse(new TextDecoder().decode(plaintext));    
