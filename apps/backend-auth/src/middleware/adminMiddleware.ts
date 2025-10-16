@@ -16,7 +16,6 @@ export async function adminMiddleware(
       res.send("unauthorized user");
       return;
     }
-        console.log(decodedPayload,"==============")
 
     if (decodedPayload.role === "admin") {
       next();
