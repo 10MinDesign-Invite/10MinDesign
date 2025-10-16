@@ -120,8 +120,8 @@ const config: NextAuthConfig = {
     sessionToken: {
       name:
         process.env.NODE_ENV === "development"
-          ? "next-auth.session-token"
-          : "__Secure-next-auth.session-token",
+          ? "authjs.session-token"
+          : "__Secure-authjs.session-token",
       options: {
         httpOnly: true,
         sameSite: process.env.NODE_ENV === "development" ? "lax" : "lax",

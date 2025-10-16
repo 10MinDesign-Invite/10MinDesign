@@ -1,7 +1,7 @@
 import hkdf from "@panva/hkdf";
 
 const AUTH_SECRET = process.env.AUTH_SECRET || "";
-const AUTH_COOKIE_NAME = "next-auth.session-token";
+const AUTH_COOKIE_NAME = process.env.NODE_ENV === 'production' ? `${process.env.PROD_SALT}` : `${process.env.DEV_SALT}`;
 export async function getDerivedEncryptionKey(): Promise<Uint8Array> {
   return await hkdf(
     "sha256",
