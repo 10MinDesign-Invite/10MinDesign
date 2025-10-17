@@ -153,9 +153,9 @@ export function Header({ disableAnimation, authData }: propType) {
           className="flex justify-center items-center w-[30px] text-xl rounded-full"
         >
           {theme == "dark" ? (
-            <GiStripedSun className="text-[rgb(247,164,70)]" />
+            <GiStripedSun className="text-[rgb(247,164,70)] cursor-pointer" />
           ) : (
-            <BsFillMoonStarsFill />
+            <BsFillMoonStarsFill className="cursor-pointer" />
           )}
         </div>
         <div className="cursor-pointer">

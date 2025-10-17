@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, ChangeEvent } from "react";
+import React, { useState, ChangeEvent, useEffect } from "react";
 import { Plus, PlusSquare, Trash2 } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -34,18 +34,17 @@ export default function DynamicFields() {
       prev.map((f, i) => (i === index ? { ...f, [key]: value } : f))
     );
   };
-
+ 
   const handleSubmit = () => {
-    const cleaned = fields.filter((f) => f.label.trim());
-    console.log({ componentId, data: cleaned });
+    console.log(componentId,fields);
     alert("✅ Data saved! Check console output.");
   };
 
   return (
-    <div className="max-w-6xl mx-auto p-6 space-y-8">
+    <div className="max-w-6xl mx-auto p-6 space-y-8 overflow-x-hidden">
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
-        <h2 className="text-2xl font-bold">🧩 Dynamic Component Builder</h2>
+        <h2 className="text-2xl font-bold">🧩 Add Template Info </h2>
         <div className="flex gap-2 flex-wrap">
           <Button variant="outline" onClick={() => addField(false)}>
             <Plus className="w-4 h-4 mr-2" /> Add Field
@@ -60,13 +59,14 @@ export default function DynamicFields() {
       </div>
 
       {/* Layout Grid */}
-      <div className="grid grid-cols-1 xl:grid-cols-2 gap-8">
+      <div className="grid grid-cols-1 xl:grid-cols-2 gap-8 ">
         {/* Form Section */}
-        <div className="space-y-4 border border-white h-[600px] overflow-x-hidden">
+        <div className="space-y-4 h-[600px] overflow-x-hidden">
           {/* Component ID */}
-          <div>
+          <div className="w-[98%] mx-auto">
             <Label>Component ID</Label>
             <Input
+              className=""
               value={componentId}
               onChange={(e: ChangeEvent<HTMLInputElement>) =>
                 setComponentId(e.target.value)
@@ -138,7 +138,7 @@ export default function DynamicFields() {
           {fields.filter((f) => f.label.trim()).length === 0 ? (
             <p className="text-gray-500 text-sm">No fields added yet.</p>
           ) : (
-            <ul className="space-y-3">
+            <ul className="space-y-3 whitespace-pre-wrap break-words">
               {fields.map(
                 (f, i) =>
                   f.label.trim() && (

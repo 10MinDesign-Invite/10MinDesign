@@ -75,15 +75,15 @@ export const MobileNav = () => {
                 </li>
                 <li>
                   <Link
-                    href="/dashboard/settings"
+                    href="/dashboard/addtemplate"
                     className={`flex items-center hover:bg-slate-50 dark:hover:bg-slate-300 dark:hover:text-black px-2 py-1 rounded-lg gap-2 ${
-                      pathName === "/dashboard/settings"
+                      pathName === "/dashboard/addtemplate"
                         ? "bg-slate-100 text-black"
                         : ""
                     }`}
                   >
                     <SlSettings />
-                    <span>Settings</span>
+                    <span>Add Template</span>
                   </Link>
                 </li>
               </ul>
