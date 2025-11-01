@@ -2,11 +2,12 @@ import cookieParser from "cookie-parser";
 import cors from "cors";
 import * as dotenv from "dotenv";
 import express from "express";
+import job from "./config/cron";
 import { addUser } from "./routes/addUser";
+import { getUsers } from "./routes/getUsers";
+import { handelTemplate } from "./routes/handelTemplate";
 import { OTP } from "./routes/sendotp";
 import { verify_Add_User } from "./routes/verify-Add-User";
-import { getUsers } from "./routes/getUsers";
-import job from "./config/cron";
 dotenv.config();
 const app = express();
 app.use(express.json());
@@ -26,6 +27,7 @@ app.get("/api/health", (req, res) => {
 app.use("/auth", OTP);
 app.use("/verify", verify_Add_User);
 app.use("/add", addUser);
+app.use("/template", handelTemplate);
 app.use("/get", getUsers);
 
 app.listen(process.env.PORT || 8080);

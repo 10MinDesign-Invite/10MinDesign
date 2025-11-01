@@ -21,3 +21,10 @@ export const forgotPasswordSchema = z.object({
     .min(6, { message: "min 6 char is nedded in password" }),
   otp: z.string().min(6, { message: "wrong otp format" }),
 });
+
+export const templateSchema = z.object({
+  templateId: z.string(),
+  templateData: z.string(),
+  category:z.string()
+});
+

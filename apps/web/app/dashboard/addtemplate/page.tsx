@@ -1,11 +1,22 @@
 "use client";
 
-import React, { useState, ChangeEvent, useEffect } from "react";
-import { Plus, PlusSquare, Trash2 } from "lucide-react";
-import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import axios from "axios";
+import { Plus, PlusSquare, Trash2 } from "lucide-react";
+import { ChangeEvent, useState } from "react";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuLabel,
+  DropdownMenuRadioGroup,
+  DropdownMenuRadioItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@radix-ui/react-dropdown-menu"
+import { toast } from "react-toastify";
 
 interface Field {
   label: string;
@@ -16,6 +27,8 @@ interface Field {
 export default function DynamicFields() {
   const [componentId, setComponentId] = useState("");
   const [fields, setFields] = useState<Field[]>([{ label: "", value: "" }]);
+  const [category, setCategory] = useState("")
+
 
   const addField = (isLarge = false) => {
     setFields((prev) => [...prev, { label: "", value: "", isLarge }]);
@@ -34,17 +47,41 @@ export default function DynamicFields() {
       prev.map((f, i) => (i === index ? { ...f, [key]: value } : f))
     );
   };
- 
-  const handleSubmit = () => {
-    console.log(componentId,fields);
-    alert("✅ Data saved! Check console output.");
+
+  const handleSubmit = async () => {
+    const res = await axios.post(
+      `${process.env.NEXT_PUBLIC_Backend_URL}/template/add`,
+      { templateId:componentId, templateData: JSON.stringify(fields), category },
+      { withCredentials: true }
+    );
+
+    if(res.status === 200){
+      toast.success("template added successfully...")
+    }
   };
 
+  const handleUpdate = async () => {
+    const update = await axios.put(`${process.env.NEXT_PUBLIC_Backend_URL}/template/update`,{templateId:componentId,templateData:JSON.stringify(fields),category},{withCredentials:true})
+    if(update.status === 200){
+      toast.success("template update success...")
+    }else{
+      toast.success("operation fail...")
+    }
+  }
+  const handleDelete = async () => {
+    const update = await axios.put(`${process.env.NEXT_PUBLIC_Backend_URL}/template/delete`,{templateId:componentId,category},{withCredentials:true})
+    if(update.status === 200){
+      toast.success("template deletion success...")
+    }else{
+      toast.success("operation fail...")
+    }
+  }
+
   return (
-    <div className="max-w-6xl mx-auto p-6 space-y-8 overflow-x-hidden">
+    <div className="max-w-6xl mx-auto p-6 space-y-8 overflow-x-hidden ">
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
-        <h2 className="text-2xl font-bold">🧩 Add Template Info </h2>
+        <h2 className="text-2xl font-bold"> Add Template Info </h2>
         <div className="flex gap-2 flex-wrap">
           <Button variant="outline" onClick={() => addField(false)}>
             <Plus className="w-4 h-4 mr-2" /> Add Field
@@ -52,8 +89,14 @@ export default function DynamicFields() {
           <Button variant="outline" onClick={() => addField(true)}>
             <PlusSquare className="w-4 h-4 mr-2" /> Add Large Field
           </Button>
-           <Button onClick={handleSubmit} className="w-full md:w-auto">
+          <Button onClick={handleSubmit} className="w-full md:w-auto">
             Save Data
+          </Button>
+          <Button onClick={handleUpdate} className="w-full md:w-auto">
+            Update
+          </Button>
+          <Button onClick={handleDelete} className="w-full md:w-auto">
+            Delete
           </Button>
         </div>
       </div>
@@ -75,6 +118,39 @@ export default function DynamicFields() {
             />
           </div>
 
+          <div className="flex flex-col relative">
+            <Label>Category</Label>
+            <DropdownMenu >
+              <DropdownMenuTrigger asChild>
+                <Button variant="outline">Select Template Category</Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent className="w-[300px] bg-black p-3 rounded-md border">
+                <DropdownMenuLabel className="text-green-300 font-bold">Template Category</DropdownMenuLabel>
+                <DropdownMenuSeparator />
+                <DropdownMenuRadioGroup
+                  value={category}
+                  onValueChange={setCategory}
+                >
+                  <DropdownMenuRadioItem className="mt-2 text-white ml-3 hover:font-bold transition-all duration-200 cursor-pointer hover:pl-2" value="wedding">
+                    wedding
+                  </DropdownMenuRadioItem>
+                  <DropdownMenuRadioItem className="mt-2 text-white ml-3 hover:font-bold transition-all duration-200 cursor-pointer hover:pl-2" value="birthday">
+                    birthday
+                  </DropdownMenuRadioItem>
+                  <DropdownMenuRadioItem className="mt-2 text-white ml-3 hover:font-bold transition-all duration-200 cursor-pointer hover:pl-2" value="rip">
+                    rip
+                  </DropdownMenuRadioItem>
+                  <DropdownMenuRadioItem className="mt-2 text-white ml-3 hover:font-bold transition-all duration-200 cursor-pointer hover:pl-2" value="opening">
+                    opening
+                  </DropdownMenuRadioItem>
+                  <DropdownMenuRadioItem className="mt-2 text-white ml-3 hover:font-bold transition-all duration-200 cursor-pointer hover:pl-2" value="festival">
+                    festival
+                  </DropdownMenuRadioItem>
+                </DropdownMenuRadioGroup>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </div>
+
           {/* Dynamic Fields */}
           {fields.map((field, index) => (
             <div
@@ -89,10 +165,8 @@ export default function DynamicFields() {
                 <Label>Label</Label>
                 <Input
                   value={field.label}
-                  onChange={(e) =>
-                    updateField(index, "label", e.target.value)
-                  }
-                  placeholder="e.g. City"
+                  onChange={(e) => updateField(index, "label", e.target.value)}
+                  placeholder="e.g. name"
                 />
               </div>
 
@@ -104,7 +178,7 @@ export default function DynamicFields() {
                     onChange={(e) =>
                       updateField(index, "value", e.target.value)
                     }
-                    placeholder="Enter large text..."
+                    placeholder="Enter large Info..."
                     className="min-h-[100px]"
                   />
                 ) : (
@@ -113,7 +187,7 @@ export default function DynamicFields() {
                     onChange={(e) =>
                       updateField(index, "value", e.target.value)
                     }
-                    placeholder="e.g. Mumbai"
+                    placeholder="e.g. some name"
                   />
                 )}
               </div>
@@ -128,9 +202,7 @@ export default function DynamicFields() {
               </Button>
             </div>
           ))}
-
         </div>
-         
 
         {/* Preview Section */}
         <div className="bg-gray-50 dark:bg-zinc-900 border rounded-xl p-5 shadow-inner">
@@ -159,7 +231,6 @@ export default function DynamicFields() {
             </ul>
           )}
         </div>
-        
       </div>
     </div>
   );

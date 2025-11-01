@@ -27,5 +27,37 @@ model OtpStore{
     email     String   @unique
     otp       String
     createdAt DateTime @default(now())
-    expiresAt DateTime
+    expiresAt DateTime @default(now())
+}
+
+model TemplateWedding{
+    id             Int      @id @default(autoincrement())
+    templateId     String   @unique
+    TemplateData   String
+    createdAt      DateTime @default(now())
+}
+model TemplateBirthday{
+    id             Int      @id @default(autoincrement())
+    templateId     String   @unique
+    TemplateData   String
+    createdAt      DateTime @default(now())
+}
+model TemplateRip{
+    id             Int      @id @default(autoincrement())
+    templateId     String   @unique
+    TemplateData   String
+    createdAt      DateTime @default(now())
+}
+model TemplateOpening{
+    id             Int      @id @default(autoincrement())
+    templateId     String   @unique
+    TemplateData   String
+    createdAt      DateTime @default(now())
+}
+model TemplateFestival{
+    id             Int      @id @default(autoincrement())
+    templateId     String   @unique
+    TemplateData   String
+    createdAt      DateTime @default(now())
+    
 }
