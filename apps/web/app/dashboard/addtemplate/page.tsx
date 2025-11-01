@@ -79,11 +79,21 @@ export default function DynamicFields() {
   // for update functionality
 
   async function handleGetData(){
-    if(category != ""){
-      const templateData = await axios.post(`${process.env.NEXT_PUBLIC_Backend_URL}/template/get`,{templateId:componentId,category},{withCredentials:true})
-      setFields(JSON.parse(templateData.data.TemplateData))
+    try {
+      if(category != ""){
+      const templateData = await axios.post(`${process.env.NEXT_PUBLIC_Backend_URL}/template/get`,{templateId:componentId,category},{withCredentials:true})      
+      if(templateData.status === 200){
+         setFields(JSON.parse(templateData.data.TemplateData))
+      }else{
+        toast.warn("somthing wrong..")
+      }
     }else{
       toast.warning("select category first...")
+    }
+    } catch (error:any) {      
+      if(error.response.status === 404){
+        toast.error("component not found")
+      }
     }
   } 
 

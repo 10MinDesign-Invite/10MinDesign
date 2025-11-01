@@ -271,7 +271,6 @@ handelTemplate.post("/get", async (req: Request, res: Response) => {
 
     switch (category) {
       case "wedding":
-        console.log("=========================================wedding")
         const wedding = await prisma.templateWedding.findUnique({
             where:{
               templateId
@@ -281,7 +280,7 @@ handelTemplate.post("/get", async (req: Request, res: Response) => {
           res.status(200).send(wedding)
           return
         }else{
-          res.status(404).send("operation failed of component not found...")
+          res.status(404).json({error:"operation failed of component not found..."})
         }
         break;
       case "birthday":
