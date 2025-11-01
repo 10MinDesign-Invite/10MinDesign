@@ -6,7 +6,7 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import axios from "axios";
 import { Plus, PlusSquare, Trash2 } from "lucide-react";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -28,7 +28,6 @@ export default function DynamicFields() {
   const [componentId, setComponentId] = useState("");
   const [fields, setFields] = useState<Field[]>([{ label: "", value: "" }]);
   const [category, setCategory] = useState("")
-
 
   const addField = (isLarge = false) => {
     setFields((prev) => [...prev, { label: "", value: "", isLarge }]);
@@ -77,25 +76,39 @@ export default function DynamicFields() {
     }
   }
 
+  // for update functionality
+
+  async function handleGetData(){
+    if(category != ""){
+      const templateData = await axios.post(`${process.env.NEXT_PUBLIC_Backend_URL}/template/get`,{templateId:componentId,category},{withCredentials:true})
+      setFields(JSON.parse(templateData.data.TemplateData))
+    }else{
+      toast.warning("select category first...")
+    }
+  } 
+
   return (
     <div className="max-w-6xl mx-auto p-6 space-y-8 overflow-x-hidden ">
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
         <h2 className="text-2xl font-bold"> Add Template Info </h2>
-        <div className="flex gap-2 flex-wrap">
+        <div className="flex gap-2 flex-wrap justify-center items-center md:justify-start">
           <Button variant="outline" onClick={() => addField(false)}>
             <Plus className="w-4 h-4 mr-2" /> Add Field
           </Button>
           <Button variant="outline" onClick={() => addField(true)}>
             <PlusSquare className="w-4 h-4 mr-2" /> Add Large Field
           </Button>
-          <Button onClick={handleSubmit} className="w-full md:w-auto">
+          <Button onClick={handleGetData} className="w-[50%]  sm:w-auto">
+            Get Data
+          </Button>
+          <Button onClick={handleSubmit} className="w-[50%]  sm:w-auto">
             Save Data
           </Button>
-          <Button onClick={handleUpdate} className="w-full md:w-auto">
+          <Button onClick={handleUpdate} className="w-[50%]  sm:w-auto">
             Update
           </Button>
-          <Button onClick={handleDelete} className="w-full md:w-auto">
+          <Button onClick={handleDelete} className="w-[50%]  sm:w-auto">
             Delete
           </Button>
         </div>

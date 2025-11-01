@@ -258,3 +258,88 @@ handelTemplate.put("/delete", async (req: Request, res: Response) => {
     console.log(error);
   }
 });
+
+handelTemplate.post("/get", async (req: Request, res: Response) => {
+  try {
+    const { templateId, category } = req.body;
+    
+    if (!templateId||!category) {
+      res.status(400).send("invalid inputs...");
+      return;
+    }
+
+
+    switch (category) {
+      case "wedding":
+        console.log("=========================================wedding")
+        const wedding = await prisma.templateWedding.findUnique({
+            where:{
+              templateId
+            },
+        })
+        if(wedding){
+          res.status(200).send(wedding)
+          return
+        }else{
+          res.status(404).send("operation failed of component not found...")
+        }
+        break;
+      case "birthday":
+        const birthday = await prisma.templateBirthday.findUnique({
+            where:{
+              templateId
+            },
+        })
+        if(birthday){
+          res.status(200).send(birthday)
+          return
+        }else{
+          res.status(404).send("operation failed of component not found...")
+        }
+        break;
+      case "rip":
+        const rip = await prisma.templateRip.findUnique({
+            where:{
+              templateId
+            },
+        })
+        if(rip){
+          res.status(200).send(rip)
+          return
+        }else{
+          res.status(404).send("operation failed of component not found...")
+        }
+        break;
+      case "opening":
+        const opening = await prisma.templateOpening.findUnique({
+            where:{
+              templateId
+            },
+        })
+        if(opening){
+          res.status(200).send(opening)
+          return
+        }else{
+          res.status(404).send("operation failed of component not found...")
+        }
+        break;
+      case "festival":
+        const festival = await prisma.templateFestival.findUnique({
+            where:{
+              templateId
+            },
+        })
+        if(festival){
+          res.status(200).send(festival)
+          return
+        }else{
+          res.status(404).send("operation failed of component not found...")
+        }
+        break;
+      default:
+        console.log("something wrong provide some valid category");
+    }
+  } catch (error) {
+    console.log(error);
+  }
+});
