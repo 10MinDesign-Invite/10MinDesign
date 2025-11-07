@@ -10,8 +10,11 @@ import {
 import axios from "axios";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { toast } from "react-toastify";
+import Turnstile, { useTurnstile } from "react-turnstile";
+
+
 
 interface sendOtpType {
   success: boolean;
@@ -19,19 +22,13 @@ interface sendOtpType {
 }
 
 export default function Page() {
+  const turnstile = useTurnstile();
   const [email, setEmail] = useState("");
   const [otp, setOtp] = useState("");
   const [otpSended, setOtpSended] = useState(false);
-  const [hide, setHide] = useState(false);
+  const hide = useRef({otpHide:true,passwordHide:true})
+  const [capchaToken, setCapchaToken] = useState("");
   const router = useRouter();
-
-  useEffect(() => {
-    const timer = setTimeout(() => setHide(false), 30000);
-
-    return () => {
-      clearTimeout(timer);
-    };
-  }, [otpSended]);
 
   async function sendOTP() {
     if (!email) {
@@ -44,23 +41,26 @@ export default function Page() {
     try {
       const res = await axios.post<sendOtpType>(
         `${process.env.NEXT_PUBLIC_Backend_URL}/auth/send-otp`,
-        { email },
+        { email, capchaToken },
       );
 
       toast.dismiss(otpSendLoading);
 
       if (res.data.success) {
         setOtpSended(true);
-        setHide(true);
         toast.success(res.data.message);
+        hide.current.passwordHide = false;
       } else {
-        toast.warning(res.data.message);
+        if (res.data.message == "you are bot") {
+          turnstile.reset();
+          toast.warning(res.data.message);
+        }
       }
     } catch (error: any) {
       toast.dismiss(otpSendLoading);
       toast.error(
         error?.response?.data?.message ||
-          "Something went wrong while sending OTP",
+        "Something went wrong while sending OTP",
       );
     }
   }
@@ -99,6 +99,10 @@ export default function Page() {
       toast.dismiss(toastId);
     }
   };
+
+  // cloud flair 
+
+
   return (
     <div className="flex justify-center items-center w-full h-dvh">
       <Card className="w-[90%] md:w-[50%] lg:w-[28%]">
@@ -145,15 +149,26 @@ export default function Page() {
                 <InputOTPSlot index={5} />
               </InputOTPGroup>
             </InputOTP>
+            
+            <div className="flex justify-center items-center">
 
+              <Turnstile
+                sitekey={`${process.env.NEXT_PUBLIC_CLOUD_FLARE_SITEKEY}`}
+                onVerify={(token) => {
+                  setCapchaToken(token);
+                  hide.current.otpHide = false;
+                }}
+              />
+
+            </div>
             <Button
-              disabled={hide ? true : false}
+              disabled={hide.current.otpHide ? true : false}
               onClick={sendOTP}
               type="button"
             >
               Send OTP
             </Button>
-            <Button type="submit">Reset Password</Button>
+            <Button disabled={hide.current.passwordHide ? true : false} type="submit">Reset Password</Button>
             <Link href={"/"} className="text-sm underline w-full text-center">
               Back to Home
             </Link>

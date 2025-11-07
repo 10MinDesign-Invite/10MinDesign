@@ -6,11 +6,12 @@ import bcrypt from "bcrypt";
 import { forgotPasswordSchema } from "@repo/zod-input-validation";
 import { resend } from "../config/resend-config";
 import { emailHtml } from "../helpers/emailHtml";
+import { capchaMiddleware } from "../middleware/capchaMiddleware";
 dotenv.config();
 
 export const OTP = Router();
 
-OTP.post("/send-otp", async (req, res) => {
+OTP.post("/send-otp",capchaMiddleware, async (req, res) => {
   const { email } = req.body;
   if (!email) {
     res.status(400).json({ success: false, message: "Email is required" });
@@ -33,7 +34,7 @@ OTP.post("/send-otp", async (req, res) => {
       const { data, error } = await resend.emails.send({
         from: "10MinDesign <noreply@api.10mindesigns.shop>",
         to: [`${email}`],
-        subject: "sending or testing the email",
+        subject: "Requesting for password Reset",
         html: `${emailHtml(email, generatedOtp)}`,
       });
 
