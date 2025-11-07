@@ -153,7 +153,7 @@ export default function Page() {
             <div className="flex justify-center items-center">
 
               <Turnstile
-                sitekey={`${process.env.NEXT_PUBLIC_CLOUD_FLARE_SITEKEY}`}
+                sitekey={`${process.env.CLOUD_FLARE_SITEKEY}`}
                 onVerify={(token) => {
                   setCapchaToken(token);
                   hide.current.otpHide = false;
