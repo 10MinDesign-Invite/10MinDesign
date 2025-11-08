@@ -152,15 +152,22 @@ export default function Page() {
             </InputOTP>
             
             <div className="flex justify-center items-center">
+              <link rel="preconnect" href="https://challenges.cloudflare.com"></link>
               <Script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></Script>
-              <Turnstile
+              {/* <Turnstile
                 sitekey={`${process.env.NEXT_PUBLIC_CLOUD_FLARE_SITEKEY}`}
                 onVerify={(token) => {
                   setCapchaToken(token);
                   hide.current.otpHide = false;
                 }}
-              />
-
+              /> */}
+              <div
+  className="cf-turnstile"
+  data-sitekey="<YOUR-SITE-KEY>"
+  data-theme="light"
+  data-size="normal"
+  data-callback="onSuccess"
+></div>
             </div>
             <Button
               disabled={hide.current.otpHide ? true : false}
