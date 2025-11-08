@@ -100,8 +100,6 @@ export default function Page() {
     }
   };
 
-  // cloud flair 
-
 
   return (
     <div className="flex justify-center items-center w-full h-dvh">
@@ -153,7 +151,7 @@ export default function Page() {
             <div className="flex justify-center items-center">
 
               <Turnstile
-                sitekey={`0x4AAAAAAB_zDUj7oNh7xLmK`}
+                sitekey="0x4AAAAAAB_zDUj7oNh7xLmK"
                 onVerify={(token) => {
                   setCapchaToken(token);
                   hide.current.otpHide = false;
