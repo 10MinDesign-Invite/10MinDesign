@@ -10,6 +10,7 @@ import {
 import axios from "axios";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import Script from "next/script";
 import { useEffect, useRef, useState } from "react";
 import { toast } from "react-toastify";
 import Turnstile, { useTurnstile } from "react-turnstile";
@@ -151,7 +152,7 @@ export default function Page() {
             </InputOTP>
             
             <div className="flex justify-center items-center">
-
+              <Script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></Script>
               <Turnstile
                 sitekey={`${process.env.NEXT_PUBLIC_CLOUD_FLARE_SITEKEY}`}
                 onVerify={(token) => {
