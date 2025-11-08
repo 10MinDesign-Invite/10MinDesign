@@ -10,7 +10,6 @@ import {
 import axios from "axios";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import Script from "next/script";
 import { useEffect, useRef, useState } from "react";
 import { toast } from "react-toastify";
 import Turnstile, { useTurnstile } from "react-turnstile";
@@ -152,22 +151,15 @@ export default function Page() {
             </InputOTP>
             
             <div className="flex justify-center items-center">
-              <link rel="preconnect" href="https://challenges.cloudflare.com"></link>
-              <Script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></Script>
-              {/* <Turnstile
-                sitekey={`${process.env.NEXT_PUBLIC_CLOUD_FLARE_SITEKEY}`}
+
+              <Turnstile
+                sitekey={`0x4AAAAAAB_zDUj7oNh7xLmK`}
                 onVerify={(token) => {
                   setCapchaToken(token);
                   hide.current.otpHide = false;
                 }}
-              /> */}
-              <div
-  className="cf-turnstile"
-  data-sitekey={`${process.env.NEXT_PUBLIC_CLOUD_FLARE_SITEKEY}`}
-  data-theme="light"
-  data-size="normal"
-  data-callback="onSuccess"
-></div>
+              />
+
             </div>
             <Button
               disabled={hide.current.otpHide ? true : false}
