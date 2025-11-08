@@ -26,7 +26,7 @@ export default function Page() {
   const [email, setEmail] = useState("");
   const [otp, setOtp] = useState("");
   const [otpSended, setOtpSended] = useState(false);
-  const hide = useRef({otpHide:true,passwordHide:true})
+  const [hide,setHide] = useState({otpHide:true,passwordHide:true})
   const [capchaToken, setCapchaToken] = useState("");
   const router = useRouter();
 
@@ -49,11 +49,12 @@ export default function Page() {
       if (res.data.success) {
         setOtpSended(true);
         toast.success(res.data.message);
-        hide.current.passwordHide = false;
+        setHide({otpHide:false,passwordHide:false});
       } else {
-        if (res.data.message == "you are bot") {
-          turnstile.reset();
-          toast.warning(res.data.message);
+        if (res.data.message == "don`t spam") {
+            setHide({otpHide:true,passwordHide:true});
+            turnstile.reset();
+            toast.warning(res.data.message);
         }
       }
     } catch (error: any) {
@@ -62,6 +63,8 @@ export default function Page() {
         error?.response?.data?.message ||
         "Something went wrong while sending OTP",
       );
+    }finally{
+      toast.dismiss(otpSendLoading);
     }
   }
   const handleSubmit = async (formData: FormData) => {
@@ -154,19 +157,19 @@ export default function Page() {
                 sitekey="0x4AAAAAAB_zDUj7oNh7xLmK"
                 onVerify={(token) => {
                   setCapchaToken(token);
-                  hide.current.otpHide = false;
+                  setHide({otpHide:false,passwordHide:true})
                 }}
               />
 
             </div>
             <Button
-              disabled={hide.current.otpHide ? true : false}
+              disabled={hide.otpHide ? true : false}
               onClick={sendOTP}
               type="button"
             >
               Send OTP
             </Button>
-            <Button disabled={hide.current.passwordHide ? true : false} type="submit">Reset Password</Button>
+            <Button disabled={hide.passwordHide ? true : false} type="submit">Reset Password</Button>
             <Link href={"/"} className="text-sm underline w-full text-center">
               Back to Home
             </Link>

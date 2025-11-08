@@ -18,7 +18,7 @@ export async function capchaMiddleware(req: Request, res: Response, next: NextFu
         if(result.success){
             next();
         }else{
-            res.json({ success: false, message: "you are bot" });
+            res.json({ success: false, message: "don`t spam" });
         }
     } catch (error) {
         console.log(error)
