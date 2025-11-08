@@ -163,7 +163,7 @@ export default function Page() {
               /> */}
               <div
   className="cf-turnstile"
-  data-sitekey="<YOUR-SITE-KEY>"
+  data-sitekey={`${process.env.NEXT_PUBLIC_CLOUD_FLARE_SITEKEY}`}
   data-theme="light"
   data-size="normal"
   data-callback="onSuccess"
