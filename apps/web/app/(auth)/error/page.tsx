@@ -1,12 +1,10 @@
 "use client";
 
-import { useSearchParams, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
 
 export default function AuthErrorPage() {
-  const searchParams = useSearchParams();
-  const router = useRouter();
-  const error = searchParams.get("error") || "Access Denied";
+  const router = useRouter()
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-gray-50 text-center px-4">
@@ -15,9 +13,7 @@ export default function AuthErrorPage() {
           Access Denied
         </h1>
         <p className="text-gray-600 mb-6">
-          {error === "OAuthAccountNotLinked"
-            ? "This email is already linked with a different sign-in method. Please use the same login method you used earlier."
-            : "Something went wrong during authentication. Please try again. OR Remember your SignUp method GOOGLE OR EMAIL"}
+          Something went wrong during authentication. Please try again. OR Remember your SignUp method GOOGLE OR EMAIL
         </p>
 
         <div className="flex flex-col sm:flex-row gap-3 justify-center">
