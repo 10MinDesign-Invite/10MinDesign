@@ -63,6 +63,7 @@ const config: NextAuthConfig = {
   ],
   pages: {
     signIn: "/login",
+    error: "/error",
   },
   callbacks: {
     signIn: async ({ user, account, email, profile }) => {
