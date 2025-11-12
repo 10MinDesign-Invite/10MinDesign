@@ -105,7 +105,7 @@ export function Header({ disableAnimation, authData }: propType) {
           <p
             className={`logo text-2xl lg:text-3xl ${disableAnimation == "" ? "md:opacity-0" : ""} lg:pl-3`}
           >
-            Invite
+            Invit
           </p>
         </Link>
         <nav className="hidden md:flex gap-5 lg:gap-7">
