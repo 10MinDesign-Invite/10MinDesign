@@ -316,15 +316,4 @@ export function Header({ disableAnimation, authData }: propType) {
     </header>
   );
 }
-{
-  /* <Link href={"/login"}>
-              <button
-                id="login-btn"
-                className={`w-[60px] md:w-[70px] h-[35px] md:h-[44px] rounded-md font-medium bg-black text-white dark:bg-white dark:text-black transform ${
-                  disableAnimation == "" ? "md:scale-0" : ""
-                }`}
-              >
-                Log in
-              </button>
-            </Link> */
-}
+
