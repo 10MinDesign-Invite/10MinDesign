@@ -33,27 +33,9 @@ importers:
       '@repo/database':
         specifier: workspace:*
         version: link:../../packages/database
-      '@repo/eslint-config':
-        specifier: workspace:*
-        version: link:../../packages/config-eslint
-      '@repo/typescript-config':
-        specifier: workspace:*
-        version: link:../../packages/config-typescript
       '@repo/zod-input-validation':
         specifier: workspace:*
         version: link:../../packages/zod-input-validation
-      '@types/bcrypt':
-        specifier: ^5.0.2
-        version: 5.0.2
-      '@types/express':
-        specifier: ^5.0.1
-        version: 5.0.5
-      '@types/jsonwebtoken':
-        specifier: ^9.0.9
-        version: 9.0.10
-      '@types/node':
-        specifier: ^22.14.0
-        version: 22.19.0
       bcrypt:
         specifier: ^6.0.0
         version: 6.0.0
@@ -78,22 +60,40 @@ importers:
       jsonwebtoken:
         specifier: ^9.0.2
         version: 9.0.2
-      nodemon:
-        specifier: ^3.1.10
-        version: 3.1.10
       resend:
         specifier: ^6.1.2
         version: 6.4.2
-      typescript:
-        specifier: ^5.8.3
-        version: 5.9.3
     devDependencies:
+      '@repo/eslint-config':
+        specifier: workspace:*
+        version: link:../../packages/config-eslint
+      '@repo/typescript-config':
+        specifier: workspace:*
+        version: link:../../packages/config-typescript
+      '@types/bcrypt':
+        specifier: ^5.0.2
+        version: 5.0.2
       '@types/cookie-parser':
         specifier: ^1.4.9
         version: 1.4.10(@types/express@5.0.5)
       '@types/cors':
         specifier: ^2.8.17
         version: 2.8.19
+      '@types/express':
+        specifier: ^5.0.1
+        version: 5.0.5
+      '@types/jsonwebtoken':
+        specifier: ^9.0.9
+        version: 9.0.10
+      '@types/node':
+        specifier: ^22.14.0
+        version: 22.19.0
+      nodemon:
+        specifier: ^3.1.10
+        version: 3.1.10
+      typescript:
+        specifier: ^5.8.3
+        version: 5.9.3
 
   apps/web:
     dependencies:
@@ -196,15 +196,6 @@ importers:
       react-turnstile:
         specifier: ^1.1.4
         version: 1.1.4(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
-      tailwind-merge:
-        specifier: ^3.3.0
-        version: 3.4.0
-      tailwind-scrollbar-hide:
-        specifier: ^2.0.0
-        version: 2.0.0(tailwindcss@3.4.18(ts-node@10.9.2(@types/node@20.19.24)(typescript@5.5.4)))
-      tailwindcss-animate:
-        specifier: ^1.0.7
-        version: 1.0.7(tailwindcss@3.4.18(ts-node@10.9.2(@types/node@20.19.24)(typescript@5.5.4)))
     devDependencies:
       '@next/eslint-plugin-next':
         specifier: ^14.1.1
@@ -245,9 +236,18 @@ importers:
       postcss:
         specifier: ^8.5.3
         version: 8.5.6
+      tailwind-merge:
+        specifier: ^3.3.0
+        version: 3.4.0
+      tailwind-scrollbar-hide:
+        specifier: ^2.0.0
+        version: 2.0.0(tailwindcss@3.4.18(ts-node@10.9.2(@types/node@20.19.24)(typescript@5.5.4)))
       tailwindcss:
         specifier: ^3.4.17
         version: 3.4.18(ts-node@10.9.2(@types/node@20.19.24)(typescript@5.5.4))
+      tailwindcss-animate:
+        specifier: ^1.0.7
+        version: 1.0.7(tailwindcss@3.4.18(ts-node@10.9.2(@types/node@20.19.24)(typescript@5.5.4)))
       typescript:
         specifier: 5.5.4
         version: 5.5.4
@@ -283,9 +283,6 @@ importers:
       '@prisma/client':
         specifier: latest
         version: 6.19.0(prisma@6.19.0(typescript@5.5.4))(typescript@5.5.4)
-      '@types/node':
-        specifier: ^20.17.50
-        version: 20.19.24
       dotenv:
         specifier: ^16.5.0
         version: 16.6.1
@@ -296,6 +293,9 @@ importers:
       '@repo/typescript-config':
         specifier: workspace:*
         version: link:../config-typescript
+      '@types/node':
+        specifier: ^20.17.50
+        version: 20.19.24
       eslint:
         specifier: ^8.57.0
         version: 8.57.1
@@ -373,15 +373,16 @@ importers:
 
   packages/zod-input-validation:
     dependencies:
+      zod:
+        specifier: ^3.24.3
+        version: 3.25.76
+    devDependencies:
       '@repo/typescript-config':
         specifier: workspace:*
         version: link:../config-typescript
       typescript:
         specifier: ^5.8.3
         version: 5.9.3
-      zod:
-        specifier: ^3.24.3
-        version: 3.25.76
 
 packages:
 

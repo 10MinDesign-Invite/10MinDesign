@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "tsc",
+    "build": "tsc -b",
     "start": "pnpm run build && node dist/index.js",
     "dev": "pnpm run build && nodemon dist/index.js"
   },
@@ -14,13 +14,7 @@
   "dependencies": {
     "@panva/hkdf": "^1.2.1",
     "@repo/database": "workspace:*",
-    "@repo/eslint-config": "workspace:*",
-    "@repo/typescript-config": "workspace:*",
     "@repo/zod-input-validation": "workspace:*",
-    "@types/bcrypt": "^5.0.2",
-    "@types/express": "^5.0.1",
-    "@types/jsonwebtoken": "^9.0.9",
-    "@types/node": "^22.14.0",
     "bcrypt": "^6.0.0",
     "cookie-parser": "^1.4.7",
     "cors": "^2.8.5",
@@ -29,12 +23,18 @@
     "express": "^5.1.0",
     "jose": "^6.1.0",
     "jsonwebtoken": "^9.0.2",
-    "nodemon": "^3.1.10",
-    "resend": "^6.1.2",
-    "typescript": "^5.8.3"
+    "resend": "^6.1.2"
   },
   "devDependencies": {
     "@types/cookie-parser": "^1.4.9",
-    "@types/cors": "^2.8.17"
+    "@types/cors": "^2.8.17",
+    "typescript": "^5.8.3",
+    "nodemon": "^3.1.10",
+    "@types/bcrypt": "^5.0.2",
+    "@types/express": "^5.0.1",
+    "@types/jsonwebtoken": "^9.0.9",
+    "@types/node": "^22.14.0",
+    "@repo/eslint-config": "workspace:*",
+    "@repo/typescript-config": "workspace:*"
   }
 }

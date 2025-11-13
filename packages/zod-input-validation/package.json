@@ -13,8 +13,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "zod": "^3.24.3"
+  },
+  "devDependencies": {
     "typescript": "^5.8.3",
-    "zod": "^3.24.3",
     "@repo/typescript-config": "workspace:*"
   }
 }
