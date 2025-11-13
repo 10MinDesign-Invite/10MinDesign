@@ -1,5 +1,5 @@
 import Router from "express";
-import { generateOTP } from "../utils/otpConfig";
+import { generateOTP } from "../config/otpConfig";
 import { prisma } from "@repo/database";
 import * as dotenv from "dotenv";
 import bcrypt from "bcrypt";
