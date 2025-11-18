@@ -21,7 +21,7 @@ export default function DesignsPage() {
     <div className="max-w-[1440px] mx-auto mt-[80px]">
       {
               <ErrorBoundary errorComponent={()=><TemplateNotFound/>}>
-                <DynamicComponent/> 
+                {DynamicComponent && <DynamicComponent/>} 
               </ErrorBoundary>
       }
     </div>
