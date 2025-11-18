@@ -16,6 +16,7 @@
     "generate": "prisma generate",
     "lint": "eslint . --max-warnings 0",
     "studio": "prisma studio",
+    "preinstall": "pnpm generate",
     "build": "tsc"
   },
   "dependencies": {
