@@ -2,6 +2,7 @@ import { prisma } from "@repo/database";
 import { Request, Response, Router } from "express";
 import bcrypt from "bcrypt";
 import { registerSchema } from "@repo/zod-input-validation";
+import { ADMIN_EMAIL } from "../env-config";
 
 export const addUser = Router();
 
@@ -22,7 +23,7 @@ addUser.post("/user", async (req: Request, res: Response) => {
           email,
           image,
           googleId: id?.toString(),
-          role: process.env.ADMIN_EMAIL === email ? 'admin' : 'user'
+          role: ADMIN_EMAIL === email ? 'admin' : 'user'
         },
       });
       if (result) {
@@ -73,7 +74,7 @@ addUser.post("/signupuser", async (req: Request, res: Response) => {
             email,
             name,
             password: hashPassword,
-            role: process.env.ADMIN_EMAIL === email ? 'admin' : 'user'
+            role: ADMIN_EMAIL === email ? 'admin' : 'user'
           },
         });
         res.status(201).json({ success: true, message: "signup successfully" });

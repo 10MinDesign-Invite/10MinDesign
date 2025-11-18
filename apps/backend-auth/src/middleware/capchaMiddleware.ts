@@ -1,4 +1,5 @@
 import { NextFunction, Request, Response } from "express";
+import { CLOUD_FLAIR_SECRETKEY } from "../env-config";
 
 export async function capchaMiddleware(req: Request, res: Response, next: NextFunction) {
     try {
@@ -10,7 +11,7 @@ export async function capchaMiddleware(req: Request, res: Response, next: NextFu
             },
             body: JSON.stringify({
                 response:capchaToken,
-                secret:process.env.CLOUD_FLAIR_SECRETKEY
+                secret:CLOUD_FLAIR_SECRETKEY
             }),
         });
     

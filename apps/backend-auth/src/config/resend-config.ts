@@ -1,7 +1,8 @@
 import { Resend } from "resend";
+import { NODE_ENV, RESEND_API_KEY, RESEND_API_KEY_DEV } from "../env-config";
 
 export const resend = new Resend(
-  process.env.NODE_ENV == "production"
-    ? process.env.RESEND_API_KEY
-    : process.env.RESEND_API_KEY_DEV,
+  NODE_ENV == "production"
+    ? RESEND_API_KEY
+    : RESEND_API_KEY_DEV,
 );

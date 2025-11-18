@@ -1,0 +1,22 @@
+import * as dotenv from "dotenv";
+dotenv.config();
+
+export const FRONTEND_URL = process.env.FRONTEND_URL
+export const jwt_OTP_SECRET= process.env.jwt_OTP_SECRET
+export const SMTP_USER=process.env.SMTP_USER
+export const SMTP_PASS=process.env.SMTP_PASS
+export const PORT=process.env.PORT
+export const NODE_ENV=process.env.NODE_ENV
+export const AUTH_SECRET=process.env.AUTH_SECRET
+export const DEV_SALT=process.env.DEV_SALT
+export const PROD_SALT=process.env.PROD_SALT
+export const REDIS_URL=process.env.REDIS_URL
+export const REDIS_TOKEN=process.env.REDIS_TOKEN
+export const AUTH_GOOGLE_ID=process.env.AUTH_GOOGLE_ID
+export const AUTH_GOOGLE_SECRET=process.env.AUTH_GOOGLE_SECRET
+export const ADMIN_EMAIL=process.env.ADMIN_EMAIL
+export const BACKEND_URL=process.env.BACKEND_URL
+export const RESEND_API_KEY=process.env.RESEND_API_KEY
+export const RESEND_API_KEY_DEV=process.env.RESEND_API_KEY_DEV
+export const DATABASE_URL=process.env.DATABASE_URL
+export const CLOUD_FLAIR_SECRETKEY=process.env.CLOUD_FLAIR_SECRETKEY

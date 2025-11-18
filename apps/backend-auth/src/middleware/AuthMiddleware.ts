@@ -1,13 +1,14 @@
 import { NextFunction, Request, Response } from "express";
 import { getDerivedEncryptionKey } from "../helpers/generateSecret";
 import jose from "jose"
+import { DEV_SALT, NODE_ENV, PROD_SALT } from "../env-config";
 export async function authMiddleware(
   req: Request,
   res: Response,
   next: NextFunction,
 ) {
   try {
-    const token = req.cookies[process.env.NODE_ENV === 'production' ? `${process.env.PROD_SALT}` : `${process.env.DEV_SALT}`];
+    const token = req.cookies[NODE_ENV === 'production' ? `${PROD_SALT}` : `${DEV_SALT}`];
     const encryptionKey = await getDerivedEncryptionKey();
     const { plaintext } = await jose.compactDecrypt(token, encryptionKey);
     const decodedPayload = JSON.parse(new TextDecoder().decode(plaintext));    

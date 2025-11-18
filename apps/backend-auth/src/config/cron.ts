@@ -1,9 +1,10 @@
 import { CronJob } from "cron";
 import https from "https";
+import { BACKEND_URL } from "../env-config";
 
 const job = new CronJob("*/14 * * * *", function () {
   https
-    .get(process.env.BACKEND_URL!, (res) => {
+    .get(BACKEND_URL!, (res) => {
       if (res.statusCode === 200) console.log("GET request sent successfully");
       else console.log("get eq fail", res.statusCode);
     })
