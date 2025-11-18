@@ -13,7 +13,7 @@ import { toPng } from "html-to-image";
 import { CiCircleInfo } from "react-icons/ci";
 import { Button } from "@/components/ui/button";
 
-export function Opening1() {
+export default function Opening1() {
   const [brandLogo, setBrandLogo] = useState("");
   const [title, setTitle] = useState("मैत्री कट्टा");
   const [service, setServices] = useState("बिर्याणी आणि चायनीज हाऊस.");
@@ -326,7 +326,7 @@ export function Opening1() {
       <DesignContainer>
         <div
           ref={containerRef}
-          className="border border-green-400 relative w-full md:h-[auto] mx-auto flex justify-center items-center"
+          className="relative w-full md:h-[auto] mx-auto flex justify-center items-center"
         >
           <Image
             src={`/firstinvitationdesignv2.png`}

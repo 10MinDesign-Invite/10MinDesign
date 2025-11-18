@@ -15,10 +15,8 @@
     "format": "prisma format",
     "generate": "prisma generate",
     "lint": "eslint . --max-warnings 0",
-    "prebuild": "pnpm run generate",
-    "predev": "npm run generate",
     "studio": "prisma studio",
-    "build": "pnpm tsc"
+    "build": "tsc"
   },
   "dependencies": {
     "@prisma/client": "latest",

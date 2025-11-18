@@ -7,7 +7,7 @@ import { DesignContainer } from "../../category-components/DesignContainer";
 import { DesignWraper } from "../../category-components/DesignWraper";
 import { DetailWrapper } from "../../category-components/DetailWrapper";
 
-export function Wedding1() {
+export default function Wedding1() {
   const containerRef = useRef(null);
   const [name1, setName1] = useState("सैनी");
   const [name2, setName2] = useState("शेट्टी");

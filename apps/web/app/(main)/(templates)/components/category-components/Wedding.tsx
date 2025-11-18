@@ -68,10 +68,10 @@ export function Wedding() {
                     <p className="">{"view"}</p>
                   </div>
                 </div>
-
+{/* change this later */}
                 <Link
                   className="w-[90%] mx-auto"
-                  href={`/category/wedding/${cur.wedding}`}
+                  href={`/category/wedding/Wedding1`}
                 >
                   <button className="w-full bg-blue-300 mt-1 text-center text-black p-1 rounded-xl">
                     Design

@@ -71,6 +71,45 @@ body{
   background-color: #02c2fd;
 }
 
+/* Main_loader animation */
+
+@keyframes pulse-slow {
+  0%, 100% {
+    opacity: 0.5;
+    transform: scale(0.95);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+}
+
+.animate-pulse-slow {
+  animation: pulse-slow 2.5s ease-in-out infinite;
+}
+
+/* Blur + opacity pulse for the main logo */
+@keyframes blurPulse {
+  0% {
+    filter: blur(12px);
+    opacity: 0.3;
+  }
+  50% {
+    filter: blur(0px);
+    opacity: 1;
+  }
+  100% {
+    filter: blur(12px);
+    opacity: 0.3;
+  }
+}
+
+.animate-blurPulse {
+  animation: blurPulse 2.2s ease-in-out infinite;
+}
+
+/* Main_Loader animation Enddd */
+
 @keyframes slideRight {
  0%{
   width: 0px;

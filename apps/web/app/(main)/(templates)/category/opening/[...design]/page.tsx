@@ -1,22 +1,29 @@
 "use client";
 
-import { Opening1 } from "@/app/(main)/(templates)/components/category-design/opening/Opening1";
-import { Opening2 } from "@/app/(main)/(templates)/components/category-design/opening/Opening2";
-import { notFound, useParams } from "next/navigation";
+import { ErrorBoundary } from "next/dist/client/components/error-boundary";
+import dynamic from "next/dynamic";
+import { useParams } from "next/navigation";
+import TemplateNotFound from "../../../components/TemplateNotFound";
+import { Main_Loader } from "@/components/Main_Loader";
 
-const designComponentMap: Record<string, React.ComponentType<any>> = {
-  Opening1,
-  Opening2,
-};
+
 
 export default function DesignsPage() {
   const params = useParams();
   let slug = params.design?.[0];
-  const Component = designComponentMap[slug!];
-  if (!Component) return notFound();
+   const DynamicComponent = dynamic(() => import(`@/app/(main)/(templates)/components/category-design/opening/${slug}`), {
+        ssr: false,
+        loading: () => (
+            <Main_Loader/>
+        ),
+   });
   return (
     <div className="max-w-[1440px] mx-auto mt-[80px]">
-      <Component />
+      {
+              <ErrorBoundary errorComponent={()=><TemplateNotFound/>}>
+                <DynamicComponent/> 
+              </ErrorBoundary>
+      }
     </div>
   );
 }
