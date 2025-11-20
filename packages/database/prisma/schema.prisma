@@ -30,6 +30,11 @@ model OtpStore{
     createdAt DateTime @default(now())
     expiresAt DateTime @default(now())
 }
+model Wedding{
+  id             Int      @id @default(autoincrement())
+  componentName  String   @unique
+  imageUrl       String
+}
 
 model TemplateWedding{
     id             Int      @id @default(autoincrement())
