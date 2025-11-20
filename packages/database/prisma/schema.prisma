@@ -21,6 +21,7 @@ model User {
   googleId  String?
   role      String  @default("user")
   @@index([email, googleId])
+  @@index([googleId])
 }
 model OtpStore{
     id        Int      @id @default(autoincrement())
