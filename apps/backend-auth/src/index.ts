@@ -8,6 +8,7 @@ import { handelTemplate } from "./routes/handelTemplate";
 import { OTP } from "./routes/sendotp";
 import { verify_Add_User } from "./routes/verify-Add-User";
 import { FRONTEND_URL, NODE_ENV, PORT } from "./env-config";
+import { handelWedding } from "./routes/handelWedding";
 
 
 const app = express();
@@ -32,5 +33,10 @@ app.use("/verify", verify_Add_User);
 app.use("/add", addUser);
 app.use("/template", handelTemplate);
 app.use("/get", getUsers);
+
+// wedding section
+
+app.use("/wedding",handelWedding)
+
 
 app.listen(PORT || 8080);
