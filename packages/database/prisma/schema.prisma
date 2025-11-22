@@ -33,6 +33,8 @@ model OtpStore{
 model Wedding{
   id             Int      @id @default(autoincrement())
   componentName  String   @unique
+  price          Int
+  width          Int? 
   imageUrl       String
 }
 
