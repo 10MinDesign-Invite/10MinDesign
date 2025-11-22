@@ -16,6 +16,7 @@
     "generate:dev": "prisma generate --config ./src/prisma.config.ts --schema ./prisma/schema.prisma",
     "lint": "eslint . --max-warnings 0",
     "studio": "prisma studio",
+    "postinstall": "pnpm prisma generate",
     "build": "tsc"
   },
   "dependencies": {
