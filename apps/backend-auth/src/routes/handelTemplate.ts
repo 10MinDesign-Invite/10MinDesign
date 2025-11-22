@@ -1,5 +1,5 @@
 import { prisma } from "@repo/database";
-import { templateSchema } from "@repo/zod-input-validation";
+import { templateSchema } from "@repo/zod-input-validation/template-types.ts";
 import { Request, Response, Router } from "express";
 
 export const handelTemplate = Router();

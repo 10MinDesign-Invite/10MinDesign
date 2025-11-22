@@ -1,52 +1,78 @@
+import { Request, Response, Router } from "express"
+import { redis } from "../config/redis-config";
 import { prisma } from "@repo/database";
-import { NextFunction, Request, Response, Router } from "express"
+import { paginationSchema, weddingInputSchema } from "@repo/zod-input-validation/template-types.ts";
 
 export const handelWedding = Router();
 
-handelWedding.post("/add",async (req:Request,res:Response)=>{
-    try {
-        const {componentName,imageUrl} = req.body;
-        console.log(componentName,imageUrl)
-        const result = await prisma.wedding.create({
-                  data: {
-                    componentName,
-                    imageUrl
-                  },
-                });
-        console.log(result)
-        res.send(result)
-    } catch (error) {
-        console.warn(error);
+handelWedding.post("/add", async (req: Request, res: Response) => {
+  try {
+    const { categoryName, imageUrl,price,width,componentName } = req.body;
+    const validInput = weddingInputSchema.safeParse({categoryName,imageUrl,price,width,componentName});
+    if(validInput.error){
+      res.send("invalid input..")
+      return
     }
+     await prisma.wedding.create({
+      data: {
+        componentName:validInput.data?.componentName,
+        price:Number(validInput.data.price),
+        width:Number(validInput.data.width),
+        imageUrl:validInput.data.imageUrl
+      },
+    });
+    
+    const keys = await redis.keys(`${categoryName}:*`);
+    if(keys.length > 0) await redis.del(...keys);
+
+    res.status(200).json({success:true,message:"new design added..."});
+  } catch (error) {
+    console.warn(error);
+  }
 })
 
-handelWedding.post("/get",async (req:Request,res:Response)=>{
+handelWedding.post("/get", async (req: Request, res: Response) => {
   try {
-    const page = parseInt(req.body.page) || 1; 
+    const page = parseInt(req.body.page) || 1;
     const items = parseInt(req.body.items) || 10;
+    const categoryName = req.body.categoryName;
+    
+    const validInput = paginationSchema.safeParse({page,items,categoryName})
+    if(validInput.error){
+      res.send("invalid pagination input")
+      return
+    }
     const skip = (page - 1) * items;
     const take = items;
 
-    const result = await prisma.wedding.findMany({
-            skip: skip,
-            take: take,
-            orderBy: {
-                id: 'asc',
-            },
-        });
+   const redisData = await redis.get(`${categoryName}:${page}`)
+   if(redisData){
+    res.status(200).send(redisData);
+   }else{
+     const result = await prisma.wedding.findMany({
+      skip: skip,
+      take: take,
+      orderBy: {
+        id: 'asc',
+      },
+    });
 
-        
-        const totalItems = await prisma.wedding.count();
-        const totalPages = Math.ceil(totalItems / items);
+    const totalItems = await prisma.wedding.count();
+    const totalPages = Math.ceil(totalItems / items);
 
-        res.json({
-            items,
-            currentPage: page,
-            item: items,
-            totalItems,
-            totalPages,
-            result
-        });
+    await redis.set(`${categoryName}:${page}`,{
+      totalPages,
+      currentPage:page,
+      result
+    })
+    res.json({
+      currentPage: page,
+      totalPages,
+      result
+    });
+
+   }
+    
   } catch (error) {
     console.warn(error)
   }

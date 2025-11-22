@@ -20,12 +20,12 @@ getUsers.get(
 
       const totalUsers = allUsers.length;
       const totalGoogleUsers = allUsers.filter(
-        (u) => u.googleId !== null,
+        (u:any) => u.googleId !== null,
       ).length;
       const totalGmailUsers = allUsers.filter(
-        (u) => u.googleId === null,
+        (u:any) => u.googleId === null,
       ).length;
-      const totalAdmins = allUsers.filter((u) => u.role === "admin").length;
+      const totalAdmins = allUsers.filter((u:any) => u.role === "admin").length;
 
       res.status(200).json({
         totalUsers,
