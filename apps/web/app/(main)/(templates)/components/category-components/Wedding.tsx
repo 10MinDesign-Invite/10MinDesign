@@ -114,7 +114,7 @@ export function Wedding() {
 {/* change this later */}
                 <Link
                   className="w-[90%] mx-auto"
-                  href={`/category/wedding/Wedding1`}
+                  href={`/category/wedding/${cur.componentName}`}
                 >
                   <button className="w-full bg-blue-300 mt-1 text-center text-black p-1 rounded-xl">
                     Design
