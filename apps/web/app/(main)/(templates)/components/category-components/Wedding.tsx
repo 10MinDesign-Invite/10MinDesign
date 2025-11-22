@@ -30,7 +30,7 @@ export function Wedding() {
   const [loading, setLoading] = useState(false);
 
   const { ref, inView } = useInView({
-    threshold: 1,
+    threshold: 0,
   });
 
   async function loadCards(pageNumber: number) {
