@@ -13,10 +13,9 @@
     "db:seed": "tsx src/seed.ts",
     "dev": "tsup src/* --watch",
     "format": "prisma format",
-    "ge": "prisma generate --config ./src/prisma.config.ts --schema ./prisma/schema.prisma",
+    "generate:dev": "prisma generate --config ./src/prisma.config.ts --schema ./prisma/schema.prisma",
     "lint": "eslint . --max-warnings 0",
     "studio": "prisma studio",
-    "preinstall": "pnpm prisma generate",
     "build": "tsc"
   },
   "dependencies": {
