@@ -22,9 +22,5 @@ export const forgotPasswordSchema = z.object({
   otp: z.string().min(6, { message: "wrong otp format" }),
 });
 
-export const templateSchema = z.object({
-  templateId: z.string(),
-  templateData: z.string(),
-  category:z.string()
-});
+
 
