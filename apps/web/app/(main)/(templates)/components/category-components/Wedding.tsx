@@ -7,7 +7,6 @@ import { IoMdEye } from "react-icons/io";
 import { CategoryLayout } from "./CategoryLayout";
 import { WeddingDesign } from "./WeddingDesign";
 import { useInView } from "react-intersection-observer";
-import axios from "axios";
 import { BottomLoader } from "@/components/Bottom_Loader";
 import { fetchCards } from "@/app/helpers/fetchCards";
 
