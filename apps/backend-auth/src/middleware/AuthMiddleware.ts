@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from "express";
-import { getDerivedEncryptionKey } from "../helpers/generateSecret";
-import jose from "jose"
-import { DEV_SALT, NODE_ENV, PROD_SALT } from "../env-config";
+import { getDerivedEncryptionKey } from "../helpers/generateSecret.js";
+import * as jose from "jose"
+import { DEV_SALT, NODE_ENV, PROD_SALT } from "../env-config.js";
 export async function authMiddleware(
   req: Request,
   res: Response,

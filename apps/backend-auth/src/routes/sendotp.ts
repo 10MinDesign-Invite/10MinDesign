@@ -1,15 +1,15 @@
-import Router from "express";
-import { generateOTP } from "../helpers/otpGenerator";
+import { generateOTP } from "../helpers/otpGenerator.js";
 import { prisma } from "@repo/database";
 import * as dotenv from "dotenv";
 import bcrypt from "bcrypt";
 import { forgotPasswordSchema } from "@repo/zod-input-validation";
-import { resend } from "../config/resend-config";
-import { emailHtml } from "../helpers/emailHtml";
-import { capchaMiddleware } from "../middleware/capchaMiddleware";
+import { resend } from "../config/resend-config.js";
+import { emailHtml } from "../helpers/emailHtml.js";
+import { capchaMiddleware } from "../middleware/capchaMiddleware.js";
+import { Router } from "express";
 dotenv.config();
 
-export const OTP = Router();
+export const OTP:Router = Router();
 
 OTP.post("/send-otp",capchaMiddleware, async (req, res) => {
   const { email } = req.body;

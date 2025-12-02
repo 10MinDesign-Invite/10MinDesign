@@ -1,6 +1,6 @@
 import { CronJob } from "cron";
 import https from "https";
-import { BACKEND_URL } from "../env-config";
+import { BACKEND_URL } from "../env-config.js";
 
 const job = new CronJob("*/14 * * * *", function () {
   https

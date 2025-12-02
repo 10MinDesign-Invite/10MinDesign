@@ -1,14 +1,14 @@
-import cookieParser from "cookie-parser";
 import cors from "cors";
 import express from "express";
-import job from "./config/cron";
-import { addUser } from "./routes/addUser";
-import { getUsers } from "./routes/getUsers";
-import { handelTemplate } from "./routes/handelTemplate";
-import { OTP } from "./routes/sendotp";
-import { verify_Add_User } from "./routes/verify-Add-User";
-import { FRONTEND_URL, NODE_ENV, PORT } from "./env-config";
-import { handelWedding } from "./routes/handelWedding";
+import job from "./config/cron.js";
+import { addUser } from "./routes/addUser.js";
+import { getUsers } from "./routes/getUsers.js";
+import { handelTemplate } from "./routes/handelTemplate.js";
+import { OTP } from "./routes/sendotp.js";
+import { verify_Add_User } from "./routes/verify-Add-User.js";
+import { FRONTEND_URL, NODE_ENV, PORT } from "./env-config.js";
+import { handelWedding } from "./routes/handelWedding.js";
+import cookieParser from "cookie-parser";
 
 
 const app = express();
@@ -18,10 +18,11 @@ app.use(cookieParser());
 
 app.use(
   cors({
-    origin: [FRONTEND_URL!],
+    origin: [FRONTEND_URL!,"http://localhost:3000"],
     credentials: true,
   }),
 );
+
 
 if (NODE_ENV == "production") job.start();
 

@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "main": "dist/client.js",
   "types": "./dist/client.d.ts",
+  "type": "module",
   "exports": {
     ".": "./dist/client.js"
   },
@@ -13,7 +14,7 @@
     "db:seed": "tsx src/seed.ts",
     "dev": "tsup src/* --watch",
     "format": "prisma format",
-    "generate:dev": "prisma generate --config ./src/prisma.config.ts --schema ./prisma/schema.prisma",
+    "generate": "prisma generate --config ./src/prisma.config.ts --schema ./prisma/schema.prisma",
     "lint": "eslint . --max-warnings 0",
     "studio": "prisma studio",
     "postinstall": "pnpm prisma generate",

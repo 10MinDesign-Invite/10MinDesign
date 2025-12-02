@@ -1,5 +1,5 @@
 import hkdf from "@panva/hkdf";
-import { AUTH_SECRET, DEV_SALT, NODE_ENV, PROD_SALT } from "../env-config";
+import { AUTH_SECRET, DEV_SALT, NODE_ENV, PROD_SALT } from "../env-config.js";
 
 const AUTH_COOKIE_NAME = NODE_ENV === 'production' ? `${PROD_SALT}` : `${DEV_SALT}`;
 export async function getDerivedEncryptionKey(): Promise<Uint8Array> {

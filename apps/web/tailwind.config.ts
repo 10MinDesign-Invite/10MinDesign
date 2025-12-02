@@ -5,7 +5,7 @@ const config = {
   darkMode: ["class"],
   content: ["./app/**/*.{js,ts,jsx,tsx}", "./components/**/*.{js,ts,jsx,tsx}"],
   presets: [sharedConfig],
-  plugins: [require("tailwindcss-animate"), require("tailwind-scrollbar-hide")],
+  plugins: [import("tailwindcss-animate"), import("tailwind-scrollbar-hide")],
   theme: {
   	extend: {
   		borderRadius: {

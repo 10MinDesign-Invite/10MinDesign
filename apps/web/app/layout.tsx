@@ -1,5 +1,4 @@
 import { ImageKitProvider } from "@imagekit/next";
-import "@repo/ui/styles.css";
 import type { Metadata } from "next";
 import { ToastContainer } from "react-toastify";
 import "./globals.css";

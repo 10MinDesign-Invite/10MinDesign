@@ -1,8 +1,8 @@
 import { Request, Response, Router } from "express";
 import { prisma } from "@repo/database";
-import { adminMiddleware } from "../middleware/adminMiddleware";
+import { adminMiddleware } from "../middleware/adminMiddleware.js";
 
-export const getUsers = Router();
+export const getUsers:Router = Router();
 
 getUsers.get(
   "/dashboard_data",

@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from "express";
-import { CLOUD_FLAIR_SECRETKEY } from "../env-config";
+import { CLOUD_FLAIR_SECRETKEY } from "../env-config.js";
 
 export async function capchaMiddleware(req: Request, res: Response, next: NextFunction) {
     try {

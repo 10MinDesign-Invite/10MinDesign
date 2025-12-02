@@ -4,6 +4,7 @@ import bcrypt from "bcryptjs";
 import NextAuth, { CredentialsSignin, type NextAuthConfig } from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 import Google from "next-auth/providers/google";
+import { getUrl } from "./lib/url-conf";
 
 const config: NextAuthConfig = {
   secret: process.env.AUTH_SECRET,
@@ -32,12 +33,13 @@ const config: NextAuthConfig = {
             cause: validInput.error.errors[0]?.message + "....",
           });
         }
-
+        const url = getUrl()
+        console.log(url)
         const user = await axios.post(
-          `${process.env.NEXT_PUBLIC_Backend_URL}/verify/user`,
+          `${url}/verify/user`,
           { email },
         );
-
+        console.log(user,"userfrom auth js@@@@@@@@@@uuuuuuuuuuuuuuuuuuuuuuuu")
         if (!user) {
           throw new CredentialsSignin("Invalid credentials.", {
             cause: "invalid credential",
@@ -66,7 +68,7 @@ const config: NextAuthConfig = {
     error: "/error",
   },
   callbacks: {
-    signIn: async ({ user, account, email, profile }) => {
+    signIn: async ({ user, account}) => {
       if (account?.provider === "google") {
         // try {
         const { email, id, name, image } = user;
@@ -74,8 +76,9 @@ const config: NextAuthConfig = {
         if (!email) {
           throw new Error("Invalid email");
         }
+        const url = getUrl();
         const res = await axios.post(
-          `${process.env.NEXT_PUBLIC_Backend_URL}/add/user`,
+          `${url}/add/user`,
           { email, id, name, image },
         );
         if (res.status === 200) {
@@ -102,8 +105,9 @@ const config: NextAuthConfig = {
       return session;
     },
     async jwt({ token }) {
+      const url = getUrl();
       const existing_user = await axios.post(
-        `${process.env.NEXT_PUBLIC_Backend_URL}/verify/user`,
+        `${url}/verify/user`,
         { email: token.email, customeData: "select only id and role" },
       );
       if (!existing_user) return token;
@@ -129,9 +133,12 @@ const config: NextAuthConfig = {
         path: "/",
         secure: process.env.NODE_ENV === "development" ? false : true,
         domain:
-          process.env.NODE_ENV === "development"
-            ? undefined
-            : ".10mindesigns.shop",
+          process.env.DOCKER == "true"
+          ? "localhost" 
+          : process.env.NODE_ENV === "production"
+          ? ".10mindesigns.shop" 
+          : undefined, 
+    
       },
     },
   },

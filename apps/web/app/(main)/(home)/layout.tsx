@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import "@repo/ui/styles.css";
 // import "../../app/globals.css"
 import { SessionProvider } from "next-auth/react";
 

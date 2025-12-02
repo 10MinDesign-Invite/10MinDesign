@@ -2,9 +2,9 @@ import { prisma } from "@repo/database";
 import { Request, Response, Router } from "express";
 import bcrypt from "bcrypt";
 import { registerSchema } from "@repo/zod-input-validation";
-import { ADMIN_EMAIL } from "../env-config";
+import { ADMIN_EMAIL } from "../env-config.js";
 
-export const addUser = Router();
+export const addUser:Router = Router();
 
 addUser.post("/user", async (req: Request, res: Response) => {
   try {

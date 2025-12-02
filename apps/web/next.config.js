@@ -5,7 +5,7 @@ const { withPrisma } = pkg;
 /** @type {import('next').NextConfig} */
 const config = {
   images: {
-    domains: ['lh3.googleusercontent.com'],
+    domains: ['lh3.googleusercontent.com','fonts.googleapis.com'],
   },
   webpack(config, { isServer }) {
     config.watchOptions = {

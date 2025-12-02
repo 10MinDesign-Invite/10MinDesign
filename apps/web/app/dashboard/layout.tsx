@@ -1,4 +1,3 @@
-import "@repo/ui/styles.css";
 import type { Metadata } from "next";
 // import "../../app/globals.css";
 import { MobileNav } from "./components/MobileNav";

@@ -2,12 +2,13 @@
   "name": "@repo/zod-input-validation",
   "version": "1.0.0",
   "description": "",
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "tsc"
   },
   "exports":{
-    ".":"./src/input.ts",
-    "./template-types.ts":"./src/backend-auth/template-types.ts"
+    ".":"./dist/input.js",
+    "./template-types.ts":"./dist/backend-auth/template-types.js"
   },
   "keywords": [],
   "author": "",

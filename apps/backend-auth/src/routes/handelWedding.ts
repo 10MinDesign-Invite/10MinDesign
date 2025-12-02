@@ -1,9 +1,9 @@
 import { Request, Response, Router } from "express"
-import { redis } from "../config/redis-config";
+import { redis } from "../config/redis-config.js";
 import { prisma } from "@repo/database";
 import { paginationSchema, weddingInputSchema } from "@repo/zod-input-validation/template-types.ts";
 
-export const handelWedding = Router();
+export const handelWedding:Router = Router();
 
 handelWedding.post("/add", async (req: Request, res: Response) => {
   try {
