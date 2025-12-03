@@ -7,10 +7,16 @@
   "scripts": {
     "build": "tsc"
   },
-  "exports":{
-    ".":"./dist/input.js",
-    "./template-types":"./dist/backend-auth/template-types.js"
+  "exports": {
+  ".": {
+    "types": "./dist/input.d.ts",
+    "default": "./dist/input.js"
   },
+  "./template-types": {
+    "types": "./dist/backend-auth/template-types.d.ts",
+    "default": "./dist/backend-auth/template-types.js"
+  }
+},
   "keywords": [],
   "author": "",
   "license": "ISC",
