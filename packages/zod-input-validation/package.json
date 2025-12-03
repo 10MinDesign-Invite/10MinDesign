@@ -9,7 +9,7 @@
   },
   "exports":{
     ".":"./dist/input.js",
-    "./template-types.ts":"./dist/backend-auth/template-types.js"
+    "./template-types":"./dist/backend-auth/template-types.js"
   },
   "keywords": [],
   "author": "",
