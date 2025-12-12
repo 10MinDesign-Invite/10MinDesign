@@ -16,7 +16,7 @@ gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
 export function Structure({ authData }: StructureProps) {
   return (
     <>
-      <Header disableAnimation="" authData={authData} />
+      <Header disableAnimation={false} authData={authData} />
       <Hero />
       <Features />
       <Footer />

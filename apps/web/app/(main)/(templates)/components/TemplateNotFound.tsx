@@ -5,7 +5,8 @@ export default function TemplateNotFound() {
     <div className="min-h-screen bg-black flex flex-col items-center justify-center text-gray-400 p-6 text-center space-y-6">
       <h1 className="text-4xl font-bold">Oops! Template Not Found</h1>
       <p className="text-lg max-w-md">
-        The template you are looking for does not exist or may have been removed.
+        The template you are looking for does not exist or may have been
+        removed.
       </p>
 
       <div className="flex space-x-4 mt-4">

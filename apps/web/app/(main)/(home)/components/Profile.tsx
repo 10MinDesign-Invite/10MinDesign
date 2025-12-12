@@ -33,8 +33,8 @@ export function Profile({ authData }: any) {
 
       <div className="">
         {profile && (
-          <Suspense fallback={<ProfileLoader/>}>
-            <ProfileData authData={authData} setProfile={setProfile}/>
+          <Suspense fallback={<ProfileLoader />}>
+            <ProfileData authData={authData} setProfile={setProfile} />
           </Suspense>
         )}
       </div>

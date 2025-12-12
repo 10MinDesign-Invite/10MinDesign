@@ -18,15 +18,15 @@ import { LiaBirthdayCakeSolid } from "react-icons/lia";
 import { SlArrowDown, SlMenu } from "react-icons/sl";
 import { logofont } from "../../../fonts/fonts-config";
 import { Profile } from "./Profile";
-import { Session, User } from "next-auth";
+import { User } from "next-auth";
 
 interface propType {
-  disableAnimation?: string;
+  disableAnimation?: boolean;
+  disableLoginButton?: boolean;
   authData?: User | null;
 }
 
-export function Header({ disableAnimation, authData }: propType) {
-  // const { data: authData } = useSession();
+export function Header({ disableAnimation, authData,disableLoginButton }: propType) {
   const [nav, setNav] = useState<boolean>(false);
   const [curNav, setCurNav] = useState({ explore: false });
   const [theme, setTheme] = useState("light");
@@ -47,7 +47,7 @@ export function Header({ disableAnimation, authData }: propType) {
 
   useGSAP(() => {
     let mm = gsap.matchMedia();
-    if (disableAnimation == "") {
+    if (disableAnimation == false) {
       mm.add("(min-width: 769px)", () => {
         gsap.set(".logo", {
           x: 550,
@@ -86,7 +86,7 @@ export function Header({ disableAnimation, authData }: propType) {
 
   return (
     <header
-      className={`max-w-[1440px] mx-auto flex justify-between pr-3 z-50 fixed top-0 left-0 right-0 backdrop-blur-xl ${disableAnimation == "" ? "lg:rounded-md opacity-0 sm:opacity-100 lg:opacity-100" : ""}`}
+      className={`max-w-[1440px] mx-auto flex justify-between pr-3 z-50 fixed top-0 left-0 right-0 backdrop-blur-xl ${disableAnimation == false ? "lg:rounded-md opacity-0 sm:opacity-100 lg:opacity-100" : ""}`}
     >
       <div className="flex p-1 py-4 gap-2 md:gap-[100px] borde">
         <div
@@ -103,7 +103,7 @@ export function Header({ disableAnimation, authData }: propType) {
           className={`${logofont.className} pl-2 flex justify-center items-center cursor-pointer`}
         >
           <p
-            className={`logo text-2xl lg:text-3xl ${disableAnimation == "" ? "md:opacity-0" : ""} lg:pl-3`}
+            className={`logo text-2xl lg:text-3xl ${disableAnimation == false ? "md:opacity-0" : ""} lg:pl-3`}
           >
             Invite
           </p>
@@ -162,10 +162,10 @@ export function Header({ disableAnimation, authData }: propType) {
           {authData != null && authData != undefined ? (
             <Profile authData={authData} />
           ) : (
-            <Link href={"/login"}>
+            !disableLoginButton && <Link href={"/login"}>
               <button
                 className={`w-[60px] md:w-[70px] h-[35px] md:h-[44px] rounded-md font-medium bg-black text-white dark:bg-white dark:text-black transform ${
-                  disableAnimation == "" ? "" : ""
+                  disableAnimation == false ? "" : ""
                 }`}
               >
                 Log in
@@ -175,7 +175,7 @@ export function Header({ disableAnimation, authData }: propType) {
         </div>
         <div
           id="primium-btn"
-          className={`flex dark:border-2 dark:border-white justify-center items-center borde px-2 md:px-5 lg:px-7 text-[14px] rounded-md font-light get_primium hover:bg-black hover:text-white hover:dark:bg-white hover:dark:text-black text-black dark:bg-black dark:text-white cursor-pointer transform ${disableAnimation == "" ? "md:scale-0" : ""}`}
+          className={`flex dark:border-2 dark:border-white justify-center items-center borde px-2 md:px-5 lg:px-7 text-[14px] rounded-md font-light get_primium hover:bg-black hover:text-white hover:dark:bg-white hover:dark:text-black text-black dark:bg-black dark:text-white cursor-pointer transform ${disableAnimation == false ? "md:scale-0" : ""}`}
         >
           Get Premium
         </div>
@@ -316,4 +316,3 @@ export function Header({ disableAnimation, authData }: propType) {
     </header>
   );
 }
-

@@ -11,7 +11,7 @@ services:
     ports:
       - "8080:8080"
     env_file:
-      - ./apps/backend-auth/.env.development.local
+      - ./apps/backend-auth/.env.local
     networks:
       - appnetwork
 
@@ -27,9 +27,9 @@ services:
       - "3000"  
     depends_on:
       - backend
-
+  
     env_file:
-      - ./apps/web/.env.development.local
+      - ./apps/web/.env.local
 
     networks:
       - appnetwork

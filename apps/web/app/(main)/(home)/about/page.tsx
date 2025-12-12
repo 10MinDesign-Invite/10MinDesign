@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 export default function AboutPage() {
   return (
     <>
-      <Header disableAnimation="disable" />
+      <Header disableAnimation={true} disableLoginButton={true} />
       <section className="max-w-5xl mx-auto mt-9 px-6 py-16 text-slate-800 dark:text-slate-200 transition-colors">
         {/* Title */}
         <h1 className="text-5xl font-extrabold text-center mb-4 text-violet-700 dark:text-violet-400">

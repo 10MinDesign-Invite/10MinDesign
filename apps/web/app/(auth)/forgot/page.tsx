@@ -10,11 +10,9 @@ import {
 import axios from "axios";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import { toast } from "react-toastify";
 import Turnstile, { useTurnstile } from "react-turnstile";
-
-
 
 interface sendOtpType {
   success: boolean;
@@ -26,7 +24,7 @@ export default function Page() {
   const [email, setEmail] = useState("");
   const [otp, setOtp] = useState("");
   const [otpSended, setOtpSended] = useState(false);
-  const [hide,setHide] = useState({otpHide:true,passwordHide:true})
+  const [hide, setHide] = useState({ otpHide: true, passwordHide: true });
   const [capchaToken, setCapchaToken] = useState("");
   const router = useRouter();
 
@@ -39,6 +37,7 @@ export default function Page() {
     const otpSendLoading = toast.loading("Sending OTP to your email...");
 
     try {
+      console.log(process.env.NEXT_PUBLIC_Backend_URL, "urlll");
       const res = await axios.post<sendOtpType>(
         `${process.env.NEXT_PUBLIC_Backend_URL}/auth/send-otp`,
         { email, capchaToken },
@@ -49,21 +48,21 @@ export default function Page() {
       if (res.data.success) {
         setOtpSended(true);
         toast.success(res.data.message);
-        setHide({otpHide:false,passwordHide:false});
+        setHide({ otpHide: false, passwordHide: false });
       } else {
         if (res.data.message == "don`t spam") {
-            setHide({otpHide:true,passwordHide:true});
-            turnstile.reset();
-            toast.warning(res.data.message);
+          setHide({ otpHide: true, passwordHide: true });
+          turnstile.reset();
+          toast.warning(res.data.message);
         }
       }
     } catch (error: any) {
       toast.dismiss(otpSendLoading);
       toast.error(
         error?.response?.data?.message ||
-        "Something went wrong while sending OTP",
+          "Something went wrong while sending OTP",
       );
-    }finally{
+    } finally {
       toast.dismiss(otpSendLoading);
     }
   }
@@ -102,7 +101,6 @@ export default function Page() {
       toast.dismiss(toastId);
     }
   };
-
 
   return (
     <div className="flex justify-center items-center w-full h-dvh">
@@ -150,17 +148,15 @@ export default function Page() {
                 <InputOTPSlot index={5} />
               </InputOTPGroup>
             </InputOTP>
-            
-            <div className="flex justify-center items-center">
 
+            <div className="flex justify-center items-center">
               <Turnstile
                 sitekey="0x4AAAAAAB_zDUj7oNh7xLmK"
                 onVerify={(token) => {
                   setCapchaToken(token);
-                  setHide({otpHide:false,passwordHide:true})
+                  setHide({ otpHide: false, passwordHide: true });
                 }}
               />
-
             </div>
             <Button
               disabled={hide.otpHide ? true : false}
@@ -169,7 +165,9 @@ export default function Page() {
             >
               Send OTP
             </Button>
-            <Button disabled={hide.passwordHide ? true : false} type="submit">Reset Password</Button>
+            <Button disabled={hide.passwordHide ? true : false} type="submit">
+              Reset Password
+            </Button>
             <Link href={"/"} className="text-sm underline w-full text-center">
               Back to Home
             </Link>

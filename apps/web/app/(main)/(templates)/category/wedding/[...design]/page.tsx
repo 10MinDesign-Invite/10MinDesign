@@ -6,7 +6,6 @@ import TemplateNotFound from "../../../components/TemplateNotFound";
 import { useState } from "react";
 import { Main_Loader } from "@/components/Main_Loader";
 
-
 export default function DesignsPage() {
   const params = useParams();
   let slug = params.design?.[0];
@@ -16,18 +15,16 @@ export default function DesignsPage() {
       import(
         `@/app/(main)/(templates)/components/category-design/wedding/${slug}`
       ),
-      {
-        ssr: false,
-        loading: () => (
-          <Main_Loader/>
-        ),
-      }
+    {
+      ssr: false,
+      loading: () => <Main_Loader />,
+    },
   );
   return (
     <div className="max-w-[1440px] mx-auto mt-[80px]">
       {
-        <ErrorBoundary errorComponent={()=><TemplateNotFound/>}>
-          <DynamicComponent/> 
+        <ErrorBoundary errorComponent={() => <TemplateNotFound />}>
+          <DynamicComponent />
         </ErrorBoundary>
       }
     </div>

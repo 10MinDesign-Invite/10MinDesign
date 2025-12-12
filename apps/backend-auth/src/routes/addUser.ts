@@ -4,7 +4,8 @@ import bcrypt from "bcrypt";
 import { registerSchema } from "@repo/zod-input-validation";
 import { ADMIN_EMAIL } from "../env-config.js";
 
-export const addUser:Router = Router();
+
+export const addUser: Router = Router();
 
 addUser.post("/user", async (req: Request, res: Response) => {
   try {
@@ -23,7 +24,7 @@ addUser.post("/user", async (req: Request, res: Response) => {
           email,
           image,
           googleId: id?.toString(),
-          role: ADMIN_EMAIL === email ? 'admin' : 'user'
+          role: ADMIN_EMAIL === email ? "admin" : "user",
         },
       });
       if (result) {
@@ -74,7 +75,7 @@ addUser.post("/signupuser", async (req: Request, res: Response) => {
             email,
             name,
             password: hashPassword,
-            role: ADMIN_EMAIL === email ? 'admin' : 'user'
+            role: ADMIN_EMAIL === email ? "admin" : "user",
           },
         });
         res.status(201).json({ success: true, message: "signup successfully" });

@@ -15,7 +15,7 @@ interface WeddingCard {
   componentName: string;
   imageUrl: string;
   price: number;
-  width?: number
+  width?: number;
 }
 
 export function Wedding() {
@@ -37,9 +37,9 @@ export function Wedding() {
     if (loading) return;
     setLoading(true);
 
-    const data = await fetchCards(pageNumber,10,"wedding");
+    const data = await fetchCards(pageNumber, 10, "wedding");
 
-    setImages(prev => [...prev, ...data.result]);
+    setImages((prev) => [...prev, ...data.result]);
     setTotalPages(data.totalPages);
 
     setLoading(false);
@@ -48,9 +48,9 @@ export function Wedding() {
   // first load 10 cards = page1
   useEffect(() => {
     loadCards(1);
-    ()=>{
-      setImages([])
-    }
+    () => {
+      setImages([]);
+    };
   }, []);
   // next rest pages 2,3,4,5,7
   useEffect(() => {
@@ -59,9 +59,9 @@ export function Wedding() {
       setPage(nextPage);
       loadCards(nextPage);
     }
-    ()=>{
-      setImages([])
-    }
+    () => {
+      setImages([]);
+    };
   }, [inView]);
 
   return (
@@ -111,7 +111,7 @@ export function Wedding() {
                     <p className="">{"view"}</p>
                   </div>
                 </div>
-{/* change this later */}
+                {/* change this later */}
                 <Link
                   className="w-[90%] mx-auto"
                   href={`/category/wedding/${cur.componentName}`}
@@ -135,12 +135,9 @@ export function Wedding() {
         />
       </div>
 
-            <div className="bg-whit p-3" ref={ref}>
-                {
-                    loading && <BottomLoader/>
-                }
-            </div>
-        
+      <div className="bg-whit p-3" ref={ref}>
+        {loading && <BottomLoader />}
+      </div>
     </div>
   );
 }

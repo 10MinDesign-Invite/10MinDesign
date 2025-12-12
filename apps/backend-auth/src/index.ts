@@ -6,9 +6,9 @@ import { getUsers } from "./routes/getUsers.js";
 import { handelTemplate } from "./routes/handelTemplate.js";
 import { OTP } from "./routes/sendotp.js";
 import { verify_Add_User } from "./routes/verify-Add-User.js";
-import { FRONTEND_URL, NODE_ENV, PORT } from "./env-config.js";
 import { handelWedding } from "./routes/handelWedding.js";
 import cookieParser from "cookie-parser";
+import { FRONTEND_URL, NODE_ENV, PORT } from "./env-config.js";
 
 
 const app = express();
@@ -18,11 +18,10 @@ app.use(cookieParser());
 
 app.use(
   cors({
-    origin: [FRONTEND_URL!,"http://localhost:3000"],
+    origin: [FRONTEND_URL!, "http://web:3000"],
     credentials: true,
   }),
 );
-
 
 if (NODE_ENV == "production") job.start();
 
@@ -37,7 +36,8 @@ app.use("/get", getUsers);
 
 // wedding section
 
-app.use("/wedding",handelWedding)
+app.use("/wedding", handelWedding);
 
-
-app.listen(PORT || 8080);
+app.listen(PORT || 8080, () =>
+  console.log(`Backend Auth Service running on port ${PORT || 8080}`),
+);

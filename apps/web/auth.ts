@@ -33,13 +33,8 @@ const config: NextAuthConfig = {
             cause: validInput.error.errors[0]?.message + "....",
           });
         }
-        const url = getUrl()
-        console.log(url)
-        const user = await axios.post(
-          `${url}/verify/user`,
-          { email },
-        );
-        console.log(user,"userfrom auth js@@@@@@@@@@uuuuuuuuuuuuuuuuuuuuuuuu")
+        const url = getUrl();
+        const user = await axios.post(`${url}/verify/user`, { email });
         if (!user) {
           throw new CredentialsSignin("Invalid credentials.", {
             cause: "invalid credential",
@@ -68,7 +63,7 @@ const config: NextAuthConfig = {
     error: "/error",
   },
   callbacks: {
-    signIn: async ({ user, account}) => {
+    signIn: async ({ user, account }) => {
       if (account?.provider === "google") {
         // try {
         const { email, id, name, image } = user;
@@ -77,10 +72,12 @@ const config: NextAuthConfig = {
           throw new Error("Invalid email");
         }
         const url = getUrl();
-        const res = await axios.post(
-          `${url}/add/user`,
-          { email, id, name, image },
-        );
+        const res = await axios.post(`${url}/add/user`, {
+          email,
+          id,
+          name,
+          image,
+        });
         if (res.status === 200) {
           return true;
         } else {
@@ -106,10 +103,10 @@ const config: NextAuthConfig = {
     },
     async jwt({ token }) {
       const url = getUrl();
-      const existing_user = await axios.post(
-        `${url}/verify/user`,
-        { email: token.email, customeData: "select only id and role" },
-      );
+      const existing_user = await axios.post(`${url}/verify/user`, {
+        email: token.email,
+        customeData: "select only id and role",
+      });
       if (!existing_user) return token;
 
       token.role = existing_user?.data?.role;
@@ -118,7 +115,7 @@ const config: NextAuthConfig = {
     },
   },
 
-  // custome cookie for my error in be req.cookie is null cheking this work orr noy 
+  // custome cookie for my error in be req.cookie is null cheking this work orr noy
 
   useSecureCookies: process.env.NODE_ENV === "development" ? false : true,
   cookies: {
@@ -134,11 +131,10 @@ const config: NextAuthConfig = {
         secure: process.env.NODE_ENV === "development" ? false : true,
         domain:
           process.env.DOCKER == "true"
-          ? "localhost" 
-          : process.env.NODE_ENV === "production"
-          ? ".10mindesigns.shop" 
-          : undefined, 
-    
+            ? "localhost"
+            : process.env.NODE_ENV === "production"
+              ? ".10mindesigns.shop"
+              : undefined,
       },
     },
   },

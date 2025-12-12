@@ -2,7 +2,7 @@ import { Request, Response, Router } from "express";
 import { prisma } from "@repo/database";
 import { adminMiddleware } from "../middleware/adminMiddleware.js";
 
-export const getUsers:Router = Router();
+export const getUsers: Router = Router();
 
 getUsers.get(
   "/dashboard_data",
@@ -20,12 +20,14 @@ getUsers.get(
 
       const totalUsers = allUsers.length;
       const totalGoogleUsers = allUsers.filter(
-        (u:any) => u.googleId !== null,
+        (u: any) => u.googleId !== null,
       ).length;
       const totalGmailUsers = allUsers.filter(
-        (u:any) => u.googleId === null,
+        (u: any) => u.googleId === null,
       ).length;
-      const totalAdmins = allUsers.filter((u:any) => u.role === "admin").length;
+      const totalAdmins = allUsers.filter(
+        (u: any) => u.role === "admin",
+      ).length;
 
       res.status(200).json({
         totalUsers,

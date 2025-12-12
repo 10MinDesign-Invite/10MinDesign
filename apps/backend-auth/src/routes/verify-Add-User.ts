@@ -2,11 +2,10 @@ import { prisma } from "@repo/database";
 import { verifyuser } from "@repo/zod-input-validation";
 import { Request, Response, Router } from "express";
 
-export const verify_Add_User:Router = Router();
+export const verify_Add_User: Router = Router();
 
 verify_Add_User.post("/user", async (req: Request, res: Response) => {
   try {
-    console.log("=======================================================================================================")
     const email = req.body.email;
     const Data = req.body.customeData;
     const parseData = verifyuser.safeParse({ email });
@@ -19,7 +18,7 @@ verify_Add_User.post("/user", async (req: Request, res: Response) => {
         email,
       },
     });
-    
+
     if (!user) {
       res.status(404).send("user not found");
       return;

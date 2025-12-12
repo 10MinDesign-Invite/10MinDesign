@@ -15,10 +15,7 @@
   "include": [
     "**/*.ts",
     "**/*.tsx",
-    "next-env.d.ts",
-    "next.config.js",
-    ".next/types/**/*.ts"
-, "../../packages/lib/utils.ts"  ],
+    ],
   "exclude": [
     "node_modules",
     "dist"

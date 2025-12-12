@@ -16,7 +16,7 @@ export default async function RootLayout({
   return (
     <div className="bg-slate-100 text-black dark:bg-black dark:text-white">
       <SessionProvider>
-        <Header disableAnimation="disable" />
+        <Header disableAnimation={true} disableLoginButton={true} />
         {children}
       </SessionProvider>
     </div>

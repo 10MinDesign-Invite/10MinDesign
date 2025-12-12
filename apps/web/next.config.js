@@ -4,10 +4,12 @@ import pkg  from '@prisma/nextjs-monorepo-workaround-plugin';
 const { withPrisma } = pkg;
 /** @type {import('next').NextConfig} */
 const config = {
+  output: "standalone",
   images: {
     domains: ['lh3.googleusercontent.com','fonts.googleapis.com'],
   },
   webpack(config, { isServer }) {
+    
     config.watchOptions = {
       ignored: [
         '**/node_modules/**',

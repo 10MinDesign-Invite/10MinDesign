@@ -15,7 +15,7 @@ import {
   DropdownMenuRadioItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@radix-ui/react-dropdown-menu"
+} from "@radix-ui/react-dropdown-menu";
 import { toast } from "react-toastify";
 
 interface Field {
@@ -27,7 +27,7 @@ interface Field {
 export default function DynamicFields() {
   const [componentId, setComponentId] = useState("");
   const [fields, setFields] = useState<Field[]>([{ label: "", value: "" }]);
-  const [category, setCategory] = useState("")
+  const [category, setCategory] = useState("");
 
   const addField = (isLarge = false) => {
     setFields((prev) => [...prev, { label: "", value: "", isLarge }]);
@@ -40,62 +40,82 @@ export default function DynamicFields() {
   const updateField = (
     index: number,
     key: keyof Field,
-    value: string
+    value: string,
   ): void => {
     setFields((prev) =>
-      prev.map((f, i) => (i === index ? { ...f, [key]: value } : f))
+      prev.map((f, i) => (i === index ? { ...f, [key]: value } : f)),
     );
   };
 
   const handleSubmit = async () => {
     const res = await axios.post(
       `${process.env.NEXT_PUBLIC_Backend_URL}/template/add`,
-      { templateId:componentId, templateData: JSON.stringify(fields), category },
-      { withCredentials: true }
+      {
+        templateId: componentId,
+        templateData: JSON.stringify(fields),
+        category,
+      },
+      { withCredentials: true },
     );
 
-    if(res.status === 200){
-      toast.success("template added successfully...")
+    if (res.status === 200) {
+      toast.success("template added successfully...");
     }
   };
 
   const handleUpdate = async () => {
-    const update = await axios.put(`${process.env.NEXT_PUBLIC_Backend_URL}/template/update`,{templateId:componentId,templateData:JSON.stringify(fields),category},{withCredentials:true})
-    if(update.status === 200){
-      toast.success("template update success...")
-    }else{
-      toast.success("operation fail...")
+    const update = await axios.put(
+      `${process.env.NEXT_PUBLIC_Backend_URL}/template/update`,
+      {
+        templateId: componentId,
+        templateData: JSON.stringify(fields),
+        category,
+      },
+      { withCredentials: true },
+    );
+    if (update.status === 200) {
+      toast.success("template update success...");
+    } else {
+      toast.success("operation fail...");
     }
-  }
+  };
   const handleDelete = async () => {
-    const update = await axios.put(`${process.env.NEXT_PUBLIC_Backend_URL}/template/delete`,{templateId:componentId,category},{withCredentials:true})
-    if(update.status === 200){
-      toast.success("template deletion success...")
-    }else{
-      toast.success("operation fail...")
+    const update = await axios.put(
+      `${process.env.NEXT_PUBLIC_Backend_URL}/template/delete`,
+      { templateId: componentId, category },
+      { withCredentials: true },
+    );
+    if (update.status === 200) {
+      toast.success("template deletion success...");
+    } else {
+      toast.success("operation fail...");
     }
-  }
+  };
 
   // for update functionality
 
-  async function handleGetData(){
+  async function handleGetData() {
     try {
-      if(category != ""){
-      const templateData = await axios.post(`${process.env.NEXT_PUBLIC_Backend_URL}/template/get`,{templateId:componentId,category},{withCredentials:true})      
-      if(templateData.status === 200){
-         setFields(JSON.parse(templateData.data.TemplateData))
-      }else{
-        toast.warn("somthing wrong..")
+      if (category != "") {
+        const templateData = await axios.post(
+          `${process.env.NEXT_PUBLIC_Backend_URL}/template/get`,
+          { templateId: componentId, category },
+          { withCredentials: true },
+        );
+        if (templateData.status === 200) {
+          setFields(JSON.parse(templateData.data.TemplateData));
+        } else {
+          toast.warn("somthing wrong..");
+        }
+      } else {
+        toast.warning("select category first...");
       }
-    }else{
-      toast.warning("select category first...")
-    }
-    } catch (error:any) {      
-      if(error.response.status === 404){
-        toast.error("component not found")
+    } catch (error: any) {
+      if (error.response.status === 404) {
+        toast.error("component not found");
       }
     }
-  } 
+  }
 
   return (
     <div className="max-w-6xl mx-auto p-6 space-y-8 overflow-x-hidden ">
@@ -143,30 +163,47 @@ export default function DynamicFields() {
 
           <div className="flex flex-col relative">
             <Label>Category</Label>
-            <DropdownMenu >
+            <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button variant="outline">Select Template Category</Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent className="w-[300px] bg-black p-3 rounded-md border">
-                <DropdownMenuLabel className="text-green-300 font-bold">Template Category</DropdownMenuLabel>
+                <DropdownMenuLabel className="text-green-300 font-bold">
+                  Template Category
+                </DropdownMenuLabel>
                 <DropdownMenuSeparator />
                 <DropdownMenuRadioGroup
                   value={category}
                   onValueChange={setCategory}
                 >
-                  <DropdownMenuRadioItem className="mt-2 text-white ml-3 hover:font-bold transition-all duration-200 cursor-pointer hover:pl-2" value="wedding">
+                  <DropdownMenuRadioItem
+                    className="mt-2 text-white ml-3 hover:font-bold transition-all duration-200 cursor-pointer hover:pl-2"
+                    value="wedding"
+                  >
                     wedding
                   </DropdownMenuRadioItem>
-                  <DropdownMenuRadioItem className="mt-2 text-white ml-3 hover:font-bold transition-all duration-200 cursor-pointer hover:pl-2" value="birthday">
+                  <DropdownMenuRadioItem
+                    className="mt-2 text-white ml-3 hover:font-bold transition-all duration-200 cursor-pointer hover:pl-2"
+                    value="birthday"
+                  >
                     birthday
                   </DropdownMenuRadioItem>
-                  <DropdownMenuRadioItem className="mt-2 text-white ml-3 hover:font-bold transition-all duration-200 cursor-pointer hover:pl-2" value="rip">
+                  <DropdownMenuRadioItem
+                    className="mt-2 text-white ml-3 hover:font-bold transition-all duration-200 cursor-pointer hover:pl-2"
+                    value="rip"
+                  >
                     rip
                   </DropdownMenuRadioItem>
-                  <DropdownMenuRadioItem className="mt-2 text-white ml-3 hover:font-bold transition-all duration-200 cursor-pointer hover:pl-2" value="opening">
+                  <DropdownMenuRadioItem
+                    className="mt-2 text-white ml-3 hover:font-bold transition-all duration-200 cursor-pointer hover:pl-2"
+                    value="opening"
+                  >
                     opening
                   </DropdownMenuRadioItem>
-                  <DropdownMenuRadioItem className="mt-2 text-white ml-3 hover:font-bold transition-all duration-200 cursor-pointer hover:pl-2" value="festival">
+                  <DropdownMenuRadioItem
+                    className="mt-2 text-white ml-3 hover:font-bold transition-all duration-200 cursor-pointer hover:pl-2"
+                    value="festival"
+                  >
                     festival
                   </DropdownMenuRadioItem>
                 </DropdownMenuRadioGroup>
@@ -249,7 +286,7 @@ export default function DynamicFields() {
                         </span>
                       </div>
                     </li>
-                  )
+                  ),
               )}
             </ul>
           )}

@@ -9,9 +9,9 @@ import { capchaMiddleware } from "../middleware/capchaMiddleware.js";
 import { Router } from "express";
 dotenv.config();
 
-export const OTP:Router = Router();
+export const OTP: Router = Router();
 
-OTP.post("/send-otp",capchaMiddleware, async (req, res) => {
+OTP.post("/send-otp", capchaMiddleware, async (req, res) => {
   const { email } = req.body;
   if (!email) {
     res.status(400).json({ success: false, message: "Email is required" });
