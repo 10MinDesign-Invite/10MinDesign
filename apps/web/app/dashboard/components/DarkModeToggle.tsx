@@ -24,7 +24,7 @@ export function DarkModeToggle() {
           <span className="sr-only">Toggle theme</span>
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end">
+      <DropdownMenuContent className="dark:bg-slate-800 bg-slate-100 border-black dark:border-slate-600 border-[2px]  p-2 rounded-lg cursor-pointer" align="end">
         <DropdownMenuItem onClick={() => setTheme("light")}>
           Light
         </DropdownMenuItem>

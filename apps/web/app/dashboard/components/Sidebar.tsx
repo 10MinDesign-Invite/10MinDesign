@@ -22,7 +22,7 @@ export const Sidebar = () => {
       <div className="mt-7 px-2">
         <div className="flex justify-between items-center">
           <p className="text-[12px]">General</p>
-          <div className="">
+          <div className="z-50">
             <DarkModeToggle />
           </div>
         </div>
