@@ -24,14 +24,14 @@ export function DarkModeToggle() {
           <span className="sr-only">Toggle theme</span>
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="dark:bg-slate-800 bg-slate-100 border-black dark:border-slate-600 border-[2px]  p-2 rounded-lg cursor-pointer" align="end">
-        <DropdownMenuItem onClick={() => setTheme("light")}>
+      <DropdownMenuContent className="dark:bg-slate-800 bg-slate-100 border-black dark:border-slate-600 border-[2px]  p-2 rounded-lg cursor-pointer outline-none" align="end">
+        <DropdownMenuItem className="outline-none" onClick={() => setTheme("light")}>
           Light
         </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme("dark")}>
+        <DropdownMenuItem className="outline-none" onClick={() => setTheme("dark")}>
           Dark
         </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme("system")}>
+        <DropdownMenuItem className="outline-none" onClick={() => setTheme("system")}>
           System
         </DropdownMenuItem>
       </DropdownMenuContent>
