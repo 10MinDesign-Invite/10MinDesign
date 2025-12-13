@@ -63,19 +63,7 @@ export const Sidebar = () => {
               <span>Add Template</span>
             </Link>
           </li>
-          <li>
-            <Link
-              href="/dashboard/addtemplatecard"
-              className={`flex items-center hover:bg-slate-200 dark:hover:text-black px-2 py-1 rounded-lg gap-2 ${
-                pathName === "/dashboard/addtemplatecard"
-                  ? "bg-slate-200 dark:text-black"
-                  : ""
-              }`}
-            >
-              <IoAdd />
-              <span>Add TemplateCard</span>
-            </Link>
-          </li>
+          
         </ul>
       </div>
     </section>
