@@ -5,6 +5,7 @@ import { CiHome } from "react-icons/ci";
 import { LuLayoutDashboard } from "react-icons/lu";
 import { SlSettings } from "react-icons/sl";
 import { DarkModeToggle } from "./DarkModeToggle";
+import { IoAdd } from "react-icons/io5";
 export const Sidebar = () => {
   const pathName = usePathname();
 
@@ -60,6 +61,19 @@ export const Sidebar = () => {
             >
               <SlSettings />
               <span>Add Template</span>
+            </Link>
+          </li>
+          <li>
+            <Link
+              href="/dashboard/addtemplatecard"
+              className={`flex items-center hover:bg-slate-200 dark:hover:text-black px-2 py-1 rounded-lg gap-2 ${
+                pathName === "/dashboard/addtemplatecard"
+                  ? "bg-slate-200 dark:text-black"
+                  : ""
+              }`}
+            >
+              <IoAdd />
+              <span>Add TemplateCard</span>
             </Link>
           </li>
         </ul>

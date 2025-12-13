@@ -33,7 +33,7 @@ FROM builder AS runner
 
 WORKDIR /app/apps/backend-auth
 
-# COPY --from=installer /app/apps/web/node_modules ./node_modules
+# COPY --from=installer /app/apps/backend-auth/node_modules ./node_modules
 COPY --from=builder /app/apps/backend-auth/dist ./dist
 COPY --from=builder /app/apps/backend-auth/package*.json ./ 
 

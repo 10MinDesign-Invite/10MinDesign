@@ -10,7 +10,6 @@ import { handelWedding } from "./routes/handelWedding.js";
 import cookieParser from "cookie-parser";
 import { FRONTEND_URL, NODE_ENV, PORT } from "./env-config.js";
 
-
 const app = express();
 
 app.use(express.json());
