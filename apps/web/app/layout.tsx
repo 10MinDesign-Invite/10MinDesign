@@ -40,7 +40,7 @@ export default function RootLayout({
         />
       </head>
       <body className="bg-slate-100 text-black dark:bg-black dark:text-white">
-        <ImageKitProvider urlEndpoint={process.env.imagekit_URL}>
+        <ImageKitProvider urlEndpoint={"https://ik.imagekit.io/10MinDesign"}>
           {children}
           <ToastContainer />
         </ImageKitProvider>

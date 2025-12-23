@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { FaHeart } from "react-icons/fa6";
 import { IoMdEye } from "react-icons/io";
 import { CategoryLayout } from "./CategoryLayout";
-import { WeddingDesign } from "./WeddingDesign";
+import { CardPreview } from "./CardPreview";
 import { useInView } from "react-intersection-observer";
 import { BottomLoader } from "@/components/Bottom_Loader";
 import { fetchCards } from "@/app/helpers/fetchCards";
@@ -20,7 +20,7 @@ interface WeddingCard {
 
 export function Wedding() {
   const [currentDesign, setCurrentDesign] = useState({
-    wedding: "",
+    component: "",
     image: "",
   });
 
@@ -101,7 +101,7 @@ export function Wedding() {
                   <div
                     onClick={() =>
                       setCurrentDesign({
-                        wedding: cur.componentName,
+                        component: cur.componentName,
                         image: cur.imageUrl,
                       })
                     }
@@ -127,9 +127,9 @@ export function Wedding() {
       </div>
 
       <div
-        className={`${currentDesign.wedding == "" ? "hidden" : "block"} inset-0 overflow-auto fixed top-0 left-0 w-full h-[100%] backdrop-blur-2xl text-white z-50`}
+        className={`${currentDesign.component == "" ? "hidden" : "block"} inset-0 overflow-auto fixed top-0 left-0 w-full h-[100%] backdrop-blur-2xl text-white z-50`}
       >
-        <WeddingDesign
+        <CardPreview
           setCurrentDesign={setCurrentDesign}
           currentDesign={currentDesign}
         />

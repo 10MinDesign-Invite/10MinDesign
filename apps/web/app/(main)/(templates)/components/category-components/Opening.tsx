@@ -5,10 +5,10 @@ import { useState } from "react";
 import { FaHeart } from "react-icons/fa6";
 import { IoMdEye } from "react-icons/io";
 import { CategoryLayout } from "./CategoryLayout";
-import { Design } from "./Design";
+import { CardPreview } from "./CardPreview";
 export function Opening() {
   const [currentDesign, setCurrentDesign] = useState({
-    opening: "",
+    component: "",
     image: "",
   });
   const images = [
@@ -58,7 +58,7 @@ export function Opening() {
                   <div
                     onClick={() =>
                       setCurrentDesign({
-                        opening: cur.opening,
+                        component: cur.opening,
                         image: cur.image,
                       })
                     }
@@ -84,9 +84,9 @@ export function Opening() {
       </div>
 
       <div
-        className={`${currentDesign.opening == "" ? "hidden" : "block"} inset-0 overflow-auto fixed top-0 left-0 w-full h-[100%] backdrop-blur-2xl text-white z-50`}
+        className={`${currentDesign.component == "" ? "hidden" : "block"} inset-0 overflow-auto fixed top-0 left-0 w-full h-[100%] backdrop-blur-2xl text-white z-50`}
       >
-        <Design
+        <CardPreview
           setCurrentDesign={setCurrentDesign}
           currentDesign={currentDesign}
         />

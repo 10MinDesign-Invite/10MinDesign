@@ -2,15 +2,15 @@ import { Image } from "@imagekit/next";
 import { Dispatch, SetStateAction } from "react";
 interface propType {
   setCurrentDesign: Dispatch<
-    SetStateAction<{ wedding: string; image: string }>
+    SetStateAction<{ component: string; image: string }>
   >;
-  currentDesign: { wedding: string; image: string };
+  currentDesign: { component: string; image: string };
 }
-export function WeddingDesign({ setCurrentDesign, currentDesign }: propType) {
+export function CardPreview({ setCurrentDesign, currentDesign }: propType) {
   return (
     <div className="">
       <div
-        onClick={() => setCurrentDesign({ wedding: "", image: "" })}
+        onClick={() => setCurrentDesign({ component: "", image: "" })}
         className="absolute bg-black dark:bg-white dark:text-red-600 top-[5px] right-[20px] cursor-pointer px-3 text-xl font-bold rounded-xl"
       >
         X
