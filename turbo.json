@@ -15,7 +15,9 @@
         "NEXTAUTH_URL",
         "PROD_SALT",
         "REDIS_URL",
-        "REDIS_TOKEN"
+        "REDIS_TOKEN",
+        "AUTH_ENV",
+        "COOKIE_DOMAIN"
       ]
     },
     "db:migrate:dev": {
