@@ -307,7 +307,8 @@ export function Hero() {
             id="card-one"
             className="home-images-div borde opacity-0 lg:opacity-100 xl:opacity-0 h-[450px] overflow-scroll p-2 grid gap-5 md:pt-[25px] lg:pt-[30px] lg:mt-[50px] scrollbar-hide rounded-2xl "
           >
-            <Image
+            <Link href={`/explore`}>
+              <Image
               className="borde p-2 xl:p-1 w-[330px] sm:w-[80%] h-[450px] md:w-[90%] md:h-[400px] lmd:w-[330px] lmd:h-[440px] xl:w-[95%] xl:h-[392px] mx-auto text-center text-5xl"
               src={"/firstinvitation.webp"}
               alt="invitation card image"
@@ -321,13 +322,15 @@ export function Hero() {
               width={250}
               height={300}
             />
+            </Link>
           </div>
 
           <div
             id="card-two"
             className="home-images-div h-[450px] opacity-0 lg:opacity-100 xl:opacity-0 overflow-scroll hidden p-2 md:grid gap-5 scrollbar-hide rounded-2xl md:pt-[15px]"
           >
-            <Image
+            <Link href={`/explore`}>
+              <Image
               className="borde p-2 xl:p-1 mt-3 w-[90%] mx-auto h-[400px] lmd:w-[320px] lmd:h-[431px] xl:w-[95%] xl:h-[394px] text-center text-5xl"
               src={"/firstwedding.webp"}
               alt="wedding card image"
@@ -341,6 +344,7 @@ export function Hero() {
               width={250}
               height={300}
             />
+            </Link>
           </div>
         </div>
       </section>
