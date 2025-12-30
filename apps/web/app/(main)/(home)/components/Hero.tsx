@@ -305,7 +305,7 @@ export function Hero() {
         >
           <div
             id="card-one"
-            className="home-images-div borde opacity-0 lg:opacity-100 xl:opacity-0 h-[450px] overflow-scroll p-2 grid gap-5 md:pt-[25px] lg:pt-[30px] lg:mt-[50px] scrollbar-hide rounded-2xl "
+            className="home-images-div borde opacity-0 lg:opacity-100 xl:opacity-0 h-[435px] overflow-scroll p-2 grid gap-5 md:pt-[25px] lg:pt-[30px] lg:mt-[50px] scrollbar-hide rounded-2xl "
           >
             <Link href={`/explore`}>
               <Image
@@ -327,7 +327,7 @@ export function Hero() {
 
           <div
             id="card-two"
-            className="home-images-div h-[450px] opacity-0 lg:opacity-100 xl:opacity-0 overflow-scroll hidden p-2 md:grid gap-5 scrollbar-hide rounded-2xl md:pt-[15px]"
+            className="home-images-div h-[435px] opacity-0 lg:opacity-100 xl:opacity-0 overflow-scroll hidden p-2 md:grid gap-5 scrollbar-hide rounded-2xl md:pt-[15px]"
           >
             <Link href={`/explore`}>
               <Image
