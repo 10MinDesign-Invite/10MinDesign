@@ -9,6 +9,7 @@
     "start": "next start",
     "lint": "eslint . --max-warnings 0"
   },
+  
   "dependencies": {
     "@gsap/react": "^2.1.2",
     "@imagekit/next": "^2.1.0",
