@@ -6,8 +6,11 @@ import { ChangeEvent, useEffect, useRef, useState } from "react";
 import { DesignContainer } from "../../category-components/DesignContainer";
 import { DesignWraper } from "../../category-components/DesignWraper";
 import { DetailWrapper } from "../../category-components/DetailWrapper";
+import { usePayment } from "@/app/helpers/usePayment";
+import { Button } from "@/components/ui/button";
 
 export default function Wedding1() {
+  const {pay,isPaid} = usePayment("Wedding1");
   const containerRef = useRef(null);
   const [name1, setName1] = useState("सैनी");
   const [name2, setName2] = useState("शेट्टी");
@@ -72,13 +75,22 @@ export default function Wedding1() {
               className="rounded-md bg-red-300 text-black w-[75%]"
             />
           </div>
-          <button
+          {
+            isPaid ? 
+            <Button
             className="bg-green-400 text-black px-2 py-1 rounded-lg mb-2"
             onClick={() => handleDownload(containerRef)}
           >
             {" "}
             dwonload
-          </button>
+          </Button>
+
+          : 
+            <Button onClick={pay} className="bg-red-600 text-white mb-3 dark:hover:text-black px-6">
+              Purchase
+            </Button>
+
+          }
         </div>
 
         <div className="flex mb-1">
