@@ -1,5 +1,5 @@
 import { Request, Response, Router } from "express";
-import { authMiddleware } from "../../middleware/AuthMiddleware";
+import { authMiddleware } from "../../middleware/AuthMiddleware.js";
 
 export const purchasedTemplate:Router = Router()
 
