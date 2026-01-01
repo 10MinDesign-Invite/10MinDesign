@@ -10,6 +10,7 @@ import { handelWedding } from "./routes/handelWedding.js";
 import cookieParser from "cookie-parser";
 import { FRONTEND_URL, NODE_ENV, PORT } from "./env-config.js";
 import { order } from "./routes/payments/order.js";
+import { purchasedTemplate } from "./routes/payments/purchasedTemplate.js";
 
 const app = express();
 
@@ -33,7 +34,10 @@ app.use("/verify", verify_Add_User);
 app.use("/add", addUser);
 app.use("/template", handelTemplate);
 app.use("/get", getUsers);
+// payment
 app.use("/make",order);
+app.use("/purchased",purchasedTemplate);
+
 
 // wedding section
 

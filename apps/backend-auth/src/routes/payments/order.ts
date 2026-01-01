@@ -8,19 +8,19 @@ import { prisma } from "@repo/database";
 
 export const order: Router = Router();
 
-order.post("/order",authMiddleware,async (req: Request, res: Response) => {
+order.post("/order", authMiddleware, async (req: Request, res: Response) => {
     try {
-        const {templateName} = req.body;
+        const { templateName } = req.body;
         const amount = await prisma.wedding.findUnique({
-            where:{
-                componentName:templateName
+            where: {
+                componentName: templateName
             },
-            select:{price:true}
+            select: { price: true }
         })
-        if(!amount) {
+        if (!amount) {
             res.status(404).send("component Not found")
             return
-        }    
+        }
         var options = {
             amount: amount.price * 100,  // Amount is in currency subunits. 
             currency: "INR",
@@ -28,12 +28,12 @@ order.post("/order",authMiddleware,async (req: Request, res: Response) => {
         };
         const data = await razorpay.orders.create(options);
         res.status(200).json({
-            name:req.name,
-            email:req.email,
+            name: req.name,
+            email: req.email,
             amount: data.amount,
-            receipt:data.receipt,
-            order_id:data.id,
-            currency:data.currency
+            receipt: data.receipt,
+            order_id: data.id,
+            currency: data.currency
         });
 
     } catch (error) {
@@ -41,27 +41,36 @@ order.post("/order",authMiddleware,async (req: Request, res: Response) => {
     }
 })
 
-order.post("/paymentverification",authMiddleware,async (req:Request,res:Response)=>{
+order.post("/paymentverification", authMiddleware, async (req: Request, res: Response) => {
     try {
-        const {razorpay_order_id, razorpay_payment_id, razorpay_signature,amount,receipt,templateName,currency} = req.body;
-        const varification = validatePaymentVerification({"order_id":razorpay_order_id , "payment_id": razorpay_payment_id }, razorpay_signature, RZP_KEY_SECRET_TEST!);
-        if(varification){
+        const { razorpay_order_id, razorpay_payment_id, razorpay_signature, amount, receipt, templateName, currency } = req.body;
+        const varification = validatePaymentVerification({ "order_id": razorpay_order_id, "payment_id": razorpay_payment_id }, razorpay_signature, RZP_KEY_SECRET_TEST!);
+        if (varification) {
             //db store
             await prisma.orders.create({
-                data:{
-                    email:req.email!,
-                    amount,                
+                data: {
+                    email: req.email!,
+                    amount,
                     receipt,
-                    currency,               
-                    templateName,          
-                    razorpay_order_id,       
-                    razorpay_payment_id,     
-                    razorpay_signature    
+                    currency,
+                    templateName,
+                    razorpay_order_id,
+                    razorpay_payment_id,
+                    razorpay_signature
                 }
             })
+            res.cookie("purchased--"+templateName, receipt, {
+                httpOnly: true,
+                maxAge: 15 * 60 * 1000,
+                sameSite: process.env.NODE_ENV === "production" ? "lax" : "lax",
+                path: "/",
+                secure: process.env.NODE_ENV !== "production" ? false : true,
+                // domain: process.env.COOKIE_DOMAIN
+            });
             res.status(200).send("payment success")
-        }else{
-            res.status(400).send("payment not valid source")
+
+        } else {
+            res.status(400).send("payment not from valid source")
         }
     } catch (error) {
         console.log(error);
