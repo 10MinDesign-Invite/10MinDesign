@@ -10,18 +10,20 @@ export async function authMiddleware(
   try {
     const token =
       req.cookies[NODE_ENV === "production" ? `${PROD_SALT}` : `${DEV_SALT}`];
+      if (!token) {
+        res.status(401).send("unauthorized user");
+        return;
+      }
     const encryptionKey = await getDerivedEncryptionKey();
     const { plaintext } = await jose.compactDecrypt(token, encryptionKey);
     const decodedPayload = JSON.parse(new TextDecoder().decode(plaintext));
-    if (!token) {
-      res.send("unauthorized user");
-      return;
-    }
 
-    if (decodedPayload.role === "user") {
+    if (decodedPayload) {
+      req.name = decodedPayload.name;
+      req.email = decodedPayload.email;
       next();
     } else {
-      res.status(401).json({ success: false, message: "you not authorized" });
+      res.status(401).json({ success: false, message: "you are not authorized" });
     }
   } catch (error) {
     console.log(error);

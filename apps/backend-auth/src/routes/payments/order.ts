@@ -1,0 +1,69 @@
+import { Request, Response, Router } from "express";
+import { razorpay } from "../../config/rzp-config.js";
+import { validatePaymentVerification } from "razorpay/dist/utils/razorpay-utils.js";
+import { RZP_KEY_SECRET_TEST } from "../../env-config.js";
+import { authMiddleware } from "../../middleware/AuthMiddleware.js";
+import { prisma } from "@repo/database";
+
+
+export const order: Router = Router();
+
+order.post("/order",authMiddleware,async (req: Request, res: Response) => {
+    try {
+        const {templateName} = req.body;
+        const amount = await prisma.wedding.findUnique({
+            where:{
+                componentName:templateName
+            },
+            select:{price:true}
+        })
+        if(!amount) {
+            res.status(404).send("component Not found")
+            return
+        }    
+        var options = {
+            amount: amount.price * 100,  // Amount is in currency subunits. 
+            currency: "INR",
+            receipt: "order_rcpt_id" + Date.now()
+        };
+        const data = await razorpay.orders.create(options);
+        res.status(200).json({
+            name:req.name,
+            email:req.email,
+            amount: data.amount,
+            receipt:data.receipt,
+            order_id:data.id,
+            currency:data.currency
+        });
+
+    } catch (error) {
+        console.log(error);
+    }
+})
+
+order.post("/paymentverification",authMiddleware,async (req:Request,res:Response)=>{
+    try {
+        const {razorpay_order_id, razorpay_payment_id, razorpay_signature,amount,receipt,templateName,currency} = req.body;
+        const varification = validatePaymentVerification({"order_id":razorpay_order_id , "payment_id": razorpay_payment_id }, razorpay_signature, RZP_KEY_SECRET_TEST!);
+        if(varification){
+            //db store
+            await prisma.orders.create({
+                data:{
+                    email:req.email!,
+                    amount,                
+                    receipt,
+                    currency,               
+                    templateName,          
+                    razorpay_order_id,       
+                    razorpay_payment_id,     
+                    razorpay_signature    
+                }
+            })
+            res.status(200).send("payment success")
+        }else{
+            res.status(400).send("payment not valid source")
+        }
+    } catch (error) {
+        console.log(error);
+    }
+})

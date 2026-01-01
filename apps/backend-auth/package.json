@@ -25,6 +25,7 @@
     "express": "^5.1.0",
     "jose": "^6.1.0",
     "jsonwebtoken": "^9.0.2",
+    "razorpay": "^2.9.6",
     "resend": "^6.1.2"
   },
   "devDependencies": {

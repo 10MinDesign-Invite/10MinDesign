@@ -1,6 +1,9 @@
 import * as dotenv from "dotenv";
 dotenv.config();
 
+
+export const RZP_KEY_ID_TEST = process.env.RZP_KEY_ID_TEST;
+export const RZP_KEY_SECRET_TEST = process.env.RZP_KEY_SECRET_TEST;
 export const FRONTEND_URL = process.env.FRONTEND_URL;
 export const jwt_OTP_SECRET = process.env.jwt_OTP_SECRET;
 export const SMTP_USER = process.env.SMTP_USER;

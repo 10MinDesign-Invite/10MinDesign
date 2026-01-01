@@ -9,6 +9,7 @@ import { verify_Add_User } from "./routes/verify-Add-User.js";
 import { handelWedding } from "./routes/handelWedding.js";
 import cookieParser from "cookie-parser";
 import { FRONTEND_URL, NODE_ENV, PORT } from "./env-config.js";
+import { order } from "./routes/payments/order.js";
 
 const app = express();
 
@@ -32,6 +33,7 @@ app.use("/verify", verify_Add_User);
 app.use("/add", addUser);
 app.use("/template", handelTemplate);
 app.use("/get", getUsers);
+app.use("/make",order);
 
 // wedding section
 
