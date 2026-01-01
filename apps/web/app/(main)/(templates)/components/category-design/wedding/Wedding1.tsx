@@ -8,9 +8,17 @@ import { DesignWraper } from "../../category-components/DesignWraper";
 import { DetailWrapper } from "../../category-components/DetailWrapper";
 import { usePayment } from "@/app/helpers/usePayment";
 import { Button } from "@/components/ui/button";
+import { useClientSession } from "@/app/helpers/useClientSession";
+import { useRouter } from "next/navigation";
+import { usePurchesedTemplate } from "@/app/helpers/getPurchasedTemplate";
 
 export default function Wedding1() {
   const {pay,isPaid} = usePayment("Wedding1");
+  const {session} = useClientSession();
+  const {purchased} = usePurchesedTemplate("Wedding1")
+  // above custom hooks
+  
+  const router = useRouter();
   const containerRef = useRef(null);
   const [name1, setName1] = useState("सैनी");
   const [name2, setName2] = useState("शेट्टी");
@@ -50,6 +58,10 @@ export default function Wedding1() {
 
   useEffect(() => {}, [whichSize]);
 
+  useEffect(()=>{
+    if(!session) router.push("/login");
+  },[session])
+
   function getCoupleImage(e: ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0];
     if (file) {
@@ -63,6 +75,7 @@ export default function Wedding1() {
     }
   }
   return (
+
     <DesignWraper customeStyles="flex flex-col lg:flex-row items-center lg:items-start text-black">
       <DetailWrapper customeStyles="relative w-full md:w-[70%] dark:text-white mb-[25px] lg:mb-0 dark:shadow-[inset_0px_0px_14px_0px_#e53e3e] shadow-[0px_7px_13px_0px_#63b3ed]">
         <div className="w-full gap-[3.5%]">
@@ -76,12 +89,12 @@ export default function Wedding1() {
             />
           </div>
           {
-            isPaid ? 
+             purchased ?? isPaid ? 
             <Button
             className="bg-green-400 text-black px-2 py-1 rounded-lg mb-2"
             onClick={() => handleDownload(containerRef)}
           >
-            {" "}
+            {""}
             dwonload
           </Button>
 
