@@ -17,7 +17,9 @@
         "REDIS_URL",
         "REDIS_TOKEN",
         "AUTH_ENV",
-        "COOKIE_DOMAIN"
+        "COOKIE_DOMAIN",
+        "RZP_KEY_ID_TEST",
+        "RZP_KEY_SECRET_TEST"
       ]
     },
     "db:migrate:dev": {
