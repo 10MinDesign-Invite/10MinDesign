@@ -75,9 +75,9 @@ export function Wedding() {
               className="outline backdrop-blur-xl bg-slate-200 rounded-xl relative mb-4 md:mb-0 overflow-x-hidden"
             >
               <p
-                className={`absolute -left-[5px] -top-[3px] ${cur.price == 0 ? "bg-green-400" : "bg-yellow-400"} rounded-br-xl px-4`}
+                className={`absolute text-black -left-[5px] -top-[3px] ${cur.price == 0 ? "bg-green-400" : "bg-yellow-400"} rounded-br-xl px-4`}
               >
-                {cur.price === 0 ? "free" : cur.price}
+                {cur.price === 0 ? "free" :"₹"+cur.price}
               </p>
               <div className=" rounded-t-xl flex justify-center">
                 <Image

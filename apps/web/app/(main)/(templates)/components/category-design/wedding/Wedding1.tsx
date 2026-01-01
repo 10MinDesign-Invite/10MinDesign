@@ -6,11 +6,11 @@ import { ChangeEvent, useEffect, useRef, useState } from "react";
 import { DesignContainer } from "../../category-components/DesignContainer";
 import { DesignWraper } from "../../category-components/DesignWraper";
 import { DetailWrapper } from "../../category-components/DetailWrapper";
-import { usePayment } from "@/app/helpers/usePayment";
+import { usePayment } from "@/app/Hooks/usePayment";
 import { Button } from "@/components/ui/button";
-import { useClientSession } from "@/app/helpers/useClientSession";
+import { useClientSession } from "@/app/Hooks/useClientSession";
 import { useRouter } from "next/navigation";
-import { usePurchesedTemplate } from "@/app/helpers/getPurchasedTemplate";
+import { usePurchesedTemplate } from "@/app/Hooks/usePurchasedTemplate";
 
 export default function Wedding1() {
   const {pay,isPaid} = usePayment("Wedding1");
