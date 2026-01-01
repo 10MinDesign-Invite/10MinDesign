@@ -15,9 +15,11 @@
     "dev": "tsup src/* --watch",
     "format": "prisma format",
     "generate": "prisma generate --config ./src/prisma.config.ts --schema ./prisma/schema.prisma",
+    "migrate": "prisma migrate dev --config ./src/prisma.config.ts --schema ./prisma/schema.prisma",
+    "reset": "prisma migrate reset --config ./src/prisma.config.ts --schema ./prisma/schema.prisma",
     "lint": "eslint . --max-warnings 0",
     "studio": "prisma studio",
-    "postinstall": "pnpm prisma generate",
+    "postinstall": "pnpm generate",
     "build": "tsc"
   },
   "dependencies": {

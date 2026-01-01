@@ -13,6 +13,20 @@ CREATE TABLE "User" (
 );
 
 -- CreateTable
+CREATE TABLE "Orders" (
+    "id" SERIAL NOT NULL,
+    "username" TEXT NOT NULL,
+    "amount" TEXT NOT NULL,
+    "receipt" TEXT NOT NULL,
+    "templateName" TEXT NOT NULL,
+    "razorpay_order_id" TEXT NOT NULL,
+    "razorpay_payment_id" TEXT NOT NULL,
+    "razorpay_signature" TEXT NOT NULL,
+
+    CONSTRAINT "Orders_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
 CREATE TABLE "OtpStore" (
     "id" SERIAL NOT NULL,
     "email" TEXT NOT NULL,
@@ -92,6 +106,9 @@ CREATE INDEX "User_email_googleId_idx" ON "User"("email", "googleId");
 
 -- CreateIndex
 CREATE INDEX "User_googleId_idx" ON "User"("googleId");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Orders_razorpay_payment_id_key" ON "Orders"("razorpay_payment_id");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "OtpStore_email_key" ON "OtpStore"("email");

@@ -20,9 +20,24 @@ model User {
   image     String?
   googleId  String?
   role      String  @default("user")
+  orders    Orders[]
   @@index([email, googleId])
   @@index([googleId])
 }
+
+model Orders {
+  id                    Int      @id @default(autoincrement())
+  email                 String
+  amount                Int
+  receipt               String
+  currency              String
+  templateName          String
+  razorpay_order_id     String  
+  razorpay_payment_id   String  @unique
+  razorpay_signature    String
+  user                  User    @relation(fields: [email], references: [email])
+}
+
 model OtpStore{
     id        Int      @id @default(autoincrement())
     email     String   @unique
