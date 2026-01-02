@@ -1,3 +1,4 @@
+
 import { handleDownload } from "@/app/(main)/(templates)/utils/handelDwonload";
 import { inknut_antiqua, laila } from "@/app/fonts/fonts-config";
 import { Image } from "@imagekit/next";
@@ -9,16 +10,17 @@ import { DetailWrapper } from "../../category-components/DetailWrapper";
 import { usePayment } from "@/app/Hooks/usePayment";
 import { Button } from "@/components/ui/button";
 import { useClientSession } from "@/app/Hooks/useClientSession";
-import { useRouter } from "next/navigation";
 import { usePurchesedTemplate } from "@/app/Hooks/usePurchasedTemplate";
+import { toast } from "react-toastify";
+import { useDragComponent } from "@/app/helpers/useDragComponents";
 
 export default function Wedding1() {
-  const {pay,isPaid} = usePayment("Wedding1");
-  const {session} = useClientSession();
-  const {purchased} = usePurchesedTemplate("Wedding1")
+  const { pay, isPaid } = usePayment("Wedding1");
+  const { session } = useClientSession();
+  const { purchased } = usePurchesedTemplate("Wedding1")
+  const {handlePointerDown,handlePointerMove,handlePointerUp} = useDragComponent();
   // above custom hooks
-  
-  const router = useRouter();
+
   const containerRef = useRef(null);
   const [name1, setName1] = useState("सैनी");
   const [name2, setName2] = useState("शेट्टी");
@@ -56,11 +58,11 @@ export default function Wedding1() {
   });
   const [coupleImage, setCoupleImage] = useState<string>("");
 
-  useEffect(() => {}, [whichSize]);
+  useEffect(() => { }, [whichSize]);
 
-  useEffect(()=>{
-    if(!session) router.push("/login");
-  },[session])
+  useEffect(() => {
+    if (!session) toast.warn("Login ")
+  }, [session])
 
   function getCoupleImage(e: ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0];
@@ -89,19 +91,19 @@ export default function Wedding1() {
             />
           </div>
           {
-             purchased ?? isPaid ? 
-            <Button
-            className="bg-green-400 text-black px-2 py-1 rounded-lg mb-2"
-            onClick={() => handleDownload(containerRef)}
-          >
-            {""}
-            dwonload
-          </Button>
+            purchased ?? isPaid ?
+              <Button
+                className="bg-green-400 text-black px-2 py-1 rounded-lg mb-2"
+                onClick={() => handleDownload(containerRef)}
+              >
+                {""}
+                dwonload
+              </Button>
 
-          : 
-            <Button onClick={pay} className="bg-red-600 text-white mb-3 dark:hover:text-black px-6">
-              Purchase
-            </Button>
+              :
+              <Button onClick={pay} className="bg-red-600 text-white mb-3 dark:hover:text-black px-6">
+                Purchase
+              </Button>
 
           }
         </div>
@@ -707,7 +709,11 @@ export default function Wedding1() {
       <DesignContainer customeStyles="w-[80%]">
         <div
           ref={containerRef}
-          className="relative w-full h-full md:h-[auto] mx-auto flex justify-center items-center"
+          onPointerDown={handlePointerDown}
+          onPointerMove={handlePointerMove}
+          onPointerUp={handlePointerUp}
+          
+          className="relative w-full h-full md:h-[auto] mx-auto flex justify-center items-center select-none"
         >
           {/* top most section */}
           <div className="absolute top-[0%] left-[0%] w-[8%] h-[8.5%] skew-[40]">
@@ -736,6 +742,8 @@ export default function Wedding1() {
           />
           <div className="absolute top-[0.5%] right-[11%] w-[9.5%]">
             <Image
+              data-draggable="true"
+              draggable={false}
               style={{ width: "100%", height: "100%" }}
               src="/swastik_red.png"
               width={40}
@@ -743,20 +751,23 @@ export default function Wedding1() {
               alt={"main image"}
             />
           </div>
-          <div className="absolute top-[3%] left-[28.4%] lg:left-[30%] w-[13.5%] h-[8.9%] lg:w-[10.9%] lg:h-[7.2%] overflow-hidden">
+          <div data-draggable="true" className="absolute top-[3%] left-[28.4%] lg:left-[30%] w-[13.5%] h-[8.9%] lg:w-[10.9%] lg:h-[7.2%] overflow-hidden">
             <Image
+              draggable={false}
               src="/first_wedding_ganpati.png"
               style={{ width: "100%", height: "100%" }}
               alt="ganpati"
               width={100}
               height={100}
               priority={true}
+              className="elect-none touch-none"
             />
           </div>
           {/* images end */}
           {/* ---------------------------------------------------------------------- */}
           <p
-            className={`absolute top-[0%] left-[20%] w-[30%] h-[2.5%] text-[1.9vw] lg:text-[1vw] xl:text-[14px] ${laila.className} font-[700] text-red-700`}
+            className={`absolute select-none top-[0%] left-[20%] w-[30%] h-[2.5%] text-[1.9vw] lg:text-[1vw] xl:text-[14px] ${laila.className} font-[700] text-red-700`}
+            data-draggable="true"
           >
             || {"श्री गणेशाय नम:"} ||
           </p>
@@ -765,6 +776,7 @@ export default function Wedding1() {
             style={{
               fontSize: `${sizes.name1 == 1 ? undefined : `${sizes.name1}px`}`,
             }}
+            data-draggable="true"
             className={`absolute top-[3%] left-[45.5%] w-[29.5%] h-[4.5%] flex justify-center items-center text-[3vw] lg:text-[2vw] xl:text-[23px] ${inknut_antiqua.className} font-[900] bg-gradient-to-b from-red-400 to-red-800 bg-clip-text text-transparent`}
           >
             {name1}
@@ -773,6 +785,7 @@ export default function Wedding1() {
             style={{
               fontSize: `${sizes.name2 == 1 ? undefined : `${sizes.name2}px`}`,
             }}
+            data-draggable="true"
             className={`absolute top-[8%] left-[50.5%] w-[29.5%] h-[4.5%] flex justify-center items-center text-[3vw] lg:text-[2vw] xl:text-[23px] ${inknut_antiqua.className} font-[900] bg-gradient-to-b from-red-400 to-red-800 bg-clip-text text-transparent`}
           >
             {name2}
@@ -781,8 +794,9 @@ export default function Wedding1() {
           {/* ================================================================================= */}
           {/* second section */}
           {/* images  start*/}
-          <div className="absolute top-[13.8%] left-[0%] w-[17%]">
+          <div data-draggable="true" className="absolute top-[13.8%] left-[0%] w-[17%]">
             <Image
+              draggable={false}
               src="/first_wedding_nimantran.png"
               style={{ width: "100%", height: "100%" }}
               alt="nimantran invite photo"
@@ -792,24 +806,26 @@ export default function Wedding1() {
             />
           </div>
           {/* images end ===================================================================== */}
-          <p className="absolute text-[2vw] lg:text-[1vw] xl:text-[12.5px] top-[10%] left-[17%] font-bold text-red-700">
+          <p data-draggable="true" className="absolute text-[2vw] lg:text-[1vw] xl:text-[12.5px] top-[10%] left-[17%] font-bold text-red-700">
             चि.
           </p>
           <div
             style={{
               fontSize: `${sizes.firstName1 == 1 ? undefined : `${sizes.firstName1}px`}`,
             }}
+            data-draggable="true"
             className={`absolute top-[12.5%] left-[20.5%] w-[34.9%] h-[7.3%] font-extrabold text-[9vw] lg:text-[7vw] xl:text-[100px] flex justify-center items-center text-red-700 ${laila.className}`}
           >
             {firstName1}
           </div>
-          <p className="absolute text-[2vw] lg:text-[1vw] xl:text-[12.5px] top-[19.4%] left-[17%] font-bold text-red-700">
+          <p data-draggable="true" className="absolute text-[2vw] lg:text-[1vw] xl:text-[12.5px] top-[19.4%] left-[17%] font-bold text-red-700">
             चि.सौ.कां.
           </p>
           <div
             style={{
               fontSize: `${sizes.firstName2 == 1 ? undefined : `${sizes.firstName2}px`}`,
             }}
+            data-draggable="true"
             className={`absolute top-[22.3%] left-[20.5%] w-[34.9%] h-[7.3%] font-bold text-[9vw] lg:text-[7vw] xl:text-[100px] flex justify-center items-center text-red-700 ${laila.className}`}
           >
             {firstName2}
@@ -820,6 +836,7 @@ export default function Wedding1() {
               fontSize: `${sizes.firstNameInfo1 == 1 ? undefined : `${sizes.firstNameInfo1}px`}`,
               lineHeight: "120%",
             }}
+            data-draggable="true"
             className="flex items-center leading-[2vw] lg:leading-[1vw] whitespace-pre-wrap break-words absolute scrollbar-hide top-[12.5%] left-[60.1%] w-[40%] h-[7.3%] font-bold text-left text-[1.7vw] lg:text-[0.8vw] xl:text-[12.5px] overflow-x-hidden text-red-800"
           >
             {firstNameInfo1}
@@ -830,14 +847,16 @@ export default function Wedding1() {
               fontSize: `${sizes.firstNameInfo2 == 1 ? undefined : `${sizes.firstNameInfo2}px`}`,
               lineHeight: "120%",
             }}
+            data-draggable="true"
             className="flex items-center whitespace-pre-wrap leading-[2vw] lg:leading-[1vw] break-words absolute scrollbar-hide top-[22.3%] left-[60.1%] w-[40%] h-[7.3%] font-bold text-[1.6vw] lg:text-[0.8vw] xl:text-[12.5px] text-left overflow-x-hidden text-red-800"
           >
             {firstNameInfo2}
           </p>
           {/* third section */}
           {/* images start */}
-          <div className="absolute w-[66.4%] h-[19%] top-[30%] left-[10.9%]">
+          <div data-draggable="true" className="absolute w-[66.4%] h-[19%] top-[30%] left-[10.9%]">
             <Image
+              draggable={false}
               src="/first_wedding_shubh_vivaha.png"
               style={{ width: "100%", height: "100%" }}
               alt="shubh vivaha"
@@ -856,8 +875,9 @@ export default function Wedding1() {
               या शुभ मुहूर्तावर करण्याचे योजिले आहे.
             </div>
           </div>
-          <div className="absolute top-[35%] right-[4%] w-[18%] h-[10%]">
+          <div data-draggable="true" className="absolute top-[35%] right-[4%] w-[18%] h-[10%]">
             <Image
+              draggable={false}
               src="/first_wedding_dhol.png"
               style={{ width: "100%", height: "100%", position: "relative" }}
               alt="dhol or drum image"
@@ -870,9 +890,10 @@ export default function Wedding1() {
           {/* third section */}
           <div className="absolute top-[51%] left-[2%] w-[48.5%] h-[11%]">
             <div className="w-full h-full relative">
-              <div className="w-[85%] h-[27%] mx-auto flex justify-between gap-1">
+              <div data-draggable="true" className="w-[85%] h-[27%] mx-auto flex justify-between gap-1">
                 <div className="h-full w-[10%] scale-x-[-1] mix-blend-multiply">
                   <Image
+                    draggable={false}
                     src="/first_wedding_bars.png"
                     style={{ width: "100%", height: "100%" }}
                     alt="bars"
@@ -894,6 +915,7 @@ export default function Wedding1() {
                 </div>
                 <div className="h-full w-[10%] mix-blend-multiply">
                   <Image
+                    draggable={false}
                     src="/first_wedding_bars.png"
                     style={{
                       width: "100%",
@@ -908,7 +930,7 @@ export default function Wedding1() {
                 </div>
               </div>
 
-              <div className=" h-[75%] rounded-tl-lg p-[0.2vw] bg-orange-600 rounded-br-lg overflow-hidden">
+              <div data-draggable="true" className=" h-[75%] rounded-tl-lg p-[0.2vw] bg-orange-600 rounded-br-lg overflow-hidden">
                 <div
                   style={{
                     fontSize: `${sizes.Date2 == 1 ? undefined : `${sizes.Date2}px`}`,
@@ -923,9 +945,10 @@ export default function Wedding1() {
           {/* =============================================================================================== */}
           {/* fourth section */}
           <div className="absolute top-[63%] left-[2%] w-[48.5%]">
-            <div className="w-full flex justify-center items-center gap-1">
+            <div data-draggable="true" className="w-full flex justify-center items-center gap-1">
               <div className="w-[5%] scale-x-[-1] mix-blend-multiply">
                 <Image
+                  draggable={false}
                   src="/first_wedding_bars.png"
                   style={{
                     width: "100%",
@@ -943,6 +966,7 @@ export default function Wedding1() {
               </div>
               <div className="w-[5%] mix-blend-multiply">
                 <Image
+                  draggable={false}
                   src="/first_wedding_bars.png"
                   style={{
                     width: "100%",
@@ -959,10 +983,11 @@ export default function Wedding1() {
           </div>
           {/* ===================================================================================== */}
           {/* fift section */}
-          <div className="absolute w-[48.5%] top-[66.8%] left-[2%] ">
+          <div data-draggable="true" className="absolute w-[48.5%] top-[66.8%] left-[2%] ">
             <div className="w-full relative flex justify-center items-center gap-[2px]">
               <div className="w-[6.4%] scale-x-[-1]">
                 <Image
+                  draggable={false}
                   src="/first_wedding_bars.png"
                   style={{
                     width: "100%",
@@ -985,6 +1010,7 @@ export default function Wedding1() {
               </div>
               <div className="w-[6.4%] mix-blend-multiply">
                 <Image
+                  draggable={false}
                   src="/first_wedding_bars.png"
                   style={{
                     width: "100%",
@@ -999,36 +1025,42 @@ export default function Wedding1() {
               </div>
             </div>
           </div>
+
           <div
             style={{
               fontSize: `${sizes.Info == 1 ? undefined : `${sizes.Info}px`}`,
               overflow: "hidden",
             }}
+            data-draggable="true"
             className="absolute top-[71.4%] left-[2%] w-[48.5%] h-[5.5%] flex justify-center items-center text-[1.2vw] lg:text-[0.6vw] xl:text-[12.5px] font-bold"
           >
             {locationAdd}
           </div>
           {/* ================================================================================== */}
           {/* sixth section */}
-          <div className="absolute top-[77.3%] left-[2%] w-[48.5%] h-[4%]">
+          <div data-draggable="true" className="absolute top-[77.3%] left-[2%] w-[48.5%] h-[4%]">
             <div className="w-[33%] mx-auto text-[2.1vw] lg:text-[1vw] xl:text-[14.5px] p-[1px] text-white bg-gradient-to-b from-purple-400 to-red-800 rounded-[45%] flex font-bold justify-center items-center">
               आपले नम्र
             </div>
           </div>
+
           <div
             style={{
               fontSize: `${sizes.relats == 1 ? undefined : `${sizes.relats}px`}`,
               lineHeight: "120%",
             }}
+            data-draggable="true"
             className="leading-[2vw] lg:leading-[1vw] xl:text-[12.5px] whitespace-pre-wrap break-words absolute top-[81.5%] left-[2%] w-[48.5%] h-[12%] font-bold flex justify-center items-center text-[1.6vw] lg:text-[0.8vw] overflow-hidden text-red-800"
           >
             {relats}
           </div>
+
           {/* ===================================================================================== */}
           {/* sixth section */}
           <div className="absolute bg-amber-100 bottom-0 left-0 h-[6%] w-full flex items-center">
-            <div className="w-[10%] h-full">
+            <div data-draggable="true" className="w-[10%] h-full">
               <Image
+                draggable={false}
                 src="/first_wedding_elephant.png"
                 style={{ width: "100%", height: "100%", position: "relative" }}
                 alt="elephant image"
@@ -1037,19 +1069,21 @@ export default function Wedding1() {
                 priority={true}
               />
             </div>
-            <div className=" w-[12%] h-[50%]  rounded-[50%] flex justify-center items-center text-[1.5vw] lg:text-[0.9vw] xl:text-[16.5px] font-bold bg-gradient-to-t from-purple-500 to-red-600 text-white">
+            <div data-draggable="true" className=" w-[12%] h-[50%]  rounded-[50%] flex justify-center items-center text-[1.5vw] lg:text-[0.9vw] xl:text-[16.5px] font-bold bg-gradient-to-t from-purple-500 to-red-600 text-white">
               निमंत्रक
             </div>
             <div
               style={{
                 fontSize: `${sizes.invite == 1 ? undefined : `${sizes.invite}px`}`,
               }}
+              data-draggable="true"
               className="w-[78%] h-full text-slate-700 font-bold text-[3.5vw] lg:text-[2vw] xl:text-[23px] flex justify-center items-center"
             >
               {invite}
             </div>
-            <div className="w-[10%] h-full scale-x-[-1]">
+            <div data-draggable="true" className="w-[10%] h-full scale-x-[-1]">
               <Image
+                draggable={false}
                 src="/first_wedding_elephant.png"
                 style={{ width: "100%", height: "100%", position: "relative" }}
                 alt="elephant image"
@@ -1060,10 +1094,11 @@ export default function Wedding1() {
             </div>
           </div>
           {/* last sec image */}
-          <div className="absolute top-[51%] left-[51.5%] w-[46.8%] h-[42%] overflow-hidden">
+          <div data-draggable="true" className="absolute top-[51%] left-[51.5%] w-[46.8%] h-[42%] overflow-hidden">
             <div className="relative w-full h-full">
-              <div className="w-[85%] rotate-90 mx-auto">
+              <div data-draggable="true" className="w-[85%] rotate-90 mx-auto">
                 <Image
+                  draggable={false}
                   className="object-cover w-full h-full"
                   src="/redScrollBar.png"
                   width={500}
@@ -1071,9 +1106,10 @@ export default function Wedding1() {
                   alt="red scroll"
                 />
               </div>
-              <div className="absolute w-full h-full top-0">
+              <div data-draggable="true" className="absolute w-full h-full top-0">
                 {coupleImage != "" ? (
                   <NextImage
+                    draggable={false}
                     className="outlin object-cover w-full h-full"
                     src={coupleImage}
                     width={500}
@@ -1082,6 +1118,7 @@ export default function Wedding1() {
                   />
                 ) : (
                   <Image
+                    draggable={false}
                     className="outlin object-cover w-full h-full"
                     src="gibliphoto.png"
                     width={500}
