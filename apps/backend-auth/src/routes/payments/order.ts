@@ -45,7 +45,8 @@ order.post("/paymentverification", authMiddleware, async (req: Request, res: Res
     try {
         const { razorpay_order_id, razorpay_payment_id, razorpay_signature, amount, receipt, templateName, currency } = req.body;
         const varification = validatePaymentVerification({ "order_id": razorpay_order_id, "payment_id": razorpay_payment_id }, razorpay_signature, RZP_KEY_SECRET_TEST!);
-        if (varification) {
+        const payment = await razorpay.payments.fetch(razorpay_payment_id);
+        if (varification && payment.status === "captured") {
             //db store
             await prisma.orders.create({
                 data: {
