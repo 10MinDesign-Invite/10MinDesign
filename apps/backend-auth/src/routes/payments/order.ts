@@ -10,13 +10,29 @@ export const order: Router = Router();
 
 order.post("/order", authMiddleware, async (req: Request, res: Response) => {
     try {
-        const { templateName } = req.body;
-        const amount = await prisma.wedding.findUnique({
-            where: {
-                componentName: templateName
-            },
-            select: { price: true }
-        })
+        const { templateName, category } = req.body;
+        let amount = null;
+        switch (category) {
+            case "opening":
+                amount =await prisma.opening.findUnique({
+                    where: {
+                        componentName: templateName
+                    },
+                    select: { price: true }
+                })
+                break;
+            case "wedding":
+                amount =await prisma.wedding.findUnique({
+                    where: {
+                        componentName: templateName
+                    },
+                    select: { price: true }
+                })
+                break;
+
+            default:
+                break;
+        }
         if (!amount) {
             res.status(404).send("component Not found")
             return
@@ -60,7 +76,7 @@ order.post("/paymentverification", authMiddleware, async (req: Request, res: Res
                     razorpay_signature
                 }
             })
-            res.cookie("purchased--"+templateName, receipt, {
+            res.cookie("purchased--" + templateName, receipt, {
                 httpOnly: true,
                 maxAge: 15 * 60 * 1000,
                 sameSite: process.env.NODE_ENV === "production" ? "lax" : "lax",
