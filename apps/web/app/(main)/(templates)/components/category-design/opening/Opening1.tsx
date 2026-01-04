@@ -18,9 +18,11 @@ import { toast } from "react-toastify";
 import { useClientSession } from "@/app/Hooks/useClientSession";
 
 export default function Opening1() {
+
   const { pay, isPaid } = usePayment("Opening1","opening")
   const {purchased} = usePurchesedTemplate("Opening1")
   const {session} = useClientSession();
+  
   // above is custome hooks
   const [brandLogo, setBrandLogo] = useState("");
   const [title, setTitle] = useState("मैत्री कट्टा");
