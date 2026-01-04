@@ -12,8 +12,16 @@ import { IoIosStarHalf } from "react-icons/io";
 import { toPng } from "html-to-image";
 import { CiCircleInfo } from "react-icons/ci";
 import { Button } from "@/components/ui/button";
+import { usePayment } from "@/app/Hooks/usePayment";
+import { usePurchesedTemplate } from "@/app/Hooks/usePurchasedTemplate";
+import { toast } from "react-toastify";
+import { useClientSession } from "@/app/Hooks/useClientSession";
 
 export default function Opening1() {
+  const { pay, isPaid } = usePayment("Opening1","opening")
+  const {purchased} = usePurchesedTemplate("Opening1")
+  const {session} = useClientSession();
+  // above is custome hooks
   const [brandLogo, setBrandLogo] = useState("");
   const [title, setTitle] = useState("मैत्री कट्टा");
   const [service, setServices] = useState("बिर्याणी आणि चायनीज हाऊस.");
@@ -92,9 +100,12 @@ export default function Opening1() {
       link.href = dataUrl;
       link.download = "finaldesign.png";
       link.click();
-    } catch (error) {}
+    } catch (error) { }
   };
 
+    useEffect(() => {
+      if (!session) toast.warn("Login First Then Edit Template..")
+    }, [session])
   return (
     <DesignWraper>
       <DetailWrapper>
@@ -108,12 +119,22 @@ export default function Opening1() {
             onChange={getLogo}
           />
           {/*dwonload button */}
-          <button
-            onClick={handleDownload}
-            className=" top-[0%] right-[3%] bg-green-400 px-5 py-1 text-black rounded-md"
-          >
-            Download
-          </button>
+
+          {
+            purchased ?? isPaid ?
+              <button
+                onClick={handleDownload}
+                className=" top-[0%] right-[3%] bg-green-400 px-5 py-1 text-black rounded-md"
+              >
+                Download
+              </button>
+
+              :
+              <button onClick={pay} className=" top-[0%] right-[3%] bg-red-500 px-5 py-1 text-black rounded-md">
+                Purchase
+              </button>
+
+          }
           <br />
           <label htmlFor="Sizes">Sizes</label>
           <div className="mt-1 flex justify-center">
@@ -317,9 +338,9 @@ export default function Opening1() {
 
         {/* translate btn */}
 
-        <Button className="bg-red-400 mt-1 w-[30%] mx-auto" onClick={() => ""}>
+        {/* <Button className="bg-red-400 mt-1 w-[30%] mx-auto" onClick={() => ""}>
           AutoTranslate
-        </Button>
+        </Button> */}
       </DetailWrapper>
 
       {/* design stard div */}

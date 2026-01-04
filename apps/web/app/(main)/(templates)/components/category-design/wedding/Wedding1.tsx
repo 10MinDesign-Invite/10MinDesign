@@ -15,9 +15,9 @@ import { toast } from "react-toastify";
 import { useDragComponent } from "@/app/helpers/useDragComponents";
 
 export default function Wedding1() {
-  const { pay, isPaid } = usePayment("Wedding1");
-  const { session } = useClientSession();
+  const { pay, isPaid } = usePayment("Wedding1","wedding");
   const { purchased } = usePurchesedTemplate("Wedding1")
+  const { session } = useClientSession();
   const {handlePointerDown,handlePointerMove,handlePointerUp} = useDragComponent();
   // above custom hooks
 

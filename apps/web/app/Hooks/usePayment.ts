@@ -4,13 +4,13 @@ import { useState } from "react";
 import { RazorpayOrderOptions, useRazorpay } from "react-razorpay";
 import { toast } from "react-toastify";
 
-export function usePayment(templateName:string) {
+export function usePayment(templateName:string,category:string) {
     const { Razorpay } = useRazorpay();
     const [isPaid,setPaid] = useState(false);
 
     const pay = async() => {
         try {
-            const order = await axios.post(`${process.env.NEXT_PUBLIC_Backend_URL}/make/order`,{templateName},{ withCredentials: true })
+            const order = await axios.post(`${process.env.NEXT_PUBLIC_Backend_URL}/make/order`,{templateName,category},{ withCredentials: true })
            
             if (order.status === 200) {
                 const options: RazorpayOrderOptions = {
