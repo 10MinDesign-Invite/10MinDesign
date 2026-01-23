@@ -177,7 +177,7 @@ export function Header({ disableAnimation, authData,disableLoginButton }: propTy
           id="primium-btn"
           className={`flex dark:border-2 dark:border-white justify-center items-center borde px-2 md:px-5 lg:px-7 text-[14px] rounded-md font-light get_primium hover:bg-black hover:text-white hover:dark:bg-white hover:dark:text-black text-black dark:bg-black dark:text-white cursor-pointer transform ${disableAnimation == false ? "md:scale-0" : ""}`}
         >
-          Get Premium
+          <Link href={"/pricing"}>Get Premium</Link>
         </div>
       </div>
 
