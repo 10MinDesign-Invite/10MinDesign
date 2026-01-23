@@ -30,11 +30,11 @@ export default function PricingPage() {
             <ul className="text-gray-300 space-y-3 mb-8">
               <li>✔ Limited access</li>
               <li className="text-red-400">✖ No translate</li>
-              <li>✔ Community help</li>
+              <li>✔ 1 Template Download</li>
             </ul>
 
             <button className="w-full py-3 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-semibold transition">
-              Pay Now
+              Explore
             </button>
           </div>
 
