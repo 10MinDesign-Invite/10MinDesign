@@ -34,7 +34,7 @@ export default function PricingPage() {
             </ul>
 
             <button className="w-full py-3 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-semibold transition">
-              Explore
+              <Link href={"/explore"}>Explore</Link>
             </button>
           </div>
 
