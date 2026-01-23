@@ -64,7 +64,7 @@ export default function AboutPage() {
         </div>
 
         {/* Custom Design Contact */}
-        <div className="mt-16 mb-20 bg-gradient-to-r from-violet-600 to-blue-600 dark:from-violet-500 dark:to-blue-500 text-white p-8 rounded-2xl shadow-lg text-center">
+        <div className="mt-16 mb-20 bg-black dark:bg-slate-800 text-white p-8 rounded-2xl shadow-lg text-center">
           <h2 className="text-3xl font-bold mb-2">Need a Custom Design?</h2>
           <p className="mb-4 text-lg">
             Want something unique? We offer personalized invitations just for
