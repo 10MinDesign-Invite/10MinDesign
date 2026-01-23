@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function PricingPage() {
   return (
-    <div className="min-h-screen flex items-center justify-center px-6">
+    <div className="min-h-screen mt-5 md:mt-0 flex items-center justify-center px-6">
       
       <div className="max-w-6xl w-full">
         {/* Heading */}
