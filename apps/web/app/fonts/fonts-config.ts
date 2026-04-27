@@ -4,9 +4,11 @@ import {
   Gotu,
   Inknut_Antiqua,
   Laila,
+  Modak,
   Pacifico,
   Palanquin_Dark,
   Sura,
+  Tillana,
   Tiro_Devanagari_Hindi,
   Yatra_One,
 } from "next/font/google";
@@ -30,7 +32,7 @@ export const mainheadingBold = Comfortaa({
 });
 
 export const gotu = Gotu({
-  subsets: ["latin"],
+  subsets: ["latin", "devanagari"],
   weight: ["400"],
   display: "swap",
 });
@@ -42,7 +44,7 @@ export const yatraOne = Yatra_One({
 });
 
 export const palanquinDark = Palanquin_Dark({
-  subsets: ["latin"],
+  subsets: ["latin","devanagari"],
   weight: ["500", "700"],
   display: "swap",
 });
@@ -54,7 +56,7 @@ export const tiroDevanagariHindi = Tiro_Devanagari_Hindi({
 });
 
 export const sura = Sura({
-  subsets: ["latin"],
+  subsets: ["latin","devanagari"],
   weight: ["700"],
   display: "swap",
 });
@@ -73,5 +75,17 @@ export const laila = Laila({
 export const inknut_antiqua = Inknut_Antiqua({
   subsets: ["devanagari"],
   weight: ["400", "700", "800", "900"],
+  display: "swap",
+});
+
+export const tillana= Tillana({
+  subsets: ["devanagari"],
+  weight: ["400"],
+  display: "swap",
+});
+
+export const modak= Modak({
+  subsets: ["devanagari"],
+  weight: ["400"],
   display: "swap",
 });
