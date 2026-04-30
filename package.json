@@ -15,7 +15,8 @@
     "db:generate": "cd packages/database && pnpm run generate && cd ../..",
     "lint": "turbo run lint",
     "start:backend":"cd apps/backend-auth && pnpm run start",
-    "start:web":"cd apps/web && pnpm start"
+    "start:web":"cd apps/web && pnpm start",
+    "postinstall":"pnpm db:generate && cd packages/zod-input-validation && pnpm build && cd../.."
   },
   "devDependencies": {
     "prettier": "^3.2.5",

@@ -1,6 +1,6 @@
-import { prisma } from "@repo/database";
 import { Request, Response, Router } from "express";
 import bcrypt from "bcrypt";
+import { prisma } from "@repo/database";
 import { registerSchema } from "@repo/zod-input-validation";
 import { ADMIN_EMAIL } from "../env-config.js";
 
