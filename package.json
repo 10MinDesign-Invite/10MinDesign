@@ -12,7 +12,7 @@
     "db:seed": "turbo run db:seed",
     "dev": "turbo run dev",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
-    "db:generate": "cd packages/database && pnpm run generate && cd ../..",
+    "db:generate": "cd packages/database && pnpm run generate && pnpm build && cd ../..",
     "lint": "turbo run lint",
     "start:backend":"cd apps/backend-auth && pnpm run start",
     "start:web":"cd apps/web && pnpm start",
