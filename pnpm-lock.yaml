@@ -302,7 +302,7 @@ importers:
         specifier: workspace:*
         version: link:../config-typescript
       '@types/node':
-        specifier: ^20.17.50
+        specifier: ^20.19.24
         version: 20.19.24
       eslint:
         specifier: ^8.57.0
